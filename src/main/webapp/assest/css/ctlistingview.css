@@ -1,0 +1,32 @@
+.ctSearchListingForm a,.ctSearchListingForm label {
+	font-family: verdana;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.ctSearchListingForm a {
+	color: #ffffff;
+	background-image: none !important;
+}
+
+.ctSearchListingForm .panel-heading {
+	background-image: none !important;
+	background-color: #087dc2 !important;
+}
+
+.ctSearchListingForm .ctListView {
+	background-color: #087dc2 !important;
+}
+
+.ctListingTitle {
+	font-family: verdana !important;
+	font-size: 16px !important;
+	font-weight: bold !important;
+	text-transform: capitalize !important;
+}
+
+.ctNoDataFoundRow span {
+	font-family: verdana;
+	color: red;
+	font-weight: bold;
+}

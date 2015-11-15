@@ -1,0 +1,84 @@
+
+.tsDefaultSearchFontStyle select
+{
+	color: #000000 !important;
+	font-family: verdana;
+}
+.tsDefaultSearchFontStyle input, .tsDefaultSearchFontStyle 
+{
+	font-size: 12px;
+	font-family: verdana;
+}
+.tsHomeSearchBtn
+{
+	position: relative;
+	top: 25px;
+}	
+.ctCityNames
+{
+	height: 37px !important;
+}
+.ctCustomerListMenu, .ctVendorListMenu
+{
+	/*width: 25% !important;*/
+	border: 1px solid #cccccc !important;
+	font-size: 12px !important;
+	font-weight: bold !important;
+	list-style: none;
+}
+.ctVendorListMenu li
+{
+	list-style: none;
+	padding: 5px 10px;
+	/*border: 1px solid #0F7DC1;*/
+	border-radius: 3px;
+	margin-bottom: 5px;
+	border-bottom: 3px solid #eeeeee !important;
+}
+.ctVendorListMenu li:hover
+{
+	background-color: #0F7DC1 !important;
+	cursor: pointer !important;
+}
+.ctVendorListMenu li.active, .ctVendorListMenu .active a
+{
+	background-color: #0F7DC1 !important;
+	color: #fff;
+}
+.ctVendorListMenu li:hover a
+{
+	color: #fff;
+}
+.ctPagesection
+{
+	font-family: verdana;
+}
+.ctConsumerContainer, .ctVendorContainer
+{
+	/*margin-left: 0px !important;*/
+}
+.ctAddIcon, .ctMinusIcon, .ctMinusIconPhotoGallery, .ctAddIconPhotoGallery
+{
+	font-size: 10px !important;
+	cursor: pointer; 
+}
+.ctVendorListingForm label, .ctEditVendorListingForm label, 
+.ctEditVendorListingImgForm label
+{
+	font-weight: bold;
+}
+
+/************************ COMMON CSS CLASS ***********************************************/
+
+.ctFont_FamilyStyle
+{
+	font-family: verdana !important;
+}
+.ctFontWeight_B
+{
+	font-weight: bold;
+}
+.ctFont_S
+{
+	font-size: 14px;
+}

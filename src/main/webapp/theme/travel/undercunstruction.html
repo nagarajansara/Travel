@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<!-- Mirrored from kodeforest.com/html/travel/undercunstruction.html by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 24 May 2015 04:07:17 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Travel - HTML Theme</title>
+
+    <!-- Css Folder -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/color.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/themetypo.css" rel="stylesheet">
+    <link href="css/bxslider.css" rel="stylesheet">
+    <link href="css/datepicker.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="home">
+
+    <!--// Wrapper //-->
+    <div class="wrapper">
+
+      <!--// Main Content //-->
+      <div class="main-content">
+        <div class="kd-undercunstruction">
+          <div class="container">
+            
+            <div id="wrapping">
+              <div id="clock-ticker" class="clearfix">
+                <div class="kd-block">
+                  <span class="flip-top" id="numdays">8</span><br>
+                  <span class="flip-btm"></span>
+                  <span class="kd-label thbg-color">Days</span>
+                </div>
+                
+                <div class="kd-block">
+                  <span class="flip-top" id="numhours">14</span><br>
+                  <span class="flip-btm"></span>
+                  <span class="kd-label thbg-color">Hours</span>
+                </div>
+                
+                <div class="kd-block">
+                  <span class="flip-top" id="nummins">34</span><br>
+                  <span class="flip-btm"></span>
+                  <span class="kd-label thbg-color">Mins</span>
+                </div>
+                
+                <div class="kd-block">
+                  <span class="flip-top" id="numsecs">9</span><br>
+                  <span class="flip-btm"></span>
+                  <span class="kd-label thbg-color">Secs</span>
+                </div>
+              </div>
+            </div>
+            <div class="wrap-title">
+              <h1>Coming Soon</h1>
+              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.<br> The point of using Lorem Ipsum is that it has a more-or-less normal distribution of lettersless normal distribution normal distribution, </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+	  <div class="clearfix"></div>
+      <!--// Main Content //-->
+	  <section style="background: #333; padding: 0px 0px 130px 0px; " class="kd-pagesection kd-undercunstruction">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-12">
+            
+              <div class="kd-subscribe">
+                <form>
+                  <p><input type="text" placeholder="Enter Email"></p>
+                  <p><input type="submit" class="thbg-color" value="Subcribe"></p>
+                </form>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!--// Wrapper //-->
+
+    <!-- jQuery (Necessary For JavaScript Plugins) -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/waypoints-min.js"></script>
+    <script src="js/jquery.countdown.js"></script>
+    <script src="js/functions.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var theDaysBox  = $("#numdays");
+        var theHoursBox = $("#numhours");
+        var theMinsBox  = $("#nummins");
+        var theSecsBox  = $("#numsecs");
+        
+        var refreshId = setInterval(function() {
+          var currentSeconds = theSecsBox.text();
+          var currentMins    = theMinsBox.text();
+          var currentHours   = theHoursBox.text();
+          var currentDays    = theDaysBox.text();
+          
+          if(currentSeconds == 0 && currentMins == 0 && currentHours == 0 && currentDays == 0) {
+            // if everything rusn out our timer is done!!
+            // do some exciting code in here when your countdown timer finishes
+            
+          } else if(currentSeconds == 0 && currentMins == 0 && currentHours == 0) {
+            // if the seconds and minutes and hours run out we subtract 1 day
+            theDaysBox.html(currentDays-1);
+            theHoursBox.html("23");
+            theMinsBox.html("59");
+            theSecsBox.html("59");
+          } else if(currentSeconds == 0 && currentMins == 0) {
+            // if the seconds and minutes run out we need to subtract 1 hour
+            theHoursBox.html(currentHours-1);
+            theMinsBox.html("59");
+            theSecsBox.html("59");
+          } else if(currentSeconds == 0) {
+            // if the seconds run out we need to subtract 1 minute
+            theMinsBox.html(currentMins-1);
+            theSecsBox.html("59");
+          } else {
+              theSecsBox.html(currentSeconds-1);
+            }
+         }, 1000);
+      });
+      </script>
+  </body>
+
+<!-- Mirrored from kodeforest.com/html/travel/undercunstruction.html by HTTrack Website Copier/3.x [XR&CO'2010], Sun, 24 May 2015 04:07:18 GMT -->
+</html>

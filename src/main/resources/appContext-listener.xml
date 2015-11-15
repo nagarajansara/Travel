@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="travel.com" />
+
+	<bean id="cityService" class="travel.com.bo.CityServiceBO">
+	</bean>
+	<bean id="consumerService" class="travel.com.bo.ConsumerServiceBO">
+	</bean>
+	<bean id="utilities" class="travel.com.util.Utilities">
+	</bean>
+	<bean id="response" class="travel.com.util.Response">
+	</bean>
+	<bean id="imageProcess" class="travel.com.model.ImageProcess">
+	</bean>
+	<bean id="loginService" class="travel.com.bo.LoginServiceBO">
+	</bean>
+	<bean id="vendorService" class="travel.com.bo.VendorServiceBO">
+	</bean>
+	<bean id="tripService" class="travel.com.bo.TripServiceBO">
+	</bean>
+	<!-- <bean id="fbConnection" class="travel.com.model.FBConnection"> </bean> -->
+
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:constants-msg.properties</value>
+				<value>classpath:db.properties</value>
+				<value>classpath:application.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="appProp" class="travel.com.util.AppProp">
+		<property name="adminMailId" value="${app.adminEmailId}" />
+		<property name="mailSubject" value="${app.emailSubject}" />
+		<property name="uploadedCsvPath" value="${app.uploadedCsvPath}" />
+		<property name="FbAppId" value="${app.FB_APP_ID}" />
+		<property name="FbAppSecret" value="${app.FB_APP_SECRET}" />
+		<property name="FbAppURI" value="${app.REDIRECT_URI}" />
+		<property name="uploadImagePath" value="${app.uploadImagePath}" />
+		<property name="uploadImageCompressPath" value="${app.uploadImageCompressFilePath}" />
+		<property name="serverDomain" value="${app.uploadImageCompressFilePath}" />
+	</bean>
+
+</beans>
+	 
