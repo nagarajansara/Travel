@@ -164,16 +164,16 @@ public class FBConnection
 			if (Utilities.isServer())
 			{
 
-				this.FB_APP_ID = "379863222204467";
-				this.FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
-				this.REDIRECT_URI =
+				FB_APP_ID = "379863222204467";
+				FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
+				REDIRECT_URI =
 						"http://saracourierservice.tk"
 								+ "/travel/travelapi/login/fbsignupcbk";
 			} else
 			{
-				this.FB_APP_ID = "379863222204467";
-				this.FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
-				this.REDIRECT_URI =
+				FB_APP_ID = "379863222204467";
+				FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
+				REDIRECT_URI =
 						"http://localhost/travel/travelapi/login/fbsignupcbk";
 			}
 		} catch (Exception ex)

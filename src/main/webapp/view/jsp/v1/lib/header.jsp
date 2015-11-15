@@ -170,6 +170,7 @@
 													<span>Your Account</span>
 													<div class="kd-login-network">
 														<ul>
+															<% out.println("MTHD :::: " +fbConnection.getFBAuthUrl()); %>
 															<li><a href="<%=fbConnection.getFBAuthUrl()%>"
 																data-original-title="Facebook"><i
 																	class="fa fa-facebook"></i> Login with Facebook</a></li>
