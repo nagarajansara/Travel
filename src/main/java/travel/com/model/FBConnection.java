@@ -78,6 +78,11 @@ public class FBConnection
 	{
 
 		setInitializeValues();
+		FB_APP_ID = "379863222204467";
+		FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
+		REDIRECT_URI =
+				"http://saracourierservice.tk"
+						+ "/travel/travelapi/login/fbsignupcbk";
 
 		String fbLoginUrl = "";
 		try
