@@ -74,24 +74,26 @@ public class FBConnection
 		return fbLoginUrl;
 	}
 
-	public String getFBAuthUrl()
+	public String getFBAuthUrl(String domainName)
 	{
 
 		String fbLoginUrl = "";
 		try
 		{
 
-			if (Utilities.isServer())
+			if (domainName.indexOf("localhost") == -1)
 			{
 				FB_APP_ID = "379863222204467";
 				FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
 				REDIRECT_URI =
 						"http://saracourierservice.tk"
 								+ "/travel/travelapi/login/fbsignupcbk";
-			}
-			else
+			} else
 			{
-				setInitializeValues();
+				FB_APP_ID = "379863222204467";
+				FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
+				REDIRECT_URI =
+						"http://localhost/travel/travelapi/login/fbsignupcbk";
 			}
 			fbLoginUrl =
 					"http://www.facebook.com/dialog/oauth?" + "client_id="

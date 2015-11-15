@@ -1,6 +1,7 @@
 <%@page import="travel.com.model.FBConnection"%>
 <%
 	FBConnection fbConnection = new FBConnection();
+	String domainName = request.getServerName();
 %>
 
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
@@ -170,7 +171,7 @@
 													<span>Your Account</span>
 													<div class="kd-login-network">
 														<ul>
-															<li><a href="<%=fbConnection.getFBAuthUrl()%>"
+															<li><a href="<%=fbConnection.getFBAuthUrl(domainName)%>"
 																data-original-title="Facebook"><i
 																	class="fa fa-facebook"></i> Login with Facebook</a></li>
 															<!--<li><a href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i> Login with Twitter</a></li>-->
