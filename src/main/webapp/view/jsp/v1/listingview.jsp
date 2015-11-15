@@ -192,7 +192,7 @@
 							</c:if>
 							<c:if test="${empty model.responseData.tripDetails}">
 								<div align="center" class="row ctNoDataFoundRow">
-									<span> Coming soon</span>
+									<span> No listing found</span>
 								</div>
 							</c:if>
 						</div>
