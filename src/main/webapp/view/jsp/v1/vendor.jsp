@@ -93,8 +93,9 @@
 								<article class="col-md-12">
 									<div align="center" style="color: red; cursor: pointer"
 										class="ctListingEmpty">
-										<span style="font-family: verdana; font-weight: bold">No
-											data found</span>
+										<span style="font-family: verdana; font-weight: bold">
+											No listing found
+										</span>
 									</div>
 								</article>
 							</c:if>

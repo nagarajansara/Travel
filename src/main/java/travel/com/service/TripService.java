@@ -21,7 +21,7 @@ public interface TripService
 
 	void addTripImage(TripImage tripImage) throws Exception;
 
-	List<Trip> getTripDetailsBasedId(Trip trips) throws Exception;
+	List<Trip> getUpdatingTripDetailsBasedId(Trip trips) throws Exception;
 
 	void deleteItenary(Long tripId) throws Exception;
 
@@ -45,5 +45,8 @@ public interface TripService
 																	// trip
 																	// details
 																	// for users
+
 	int getAllValidTripDetailsCount(Trip trip) throws Exception;
+
+	List<Trip> getTripDetailsBasedId(Trip trip) throws Exception;
 }

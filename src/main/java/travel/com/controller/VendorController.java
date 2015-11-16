@@ -148,7 +148,7 @@ public class VendorController extends BaseController
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			Trip trip = new Trip(listingId, userId, status);
-			List<Trip> trips = tripService.getTripDetailsBasedId(trip);
+			List<Trip> trips = tripService.getUpdatingTripDetailsBasedId(trip);
 
 			CommonMtd commonMtd = new CommonMtd();
 			List<Activity> activityList = commonMtd.getActivityList();

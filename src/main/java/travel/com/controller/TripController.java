@@ -43,7 +43,8 @@ import travel.com.util.*;
 
 @Controller
 @RequestMapping("/trip")
-@SuppressWarnings({ "unchecked", "unused" })
+@SuppressWarnings(
+{ "unchecked", "unused" })
 public class TripController extends BaseController
 {
 
@@ -92,11 +93,12 @@ public class TripController extends BaseController
 				String fromDate = (String) map.get("fromdate");
 				String toDate = (String) map.get("todate");
 				int startPoint =
-						Integer.parseInt((String) map.get("startpoint"));
+						Integer.parseInt((String) map.get("startpoint")); // Start
+																			// point
 				String description = (String) map.get("description");
 				String guideLines = (String) map.get("guideline");
 				String totalDuration = (String) map.get("totalduration");
-				String locationId = (String) map.get("city");
+				String locationId = (String) map.get("city"); // Destination
 				String activityId = (String) map.get("activitytype");
 				String routecount = (String) map.get("routecount");
 				String durationcount = (String) map.get("durationcount");
@@ -287,8 +289,6 @@ public class TripController extends BaseController
 					commonMthds.getTripDetailsBasedFilters(null, jsonObject,
 							currPageNo, utilities.getDefaultMaxIndx());
 
-			System.out.println("requestedFilteredParam map : " + map);
-
 			utilities.setSuccessResponse(response, map);
 
 		} catch (Exception ex)
@@ -298,6 +298,27 @@ public class TripController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "listingview";
+	}
+
+	@RequestMapping(value = "/getTripDetailsBasedId/{tripId}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getTripDetailsBasedId(HttpServletRequest request,
+			@PathVariable("tripId") int tripId, HttpServletResponse res,
+			ModelMap model) throws Exception
+	{
+		try
+		{
+			String STATUS_ACTIVE = "active";
+			Trip trip = new Trip(tripId, STATUS_ACTIVE);
+			List<Trip> list = tripService.getTripDetailsBasedId(trip);
+			utilities.setSuccessResponse(response, list);
+		} catch (Exception ex)
+		{
+			logger.error("getTripDetailsBasedId :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "viewlisting";
 	}
 
 	class CommonMthds
@@ -487,11 +508,11 @@ public class TripController extends BaseController
 									request.getParameter("fromdate") == null ? utilities
 											.getDefaultWord() : request
 											.getParameter("fromdate"));
-					
+
 					requestedParam.put("numEntries", numEntries);
 					requestedParam.put("fromPrice", priceMap.get("fromprice"));
 					requestedParam.put("toPrice", priceMap.get("toprice"));
-					
+
 				} else
 				{
 					requestedParam.put("locationId",
@@ -508,11 +529,11 @@ public class TripController extends BaseController
 							jsonObject.get("fromdate") == null ? utilities
 									.getDefaultWord() : jsonObject
 									.get("fromdate"));
-					
+
 					requestedParam.put("numEntries", numEntries);
 					requestedParam.put("fromPrice", priceMap.get("fromprice"));
 					requestedParam.put("toPrice", priceMap.get("toprice"));
-					
+
 				}
 
 				/*************************** REQUESTED PARAMS ENDS *************************************/

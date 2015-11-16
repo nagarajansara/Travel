@@ -11,7 +11,7 @@ public interface TripDAO
 
 	Map<String, Object> getTripDetails(Trip trip) throws Exception;
 
-	List<Trip> getTripDetailsBasedId(Trip trips) throws Exception;
+	List<Trip> getUpdatingTripDetailsBasedId(Trip trips) throws Exception;
 
 	void update(Trip trip) throws Exception;
 
@@ -28,4 +28,7 @@ public interface TripDAO
 	List<Trip> getTripDetails_Users(Trip trip) throws Exception;
 
 	int getAllValidTripDetailsCount(Trip trip) throws Exception;
+
+	List<Trip> getTripDetailsBasedId(Trip trip) throws Exception;
+
 }

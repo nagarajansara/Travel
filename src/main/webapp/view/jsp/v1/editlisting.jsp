@@ -189,47 +189,50 @@
 							</tbody>
 						</table>
 					</c:if>
-					<c:if test="${not empty model.responseData.tripImagesList}">
-						<form enctype="multipart/form-data"
-							onsubmit="return ctEditImageListingData();"
-							action="${baseURL}/travelapi/vendor/updatelistingimage/${tripId}"
-							method="POST" role="form"
-							class="form-horizontal ctFontWeight_B ctEditVendorListingImgForm">
-							<div
-								class="form-group ctEditPhotogalleryParentDiv ctEditPhotogalleryParentLen1">
-								<div class="col-lg-5 col-md-5 col-sm-5">
-									<label class="custom-file-input"> <input
-										class="ctEditPhotogalleryFile" type="file" name="file">
-									</label>
-								</div>
-								<div class="col-lg-1 col-md-1">
-									<button type="button" title="addMoreFiles"
-										style="font-size: 8px;"
-										class="btn btn-primary ctEditAddIconPhotoGallery">
-										<i class="fa fa-plus" style=""></i>
-									</button>
-								</div>
-								<div class="col-lg-1 col-md-1">
-									<button type="button" style="font-size: 8px;"
-										title="removeFiles"
-										class="btn btn-danger ctEditMinusIconPhotoGallery">
-										<i class="fa fa-minus"></i>
-									</button>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-lg-3 col-md-3 col-sm-3 control-label"></label>
-								<div class="col-lg-4 col-md-4 col-sm-4">
-									<button class="btn btn-primary" type="submit">Upload</button>
-								</div>
-							</div>
-						</form>
-					</c:if>
 					<c:if test="${empty model.responseData.tripImagesList}">
-						<span style="color: red; font-family: verdana;">No data
+						<span style="color: red; font-family: verdana; font-weight: bold">No existing image
 							found</span>
 					</c:if>
+					</br> </br>
+					</br> </br>
+					</br> </br>
+					<%-- <c:if test="${not empty model.responseData.tripImagesList}"> --%>
+					<form enctype="multipart/form-data"
+						onsubmit="return ctEditImageListingData();"
+						action="${baseURL}/travelapi/vendor/updatelistingimage/${tripId}"
+						method="POST" role="form"
+						class="form-horizontal ctFontWeight_B ctEditVendorListingImgForm">
+						<div
+							class="form-group ctEditPhotogalleryParentDiv ctEditPhotogalleryParentLen1">
+							<div class="col-lg-5 col-md-5 col-sm-5">
+								<label class="custom-file-input"> <input
+									class="ctEditPhotogalleryFile" type="file" name="file">
+								</label>
+							</div>
+							<div class="col-lg-1 col-md-1">
+								<button type="button" title="addMoreFiles"
+									style="font-size: 8px;"
+									class="btn btn-primary ctEditAddIconPhotoGallery">
+									<i class="fa fa-plus" style=""></i>
+								</button>
+							</div>
+							<div class="col-lg-1 col-md-1">
+								<button type="button" style="font-size: 8px;"
+									title="removeFiles"
+									class="btn btn-danger ctEditMinusIconPhotoGallery">
+									<i class="fa fa-minus"></i>
+								</button>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-lg-3 col-md-3 col-sm-3 control-label"></label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<button class="btn btn-primary" type="submit">Upload</button>
+							</div>
+						</div>
+					</form>
+					<%-- </c:if> --%>
 				</div>
 				<c:if test="${empty model.responseData.trip}">
 					<div class="row">
@@ -263,7 +266,7 @@
 						var searchTerm = null, numEntries =
 								'${model.responseData.numEntries}', MAX_ENTRIES =
 								10, START_PAGE = 1;
-						$('.ctPriceTxt').numeric();		
+						$('.ctPriceTxt').numeric();
 						var remoteDataConfig =
 								{
 									dropdownCssClass : 'bmSelect2Class',

@@ -165,9 +165,9 @@ public class TripServiceBO implements TripService
 		tripImageDAO.addTripImage(tripImage);
 	}
 
-	public List<Trip> getTripDetailsBasedId(Trip trip) throws Exception
+	public List<Trip> getUpdatingTripDetailsBasedId(Trip trip) throws Exception
 	{
-		return tripDAO.getTripDetailsBasedId(trip);
+		return tripDAO.getUpdatingTripDetailsBasedId(trip);
 	}
 
 	public void deleteItenary(Long tripId) throws Exception
@@ -219,6 +219,11 @@ public class TripServiceBO implements TripService
 	public int getAllValidTripDetailsCount(Trip trip) throws Exception
 	{
 		return tripDAO.getAllValidTripDetailsCount(trip);
+	}
+
+	public List<Trip> getTripDetailsBasedId(Trip trip) throws Exception
+	{
+		return tripDAO.getTripDetailsBasedId(trip);
 	}
 
 }

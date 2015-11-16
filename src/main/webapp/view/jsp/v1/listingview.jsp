@@ -157,7 +157,9 @@
 												</figure>
 												<section class="kd-bloginfo">
 													<h2>
-														<a class="ctListingTitle" href="#">${ element.title} </a>
+														<a class="ctListingTitle" target="_blank"
+															href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}">${ element.title}
+														</a>
 													</h2>
 													<ul class="kd-postoption">
 														<li><a href="#" class="thcolorhover">Start Date </a></li>

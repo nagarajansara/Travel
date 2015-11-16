@@ -27,17 +27,21 @@ public class TripDAOImpl implements TripDAO
 	@Qualifier("baseDAO")
 	BaseDAO baseDAO;
 
+	final String DEFAULT_TRIP_IMAGE_PATH =
+			"defaulttripimage/default_tripimage.jpg";
+	final String ACTIVITY_ID_ATTRIBUTE = "activityid";
+
 	final String INSERT_TRIP_DETAILS =
 			"INSERT into tripdetails (userid, locationid, activityid, duration, fromdate, todate, startpoint, route, description, guidelines, title, price "
 					+ ") VALUES (:userid, :locationid, :activityid, :duration, :fromdate, :todate, :startpoint, :route, :description, "
 					+ ":guidelines, :title, :price)";
 
 	final String GET_TRIP_DETAILS =
-			"SELECT td.title, td.id AS id, td.description AS description, td.guidelines AS guidelines, SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1) AS imageurls, "
+			"SELECT td.title, td.id AS id, td.description AS description, td.guidelines AS guidelines, IF(SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1) IS NULL , :defaultImage, SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1))AS imageurls, "
 					+ "DATE_FORMAT(td.createdat, '%b %d, %Y') AS createdat, a.name AS activityname "
 					+ "FROM tripdetails td "
 					+ "INNER JOIN activity a ON td.activityid = a.id "
-					+ "INNER JOIN tripimages ti ON td.id = ti.tripid "
+					+ "LEFT OUTER JOIN(SELECT * FROM tripimages WHERE STATUS =:status) AS ti ON td.id = ti.tripid "
 					+ "where "
 					+ "td.status =:status and td.userid =:userId "
 					+ "GROUP BY td.description, td.guidelines, td.createdat, a.name "
@@ -69,20 +73,27 @@ public class TripDAOImpl implements TripDAO
 			"UPDATE tripdetails set status =:status where userid =:userid AND id =:id";
 
 	final String GET_FILTERED_TRIP_DETAILS =
-			"SELECT td.*, ti.name AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
-					+ "INNER JOIN (SELECT * FROM tripimages GROUP BY tripid) ti ON td.id = ti.tripid "
+			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
+					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti  ON td.id = ti.tripid "
 					+ "WHERE ";
 
 	final String GET_FILTERED_TRIP_DETAILS_NUMENTRIES =
 			"Select count(*) from tripdetails td where ";
 	final String GET_ALL_TRIP_DETAILS =
-			"SELECT td.*, ti.name AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
-					+ "INNER JOIN (SELECT * FROM tripimages GROUP BY tripid) ti ON td.id = ti.tripid "
+			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
+					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti ON td.id = ti.tripid "
 					+ "WHERE td.fromdate >= NOW() AND td.status =:status LIMIT :startIndx, :endIndx";
 
 	final String GET_ALL_TRIPDETAILS_NUMENTRIES =
 			"Select count(*) from tripdetails where fromdate >= NOW() AND status =:status";
-	final String ACTIVITY_ID_ATTRIBUTE = "activityid";
+
+	final String GET_TRIP_DETAILS_BASED_ID =
+			"SELECT td.*, c.city AS tocity, IFNULL(ti.tripimagename , :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
+					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat FROM tripdetails td "
+					+ " INNER JOIN (SELECT * FROM itenary ORDER BY DAY) AS it ON it.tripid = td.id "
+					+ "INNER JOIN city c ON c.id = td.locationid "
+					+ " LEFT OUTER JOIN (SELECT tripid, GROUP_CONCAT(NAME) AS tripimagename FROM tripimages WHERE STATUS =:status GROUP BY tripid) AS ti ON ti.tripid = td.id "
+					+ "WHERE td.id =:id";
 
 	public Long addTripDetails(Trip trip) throws Exception
 	{
@@ -115,6 +126,8 @@ public class TripDAOImpl implements TripDAO
 		map.put("startIndx", trip.getStartIndx());
 		map.put("endIndx", trip.getEndIndx());
 		map.put("userId", trip.getUserid());
+		map.put("defaultImage", DEFAULT_TRIP_IMAGE_PATH);
+
 		List<Trip> list =
 				namedParameterJdbcTemplate.query(GET_TRIP_DETAILS, map,
 						new BeanPropertyRowMapper(Trip.class));
@@ -134,7 +147,7 @@ public class TripDAOImpl implements TripDAO
 		return namedParameterJdbcTemplate.queryForInt(GET_TOTAL_TRIPS, map);
 	}
 
-	public List<Trip> getTripDetailsBasedId(Trip trip) throws Exception
+	public List<Trip> getUpdatingTripDetailsBasedId(Trip trip) throws Exception
 	{
 		Map map = new HashMap();
 		map.put("status", trip.getStatus());
@@ -184,6 +197,7 @@ public class TripDAOImpl implements TripDAO
 	{
 		Map map = new HashMap();
 		map.put("status", status);
+		map.put("defaultImage", DEFAULT_TRIP_IMAGE_PATH);
 		map.put("startIndx", START_INDEX);
 		map.put("endIndx", END_INDEX);
 
@@ -336,6 +350,7 @@ public class TripDAOImpl implements TripDAO
 		try
 		{
 			baseDAO.setNamedParameter(trip, params, map);
+			map.put("defaultImage", DEFAULT_TRIP_IMAGE_PATH);
 			list =
 					namedParameterJdbcTemplate.query(GET_ALL_TRIP_DETAILS, map,
 							new BeanPropertyRowMapper(Trip.class));
@@ -363,5 +378,25 @@ public class TripDAOImpl implements TripDAO
 			throw ex;
 		}
 		return numEntries;
+	}
+
+	public List<Trip> getTripDetailsBasedId(Trip trip) throws Exception
+	{
+		Map paramMap = new HashMap();
+		String[] param =
+		{ "status", "id" };
+		List<Trip> list = null;
+		try
+		{
+			baseDAO.setNamedParameter(trip, param, paramMap);
+			paramMap.put("defaultImage", DEFAULT_TRIP_IMAGE_PATH);
+			list =
+					namedParameterJdbcTemplate.query(GET_TRIP_DETAILS_BASED_ID,
+							paramMap, new BeanPropertyRowMapper(Trip.class));
+		} catch (Exception ex)
+		{
+			throw ex;
+		}
+		return list;
 	}
 }

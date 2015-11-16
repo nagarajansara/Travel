@@ -119,6 +119,12 @@ public class Trip
 	@Setter
 	private String daysdesc;
 
+	@Getter
+	@Setter
+	private String defaultImage;
+
+
+
 	public double getPrice()
 	{
 		return price;
@@ -152,6 +158,30 @@ public class Trip
 	@Getter
 	@Setter
 	private String dateformat;
+	
+	@Getter
+	@Setter
+	private String todateformat;
+
+	public String getDefaultImage()
+	{
+		return defaultImage;
+	}
+
+	public void setDefaultImage(String defaultImage)
+	{
+		this.defaultImage = defaultImage;
+	}
+
+	public String getTodateformat()
+	{
+		return todateformat;
+	}
+
+	public void setTodateformat(String todateformat)
+	{
+		this.todateformat = todateformat;
+	}
 
 	public Trip()
 	{
@@ -209,6 +239,12 @@ public class Trip
 		this.userid = userId;
 		this.status = status;
 		this.id = tripId;
+	}
+
+	public Trip(int tripId, String status)
+	{
+		this.id = tripId;
+		this.status = status;
 	}
 
 	public Trip(String status, int startIndx, int endIndx)
