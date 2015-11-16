@@ -147,7 +147,7 @@
 										<article class="col-md-12">
 											<div class="bloginner">
 												<figure>
-													<a href="javascript:void(0)"><img width="840"
+													<a target="_blank" href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}"><img width="840"
 														height="337"
 														src="${hostName}:${port}/travelimages/compress/${(element.tripimagename)}"
 														alt=""></a>
