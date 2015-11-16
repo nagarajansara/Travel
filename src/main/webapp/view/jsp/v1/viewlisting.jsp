@@ -66,12 +66,24 @@
 											${element.dateformat} - ${element.todateformat}</li>
 										<li><i class="fa fa-paper-plane"></i> <strong>LOCATION:</strong>
 											${element.tocity}</li>
-										<li><i class="fa fa-ticket"></i> <strong>Available
-												Seat:</strong> 52</li>
+										<li><i class="fa fa-ticket"></i> <strong>Route :</strong>
+											${element.route }</li>
 										<li><i class="fa fa-tag"></i> <strong>Price:</strong>
 											${element.price}</li>
 									</ul>
 									<a class="kd-booking-btn thbg-color" href="#">bOOK nOW</a>
+								</div>
+								<blockquote>${ element.guidelines }</blockquote>
+								<div class="kd-rich-editor">
+									<c:set var="tripdaysdesc"
+										value="${fn:split(element.daysdesc, ',')}" />
+									<c:forEach items="${tripdaysdesc}" var="tripdaysdescElement"
+										varStatus="loopElement">
+										<h1>DAY <c:out value="${ loopElement.index + 1}"></c:out></h1>
+										<p>
+											<c:out value="${tripdaysdescElement }"></c:out>
+										</p>
+									</c:forEach>
 								</div>
 							</c:forEach>
 						</c:if>

@@ -82,13 +82,13 @@ public class TripDAOImpl implements TripDAO
 	final String GET_ALL_TRIP_DETAILS =
 			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
 					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti ON td.id = ti.tripid "
-					+ "WHERE td.fromdate >= NOW() AND td.status =:status LIMIT :startIndx, :endIndx";
+					+ "WHERE td.fromdate >= NOW() AND td.status =:status ORDER BY td.createdat DESC LIMIT :startIndx, :endIndx ";
 
 	final String GET_ALL_TRIPDETAILS_NUMENTRIES =
 			"Select count(*) from tripdetails where fromdate >= NOW() AND status =:status";
 
 	final String GET_TRIP_DETAILS_BASED_ID =
-			"SELECT td.*, c.city AS tocity, IFNULL(ti.tripimagename , :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
+			"SELECT td.*, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
 					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat FROM tripdetails td "
 					+ " INNER JOIN (SELECT * FROM itenary ORDER BY DAY) AS it ON it.tripid = td.id "
 					+ "INNER JOIN city c ON c.id = td.locationid "

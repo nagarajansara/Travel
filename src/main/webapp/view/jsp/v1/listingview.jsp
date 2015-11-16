@@ -147,12 +147,13 @@
 										<article class="col-md-12">
 											<div class="bloginner">
 												<figure>
-													<a target="_blank" href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}"><img width="840"
-														height="337"
+													<a href="#"><img width="840" height="337"
 														src="${hostName}:${port}/travelimages/compress/${(element.tripimagename)}"
 														alt=""></a>
 													<figcaption>
-														<a href="#" class="fa fa-plus-circle"></a>
+														<a target="_blank"
+															href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}"
+															" class="fa fa-plus-circle"></a>
 													</figcaption>
 												</figure>
 												<section class="kd-bloginfo">
