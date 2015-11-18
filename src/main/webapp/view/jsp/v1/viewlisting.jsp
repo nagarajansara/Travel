@@ -75,11 +75,22 @@
 								</div>
 								<blockquote>${ element.guidelines }</blockquote>
 								<div class="kd-rich-editor">
+									<div class="kd-imageframe">
+										<div class="row">
+											<div class="col-md-7">
+												<h2>Description</h2>
+												<p>${ element.description}</p>
+											</div>
+										</div>
+									</div>
 									<c:set var="tripdaysdesc"
 										value="${fn:split(element.daysdesc, ',')}" />
 									<c:forEach items="${tripdaysdesc}" var="tripdaysdescElement"
 										varStatus="loopElement">
-										<h1>DAY <c:out value="${ loopElement.index + 1}"></c:out></h1>
+										<h1>
+											DAY
+											<c:out value="${ loopElement.index + 1}"></c:out>
+										</h1>
 										<p>
 											<c:out value="${tripdaysdescElement }"></c:out>
 										</p>
