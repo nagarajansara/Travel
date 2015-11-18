@@ -33,7 +33,7 @@
 	        </li>
 	      </ul>
 	      
-	      <div class="kd-tourform">
+	      <div class="kd-tourform" style="display: none">
 	        <div class="container">
 	          <a href="#" class="formbtn">Find the tour</a>
 	          <form>

@@ -138,16 +138,16 @@
 						<div class="kd-section-title">
 							<h3>Listing View</h3>
 						</div>
-						<div class="kd-blog-list kd-bloglarge">
+						<div class="kd-blog-list kd-blogmedium">
 							<c:if test="${not empty model.responseData.tripDetails}">
 								<c:set var="numEntries" value="${model.responseData.numEntries}" />
 								<div class="row">
 									<c:forEach items="${model.responseData.tripDetails}"
 										var="element" varStatus="loop">
 										<article class="col-md-12">
-											<div class="bloginner">
+											<div class="bloginner" style="width: 100% !important">
 												<figure>
-													<a href="#"><img width="840" height="337"
+													<a href="#"><img width="255" height="191"
 														src="${hostName}:${port}/travelimages/compress/${(element.tripimagename)}"
 														alt=""></a>
 													<figcaption>

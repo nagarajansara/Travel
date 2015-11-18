@@ -171,7 +171,8 @@
 													<span>Your Account</span>
 													<div class="kd-login-network">
 														<ul>
-															<li><a href="<%=fbConnection.getFBAuthUrl(domainName)%>"
+															<li><a
+																href="<%=fbConnection.getFBAuthUrl(domainName)%>"
 																data-original-title="Facebook"><i
 																	class="fa fa-facebook"></i> Login with Facebook</a></li>
 															<!--<li><a href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i> Login with Twitter</a></li>-->
@@ -216,7 +217,10 @@
 		<div class="kd-headbar">
 			<div class="container">
 				<div class="row">
-					<!--<div class="col-md-3"><a href="index.html" class="logo"><img src="${baseURL}/theme/images/logo.png" alt=""></a></div>-->
+					<div class="col-md-3">
+						<a href="index.html" class="logo"><img
+							src="${baseURL}/theme/images/logo.png" alt=""></a>
+					</div>
 					<div class="col-md-9">
 						<div class="kd-rightside">
 							<nav class="navbar navbar-default navigation">
