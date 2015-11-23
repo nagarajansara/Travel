@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html"%>
 <%@ include file="lib/header.jsp"%>
+<style type="text/css">
+.bs-example {
+	margin: 20px;
+}
+</style>
 <link rel="stylesheet"
-	href="${baseURL}/assest/plugin/slider/jssor.slider.css" media="screen" />
+	href="${baseURL}/assest/plugin/slider/owl.carousel.css" media="screen" />
+<link rel="stylesheet"
+	href="${baseURL}/assest/plugin/slider/owl.theme.css" media="screen" />
+<link rel="stylesheet"
+	href="${baseURL}/assest/plugin/slider/owl.transitions.css"
+	media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctviewlisting.css"
 	media="screen" />
 <div class="kd-content">
@@ -71,7 +81,8 @@
 										<li><i class="fa fa-tag"></i> <strong>Price:</strong>
 											${element.price}</li>
 									</ul>
-									<a class="kd-booking-btn thbg-color" href="#">bOOK nOW</a>
+									<a class="kd-booking-btn thbg-color ctBookingNow" href="#">bOOK
+										nOW</a>
 								</div>
 								<blockquote>${ element.guidelines }</blockquote>
 								<div class="kd-rich-editor">
@@ -98,6 +109,41 @@
 								</div>
 							</c:forEach>
 						</c:if>
+						<!-- <div class="kd-related-post kd-package-post">
+							<div class="kd-section-title">
+								<h2>Related packages</h2>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bs-example">
+			<!-- Button HTML (to Trigger Modal) -->
+
+
+			<!-- Modal HTML -->
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Confirmation</h4>
+						</div>
+						<div class="modal-body">
+							<p>Do you want to save changes you made to document before
+								closing?</p>
+							<p class="text-warning">
+								<small>If you don't save, your changes will be lost.</small>
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save
+								changes</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -107,7 +153,7 @@
 <div class="clear"></div>
 <%@ include file="lib/footer.jsp"%>
 <script src="${baseURL}/assest/plugin/slider/jssor.slider.mini.js"></script>
-<%-- <script src="${baseURL}/assest/js/ctviewlisting.js"></script> --%>
+<script src="${baseURL}/assest/js/ctviewlisting.js"></script>
 <script>
 	$(document)
 			.ready(
@@ -391,6 +437,10 @@
 						$(window).bind("resize", ScaleSlider);
 						$(window).bind("orientationchange", ScaleSlider);
 						//responsive code end
+
+						$(".ctBookingNow").click(function() {
+							$("#myModal").modal('show');
+						});
 
 					});
 </script>

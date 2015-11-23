@@ -38,6 +38,7 @@ import travel.com.util.*;
 
 @Controller
 @RequestMapping("/vendor")
+@SuppressWarnings("unused")
 public class VendorController extends BaseController
 {
 	private static final Logger logger = Logger
@@ -96,7 +97,6 @@ public class VendorController extends BaseController
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
 		{
-
 			logger.error("vendor listing :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}

@@ -91,6 +91,20 @@ public class Login
 	@Setter
 	private String pancardno;
 
+	public int getCrdits()
+	{
+		return crdits;
+	}
+
+	public void setCrdits(int crdits)
+	{
+		this.crdits = crdits;
+	}
+
+	@Getter
+	@Setter
+	private int crdits;
+
 	public String getPancardno()
 	{
 		return pancardno;

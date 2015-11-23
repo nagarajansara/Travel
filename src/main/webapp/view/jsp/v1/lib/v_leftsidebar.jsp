@@ -7,8 +7,8 @@
 		<li class="ctVendorCreditsMenu"><a href="javascript:void(0)">Credits
 				Points</a></li>
 		<li class="ctVendorLeadsMenu"><a href="#messagesone">My Leads</a></li>
-		<li class="ctVendorBookingMenu"><a href="#messagesone">My
-				Bookings</a></li>
+		<!-- <li class="ctVendorBookingMenu"><a href="#messagesone">My
+				Bookings</a></li> -->
 		<li class="ctVendorStatisticsMenu"><a href="#messagesone">Statistics</a></li>
 		<li class="ctVendorDealsMenu"><a href="#messagesone">Deals</a></li>
 		<li class="ctVendorTutorialsMenu"><a href="#messagesone">Tutorials</a></li>

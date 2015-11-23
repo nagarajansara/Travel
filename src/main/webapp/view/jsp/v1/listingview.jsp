@@ -87,7 +87,7 @@
 										</div>
 										<div class="panel-collapse collapse in" id="collapseOne"
 											style="height: auto;">
-											<div class="panel-body">
+											<div class="panel-body ctListViewActivity">
 												<div class="checkbox">
 													<c:if test="${not empty model.responseData.activityType}">
 														<c:forEach items="${model.responseData.activityType}"

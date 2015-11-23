@@ -24,7 +24,9 @@
 	</bean>
 	<bean id="tripService" class="travel.com.bo.TripServiceBO">
 	</bean>
-	<!-- <bean id="fbConnection" class="travel.com.model.FBConnection"> </bean> -->
+	<bean id="bookingService" class="travel.com.bo.BookingServiceBO">
+	</bean>
+
 
 
 	<bean

@@ -20,6 +20,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public class Booking
 {
 	@Getter
@@ -50,6 +51,12 @@ public class Booking
 	public Booking(int consumerid)
 	{
 		this.consumerid = consumerid;
+	}
+
+	public Booking(int vendorid, String status)
+	{
+		this.vendorid = vendorid;
+		this.status = status;
 	}
 
 	public int getId()
