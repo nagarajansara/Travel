@@ -5,13 +5,13 @@
 	margin: 20px;
 }
 </style>
-<link rel="stylesheet"
+<%-- <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/slider/owl.carousel.css" media="screen" />
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/slider/owl.theme.css" media="screen" />
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/slider/owl.transitions.css"
-	media="screen" />
+	media="screen" /> --%>
 <link rel="stylesheet" href="${baseURL}/assest/css/ctviewlisting.css"
 	media="screen" />
 <div class="kd-content">
@@ -81,8 +81,8 @@
 										<li><i class="fa fa-tag"></i> <strong>Price:</strong>
 											${element.price}</li>
 									</ul>
-									<a class="kd-booking-btn thbg-color ctBookingNow" href="#">bOOK
-										nOW</a>
+									<a class="kd-booking-btn thbg-color ctBookingNow"
+										href="javascript:void(0)">bOOK nOW</a>
 								</div>
 								<blockquote>${ element.guidelines }</blockquote>
 								<div class="kd-rich-editor">

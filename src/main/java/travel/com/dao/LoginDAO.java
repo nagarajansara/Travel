@@ -5,6 +5,7 @@ import java.util.*;
 
 import travel.com.model.*;
 
+@SuppressWarnings("unused")
 public interface LoginDAO
 {
 	void insertCustomerData(Login login) throws Exception;
@@ -21,4 +22,8 @@ public interface LoginDAO
 	List<Login> getUserDetails(Login login) throws Exception;
 
 	void updateProfile(Login login) throws Exception;
+
+	int getCredits(int userId) throws Exception;
+
+	List<Login> getCreditsHistory(Login login) throws Exception;
 }

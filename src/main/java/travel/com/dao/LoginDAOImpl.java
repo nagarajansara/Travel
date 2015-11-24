@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import travel.com.model.*;
 import travel.com.util.Response;
 
+@SuppressWarnings("unused")
 public class LoginDAOImpl implements LoginDAO
 {
 
@@ -25,25 +26,39 @@ public class LoginDAOImpl implements LoginDAO
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-	final String INSERT_CUSTOMER_QUERY = "INSERT INTO users (email, firstname, lastname, password, role, city,"
-			+ "ip) VALUES (:email, :firstname, :lastname, :password, :role, :city, :ip)";
+	final String INSERT_CUSTOMER_QUERY =
+			"INSERT INTO users (email, firstname, lastname, password, role, city,"
+					+ "ip) VALUES (:email, :firstname, :lastname, :password, :role, :city, :ip)";
 
-	final String SIGN_UP_FB_QUERY = "INSERT INTO users (email, firstname, lastname, role, city, openid, openiddata, "
-			+ "ip, signuptype) VALUES (:email, :firstname, :lastname, :role, :city, :openid, "
-			+ ":openiddata, :ip, :signuptype)";
+	final String SIGN_UP_FB_QUERY =
+			"INSERT INTO users (email, firstname, lastname, role, city, openid, openiddata, "
+					+ "ip, signuptype) VALUES (:email, :firstname, :lastname, :role, :city, :openid, "
+					+ ":openiddata, :ip, :signuptype)";
 
-	final String GET_USER_ID_QUERY = "SELECT id, email from users where email =:email and openid =:openid";
+	final String GET_USER_ID_QUERY =
+			"SELECT id, email from users where email =:email and openid =:openid";
 
-	final String INSERT_VENDOR_QUERY = "INSERT into users (organizationname, email, firstname, lastname, password, role, state, mobile, phoneno, address,"
-			+ "ip) VALUES (:organizationname, :email, :firstname, :lastname, :password, :role, :state, :mobile, "
-			+ ":phoneno, :address, :ip)";
+	final String INSERT_VENDOR_QUERY =
+			"INSERT into users (organizationname, email, firstname, lastname, password, role, state, mobile, phoneno, address,"
+					+ "ip) VALUES (:organizationname, :email, :firstname, :lastname, :password, :role, :state, :mobile, "
+					+ ":phoneno, :address, :ip)";
 
-	final String VALIDATE_QUERY = "SELECT * from users where email =:email and password =:password and isapproved =:isapproved";
+	final String VALIDATE_QUERY =
+			"SELECT * from users where email =:email and password =:password and isapproved =:isapproved";
 
-	final String GET_USER_DETAILS = "SELECT * from users where id =:id and role =:role";
+	final String GET_USER_DETAILS =
+			"SELECT * from users where id =:id and role =:role";
 
-	final String UPDATE_VENDOR_PROFILE_DATAS = "Update users set firstname =:firstname, lastname =:lastname, address =:address, mobile =:mobile, pincode =:pincode"
-			+ ",state =:state, organizationname =:organizationname, city =:city, pancardno =:pancardno where id =:id";
+	final String UPDATE_VENDOR_PROFILE_DATAS =
+			"Update users set firstname =:firstname, lastname =:lastname, address =:address, mobile =:mobile, pincode =:pincode"
+					+ ",state =:state, organizationname =:organizationname, city =:city, pancardno =:pancardno where id =:id";
+
+	final String GET_CREDITS = "Select credits from users where id =:userId";
+
+	final String GET_CREDITS_HISTORY =
+			"SELECT b.credits AS tripcredits, DATE_FORMAT(b.createdat, '%d-%m-%y') AS createddate  FROM users u "
+					+ "INNER JOIN booking b ON u.id = b.vendorid "
+					+ "WHERE u.id =:id";
 
 	public void insertCustomerData(Login login) throws Exception
 	{
@@ -59,8 +74,7 @@ public class LoginDAOImpl implements LoginDAO
 		{
 
 			namedParameterJdbcTemplate.update(INSERT_CUSTOMER_QUERY, map);
-		}
-		catch (Exception ex)
+		} catch (Exception ex)
 		{
 			throw ex;
 		}
@@ -90,10 +104,9 @@ public class LoginDAOImpl implements LoginDAO
 		map.put("email", email);
 		map.put("openid", openId);
 
-		List<Login> list = namedParameterJdbcTemplate.query(GET_USER_ID_QUERY,
-															map,
-															new BeanPropertyRowMapper(
-																	Login.class));
+		List<Login> list =
+				namedParameterJdbcTemplate.query(GET_USER_ID_QUERY, map,
+						new BeanPropertyRowMapper(Login.class));
 		if (list != null && list.size() > 0)
 		{
 			Login login = (Login) list.get(0);
@@ -105,37 +118,38 @@ public class LoginDAOImpl implements LoginDAO
 	public void insertVendorData(Login login) throws Exception
 	{
 		Map map = new HashMap();
-		String[] params = { "organizationname", "email", "state", "password",
-				"phoneno", "mobile", "firstname", "lastname", "role",
-				"address", "ip" };
+		String[] params =
+				{ "organizationname", "email", "state", "password", "phoneno",
+						"mobile", "firstname", "lastname", "role", "address",
+						"ip" };
 		try
 		{
 			baseDAO.setNamedParameter(login, params, map);
 			namedParameterJdbcTemplate.update(INSERT_VENDOR_QUERY, map);
-		}
-		catch (Exception ex)
+		} catch (Exception ex)
 		{
 			throw ex;
 		}
 
 	}
 
-	public List<Login>
-			validate(String email, String password, String isApproved)
-					throws Exception
+	public
+			List<Login> validate(String email, String password,
+					String isApproved) throws Exception
 	{
 		Map map = new HashMap();
-		String[] params = { "email", "password", "isapproved" };
-		String[] paramValues = { email, password, isApproved };
+		String[] params =
+		{ "email", "password", "isapproved" };
+		String[] paramValues =
+		{ email, password, isApproved };
 		List<Login> list = null;
 		try
 		{
 			baseDAO.setNamedParameter(params, paramValues, map);
-			list = namedParameterJdbcTemplate.query(VALIDATE_QUERY, map,
-													new BeanPropertyRowMapper(
-															Login.class));
-		}
-		catch (Exception ex)
+			list =
+					namedParameterJdbcTemplate.query(VALIDATE_QUERY, map,
+							new BeanPropertyRowMapper(Login.class));
+		} catch (Exception ex)
 		{
 			throw ex;
 		}
@@ -148,27 +162,58 @@ public class LoginDAOImpl implements LoginDAO
 		map.put("id", login.getId());
 		map.put("role", login.getRole());
 
-		List<Login> list = namedParameterJdbcTemplate.query(GET_USER_DETAILS,
-															map,
-															new BeanPropertyRowMapper(
-																	Login.class));
+		List<Login> list =
+				namedParameterJdbcTemplate.query(GET_USER_DETAILS, map,
+						new BeanPropertyRowMapper(Login.class));
 		return list;
 	}
 
 	public void updateProfile(Login login) throws Exception
 	{
 		Map map = new HashMap();
-		String[] params = { "firstname", "lastname", "address", "mobile",
-				"pincode", "state", "organizationname", "city", "pancardno",
-				"id" };
+		String[] params =
+				{ "firstname", "lastname", "address", "mobile", "pincode",
+						"state", "organizationname", "city", "pancardno", "id" };
 		try
 		{
 			baseDAO.setNamedParameter(login, params, map);
 			namedParameterJdbcTemplate.update(UPDATE_VENDOR_PROFILE_DATAS, map);
-		}
-		catch (Exception ex)
+		} catch (Exception ex)
 		{
 			throw ex;
 		}
+	}
+
+	public int getCredits(int userId) throws Exception
+	{
+		int credits = 0;
+		Map map = new HashMap();
+		map.put("userId", userId);
+		List<Login> list =
+				namedParameterJdbcTemplate.query(GET_CREDITS, map,
+						new BeanPropertyRowMapper(Login.class));
+		if (list != null && list.size() > 0)
+		{
+			Login login = (Login) list.get(0);
+			credits = login.getCredits();
+		}
+		return credits;
+	}
+
+	public List<Login> getCreditsHistory(Login login) throws Exception
+	{
+		Map map = new HashMap();
+		String[] params =
+		{ "id" };
+		try
+		{
+			baseDAO.setNamedParameter(login, params, map);
+			return namedParameterJdbcTemplate.query(GET_CREDITS_HISTORY, map,
+					new BeanPropertyRowMapper(Login.class));
+		} catch (Exception ex)
+		{
+			throw ex;
+		}
+
 	}
 }

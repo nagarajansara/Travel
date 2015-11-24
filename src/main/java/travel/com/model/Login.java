@@ -91,6 +91,12 @@ public class Login
 	@Setter
 	private String pancardno;
 
+	@Getter
+	@Setter
+	private int credits;
+	
+	
+
 	public int getCrdits()
 	{
 		return crdits;
@@ -99,6 +105,11 @@ public class Login
 	public void setCrdits(int crdits)
 	{
 		this.crdits = crdits;
+	}
+
+	public void setCredits(int credits)
+	{
+		this.credits = credits;
 	}
 
 	@Getter
@@ -133,13 +144,51 @@ public class Login
 	@Setter
 	private String pincode;
 
+	@Getter
+	@Setter
+	private int tripcredits;
+
+	@Getter
+	@Setter
+	private String createddate;
+
+	public int getTripcredits()
+	{
+		return tripcredits;
+	}
+
+	public void setTripcredits(int tripcredits)
+	{
+		this.tripcredits = tripcredits;
+	}
+
+	public String getCreateddate()
+	{
+		return createddate;
+	}
+
+	public void setCreateddate(String createddate)
+	{
+		this.createddate = createddate;
+	}
+
+	public int getCredits()
+	{
+		return credits;
+	}
+
 	public Login()
 	{
 
 	}
 
+	public Login(int id)
+	{
+		this.id = id;
+	}
+
 	public Login(String email, String firstName, String lastName,
-		String password, String city, String role, String ip)
+			String password, String city, String role, String ip)
 	{
 		this.email = email;
 		this.firstname = firstName;
@@ -151,8 +200,8 @@ public class Login
 	}
 
 	public Login(String email, String firstName, String lastName, String city,
-		String role, String ip, String openId, String signupType,
-		String openIdData)
+			String role, String ip, String openId, String signupType,
+			String openIdData)
 	{
 		this.email = email;
 		this.firstname = firstName;
@@ -166,8 +215,8 @@ public class Login
 	}
 
 	public Login(String nameOrganization, String email, String firstName,
-		String lastName, String password, String stateName, String address,
-		String mobile, String phoneno, String role, String ip)
+			String lastName, String password, String stateName, String address,
+			String mobile, String phoneno, String role, String ip)
 	{
 		this.organizationname = organizationname;
 		this.email = email;
@@ -313,8 +362,8 @@ public class Login
 	}
 
 	public Login(String firstname, String lastname, String address,
-		String mobile, String pincode, String state, String organizationname,
-		String city, String pancardno, int id)
+			String mobile, String pincode, String state,
+			String organizationname, String city, String pancardno, int id)
 	{
 		this.firstname = firstname;
 		this.lastname = lastname;

@@ -43,9 +43,23 @@ public class Booking
 	@Setter
 	private String createdat;
 
+	@Getter
+	@Setter
+	private int credits;
+
 	public Booking()
 	{
 
+	}
+
+	public int getCredits()
+	{
+		return credits;
+	}
+
+	public void setCredits(int credits)
+	{
+		this.credits = credits;
 	}
 
 	public Booking(int consumerid)

@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.json.simple.parser.JSONParser;
-import org.springframework.web.bind.annotation.ResponseBody;  
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,21 +31,19 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 import travel.com.service.*;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
 
-
-
 @Controller
 @RequestMapping("/login")
+@SuppressWarnings("unused")
 public class LoginController extends BaseController
 {
 
-	private static final Logger logger = Logger.getLogger(LoginController.class.getName());
-
+	private static final Logger logger = Logger.getLogger(LoginController.class
+			.getName());
 
 	@Autowired
 	@Qualifier("cityService")
@@ -68,13 +65,10 @@ public class LoginController extends BaseController
 	@Qualifier("appProp")
 	AppProp appProp;
 
+	@RequestMapping(value = "/customerregister", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String customerRegister(HttpServletRequest request, ModelMap model)
 
-
-	@RequestMapping(value="/customerregister", method = {RequestMethod.GET, RequestMethod.POST})
-	public String customerRegister(
-		HttpServletRequest request,
-		ModelMap model)
-	 
 	{
 
 		String CUSTOMER_ROLE = "ROLE_CUSTOMER";
@@ -90,36 +84,36 @@ public class LoginController extends BaseController
 			String role = CUSTOMER_ROLE;
 			String ip = utilities.getIpAddress(request);
 
-			String[] params = {"email", "firstName", "lastName", "password", "cityName"};
+			String[] params =
+			{ "email", "firstName", "lastName", "password", "cityName" };
 
-			if(!utilities.isChkRequsetParamsNull(request, params))
+			if (!utilities.isChkRequsetParamsNull(request, params))
 			{
-				Login login = new Login(email, firstName, lastName, 
-										password, cityName, role, ip);
+				Login login =
+						new Login(email, firstName, lastName, password,
+								cityName, role, ip);
 
 				loginService.insertCustomerData(login);
 
 				utilities.setSuccessResponse(response);
-			}
-			else
+			} else
 			{
 				throw new ConstException(ConstException.ERR_MSG_BLANK_DATA);
 			}
-		}
-		catch(Exception ex)
+		} catch (Exception ex)
 		{
-			logger.error("customerRegister :" +ex.getMessage());
+			logger.error("customerRegister :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
-		
-	    return "customerregister";
+
+		return "customerregister";
 	}
-	@RequestMapping(value="/vendorregister", method = {RequestMethod.GET, RequestMethod.POST})
-	public String vendorregister(
-		HttpServletRequest request,
-		ModelMap model)
-	 
+
+	@RequestMapping(value = "/vendorregister", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String vendorregister(HttpServletRequest request, ModelMap model)
+
 	{
 
 		String CUSTOMER_ROLE = "ROLE_VENDOR";
@@ -127,7 +121,8 @@ public class LoginController extends BaseController
 		try
 		{
 
-			String nameOrganization = request.getParameter("nameoforganization");
+			String nameOrganization =
+					request.getParameter("nameoforganization");
 			String email = request.getParameter("email");
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
@@ -140,60 +135,63 @@ public class LoginController extends BaseController
 			String role = CUSTOMER_ROLE;
 			String ip = utilities.getIpAddress(request);
 
-			String[] params = {"nameoforganization", "email", "firstName", "lastName", 
-									"password", "stateName", "ctAddress", "mobile", "contact", "pancard"
-									};
-					
-			if(!utilities.isChkRequsetParamsNull(request, params))
+			String[] params =
+					{ "nameoforganization", "email", "firstName", "lastName",
+							"password", "stateName", "ctAddress", "mobile",
+							"contact", "pancard" };
+
+			if (!utilities.isChkRequsetParamsNull(request, params))
 			{
-				Login login = new Login(nameOrganization, email, firstName, lastName, password, stateName,
-											address, phoneno, mobile, role, ip);
+				Login login =
+						new Login(nameOrganization, email, firstName, lastName,
+								password, stateName, address, phoneno, mobile,
+								role, ip);
 
 				loginService.insertVendorData(login);
 
 				utilities.setSuccessResponse(response);
-			}
-			else
+			} else
 			{
 				throw new ConstException(ConstException.ERR_MSG_BLANK_DATA);
 			}
-				
-		}
-		catch(Exception ex)
+
+		} catch (Exception ex)
 		{
-			logger.error("vendorregister :" +ex.getMessage());
+			logger.error("vendorregister :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
-		
-	    return "vendorregister";
+
+		return "vendorregister";
 	}
-	@RequestMapping(value = "/fbsignupcbk", method = {RequestMethod.GET, RequestMethod.POST})
-	public String fbsignupcbk(
-		HttpServletRequest req, 
-		HttpServletResponse res,
-		ModelMap model)throws Exception 
-               
-    {
+
+	@RequestMapping(value = "/fbsignupcbk", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String fbsignupcbk(HttpServletRequest req, HttpServletResponse res,
+			ModelMap model) throws Exception
+
+	{
 		Login login = null;
-		try 
+		try
 		{
 
 			String CUSTOMER_ROLE = "ROLE_CUSTOMER";
-			String code="";
+			String code = "";
 			code = req.getParameter("code");
-			if (code == null || code.equals("")) 
+			if (code == null || code.equals(""))
 			{
 				throw new RuntimeException(
 						"ERROR: Didn't get code parameter in callback.");
 			}
-			
+
 			FBConnection fbConnection = new FBConnection();
 			String accessToken = fbConnection.getAccessToken(code);
 
 			FBGraph fbGraph = new FBGraph(accessToken);
 			String graph = fbGraph.getFBGraph();
 			Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
+
+			logger.info("fbProfileData :" + fbProfileData);
 
 			String email = fbProfileData.get("email");
 			String firstName = fbProfileData.get("first_name");
@@ -205,111 +203,107 @@ public class LoginController extends BaseController
 			String signupType = "fb";
 			String openId = fbProfileData.get("id");
 
-			
-			login = new Login(email, firstName, lastName, cityName,
-										role, ip, openId, signupType, openIdData);
+			login =
+					new Login(email, firstName, lastName, cityName, role, ip,
+							openId, signupType, openIdData);
 
 			loginService.customerSignUpFB(login);
 
-			int userId = loginService.getUserId(login.getEmail(), login.getOpenid());
+			int userId =
+					loginService.getUserId(login.getEmail(), login.getOpenid());
 			login.setId(userId);
 
 			setUserSession(req, login);
 
-			
 			utilities.setSuccessResponse(response);
-			
-			
-		} 
-		catch (Exception ex) 
+
+		} catch (Exception ex)
 		{
-			logger.error("fbsignupcbk :" +ex.getMessage());
-			if(ex.getMessage().indexOf("Duplicate entry") >= 0)
+			logger.error("fbsignupcbk :" + ex.getMessage());
+			if (ex.getMessage().indexOf("Duplicate entry") >= 0)
 			{
-				int userId = loginService.getUserId(login.getEmail(), login.getOpenid());
+				int userId =
+						loginService.getUserId(login.getEmail(),
+								login.getOpenid());
 				login.setId(userId);
 				setUserSession(req, login);
 			}
-			utilities.setErrResponse(ex, response);		
+			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
 		return "home";
-			
+
 	}
-	@RequestMapping(value = "/validate", method = {RequestMethod.GET, RequestMethod.POST})
-	public String validate(
-		HttpServletRequest request, 
-		HttpServletResponse res,
-		ModelMap model)throws Exception
+
+	@RequestMapping(value = "/validate", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String validate(HttpServletRequest request, HttpServletResponse res,
+			ModelMap model) throws Exception
 	{
 		try
 		{
-			String email = request.getParameter("email");;
+			String email = request.getParameter("email");
+			;
 			String password = request.getParameter("password");
 			String isApproved = "yes";
 
-			String[] params = {"email", "password"};
+			String[] params =
+			{ "email", "password" };
 
-			if(!utilities.isChkRequsetParamsNull(request, params))
+			if (!utilities.isChkRequsetParamsNull(request, params))
 			{
-				List<Login> list = loginService.validate(email, password, isApproved);
-				if(list != null && list.size() > 0)
+				List<Login> list =
+						loginService.validate(email, password, isApproved);
+				if (list != null && list.size() > 0)
 				{
-					Login login = (Login)list.get(0);
+					Login login = (Login) list.get(0);
 					setUserSession(request, login);
 					utilities.setSuccessResponse(response);
-				}
-				else
+				} else
 				{
 					throw new ConstException("Invalid Login");
 				}
-			}
-			else
+			} else
 			{
-				throw new ConstException(ConstException.ERR_CODE_BLANK_DATA, ConstException.ERR_MSG_BLANK_DATA);
+				throw new ConstException(ConstException.ERR_CODE_BLANK_DATA,
+						ConstException.ERR_MSG_BLANK_DATA);
 			}
-			
-		}
-		catch(Exception ex)
+
+		} catch (Exception ex)
 		{
-			logger.error("validate :" +ex.getMessage());		
+			logger.error("validate :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
 		return "home";
 	}
-	@RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
-	public String logout(
-		HttpServletRequest request, 
-		HttpServletResponse res,
-		ModelMap model)throws Exception
+
+	@RequestMapping(value = "/logout", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String logout(HttpServletRequest request, HttpServletResponse res,
+			ModelMap model) throws Exception
 	{
 		try
 		{
 			HttpSession session = request.getSession(false);
-            session.invalidate();
+			session.invalidate();
 			utilities.setSuccessResponse(response);
-		}
-		catch(Exception ex)
+		} catch (Exception ex)
 		{
-			logger.error("logout :" +ex.getMessage());
+			logger.error("logout :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
 		return "home";
 	}
-	@RequestMapping(value = "/sessionfailure", method = {RequestMethod.GET, RequestMethod.POST})
-	public String sessionfailure(
-		HttpServletRequest req, 
-		HttpServletResponse res,
-		ModelMap model)throws Exception
+
+	@RequestMapping(value = "/sessionfailure", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String sessionfailure(HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) throws Exception
 	{
-		
+
 		return "403";
 	}
-	
-	
-               
-	
-	
+
 }

@@ -46,9 +46,9 @@ public class LoginServiceBO implements LoginService
 		loginDAO.insertVendorData(login);
 	}
 
-	public List<Login>
-			validate(String email, String password, String isApproved)
-					throws Exception
+	public
+			List<Login> validate(String email, String password,
+					String isApproved) throws Exception
 	{
 		return loginDAO.validate(email, password, isApproved);
 	}
@@ -61,5 +61,15 @@ public class LoginServiceBO implements LoginService
 	public void updateProfile(Login login) throws Exception
 	{
 		loginDAO.updateProfile(login);
+	}
+
+	public int getCredits(int userId) throws Exception
+	{
+		return loginDAO.getCredits(userId);
+	}
+
+	public List<Login> getCreditsHistory(Login login) throws Exception
+	{
+		return loginDAO.getCreditsHistory(login);
 	}
 }

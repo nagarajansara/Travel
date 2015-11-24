@@ -312,6 +312,29 @@ public class VendorController extends BaseController
 		return "profile";
 	}
 
+	@RequestMapping(value = "/getCredits", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getCredits(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			int userId = getUserId(request);
+			Map<String, Object> map = new HashMap<String, Object>();
+			int credits = loginService.getCredits(userId);
+			List<Login> list =
+					loginService.getCreditsHistory(new Login(userId));
+			map.put("credits", credits);
+			map.put("history", list);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getCredits_VENDOR: " + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "credits";
+	}
+
 	@RequestMapping(value = "/updateProfile", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String updateProfile(HttpServletRequest request, ModelMap model)

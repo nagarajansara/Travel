@@ -114,7 +114,7 @@
 										<div class="panel-collapse collapse in">
 											<div class="panel-body">
 												<p>
-													<input type="text" id="price"
+													<input type="text" disabled id="price"
 														style="border: 0; color: #000000; font-weight: bold;">
 												</p>
 												<input type="hidden" value="10" class="ctFromPriceHidden"

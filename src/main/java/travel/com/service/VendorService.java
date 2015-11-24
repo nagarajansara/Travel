@@ -7,8 +7,9 @@ import java.util.*;
 import travel.com.util.*;
 import travel.com.model.*;
 
-
+@SuppressWarnings("unused")
 public interface VendorService
 {
 	List<Activity> getActivitys(Activity activity) throws Exception;
+
 }

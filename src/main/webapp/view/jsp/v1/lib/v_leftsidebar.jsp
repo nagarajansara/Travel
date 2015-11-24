@@ -4,8 +4,8 @@
 			href="${baseURL}/travelapi/vendor/listing">Listing</a></li>
 		<li class="ctVendorProfileMenu"><a
 			href="${baseURL}/travelapi/vendor/getProfile">Profile</a></li>
-		<li class="ctVendorCreditsMenu"><a href="javascript:void(0)">Credits
-				Points</a></li>
+		<li class="ctVendorCreditsMenu"><a
+			href="${baseURL}/travelapi/vendor/getCredits">Credit Points</a></li>
 		<li class="ctVendorLeadsMenu"><a href="#messagesone">My Leads</a></li>
 		<!-- <li class="ctVendorBookingMenu"><a href="#messagesone">My
 				Bookings</a></li> -->
