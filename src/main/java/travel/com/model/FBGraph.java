@@ -24,9 +24,6 @@ public class FBGraph
 		String graph = null;
 		try
 		{
-
-			System.out.println("accessToken getFBGraph : " + accessToken);
-
 			String g = "https://graph.facebook.com/me?" + accessToken;
 			URL u = new URL(g);
 			URLConnection c = u.openConnection();
