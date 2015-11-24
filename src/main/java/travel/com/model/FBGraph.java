@@ -26,7 +26,7 @@ public class FBGraph
 		{
 
 			String g =
-					"https://graph.facebook.com/me?" + accessToken;
+					"https://graph.facebook.com/me?access_token=" + accessToken;
 			URL u = new URL(g);
 			URLConnection c = u.openConnection();
 			BufferedReader in =
