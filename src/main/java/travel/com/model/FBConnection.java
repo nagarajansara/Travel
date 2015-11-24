@@ -99,7 +99,7 @@ public class FBConnection
 					"http://www.facebook.com/dialog/oauth?" + "client_id="
 							+ FB_APP_ID + "&redirect_uri="
 							+ URLEncoder.encode(REDIRECT_URI, "UTF-8")
-							+ "&scope=email";
+							+ "&scope=email,offline_access,user_about_me,user_birthday,read_friendlists";
 		} catch (Exception e)
 		{
 			e.printStackTrace();

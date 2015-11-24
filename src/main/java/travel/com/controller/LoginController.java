@@ -190,9 +190,12 @@ public class LoginController extends BaseController
 
 			FBGraph fbGraph = new FBGraph(accessToken);
 			String graph = fbGraph.getFBGraph();
+			
+			System.out.println("graph :" + graph);
+			
 			Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
-			System.out.println("fbProfileData :" + fbProfileData);
+			
 
 			String email = fbProfileData.get("email");
 			String firstName = fbProfileData.get("first_name");
