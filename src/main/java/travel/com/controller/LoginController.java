@@ -178,7 +178,7 @@ public class LoginController extends BaseController
 			String CUSTOMER_ROLE = "ROLE_CUSTOMER";
 			String code = "";
 			code = req.getParameter("code");
-			logger.error("code  code :" + code);
+			System.out.println("code code :" + code);
 			if (code == null || code.equals(""))
 			{
 				throw new RuntimeException(
@@ -192,7 +192,7 @@ public class LoginController extends BaseController
 			String graph = fbGraph.getFBGraph();
 			Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
-			logger.error("fbProfileData :" + fbProfileData);
+			System.out.println("fbProfileData :" + fbProfileData);
 
 			String email = fbProfileData.get("email");
 			String firstName = fbProfileData.get("first_name");
@@ -220,6 +220,7 @@ public class LoginController extends BaseController
 
 		} catch (Exception ex)
 		{
+			System.out.println("fbsignupcbk fbsignupcbk :" + ex.getMessage());
 			logger.error("fbsignupcbk :" + ex.getMessage());
 			if (ex.getMessage().indexOf("Duplicate entry") >= 0)
 			{
