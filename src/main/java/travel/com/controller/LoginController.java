@@ -191,7 +191,6 @@ public class LoginController extends BaseController
 			String graph = fbGraph.getFBGraph();
 
 			System.out.println("accessToken :" + accessToken);
-			System.out.println("graph :" + graph);
 			System.out.println("code :" + code);
 
 			Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
@@ -212,12 +211,11 @@ public class LoginController extends BaseController
 
 			loginService.customerSignUpFB(login);
 
-			/*
-			 * int userId = loginService.getUserId(login.getEmail(),
-			 * login.getOpenid()); login.setId(userId);
-			 */
+			int userId =
+					loginService.getUserId(login.getEmail(), login.getOpenid());
+			login.setId(userId);
 
-			// setUserSession(req, login);
+			setUserSession(req, login);
 
 			utilities.setSuccessResponse(response);
 
@@ -225,11 +223,16 @@ public class LoginController extends BaseController
 		{
 			System.out.println("Exception User Exits :" + ex.getMessage());
 			logger.error("fbsignupcbk :" + ex.getMessage());
-			/*
-			 * if (ex.getMessage().indexOf("Duplicate entry") >= 0) { int userId
-			 * = loginService.getUserId(login.getEmail(), login.getOpenid());
-			 * login.setId(userId); setUserSession(req, login); }
-			 */
+
+			if (ex.getMessage().indexOf("Duplicate entry") >= 0)
+			{
+				int userId =
+						loginService.getUserId(login.getEmail(),
+								login.getOpenid());
+				login.setId(userId);
+				setUserSession(req, login);
+			}
+
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);

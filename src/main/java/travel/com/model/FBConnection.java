@@ -22,7 +22,7 @@ import travel.com.util.*;
 public class FBConnection
 {
 
-	static String accessToken = "";
+	String accessToken = "";
 
 	public static String FB_APP_ID = "";
 	public static String FB_APP_SECRET = "";
@@ -127,6 +127,7 @@ public class FBConnection
 
 	public String getAccessToken(String code)
 	{
+		accessToken = "";
 		if ("".equals(accessToken))
 		{
 			URL fbGraphURL;
