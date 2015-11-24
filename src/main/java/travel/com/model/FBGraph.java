@@ -10,41 +10,47 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class FBGraph
 {
 	private String accessToken;
 
-	public FBGraph(String accessToken) {
+	public FBGraph(String accessToken)
+	{
 		this.accessToken = accessToken;
 	}
 
-	public String getFBGraph() {
+	public String getFBGraph()
+	{
 		String graph = null;
-		try {
+		try
+		{
 
-			String g = "https://graph.facebook.com/me?" + accessToken;
+			String g =
+					"https://graph.facebook.com/me?access_token=" + accessToken;
 			URL u = new URL(g);
 			URLConnection c = u.openConnection();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					c.getInputStream()));
+			BufferedReader in =
+					new BufferedReader(
+							new InputStreamReader(c.getInputStream()));
 			String inputLine;
 			StringBuffer b = new StringBuffer();
 			while ((inputLine = in.readLine()) != null)
 				b.append(inputLine + "\n");
 			in.close();
 			graph = b.toString();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 			throw new RuntimeException("ERROR in getting FB graph data. " + e);
 		}
 		return graph;
 	}
 
-	public Map getGraphData(String fbGraph) 
+	public Map getGraphData(String fbGraph)
 	{
 		Map fbProfile = new HashMap();
-		try {
+		try
+		{
 			JSONObject json = new JSONObject(fbGraph);
 			fbProfile.put("id", json.getString("id"));
 			fbProfile.put("first_name", json.getString("first_name"));
@@ -53,7 +59,8 @@ public class FBGraph
 				fbProfile.put("email", json.getString("email"));
 			if (json.has("gender"))
 				fbProfile.put("gender", json.getString("gender"));
-		} catch (JSONException e) {
+		} catch (JSONException e)
+		{
 			e.printStackTrace();
 			throw new RuntimeException("ERROR in parsing FB graph data. " + e);
 		}

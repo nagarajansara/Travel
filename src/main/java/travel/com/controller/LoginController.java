@@ -191,7 +191,7 @@ public class LoginController extends BaseController
 			String graph = fbGraph.getFBGraph();
 			Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
-			logger.info("fbProfileData :" + fbProfileData);
+			logger.error("fbProfileData :" + fbProfileData);
 
 			String email = fbProfileData.get("email");
 			String firstName = fbProfileData.get("first_name");
