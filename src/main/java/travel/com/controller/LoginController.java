@@ -178,6 +178,7 @@ public class LoginController extends BaseController
 			String CUSTOMER_ROLE = "ROLE_CUSTOMER";
 			String code = "";
 			code = req.getParameter("code");
+			logger.error("code  code :" + code);
 			if (code == null || code.equals(""))
 			{
 				throw new RuntimeException(
