@@ -125,7 +125,7 @@
 						<!--// Comments //-->
 						<div id="kdcomments">
 							<c:if test="${not empty model.responseData.reviewsdetails}">
-								<h2>${model.responseData.reviewsNumEntries}Comments</h2>
+								<h2>${model.responseData.reviewsNumEntries} Comments</h2>
 								<ul class="ctReviewsDetailsUL">
 									<c:forEach items="${model.responseData.reviewsdetails}"
 										var="element" varStatus="loop">
