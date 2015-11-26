@@ -25,6 +25,8 @@ public class LoginDAOImpl implements LoginDAO
 
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	final int INITIAL_CREDITS = 0;
 
 	final String INSERT_CUSTOMER_QUERY =
 			"INSERT INTO users (email, firstname, lastname, password, role, city,"
@@ -56,8 +58,14 @@ public class LoginDAOImpl implements LoginDAO
 	final String GET_CREDITS = "Select credits from users where id =:userId";
 
 	final String GET_CREDITS_HISTORY =
-			"SELECT b.credits AS tripcredits, DATE_FORMAT(b.createdat, '%d-%m-%y') AS createddate  FROM users u "
-					+ "INNER JOIN booking b ON u.id = b.vendorid "
+			"SELECT Tab.status As reason, Tab.credits AS tripcredits, DATE_FORMAT(Tab.createdat, '%d-%m-%y') AS createddate FROM "
+					+ "(SELECT tripid, STATUS, credits, createdat FROM booking where credits >:initialcredits"
+					+ "UNION "
+					+ "SELECT tripid, STATUS, credits, createdat FROM enquiry where credits >:initialcredits"
+					+ "UNION "
+					+ "SELECT tripid, STATUS, credits, createdat FROM viewers where credits >:initialcredits) AS Tab "
+					+ "INNER JOIN tripdetails t ON Tab.tripid = t.id "
+					+ "INNER JOIN users u ON u.id = t.userid "
 					+ "WHERE u.id =:id";
 
 	public void insertCustomerData(Login login) throws Exception
@@ -204,10 +212,12 @@ public class LoginDAOImpl implements LoginDAO
 	{
 		Map map = new HashMap();
 		String[] params =
-		{ "id" };
+		{ "id"};
 		try
 		{
 			baseDAO.setNamedParameter(login, params, map);
+			map.put("initialcredits", INITIAL_CREDITS);
+			System.out.println(map);
 			return namedParameterJdbcTemplate.query(GET_CREDITS_HISTORY, map,
 					new BeanPropertyRowMapper(Login.class));
 		} catch (Exception ex)

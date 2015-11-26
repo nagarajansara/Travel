@@ -54,7 +54,7 @@
 																<c:out value="${(element.createdat) }" />
 															</time></li>
 													</ul>
-													
+
 													<p>
 														<c:out value="${(element.guidelines) }" />
 													</p>
@@ -94,8 +94,7 @@
 									<div align="center" style="color: red; cursor: pointer"
 										class="ctListingEmpty">
 										<span style="font-family: verdana; font-weight: bold">
-											No listing found
-										</span>
+											No listing found </span>
 									</div>
 								</article>
 							</c:if>
@@ -125,7 +124,8 @@
 								Type</label>
 							<div class="col-lg-4 col-md-4 col-sm-4">
 								<c:if test="${not empty model.responseData.activityList}">
-									<select name="activitytype" class="form-control ctVendorActivitySelectOPtion">
+									<select name="activitytype"
+										class="form-control ctVendorActivitySelectOPtion">
 										<option value="">Select Activity</option>
 										<c:forEach items="${model.responseData.activityList}"
 											var="element" varStatus="loop">

@@ -42,5 +42,11 @@
 	</bean>
 	<bean id="baseDAO" class="travel.com.dao.BaseDAOImpl">
 	</bean>
+	<bean id="reviewsDAO" class="travel.com.dao.ReviewsDAOImpl">
+	</bean>
+	<bean id="viewersDAO" class="travel.com.dao.ViewersDAOImpl">
+	</bean>
+	<bean id="enquiryDAO" class="travel.com.dao.EnquiryDAOImpl">
+	</bean>
 
 </beans>

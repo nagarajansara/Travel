@@ -217,6 +217,7 @@
 <script src="${baseURL}/assest/plugin/datepicker/tsdatepicker.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
+<script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script type="text/javascript">
 	var numEntries = '${numEntries}', locationId = '${locationId}', locationName =
 			'${locationName}', activityIds = '${activityIds}', fromdate =

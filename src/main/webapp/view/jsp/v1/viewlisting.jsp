@@ -5,13 +5,6 @@
 	margin: 20px;
 }
 </style>
-<%-- <link rel="stylesheet"
-	href="${baseURL}/assest/plugin/slider/owl.carousel.css" media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/slider/owl.theme.css" media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/slider/owl.transitions.css"
-	media="screen" /> --%>
 <link rel="stylesheet" href="${baseURL}/assest/css/ctviewlisting.css"
 	media="screen" />
 <div class="kd-content">
@@ -33,9 +26,9 @@
 							</div>
 							<div data-u="slides"
 								style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
-								<c:if test="${not empty model.responseData}">
-									<c:forEach items="${model.responseData}" var="element"
-										varStatus="loop">
+								<c:if test="${not empty model.responseData.tripdetails}">
+									<c:forEach items="${model.responseData.tripdetails}"
+										var="element" varStatus="loop">
 										<c:set var="tripimages"
 											value="${fn:split(element.tripimagename, ',')}" />
 										<c:forEach var="arrayVar" items="${tripimages}">
@@ -67,9 +60,9 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="kd-package-detail">
-						<c:if test="${not empty model.responseData}">
-							<c:forEach items="${model.responseData}" var="element"
-								varStatus="loop">
+						<c:if test="${not empty model.responseData.tripdetails}">
+							<c:forEach items="${model.responseData.tripdetails}"
+								var="element" varStatus="loop">
 								<div class="kd-pkg-info">
 									<ul>
 										<li><i class="fa fa-map-marker"></i> <strong>Duration:</strong>
@@ -81,8 +74,28 @@
 										<li><i class="fa fa-tag"></i> <strong>Price:</strong>
 											${element.price}</li>
 									</ul>
-									<a class="kd-booking-btn thbg-color ctBookingNow"
-										href="javascript:void(0)">bOOK nOW</a>
+									<div class="row" style="clear: both;">
+										<div class="col-md-3">
+											<ul>
+												<li><i class="fa fa-eye"></i> <strong>Views:</strong>
+													${ element.views}</li>
+											</ul>
+										</div>
+										<div class="col-md-3">
+											<ul>
+												<li><i class="fa fa-heart"></i> <strong>Favourite:</strong>
+													${ element.favourites}</li>
+											</ul>
+										</div>
+										<div class="col-md-3">
+											<ul>
+												<li><i class="fa fa-comment"></i> <strong>Reviews:</strong>
+													${ element.reviews}</li>
+											</ul>
+										</div>
+									</div>
+									<a class="kd-booking-btn thbg-color ctBookingNow" href="javascript:void(0)">enquiry
+										nOW</a>
 								</div>
 								<blockquote>${ element.guidelines }</blockquote>
 								<div class="kd-rich-editor">
@@ -109,11 +122,78 @@
 								</div>
 							</c:forEach>
 						</c:if>
-						<!-- <div class="kd-related-post kd-package-post">
-							<div class="kd-section-title">
-								<h2>Related packages</h2>
+						<!--// Comments //-->
+						<div id="kdcomments">
+							<c:if test="${not empty model.responseData.reviewsdetails}">
+								<h2>${model.responseData.reviewsNumEntries}Comments</h2>
+								<ul class="ctReviewsDetailsUL">
+									<c:forEach items="${model.responseData.reviewsdetails}"
+										var="element" varStatus="loop">
+										<li>
+											<div class="thumblist">
+												<ul>
+													<li>
+														<figure>
+															<a href="#"><img alt=""
+																src="${baseURL}/theme/extraimages/comment1.jpg"></a>
+														</figure>
+														<div class="text">
+															<a href="#">${element.username}</a>
+															<time datetime="2008-02-14 20:00">
+																<i class="fa fa-calendar"></i>
+																${element.createdateformat}
+															</time>
+															<p>${element.comment}</p>
+															<!-- <a class="replay-btn thbg-colorhover" href="#">Reply</a> -->
+														</div>
+													</li>
+												</ul>
+											</div>
+										</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+							<div class="row">
+								<div class="col-md-12">
+									<div align="center">
+										<c:if test="${not empty model.responseData.reviewsNumEntries}">
+											<c:if test="${model.responseData.reviewsNumEntries gt 10}">
+												<div id="load-more" class="ctViewLisitingLoadMore">Load
+													More</div>
+												<div class="ctLoadingImage ctDefaultDisplayNone">
+													<img src="${baseURL}/assest/img/loading.gif">
+												</div>
+												<input id="ctViewListingNumEntries" type="hidden"
+													value="${model.responseData.reviewsCurrentPage }">
+												<input id="ctCommentsNumEntries" type="hidden"
+													value="${model.responseData.reviewsNumEntries }">
+											</c:if>
+										</c:if>
+									</div>
+								</div>
 							</div>
-						</div> -->
+						</div>
+						<!--// Comments //-->
+						<div id="respond">
+							<h2>Comments</h2>
+							<form>
+								<p>
+									<input class="ctViewListingName ctIsChkEmptyVal" type="text"
+										placeholder="Name *">
+								</p>
+								<p class="kd-textarea">
+									<textarea class="ctViewListingComment ctIsChkEmptyVal"
+										placeholder="add your comment *"></textarea>
+								</p>
+								<p class="kd-button">
+									<input type="button" value="Submit comment "
+										class="thbg-color ctSubmitCommentBtn"> <span
+										class="ctSuccessComment"
+										style="display: none; font-family: verdana; color: green">&nbsp;&nbsp;Successfully
+										commented</span>
+								</p>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -129,19 +209,44 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Confirmation</h4>
+							<h4 class="modal-title">Enquire Confirmation</h4>
 						</div>
 						<div class="modal-body">
-							<p>Do you want to save changes you made to document before
-								closing?</p>
-							<p class="text-warning">
-								<small>If you don't save, your changes will be lost.</small>
-							</p>
+							<div class="row">
+								<div class="col-md-8">
+									<form class="ctEnquiryNow"
+										action="${baseURL}/travelapi/trip/getFilterTripsDetails"
+										method="POST">
+										<div class="form-group">
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<input type="text"
+													class="form-control ctName ctIsChkEmptyEnquiryVal" name="name"
+													value="" placeholder="Name *">
+											</div>
+										</div>
+										<div class="form-group">
+											<!-- <label class="col-lg-3 col-md-3 col-sm-3 control-label"></label> -->
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<input type="text"
+													class="form-control ctEnquiryEmail ctIsChkEmptyEnquiryVal"
+													name="emailId" value="" placeholder="Email Id *">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<input type="text"
+													class="form-control ctPhoneNo ctIsChkEmptyEnquiryVal"
+													name="phoneNo" value="" placeholder="Phone No *">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
+							<button type="button" class="btn btn-default ctEnquiryModalClose"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save
+							<button type="button" class="btn btn-primary ctSUbmitEnquireForm">Save
 								changes</button>
 						</div>
 					</div>
@@ -436,11 +541,14 @@
 						$(window).bind("load", ScaleSlider);
 						$(window).bind("resize", ScaleSlider);
 						$(window).bind("orientationchange", ScaleSlider);
-						//responsive code end
 
+						//responsive code end
+						$('.ctPhoneNo').numeric();
 						$(".ctBookingNow").click(function() {
 							$("#myModal").modal('show');
 						});
+
+						ctInitViewListing();
 
 					});
 </script>

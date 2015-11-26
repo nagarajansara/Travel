@@ -75,6 +75,18 @@ public class TripController extends BaseController
 	@Qualifier("appProp")
 	AppProp appProp;
 
+	@Autowired
+	@Qualifier("reviewsService")
+	ReviewsService reviewsService;
+
+	@Autowired
+	@Qualifier("viewersService")
+	ViewersService viewersService;
+
+	@Autowired
+	@Qualifier("enquiryService")
+	EnquiryService enquiryService;
+
 	@RequestMapping(value = "/addTripDetails", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String addTripDetails(HttpServletRequest request,
@@ -308,13 +320,107 @@ public class TripController extends BaseController
 	{
 		try
 		{
+
+			Map<String, Object> map = new HashMap<String, Object>();
 			String STATUS_ACTIVE = "active";
+			int credits = 0;
+			Viewers viewers =
+					new Viewers(tripId, credits, Viewers.STATUS_VIEWED);
+			viewersService.insertViewers(viewers);
 			Trip trip = new Trip(tripId, STATUS_ACTIVE);
 			List<Trip> list = tripService.getTripDetailsBasedId(trip);
-			utilities.setSuccessResponse(response, list);
+			Reviews reviews =
+					new Reviews(tripId, utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx());
+			List<Reviews> reviewList =
+					reviewsService.getReviewsBasedTripId(reviews);
+			int numEntries = reviewsService.getNumEntries(reviews);
+			map.put("tripdetails", list);
+			map.put("reviewsdetails", reviewList);
+			map.put("reviewsNumEntries", numEntries);
+			map.put("reviewsCurrentPage", utilities.getDefaultMinIndx());
+			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
 		{
 			logger.error("getTripDetailsBasedId :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "viewlisting";
+	}
+
+	@RequestMapping(value = "/addComments", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String addComments(HttpServletRequest request,
+			HttpServletResponse res,
+			@RequestParam(value = "tripId") int tripId, @RequestParam(
+					value = "username") String username, @RequestParam(
+					value = "comment") String comment, ModelMap model)
+			throws Exception
+	{
+		try
+		{
+			Reviews reviews = new Reviews(tripId, username, comment);
+			reviewsService.addComments(reviews);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("addComments : " + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "viewlisting";
+	}
+
+	@RequestMapping(value = "/addEnquiry", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String addEnquiry(HttpServletRequest request,
+			HttpServletResponse res,
+			@RequestParam(value = "tripId") int tripId, @RequestParam(
+					value = "username") String username, @RequestParam(
+					value = "phoneno") String phoneno, @RequestParam(
+					value = "email") String email, ModelMap model)
+			throws Exception
+	{
+		try
+		{
+			Enquiry enquiry =
+					new Enquiry(tripId, username, Enquiry.STATUS_ENQUIRY,
+							phoneno, Enquiry.DEFAULT_ENQUIRY_DEDUCTION, email);
+			enquiryService.addEnquiry(enquiry);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("addEnquiry : " + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "viewlisting";
+	}
+
+	@RequestMapping(value = "/getCommentsPagno", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getCommentsPagno(HttpServletRequest request,
+			HttpServletResponse res,
+			@RequestParam(value = "tripId") int tripId, @RequestParam(
+					value = "startIndx") int startIndx, ModelMap model)
+			throws Exception
+	{
+		try
+		{
+			int currentPage =
+					getStartIdx(startIndx, utilities.getDefaultMaxIndx());
+			Reviews reviews =
+					new Reviews(tripId, currentPage,
+							utilities.getDefaultMaxIndx());
+			List<Reviews> reviewList = reviewsService.getCommentsPagno(reviews);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("reviewList", reviewList);
+			map.put("currentPage", startIndx);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getCommentsPagno : " + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);

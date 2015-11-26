@@ -39,6 +39,7 @@
 									<thead>
 										<tr>
 											<th>S.No</th>
+											<th>Reason</th>
 											<th>Credits Deduction</th>
 											<th>Date</th>
 										</tr>
@@ -48,6 +49,7 @@
 											varStatus="loopElement">
 											<tr>
 												<td><c:out value="${ loopElement.index + 1}"></c:out></td>
+												<td>${element.reason }</td>
 												<td>${element.tripcredits }</td>
 												<td>${ element.createddate}</td>
 											</tr>

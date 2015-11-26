@@ -94,8 +94,34 @@ public class Login
 	@Getter
 	@Setter
 	private int credits;
-	
-	
+
+	@Getter
+	@Setter
+	private String reason;
+
+	@Getter
+	@Setter
+	private int initialcredits;
+
+	public int getInitialcredits()
+	{
+		return initialcredits;
+	}
+
+	public void setInitialcredits(int initialcredits)
+	{
+		this.initialcredits = initialcredits;
+	}
+
+	public String getReason()
+	{
+		return reason;
+	}
+
+	public void setReason(String reason)
+	{
+		this.reason = reason;
+	}
 
 	public int getCrdits()
 	{
@@ -360,7 +386,7 @@ public class Login
 	{
 		this.signuptype = signuptype;
 	}
-
+	
 	public Login(String firstname, String lastname, String address,
 			String mobile, String pincode, String state,
 			String organizationname, String city, String pancardno, int id)

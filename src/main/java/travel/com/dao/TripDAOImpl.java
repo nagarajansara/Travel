@@ -89,10 +89,15 @@ public class TripDAOImpl implements TripDAO
 
 	final String GET_TRIP_DETAILS_BASED_ID =
 			"SELECT td.*, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
-					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat FROM tripdetails td "
+					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat,  " 
+					+ " IFNULL(v.views, 0) AS views, IFNULL(f.favourites, 0) AS favourites, IFNULL(r.reviews, 0) AS reviews "
+					+ " FROM tripdetails td "
 					+ " INNER JOIN (SELECT * FROM itenary ORDER BY DAY) AS it ON it.tripid = td.id "
 					+ "INNER JOIN city c ON c.id = td.locationid "
 					+ " LEFT OUTER JOIN (SELECT tripid, GROUP_CONCAT(NAME) AS tripimagename FROM tripimages WHERE STATUS =:status GROUP BY tripid) AS ti ON ti.tripid = td.id "
+					+ "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS views FROM viewers WHERE STATUS = 'viewed' GROUP BY tripid) v ON td.id = v.tripid "
+					+ " LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS favourites FROM viewers WHERE STATUS = 'liked' GROUP BY tripid) f ON td.id = f.tripid "
+					+ "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS reviews FROM reviews GROUP BY tripid) r ON td.id = r.tripid "
 					+ "WHERE td.id =:id";
 
 	public Long addTripDetails(Trip trip) throws Exception

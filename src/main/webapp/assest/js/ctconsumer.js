@@ -2,9 +2,6 @@ function ctInitConsumer()
 {
 	var param = {
 	};
-	/*ctDAO.getConsumerProfile(param, function(data){
-		console.log(data);	
-	});*/
 	
 	$('.ctMyTravels').click(function(){
 		ctSetActiveClass('.ctMyTravels');

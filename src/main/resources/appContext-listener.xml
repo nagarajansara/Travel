@@ -26,6 +26,12 @@
 	</bean>
 	<bean id="bookingService" class="travel.com.bo.BookingServiceBO">
 	</bean>
+	<bean id="reviewsService" class="travel.com.bo.ReviewsServiceBO">
+	</bean>
+	<bean id="viewersService" class="travel.com.bo.ViewersServiceBO">
+	</bean>
+	<bean id="enquiryService" class="travel.com.bo.EnquiryServiceBO">
+	</bean>
 
 
 

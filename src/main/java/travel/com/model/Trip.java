@@ -123,7 +123,47 @@ public class Trip
 	@Setter
 	private String defaultImage;
 
+	@Getter
+	@Setter
+	private int views;
 
+	@Getter
+	@Setter
+	private int favourites;
+
+	@Getter
+	@Setter
+	private int reviews;
+
+	public int getViews()
+	{
+		return views;
+	}
+
+	public void setViews(int views)
+	{
+		this.views = views;
+	}
+
+	public int getFavourites()
+	{
+		return favourites;
+	}
+
+	public void setFavourites(int favourites)
+	{
+		this.favourites = favourites;
+	}
+
+	public int getReviews()
+	{
+		return reviews;
+	}
+
+	public void setReviews(int reviews)
+	{
+		this.reviews = reviews;
+	}
 
 	public double getPrice()
 	{
@@ -158,7 +198,7 @@ public class Trip
 	@Getter
 	@Setter
 	private String dateformat;
-	
+
 	@Getter
 	@Setter
 	private String todateformat;
