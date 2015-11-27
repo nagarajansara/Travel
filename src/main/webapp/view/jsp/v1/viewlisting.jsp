@@ -94,8 +94,8 @@
 											</ul>
 										</div>
 									</div>
-									<a class="kd-booking-btn thbg-color ctBookingNow" href="javascript:void(0)">enquiry
-										nOW</a>
+									<a class="kd-booking-btn thbg-color ctBookingNow"
+										href="javascript:void(0)">enquiry nOW</a>
 								</div>
 								<blockquote>${ element.guidelines }</blockquote>
 								<div class="kd-rich-editor">
@@ -125,7 +125,7 @@
 						<!--// Comments //-->
 						<div id="kdcomments">
 							<c:if test="${not empty model.responseData.reviewsdetails}">
-								<h2>${model.responseData.reviewsNumEntries} Comments</h2>
+								<h2>${model.responseData.reviewsNumEntries}Comments</h2>
 								<ul class="ctReviewsDetailsUL">
 									<c:forEach items="${model.responseData.reviewsdetails}"
 										var="element" varStatus="loop">
@@ -220,8 +220,8 @@
 										<div class="form-group">
 											<div class="col-lg-12 col-md-12 col-sm-12">
 												<input type="text"
-													class="form-control ctName ctIsChkEmptyEnquiryVal" name="name"
-													value="" placeholder="Name *">
+													class="form-control ctName ctIsChkEmptyEnquiryVal"
+													name="name" value="" placeholder="Name *">
 											</div>
 										</div>
 										<div class="form-group">

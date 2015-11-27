@@ -27,6 +27,7 @@ public class AuthenticationFilter extends BaseController implements Filter
 
 	private String SESSION_FAILURE_URL = "/travel/travelapi/login/sessionfailure";
 	private List<String> AUTHENTICATED_URL = new ArrayList<String>();
+	private List<String> AUTHENTICATED_URL_INDEXOF = new ArrayList<String>();
 	private List<String> ROLE_CUSTOMER_URL = new ArrayList<String>();
 	private List<String> ROLE_VENDOR_URL = new ArrayList<String>();
 	private final String ROLE_CUSTOMER = "ROLE_CUSTOMER";
@@ -41,7 +42,8 @@ public class AuthenticationFilter extends BaseController implements Filter
 		
 			
 		/************ View pages *****************************/	
-		AUTHENTICATED_URL.add("authentificationfailure");
+		
+        AUTHENTICATED_URL.add("authentificationfailure");
 		AUTHENTICATED_URL.add("customerregister.jsp");
 		AUTHENTICATED_URL.add("customerregister");
 		AUTHENTICATED_URL.add("fbsignupcbk");
@@ -55,8 +57,13 @@ public class AuthenticationFilter extends BaseController implements Filter
 		AUTHENTICATED_URL.add("vendorregister.jsp");
 		AUTHENTICATED_URL.add("home.jsp");
 		AUTHENTICATED_URL.add("listingview.jsp");
+		AUTHENTICATED_URL.add("getTripDetails");
+		
+		
+		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsBasedId");
 
 		/************** Role based urls ***********************/
+		
 		ROLE_CUSTOMER_URL.add("customer.jsp");
 		ROLE_VENDOR_URL.add("vendor.jsp");
 
@@ -75,7 +82,9 @@ public class AuthenticationFilter extends BaseController implements Filter
 
 		String lastURIWord = uri.substring(uri.lastIndexOf("/") + 1);
 		
-        if( userDetails == null && !(AUTHENTICATED_URL.indexOf(lastURIWord) >= 0))
+		
+        if( userDetails == null && !(AUTHENTICATED_URL.indexOf(lastURIWord) >= 0)
+        		&& AUTHENTICATED_URL_INDEXOF.indexOf(uri) >=0 )
 		{
 			res.sendRedirect(SESSION_FAILURE_URL);
 	    }
