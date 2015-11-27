@@ -156,7 +156,6 @@ public class TripController extends BaseController
 
 		} catch (Exception ex)
 		{
-			System.out.println(ex.getMessage());
 			logger.error("uploadTripDetails :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 			successResponse = ex.getMessage();

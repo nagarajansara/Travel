@@ -75,7 +75,7 @@ public class TripDAOImpl implements TripDAO
 	final String GET_FILTERED_TRIP_DETAILS =
 			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
 					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti  ON td.id = ti.tripid "
-					+ "WHERE ";
+					+ "WHERE td.fromdate >= NOW() AND ";
 
 	final String GET_FILTERED_TRIP_DETAILS_NUMENTRIES =
 			"Select count(*) from tripdetails td where ";
@@ -89,7 +89,7 @@ public class TripDAOImpl implements TripDAO
 
 	final String GET_TRIP_DETAILS_BASED_ID =
 			"SELECT td.*, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
-					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat,  " 
+					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat,  "
 					+ " IFNULL(v.views, 0) AS views, IFNULL(f.favourites, 0) AS favourites, IFNULL(r.reviews, 0) AS reviews "
 					+ " FROM tripdetails td "
 					+ " INNER JOIN (SELECT * FROM itenary ORDER BY DAY) AS it ON it.tripid = td.id "
