@@ -33,8 +33,8 @@
 <link href="${baseURL}/theme/css/themetypo.css" rel="stylesheet">
 <%-- <link href="${baseURL}/theme/css/bxslider.css" rel="stylesheet"> --%>
 <%-- <link href="${baseURL}/theme/css/datepicker.css" rel="stylesheet"> --%>
-<link href="${baseURL}/theme/plugin/select2/select2.css"
-	rel="stylesheet">
+<%-- <link href="${baseURL}/theme/plugin/select2/select2.css"
+	rel="stylesheet"> --%>
 
 
 <link href="${baseURL}/theme/plugin/datepicker/tsdatepicker.css"
