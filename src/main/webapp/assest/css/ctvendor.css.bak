@@ -1,9 +1,0 @@
-.bmSelect2Class
-{
-	font-family: verdana;
-	color: #000000;
-}
-.ctOperationVendorBtn
-{
-	margin-top: 6px !important;
-}

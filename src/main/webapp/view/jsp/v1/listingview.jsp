@@ -211,12 +211,11 @@
 </div>
 <div class="clear"></div>
 <%@ include file="lib/footer.jsp"%>
-<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="${baseURL}/jquery.js/jquery-ui.js"></script>
 <script src="${baseURL}/assest/js/ctlistingview.js"></script>
 <script src="${baseURL}/assest/plugin/selecttwo/select_min.js"></script>
 <script src="${baseURL}/assest/plugin/datepicker/tsdatepicker.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
-<script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script type="text/javascript">
 	var numEntries = '${numEntries}', locationId = '${locationId}', locationName =
