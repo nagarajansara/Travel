@@ -4,14 +4,11 @@
 	media="screen" />
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsdatepicker.css"
-	media="screen" />
 <link
 	href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" />
+<<%-- link rel="stylesheet"
+	href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" /> --%>
 <div class="kd-content">
 	<section class="kd-pagesection"
 		style="padding: 0px 0px 0px 0px; background: #ffffff;">
