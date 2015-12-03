@@ -24,7 +24,6 @@ import java.io.*;
 import java.net.*;
 import java.text.*;
 import java.util.*;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -32,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import travel.com.service.*;
+import travel.com.JMS.JMSProducer;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
@@ -64,6 +64,10 @@ public class LoginController extends BaseController
 	@Autowired
 	@Qualifier("appProp")
 	AppProp appProp;
+
+	@Autowired
+	@Qualifier("jMSProducer")
+	JMSProducer jMSProducer;
 
 	@RequestMapping(value = "/customerregister", method =
 	{ RequestMethod.GET, RequestMethod.POST })
@@ -311,4 +315,24 @@ public class LoginController extends BaseController
 		return "403";
 	}
 
+	@RequestMapping(value = "/chkJMSAPI", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String chkJMSAPI(HttpServletRequest req, HttpServletResponse res,
+			ModelMap model) throws Exception
+	{
+		try
+		{
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("name", "Nagarajan");
+			jsonObject.put("subject", "Test email for my accout");
+			jsonObject.put("content", "Mail content");
+			jsonObject.put("fromEmail", "rnagarajan.ramalingam@gmail.com");
+			jsonObject.put("toEmail", "nagarajan@vidcampaign.com");
+			jMSProducer.SendJMS_Message(jsonObject.toString());
+		} catch (Exception ex)
+		{
+			System.out.println("chkJMSAPI : " + ex.getMessage());
+		}
+		return "403";
+	}
 }

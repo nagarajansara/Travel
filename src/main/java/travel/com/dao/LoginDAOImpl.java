@@ -15,7 +15,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import travel.com.model.*;
 import travel.com.util.Response;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public class LoginDAOImpl implements LoginDAO
 {
 
@@ -57,16 +58,27 @@ public class LoginDAOImpl implements LoginDAO
 
 	final String GET_CREDITS = "Select credits from users where id =:userId";
 
+	final String GET_CREDITS_HISTORY_NUMENTRIES =
+			"SELECT count(*) AS initialcredits FROM "
+					+ "(SELECT tripid, STATUS, credits, createdat FROM booking where credits >:initialcredits "
+					+ "UNION "
+					+ "SELECT tripid, STATUS, credits, createdat FROM enquiry where credits >:initialcredits "
+					+ "UNION "
+					+ "SELECT tripid, STATUS, credits, createdat FROM viewers where credits >:initialcredits ORDER BY createdat DESC) AS Tab "
+					+ "INNER JOIN tripdetails t ON Tab.tripid = t.id "
+					+ "INNER JOIN users u ON u.id = t.userid "
+					+ "WHERE u.id =:id";
+
 	final String GET_CREDITS_HISTORY =
 			"SELECT Tab.status As reason, Tab.credits AS tripcredits, DATE_FORMAT(Tab.createdat, '%d-%m-%y') AS createddate FROM "
 					+ "(SELECT tripid, STATUS, credits, createdat FROM booking where credits >:initialcredits "
 					+ "UNION "
 					+ "SELECT tripid, STATUS, credits, createdat FROM enquiry where credits >:initialcredits "
 					+ "UNION "
-					+ "SELECT tripid, STATUS, credits, createdat FROM viewers where credits >:initialcredits) AS Tab "
+					+ "SELECT tripid, STATUS, credits, createdat FROM viewers where credits >:initialcredits ORDER BY createdat DESC) AS Tab "
 					+ "INNER JOIN tripdetails t ON Tab.tripid = t.id "
 					+ "INNER JOIN users u ON u.id = t.userid "
-					+ "WHERE u.id =:id";
+					+ "WHERE u.id =:id ORDER BY Tab.createdat DESC  LIMIT 0, 10";
 
 	public void insertCustomerData(Login login) throws Exception
 	{
@@ -224,5 +236,26 @@ public class LoginDAOImpl implements LoginDAO
 			throw ex;
 		}
 
+	}
+
+	public int getCreditHistoryNumEntries(Login login) throws Exception
+	{
+		Map map = new HashMap();
+		String[] params =
+		{ "id" };
+		int numEntries = 0;
+		try
+		{
+			baseDAO.setNamedParameter(login, params, map);
+			map.put("initialcredits", INITIAL_CREDITS);
+			numEntries =
+					namedParameterJdbcTemplate.queryForInt(
+							GET_CREDITS_HISTORY_NUMENTRIES, map);
+
+		} catch (Exception ex)
+		{
+			throw ex;
+		}
+		return numEntries;
 	}
 }

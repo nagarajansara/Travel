@@ -49,4 +49,6 @@ public interface TripService
 	int getAllValidTripDetailsCount(Trip trip) throws Exception;
 
 	List<Trip> getTripDetailsBasedId(Trip trip) throws Exception;
+
+	List<Trip> getCredits_AND_Email(int tripId) throws Exception;
 }

@@ -7,7 +7,8 @@ import java.util.*;
 import travel.com.util.*;
 import travel.com.model.*;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public interface LoginService
 {
 	void insertCustomerData(Login login) throws Exception;
@@ -28,4 +29,7 @@ public interface LoginService
 	int getCredits(int userId) throws Exception;
 
 	List<Login> getCreditsHistory(Login login) throws Exception;
+
+	int getCreditHistoryNumEntries(Login login) throws Exception;
+
 }

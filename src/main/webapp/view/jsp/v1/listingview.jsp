@@ -56,7 +56,7 @@
 														test="${not empty locationId && locationId ne 'EMPTY'}">
 														<input data-option="${locationName}" style="width: 100%;"
 															value="${locationId}" type="hidden"
-															id="ctSelectListingViewActivityType" name="startpoint">
+															id="ctSelectListingViewActivityType" name="locationid">
 														<input type="hidden" value="${locationName}"
 															name="startLocation" class="ctStartLocation">
 													</c:when>

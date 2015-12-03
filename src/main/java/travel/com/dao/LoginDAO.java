@@ -26,4 +26,6 @@ public interface LoginDAO
 	int getCredits(int userId) throws Exception;
 
 	List<Login> getCreditsHistory(Login login) throws Exception;
+
+	int getCreditHistoryNumEntries(Login login) throws Exception;
 }

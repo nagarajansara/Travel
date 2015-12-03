@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ConstantException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,7 @@ import java.io.*;
 import java.net.*;
 import java.text.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -37,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import travel.com.service.*;
+import travel.com.JMS.JMSProducer;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
@@ -86,6 +89,10 @@ public class TripController extends BaseController
 	@Autowired
 	@Qualifier("enquiryService")
 	EnquiryService enquiryService;
+
+	@Autowired
+	@Qualifier("jMSProducer")
+	JMSProducer jMSProducer;
 
 	@RequestMapping(value = "/addTripDetails", method =
 	{ RequestMethod.GET, RequestMethod.POST })
@@ -156,6 +163,7 @@ public class TripController extends BaseController
 
 		} catch (Exception ex)
 		{
+			System.out.println(ex.getMessage());
 			logger.error("uploadTripDetails :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 			successResponse = ex.getMessage();
@@ -258,6 +266,7 @@ public class TripController extends BaseController
 	{
 		try
 		{
+			System.out.println("Test......");
 			int START_INDEX = utilities.getDefaultMinIndx();
 			int END_INDEX = utilities.getDefaultMaxIndx();
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -383,10 +392,30 @@ public class TripController extends BaseController
 	{
 		try
 		{
-			Enquiry enquiry =
-					new Enquiry(tripId, username, Enquiry.STATUS_ENQUIRY,
-							phoneno, Enquiry.DEFAULT_ENQUIRY_DEDUCTION, email);
-			enquiryService.addEnquiry(enquiry);
+			if (true)
+			{
+				if (true)
+				{
+					JSONObject jsonObject = new JSONObject();
+					jsonObject.put("name", username);
+					jsonObject.put("subject", appProp.getEnqurirySubject());
+					jsonObject.put("content", appProp.getEnquriryContent());
+					jsonObject.put("fromEmail", appProp.getAdminMailId());
+					jsonObject.put("toEmail", email);
+					jsonObject.put("tripId", tripId);
+					jsonObject.put("phoneno", phoneno);
+
+					jMSProducer.SendJMS_Message(jsonObject.toString()); // Add
+																		// JMS
+																		// QUEQUE
+
+				} else
+				{
+					throw new ConstException(
+							ConstException.ERR_CODE_NO_CREDITS,
+							ConstException.ERR_MSG_NO_CREDITS);
+				}
+			}
 			utilities.setSuccessResponse(response);
 		} catch (Exception ex)
 		{
@@ -649,4 +678,5 @@ public class TripController extends BaseController
 			return requestedParam;
 		}
 	}
+
 }

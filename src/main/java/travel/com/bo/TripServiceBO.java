@@ -216,6 +216,7 @@ public class TripServiceBO implements TripService
 	{
 		return tripDAO.getTripDetails_Users(trip);
 	}
+
 	public int getAllValidTripDetailsCount(Trip trip) throws Exception
 	{
 		return tripDAO.getAllValidTripDetailsCount(trip);
@@ -224,6 +225,12 @@ public class TripServiceBO implements TripService
 	public List<Trip> getTripDetailsBasedId(Trip trip) throws Exception
 	{
 		return tripDAO.getTripDetailsBasedId(trip);
+	}
+
+	@Override
+	public List<Trip> getCredits_AND_Email(int tripId) throws Exception
+	{
+		return tripDAO.getCredits_AND_Email(tripId);
 	}
 
 }

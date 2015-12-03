@@ -62,6 +62,14 @@
 									style="font-family: verdana; color: red; font-weight: bold; font-size: 12px;">No
 									credits history found</span>
 							</c:if>
+							<div class="form-group">
+								<label class="col-lg-12 col-md-12 col-sm-12 control-label">
+									<c:if test="${model.responseData.numEntries gt 5}">
+										<a class="frame-btn thbg-color" href="#">Request email to
+											more details</a>
+									</c:if>
+								</label>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -73,6 +81,6 @@
 <%@ include file="lib/footer.jsp"%>
 <script src="${baseURL}/assest/js/ctcredits.js"></script>
 <script type="text/javascript">
-	$('.ctVendorListMenu li').removeClass('active');
-	$('.ctVendorListMenu .ctVendorCreditsMenu').addClass('active');
+    $('.ctVendorListMenu li').removeClass('active');
+    $('.ctVendorListMenu .ctVendorCreditsMenu').addClass('active');
 </script>

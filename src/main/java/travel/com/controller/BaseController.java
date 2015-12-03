@@ -10,6 +10,8 @@ import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
 
+@SuppressWarnings(
+{ "unchecked", "unused" })
 public class BaseController
 {
 

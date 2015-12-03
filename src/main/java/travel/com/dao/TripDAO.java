@@ -31,4 +31,6 @@ public interface TripDAO
 
 	List<Trip> getTripDetailsBasedId(Trip trip) throws Exception;
 
+	List<Trip> getCredits_AND_Email(int tripId) throws Exception;
+
 }

@@ -103,6 +103,20 @@ public class Login
 	@Setter
 	private int initialcredits;
 
+	public int getTotalcreditshistory()
+	{
+		return totalcreditshistory;
+	}
+
+	public void setTotalcreditshistory(int totalcreditshistory)
+	{
+		this.totalcreditshistory = totalcreditshistory;
+	}
+
+	@Getter
+	@Setter
+	private int totalcreditshistory;
+
 	public int getInitialcredits()
 	{
 		return initialcredits;
@@ -386,7 +400,7 @@ public class Login
 	{
 		this.signuptype = signuptype;
 	}
-	
+
 	public Login(String firstname, String lastname, String address,
 			String mobile, String pincode, String state,
 			String organizationname, String city, String pancardno, int id)

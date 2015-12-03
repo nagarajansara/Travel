@@ -32,6 +32,9 @@
 	</bean>
 	<bean id="enquiryService" class="travel.com.bo.EnquiryServiceBO">
 	</bean>
+	<bean id="jMSProducer" class="travel.com.JMS.JMSProducer"
+		init-method="startJMSThread">
+	</bean>
 
 
 
@@ -56,6 +59,8 @@
 		<property name="uploadImagePath" value="${app.uploadImagePath}" />
 		<property name="uploadImageCompressPath" value="${app.uploadImageCompressFilePath}" />
 		<property name="serverDomain" value="${app.uploadImageCompressFilePath}" />
+		<property name="enqurirySubject" value="${app.enquriry.subject}" />
+		<property name="enquriryContent" value="${app.enquriry.content}" />
 	</bean>
 
 </beans>

@@ -12,6 +12,28 @@ public class AppProp
 	private String uploadImagePath;
 	private String uploadImageCompressPath;
 	private String serverDomain;
+	private String enquriryContent;
+	private String enqurirySubject;
+
+	public String getEnquriryContent()
+	{
+		return enquriryContent;
+	}
+
+	public void setEnquriryContent(String enquriryContent)
+	{
+		this.enquriryContent = enquriryContent;
+	}
+
+	public String getEnqurirySubject()
+	{
+		return enqurirySubject;
+	}
+
+	public void setEnqurirySubject(String enqurirySubject)
+	{
+		this.enqurirySubject = enqurirySubject;
+	}
 
 	public String getServerDomain()
 	{

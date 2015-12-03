@@ -99,6 +99,10 @@ public class TripDAOImpl implements TripDAO
 					+ " LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS favourites FROM viewers WHERE STATUS = 'liked' GROUP BY tripid) f ON td.id = f.tripid "
 					+ "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS reviews FROM reviews GROUP BY tripid) r ON td.id = r.tripid "
 					+ "WHERE td.id =:id";
+	final String GET_CREDITS_BASED_TRIPID =
+			"Select u.email, u.credits FROM users u "
+					+ "INNER JOIN tripdetails "
+					+ "td ON u.id = td.userid WHERE td.id =:id";
 
 	public Long addTripDetails(Trip trip) throws Exception
 	{
@@ -220,7 +224,7 @@ public class TripDAOImpl implements TripDAO
 		if (_setActivityFilterValuesForAllFields(tripTable) != null
 				&& _setActivityFilterValuesForAllFields(tripTable).length() > 0)
 		{
-			stringBuffer.append(" OR ");
+			stringBuffer.append(" AND ");
 			stringBuffer
 					.append(_setActivityFilterValuesForAllFields(tripTable));
 		}
@@ -398,6 +402,25 @@ public class TripDAOImpl implements TripDAO
 			list =
 					namedParameterJdbcTemplate.query(GET_TRIP_DETAILS_BASED_ID,
 							paramMap, new BeanPropertyRowMapper(Trip.class));
+		} catch (Exception ex)
+		{
+			throw ex;
+		}
+		return list;
+	}
+
+	@Override
+	public List<Trip> getCredits_AND_Email(int tripId) throws Exception
+	{
+		Map map = new HashMap();
+		List<Trip> list = null;
+		try
+		{
+			map.put("id", tripId);
+			list =
+					namedParameterJdbcTemplate.query(GET_CREDITS_BASED_TRIPID,
+							map, new BeanPropertyRowMapper(Trip.class));
+
 		} catch (Exception ex)
 		{
 			throw ex;

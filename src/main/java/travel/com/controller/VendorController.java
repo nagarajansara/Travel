@@ -319,12 +319,15 @@ public class VendorController extends BaseController
 		try
 		{
 			int userId = getUserId(request);
+			int MAX_CREDITS_HISTORY = 10;
 			Map<String, Object> map = new HashMap<String, Object>();
 			int credits = loginService.getCredits(userId);
 			List<Login> list =
 					loginService.getCreditsHistory(new Login(userId));
+			int numEntries = loginService.getCreditHistoryNumEntries(new Login(userId));
 			map.put("credits", credits);
 			map.put("history", list);
+			map.put("numEntries", numEntries);
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
 		{

@@ -135,6 +135,34 @@ public class Trip
 	@Setter
 	private int reviews;
 
+	@Getter
+	@Setter
+	private int credits;
+
+	@Getter
+	@Setter
+	private String email;
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	public int getCredits()
+	{
+		return credits;
+	}
+
+	public void setCredits(int credits)
+	{
+		this.credits = credits;
+	}
+
 	public int getViews()
 	{
 		return views;
