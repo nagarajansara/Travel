@@ -48,6 +48,9 @@
 							</tbody>
 						</table>
 					</c:if>
+					<c:if test="${empty model.responseData}">
+						<span class="ctDangerDefaultTxt">No data found</span>
+					</c:if>
 				</div>
 				<div class="row"></div>
 			</div>
