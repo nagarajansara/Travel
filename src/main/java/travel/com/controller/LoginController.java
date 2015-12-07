@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -68,6 +69,10 @@ public class LoginController extends BaseController
 	@Autowired
 	@Qualifier("jMSProducer")
 	JMSProducer jMSProducer;
+
+	@Autowired
+	@Qualifier("enquiryService")
+	EnquiryService enquiryService;
 
 	@RequestMapping(value = "/customerregister", method =
 	{ RequestMethod.GET, RequestMethod.POST })
@@ -331,8 +336,57 @@ public class LoginController extends BaseController
 			jMSProducer.SendJMS_Message(jsonObject.toString());
 		} catch (Exception ex)
 		{
-			System.out.println("chkJMSAPI : " + ex.getMessage());
+			logger.error("chkJMSAPI : " + ex.getMessage());
 		}
 		return "403";
+	}
+
+	@RequestMapping(value = "/getpendingenquiry", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getPendingEnquiry(HttpServletRequest request,
+			HttpServletResponse res, ModelMap model) throws Exception
+	{
+		try
+		{
+			int userId = getUserId(request);
+			String status = Enquiry.STATUS_PENDING;
+			List<Enquiry> list =
+					enquiryService.getPendingEnquiry(userId, status);
+			utilities.setSuccessResponse(response, list);
+		} catch (Exception ex)
+		{
+			logger.error("getpendingenquiry :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "enquirystatus";
+	}
+
+	@RequestMapping(value = "/activateEnquiry", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String activateEnquiry(HttpServletRequest request,
+			HttpServletResponse res, ModelMap model, @RequestParam(
+					value = "enquiryid") int enquiryId, @RequestParam(
+					value = "email") String email, @RequestParam(
+					value = "tripId") int tripId) throws Exception
+	{
+		try
+		{
+			int userId = getUserId(request);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("enquiryid", enquiryId);
+			jsonObject.put("email", email);
+			jsonObject.put("tripId", tripId);
+			jMSProducer.SendJMS_Message(jsonObject.toString()); // Add
+			// JMS
+			// QUEQUE
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("activateEnquiry :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "enquirystatus";
 	}
 }

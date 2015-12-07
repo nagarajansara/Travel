@@ -79,6 +79,8 @@ public class LoginDAOImpl implements LoginDAO
 					+ "INNER JOIN tripdetails t ON Tab.tripid = t.id "
 					+ "INNER JOIN users u ON u.id = t.userid "
 					+ "WHERE u.id =:id ORDER BY Tab.createdat DESC  LIMIT 0, 10";
+	final String UPDATE_CREDITS =
+			"Update users set credits =:credits where email =:email";
 
 	public void insertCustomerData(Login login) throws Exception
 	{
@@ -257,5 +259,13 @@ public class LoginDAOImpl implements LoginDAO
 			throw ex;
 		}
 		return numEntries;
+	}
+
+	@Override
+	public void updateCredits(String email)
+	{
+		Map map = new HashMap();
+		map.put("email", email);
+		namedParameterJdbcTemplate.update(UPDATE_CREDITS, map);
 	}
 }

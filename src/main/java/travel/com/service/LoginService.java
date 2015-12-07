@@ -32,4 +32,6 @@ public interface LoginService
 
 	int getCreditHistoryNumEntries(Login login) throws Exception;
 
+	void updateCredits(String email) throws Exception;
+
 }

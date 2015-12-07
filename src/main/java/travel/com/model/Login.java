@@ -20,6 +20,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public class Login
 {
 
@@ -99,9 +101,23 @@ public class Login
 	@Setter
 	private String reason;
 
+	public int getUserid()
+	{
+		return userid;
+	}
+
+	public void setUserid(int userid)
+	{
+		this.userid = userid;
+	}
+
 	@Getter
 	@Setter
 	private int initialcredits;
+	
+	@Getter
+	@Setter
+	private int userid;
 
 	public int getTotalcreditshistory()
 	{

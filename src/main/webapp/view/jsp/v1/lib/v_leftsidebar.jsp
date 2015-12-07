@@ -6,6 +6,9 @@
 			href="${baseURL}/travelapi/vendor/getProfile">Profile</a></li>
 		<li class="ctVendorCreditsMenu"><a
 			href="${baseURL}/travelapi/vendor/getCredits">Credit Points</a></li>
+		<li class="ctVendorPendingStatus"><a
+			href="${baseURL}/travelapi/login/getpendingenquiry">Enquiry
+				Status</a></li>
 		<li class="ctVendorLeadsMenu"><a href="#messagesone">My Leads</a></li>
 		<!-- <li class="ctVendorBookingMenu"><a href="#messagesone">My
 				Bookings</a></li> -->

@@ -33,9 +33,23 @@ public class Enquiry
 	@Setter
 	private int tripid;
 
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
 	@Getter
 	@Setter
 	private String createdat;
+
+	@Getter
+	@Setter
+	private String title;
 
 	public int getId()
 	{
@@ -123,7 +137,6 @@ public class Enquiry
 	public static final String STATUS_REJECTED = "rejected";
 	public static final int DEFAULT_ENQUIRY_DEDUCTION = 10; // 10 credits
 	public static final int DEFAULT_ENQUIRY_NON_DEDUCTION = 0; // 10 credits
-	
 
 	public Enquiry()
 	{
@@ -139,6 +152,13 @@ public class Enquiry
 		this.phoneno = phoneno;
 		this.credits = credits;
 		this.email = email;
+	}
+
+	public Enquiry(int credits, int id, String status)
+	{
+		this.id = id;
+		this.status = status;
+		this.credits = credits;
 	}
 
 }

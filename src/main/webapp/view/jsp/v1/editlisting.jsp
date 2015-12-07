@@ -327,9 +327,6 @@
 						}
 						;
 
-						console.log("startpoint : " + '${startpoint}');
-						console.log("tocity : " + '${tocity}');
-
 						$("#ctEditSelectActivityLocation").select2(
 								remoteDataConfig)
 						$('#ctEditSelectActivityLocation').select2('val',

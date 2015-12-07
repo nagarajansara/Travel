@@ -28,4 +28,7 @@ public interface LoginDAO
 	List<Login> getCreditsHistory(Login login) throws Exception;
 
 	int getCreditHistoryNumEntries(Login login) throws Exception;
+
+	void updateCredits(String email);
+
 }

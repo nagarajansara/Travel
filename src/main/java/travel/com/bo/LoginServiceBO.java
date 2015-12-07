@@ -72,8 +72,16 @@ public class LoginServiceBO implements LoginService
 	{
 		return loginDAO.getCreditsHistory(login);
 	}
+
 	public int getCreditHistoryNumEntries(Login login) throws Exception
 	{
 		return loginDAO.getCreditHistoryNumEntries(login);
 	}
+
+	@Override
+	public void updateCredits(String email) throws Exception
+	{
+		loginDAO.updateCredits(email);
+	}
+
 }

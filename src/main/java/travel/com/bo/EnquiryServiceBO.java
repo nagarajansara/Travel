@@ -1,5 +1,7 @@
 package travel.com.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -19,4 +21,14 @@ public class EnquiryServiceBO implements EnquiryService
 		enquiryDAO.addEnquiry(enquiry);
 	}
 
+	public List<Enquiry> getPendingEnquiry(int userId, String status)
+			throws Exception
+	{
+		return enquiryDAO.getPendingEnquiry(userId, status);
+	}
+
+	public void updateEnquiryStatus(Enquiry enquiry) throws Exception
+	{
+		enquiryDAO.updateEnquiryStatus(enquiry);
+	}
 }
