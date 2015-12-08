@@ -8,6 +8,7 @@ function ctActivateEnquiryData(enquiryId, email, tripId, cbk) {
 	if (data && data.responseStatus == bmpUtil.RESPONSE_STATUS) {
 	    cbk();
 	} else {
+	    $('.ctLoadingImg').hide();
 	    alert(data.responseData);
 	}
 

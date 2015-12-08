@@ -377,7 +377,8 @@ public class LoginController extends BaseController
 			jsonObject.put("enquiryid", enquiryId);
 			jsonObject.put("email", email);
 			jsonObject.put("tripId", tripId);
-			jMSProducer.SendJMS_Message(jsonObject.toString()); // Add
+			jMSProducer.SendJMS_Message(jsonObject.toString(),
+					jMSProducer.ACTIVATE_ENQUIRY_MESSAGE_QUEQUE); // Add
 			// JMS
 			// QUEQUE
 			utilities.setSuccessResponse(response);

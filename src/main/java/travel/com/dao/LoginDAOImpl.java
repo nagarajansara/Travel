@@ -266,6 +266,7 @@ public class LoginDAOImpl implements LoginDAO
 	{
 		Map map = new HashMap();
 		map.put("email", email);
+		map.put("credits", Enquiry.DEFAULT_ENQUIRY_DEDUCTION);
 		namedParameterJdbcTemplate.update(UPDATE_CREDITS, map);
 	}
 }

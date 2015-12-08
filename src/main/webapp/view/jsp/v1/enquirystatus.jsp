@@ -15,6 +15,9 @@
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Enquire Status</h3>
 					</div>
+					<div class="ctLoadingImg" style="display: none;">
+						<img src="${baseURL}/assest/img/loading.gif">
+					</div>
 					<c:if test="${not empty model.responseData}">
 						<table class="table table-striped">
 							<thead>
@@ -71,8 +74,9 @@
 			'checked'), tripId = $(this).attr('pk_tripId');
 		console.log("currentValue :" + currentValue);
 		if (currentValue) {
+		    $('.ctLoadingImg').show();
 		    ctActivateEnquiryData(enquiryId, email, tripId, function() {
-
+			$('.ctLoadingImg').hide();
 		    });
 		} else {
 		    alert("Once you click you can't do it again");
