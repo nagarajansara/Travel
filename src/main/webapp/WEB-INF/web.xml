@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
-   <display-name>socialcrm</display-name>
+   <display-name>travel</display-name>
    
    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
