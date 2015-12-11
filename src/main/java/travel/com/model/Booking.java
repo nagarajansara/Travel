@@ -45,7 +45,70 @@ public class Booking
 
 	@Getter
 	@Setter
+	private int startIndx;
+
+	@Getter
+	@Setter
+	private int endIndx;
+
+	public int getStartIndx()
+	{
+		return startIndx;
+	}
+
+	public void setStartIndx(int startIndx)
+	{
+		this.startIndx = startIndx;
+	}
+
+	public int getEndIndx()
+	{
+		return endIndx;
+	}
+
+	public void setEndIndx(int endIndx)
+	{
+		this.endIndx = endIndx;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	@Getter
+	@Setter
+	private String title;
+
+	@Getter
+	@Setter
+	private String email;
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
+	public static String getBookingStatusBooked()
+	{
+		return BOOKING_STATUS_BOOKED;
+	}
+
+	@Getter
+	@Setter
 	private int credits;
+
+	public final static String BOOKING_STATUS_BOOKED = "booked";
 
 	public Booking()
 	{
@@ -71,6 +134,14 @@ public class Booking
 	{
 		this.vendorid = vendorid;
 		this.status = status;
+	}
+
+	public Booking(int vendorid, String status, int startIndx, int endIndx)
+	{
+		this.vendorid = vendorid;
+		this.status = status;
+		this.startIndx = startIndx;
+		this.endIndx = endIndx;
 	}
 
 	public int getId()

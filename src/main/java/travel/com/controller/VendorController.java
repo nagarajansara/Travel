@@ -324,7 +324,8 @@ public class VendorController extends BaseController
 			int credits = loginService.getCredits(userId);
 			List<Login> list =
 					loginService.getCreditsHistory(new Login(userId));
-			int numEntries = loginService.getCreditHistoryNumEntries(new Login(userId));
+			int numEntries =
+					loginService.getCreditHistoryNumEntries(new Login(userId));
 			map.put("credits", credits);
 			map.put("history", list);
 			map.put("numEntries", numEntries);
@@ -380,6 +381,36 @@ public class VendorController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "profile";
+	}
+
+	@RequestMapping(value = "/getChartType/{charttype}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getChartType(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+
+		} catch (Exception ex)
+		{
+			logger.error("getChartType :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		return "";
+	}
+
+	@RequestMapping(value = "/getCharts", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getChart(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			
+		} catch (Exception ex)
+		{
+			logger.error("getCharts :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		return "";
 	}
 
 	class CommonMtd

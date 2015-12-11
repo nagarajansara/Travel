@@ -12,4 +12,8 @@ public interface BookingDAO
 
 	List<Booking> getBooking(int vendorId, String sTATUS_ACTIVE)
 			throws Exception;
+
+	List<Booking> getLeads(Booking booking) throws Exception;
+
+	int getNumEntries(Booking booking) throws Exception;
 }

@@ -9,7 +9,8 @@
 		<li class="ctVendorPendingStatus"><a
 			href="${baseURL}/travelapi/login/getpendingenquiry">Enquiry
 				Status</a></li>
-		<li class="ctVendorLeadsMenu"><a href="#messagesone">My Leads</a></li>
+		<li class="ctVendorLeadsMenu"><a
+			href="${baseURL}/travelapi/booking/getLeads">My Leads</a></li>
 		<!-- <li class="ctVendorBookingMenu"><a href="#messagesone">My
 				Bookings</a></li> -->
 		<li class="ctVendorStatisticsMenu"><a href="#messagesone">Statistics</a></li>

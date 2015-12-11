@@ -14,4 +14,8 @@ public interface BookingService
 
 	List<Booking> getBookingDetails(Booking booking) throws Exception;
 
+	List<Booking> getLeads(Booking booking) throws Exception;
+	
+	int getNumEntries(Booking booking) throws Exception;
+
 }

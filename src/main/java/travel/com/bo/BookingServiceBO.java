@@ -29,4 +29,13 @@ public class BookingServiceBO implements BookingService
 		return bookingDAO.getBookingDetails(booking);
 	}
 
+	public List<Booking> getLeads(Booking booking) throws Exception
+	{
+		return bookingDAO.getLeads(booking);
+	}
+
+	public int getNumEntries(Booking booking) throws Exception
+	{
+		return bookingDAO.getNumEntries(booking);
+	}
 }

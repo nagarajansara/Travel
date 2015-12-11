@@ -294,9 +294,9 @@ function ctgetPhotoGalleryFileField(jqSel) {
 			+ '</label>' + '</div>' + '</div>';
 	return html;
 };
-function ctSetListingPagination(numEntries, entryPerPage, visiblePageNo, startPage,
+function ctSetPagination(numEntries, entryPerPage, visiblePageNo, startPage,
 		hrefURL) {
-	$(".ctListingPaginationDiv").css({
+	$(".ctPaginationDiv").css({
 		display : "block"
 	});
 	numEntries = numEntries ? numEntries : 50;

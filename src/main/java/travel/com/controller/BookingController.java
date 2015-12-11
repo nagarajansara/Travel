@@ -37,7 +37,7 @@ import travel.com.model.*;
 import travel.com.util.*;
 
 @Controller
-@RequestMapping("/vendor")
+@RequestMapping("/booking")
 @SuppressWarnings("unused")
 public class BookingController extends BaseController
 {
@@ -87,5 +87,67 @@ public class BookingController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "booking";
+	}
+
+	@RequestMapping(value = "/getLeads", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getLeads(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int vendorId = getUserId(request);
+			int numEntries = 0;
+			Booking booking =
+					new Booking(vendorId, Booking.BOOKING_STATUS_BOOKED,
+							utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx());
+			Booking tempBooking =
+					new Booking(vendorId, Booking.BOOKING_STATUS_BOOKED);
+			numEntries = bookingService.getNumEntries(tempBooking);
+			List<Booking> list = bookingService.getLeads(booking);
+			map.put("leads", list);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getLeads: " + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "myleads";
+	}
+
+	@RequestMapping(value = "/getLeadsPagination/{currPageNo}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getLeads(HttpServletRequest request,
+			@PathVariable int currPageNo, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int vendorId = getUserId(request);
+			int numEntries = 0;
+			currPageNo = currPageNo - 1;
+			Booking booking =
+					new Booking(vendorId, Booking.BOOKING_STATUS_BOOKED,
+							getStartIdx(currPageNo,
+									utilities.getDefaultMaxIndx()),
+							utilities.getDefaultMaxIndx());
+
+			Booking tempBooking =
+					new Booking(vendorId, Booking.BOOKING_STATUS_BOOKED);
+			numEntries = bookingService.getNumEntries(tempBooking);
+			List<Booking> list = bookingService.getLeads(booking);
+			map.put("leads", list);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getLeads: " + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "myleads";
 	}
 }
