@@ -55,7 +55,9 @@ public class AuthenticationFilter extends BaseController implements Filter
 		AUTHENTICATED_URL.add("home.jsp");
 		AUTHENTICATED_URL.add("listingview.jsp");
 		AUTHENTICATED_URL.add("getTripDetails");
-
+		AUTHENTICATED_URL.add("getCommentsPagno.json");
+		AUTHENTICATED_URL.add("addComments.json");
+		
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsBasedId");
 
 		/************** Role based urls ***********************/

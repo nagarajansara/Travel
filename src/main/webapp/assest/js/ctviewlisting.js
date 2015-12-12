@@ -104,11 +104,6 @@ function ctSubmitBtn() {
 	    function() {
 		var name = $('.ctViewListingName').val(), comment = $(
 			'.ctViewListingComment').val(), params = {};
-		console.log("name : " + name);
-		console.log("comment :" + comment);
-		console.log("name : " + name.length);
-		console.log("comment :" + comment.length);
-
 		if (name && name.length > 0 && comment && comment.length > 0) {
 		    params["username"] = name;
 		    params["comment"] = comment;
