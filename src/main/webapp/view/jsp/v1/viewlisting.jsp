@@ -34,7 +34,7 @@
 										<c:forEach var="arrayVar" items="${tripimages}">
 											<div data-p="112.50" style="display: none;">
 												<img data-u="image"
-													src="${hostName}:${port}/travelimages/${arrayVar}" />
+													src="${hostName}:${port}/${ uploadedImageFolderName }/${arrayVar}" />
 											</div>
 										</c:forEach>
 									</c:forEach>
