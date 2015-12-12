@@ -51,6 +51,20 @@ public class Enquiry
 	@Setter
 	private String title;
 
+	public int getTotals()
+	{
+		return totals;
+	}
+
+	public void setTotals(int totals)
+	{
+		this.totals = totals;
+	}
+
+	@Getter
+	@Setter
+	private int totals;
+
 	public int getId()
 	{
 		return id;

@@ -34,9 +34,25 @@ public class VendorServiceBO implements VendorService
 	@Qualifier("activityDAO")
 	ActivityDAO activityDAO;
 
+	@Autowired
+	@Qualifier("bookingDAO")
+	BookingDAO bookingDAO;
+
 	public List<Activity> getActivitys(Activity activity) throws Exception
 	{
 		return activityDAO.getActivitys(activity);
+	}
+
+	@Override
+	public Map<String, Object> getLeads(Booking booking) throws Exception
+	{
+		return activityDAO.getLeads(booking);
+	}
+
+	@Override
+	public Map<String, Object> getVendorStatistic() throws Exception
+	{
+		return bookingDAO.getVendorStatistic();
 	}
 
 }

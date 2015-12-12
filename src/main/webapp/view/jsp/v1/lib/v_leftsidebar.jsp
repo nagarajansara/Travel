@@ -13,7 +13,8 @@
 			href="${baseURL}/travelapi/booking/getLeads">My Leads</a></li>
 		<!-- <li class="ctVendorBookingMenu"><a href="#messagesone">My
 				Bookings</a></li> -->
-		<li class="ctVendorStatisticsMenu"><a href="#messagesone">Statistics</a></li>
+		<li class="ctVendorStatisticsMenu"><a
+			href="${baseURL}/travelapi/vendor/getVendorStatistic">Statistics</a></li>
 		<li class="ctVendorDealsMenu"><a href="#messagesone">Deals</a></li>
 		<li class="ctVendorTutorialsMenu"><a href="#messagesone">Tutorials</a></li>
 		<li class="ctVendorContactMenu"><a href="#messagesone">Contact

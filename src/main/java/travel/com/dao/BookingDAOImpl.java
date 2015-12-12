@@ -14,7 +14,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import travel.com.model.*;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public class BookingDAOImpl implements BookingDAO
 {
 
@@ -41,6 +42,17 @@ public class BookingDAOImpl implements BookingDAO
 			+ "INNER JOIN tripdetails td  ON " + "b.tripid = td.id "
 			+ "INNER JOIN users u ON " + "u.id = b.consumerid "
 			+ "WHERE td.userid =:vendorid AND b.status =:status";
+
+	final String GET_VENDOR_STATISTIC_BOOKING =
+			"SELECT  UNIX_TIMESTAMP(createdat)*1000 AS createdat, COUNT(*) AS totals "
+					+ "FROM booking "
+					+ "WHERE createdat BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() GROUP BY DATE_FORMAT(createdat, '%m/%d/%Y')";
+
+	final String GET_VENDOR_STATISTIC_ENQUIRY =
+			"SELECT  UNIX_TIMESTAMP(createdat)*1000 AS createdat, COUNT(*) AS totals "
+					+ "FROM enquiry "
+					+ "WHERE createdat BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() GROUP BY DATE_FORMAT(createdat, '%m/%d/%Y') AND "
+					+ " status =:status";
 
 	public List<Booking> getBookingDetails(Booking booking) throws Exception
 	{
@@ -103,5 +115,22 @@ public class BookingDAOImpl implements BookingDAO
 			throw ex;
 		}
 		return numEntries;
+	}
+
+	@Override
+	public Map<String, Object> getVendorStatistic() throws Exception
+	{
+		Map<String, Object> mapList = new HashMap<String, Object>();
+		Map params = new HashMap();
+		List<Booking> bookingList =
+				namedParameterJdbcTemplate.query(GET_VENDOR_STATISTIC_BOOKING,
+						params, new BeanPropertyRowMapper(Booking.class));
+		params.put("status", "enquiry"); // Enquire Status
+		List<Enquiry> enquiryList =
+				namedParameterJdbcTemplate.query(GET_VENDOR_STATISTIC_ENQUIRY,
+						params, new BeanPropertyRowMapper(Enquiry.class));
+		mapList.put("booking", bookingList);
+		mapList.put("enquiry", enquiryList);
+		return mapList;
 	}
 }

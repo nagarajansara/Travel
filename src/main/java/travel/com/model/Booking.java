@@ -39,6 +39,16 @@ public class Booking
 	@Setter
 	private String status;
 
+	public int getTotals()
+	{
+		return totals;
+	}
+
+	public void setTotals(int totals)
+	{
+		this.totals = totals;
+	}
+
 	@Getter
 	@Setter
 	private String createdat;
@@ -50,6 +60,10 @@ public class Booking
 	@Getter
 	@Setter
 	private int endIndx;
+
+	@Getter
+	@Setter
+	private int totals;
 
 	public int getStartIndx()
 	{

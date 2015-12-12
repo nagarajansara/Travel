@@ -383,34 +383,75 @@ public class VendorController extends BaseController
 		return "profile";
 	}
 
-	@RequestMapping(value = "/getChartType/{charttype}", method =
+	@RequestMapping(value = "/getVendorStatistic", method =
 	{ RequestMethod.GET, RequestMethod.POST })
-	public String getChartType(HttpServletRequest request, ModelMap model)
+	public
+			String
+			getVendorStatistic(HttpServletRequest request, ModelMap model)
 	{
 		try
 		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			Map<String, Object> responseMap = new HashMap<String, Object>();
+
+			String[][] responseBookingList = null;
+			String[][] responseEnquiryList = null;
+
+			map = vendorService.getVendorStatistic();
+			if (map != null && !map.isEmpty())
+			{
+				List<Booking> listBookings = (List<Booking>) map.get("booking");
+				List<Enquiry> enquiries = (List<Enquiry>) map.get("enquiry");
+				if (listBookings != null && listBookings.size() > 0)
+				{
+					responseBookingList = new String[listBookings.size()][2];
+					for (int i = 0; i < listBookings.size(); i++)
+					{
+						Booking booking = (Booking) listBookings.get(i);
+						int j = 0;
+						responseBookingList[i][j] =
+								(String) (booking.getCreatedat());
+						j = j + 1;
+						responseBookingList[i][j] =
+								String.valueOf(booking.getTotals());
+					}
+				}
+				if (enquiries != null && enquiries.size() > 0)
+				{
+					responseEnquiryList = new String[enquiries.size()][2];
+					for (int i = 0; i < enquiries.size(); i++)
+					{
+						Enquiry enquiry = (Enquiry) enquiries.get(i);
+						int j = 0;
+						responseEnquiryList[i][j] =
+								(String) (enquiry.getCreatedat());
+						j = j + 1;
+						responseEnquiryList[i][j] =
+								String.valueOf(enquiry.getTotals());
+					}
+				}
+				responseMap.put(
+						"bookingStatistic",
+						(responseBookingList == null) ? "EMTPY" : Arrays
+								.deepToString(responseBookingList));
+				responseMap.put(
+						"enquiryStatistic",
+						(responseEnquiryList == null) ? "EMTPY" : Arrays
+								.deepToString(responseEnquiryList));
+
+				utilities.setSuccessResponse(response, responseMap);
+			} else
+			{
+				throw new Exception();
+			}
 
 		} catch (Exception ex)
 		{
-			logger.error("getChartType :" + ex.getMessage());
+			logger.error("getVendorStatistic :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
-		return "";
-	}
-
-	@RequestMapping(value = "/getCharts", method =
-	{ RequestMethod.GET, RequestMethod.POST })
-	public String getChart(HttpServletRequest request, ModelMap model)
-	{
-		try
-		{
-			
-		} catch (Exception ex)
-		{
-			logger.error("getCharts :" + ex.getMessage());
-			utilities.setErrResponse(ex, response);
-		}
-		return "";
+		model.addAttribute("model", response);
+		return "vendorstatistic";
 	}
 
 	class CommonMtd
