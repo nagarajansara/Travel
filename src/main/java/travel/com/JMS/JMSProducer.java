@@ -237,7 +237,7 @@ public class JMSProducer
 				try
 				{
 					receiveJMS_Message();
-					TimeUnit.MILLISECONDS.sleep(60);
+					TimeUnit.MINUTES.sleep(1);
 				} catch (Exception e)
 				{
 					logger.error("Start_JMS_THREAD :" + e.getMessage());
