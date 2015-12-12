@@ -218,7 +218,7 @@ public class TripDAOImpl implements TripDAO
 		stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
 		if (_setFilterActivityId(activityTable).length() > 0)
 		{
-			stringBuffer.append(" OR ");
+			stringBuffer.append(" AND ");
 			stringBuffer.append(_setFilterActivityId(activityTable));
 		}
 		if (_setActivityFilterValuesForAllFields(tripTable) != null
@@ -257,17 +257,18 @@ public class TripDAOImpl implements TripDAO
 		stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
 		if (_setFilterActivityId(activityTable).length() > 0)
 		{
-			stringBuffer.append(" OR ");
+			stringBuffer.append(" AND ");
 			stringBuffer.append(_setFilterActivityId(activityTable));
 		}
 		if (_setActivityFilterValuesForAllFields(tripTable) != null
 				&& _setActivityFilterValuesForAllFields(tripTable).length() > 0)
 		{
-			stringBuffer.append(" OR ");
+			stringBuffer.append(" AND ");
 			stringBuffer
 					.append(_setActivityFilterValuesForAllFields(tripTable));
 		}
 		stringBuffer.append(" ) ");
+
 		return namedParameterJdbcTemplate.queryForInt(stringBuffer.toString(),
 				map);
 
@@ -346,7 +347,6 @@ public class TripDAOImpl implements TripDAO
 									stringBuffer.lastIndexOf(" OR ")));
 			stringBuffer.append(" )");
 		}
-
 		return stringBuffer.toString();
 	}
 

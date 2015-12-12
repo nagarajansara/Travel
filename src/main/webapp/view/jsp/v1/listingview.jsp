@@ -33,6 +33,9 @@
 					</c:if>
 				</c:if>
 			</c:if>
+			<c:if test="${empty toPrice}">
+				<c:set var="toPrice" value="1000" />
+			</c:if>
 			<div class="row ctFont_FamilyStyle">
 				<div class="col-md-12">
 					<div class="col-md-3">
@@ -116,7 +119,7 @@
 												</p>
 												<input type="hidden" value="10" class="ctFromPriceHidden"
 													name="fromprice"> <input type="hidden"
-													class="ctToPriceHidden" value="1000" name="toprice">
+													class="ctToPriceHidden" value="${toPrice }" name="toprice">
 												<div id="slider-3"></div>
 											</div>
 										</div>
@@ -215,54 +218,40 @@
 <script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script type="text/javascript">
-	var numEntries = '${numEntries}', locationId = '${locationId}', locationName =
-			'${locationName}', activityIds = '${activityIds}', fromdate =
-			'${fromdate}', fromPrice = '${fromPrice}', toPrice = '${toPrice}', START_PAGE =
-			1, MAX_ENTRIES = 2, requestedFilterParams =
-	[
-			locationId, locationName, activityIds, fromdate, toPrice
-	], requestedFilterParamsJSON =
-	{
-		"startpoint" : locationId,
-		"fromdate" : fromdate,
-		"activitytype" : activityIds,
-		"toprice" : toPrice,
-		"fromprice" : fromPrice,
-		"startLocation" : locationName
-	};
-	ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate);
-	if (ctChkRequestedFilterParamsEmpty(requestedFilterParams))
-	{
-		if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE)
-		{
-			var lastPart = bmpUtil.getLastStartingURL(), URL =
-					"http://" + location.host
-							+ "/travel/travelapi/trip/getTripDetailsPageno";
-			lastPart = parseInt(lastPart);
-			if (lastPart && typeof lastPart === 'number')
-			{
-				START_PAGE = lastPart;
-			}
-			ctSetListingPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
-		}
+    var numEntries = '${numEntries}', locationId = '${locationId}', locationName = '${locationName}', activityIds = '${activityIds}', fromdate = '${fromdate}', fromPrice = '${fromPrice}', toPrice = '${toPrice}', START_PAGE = 1, MAX_ENTRIES = 2, requestedFilterParams = [
+	    locationId, locationName, activityIds, fromdate, toPrice ], requestedFilterParamsJSON = {
+	"startpoint" : locationId,
+	"fromdate" : fromdate,
+	"activitytype" : activityIds,
+	"toprice" : toPrice,
+	"fromprice" : fromPrice,
+	"startLocation" : locationName
+    };
+    ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate);
+    if (ctChkRequestedFilterParamsEmpty(requestedFilterParams)) {
+	if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE) {
+	    var lastPart = bmpUtil.getLastStartingURL(), URL = "http://"
+		    + location.host
+		    + "/travel/travelapi/trip/getTripDetailsPageno";
+	    lastPart = parseInt(lastPart);
+	    if (lastPart && typeof lastPart === 'number') {
+		START_PAGE = lastPart;
+	    }
+	    ctSetListingPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
 	}
-	else
-	{
-		if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE)
-		{
-			var params = JSON.stringify(requestedFilterParamsJSON);
-			var lastPart = bmpUtil.getLastStartingURL(), URL =
-					"http://"
-							+ location.host
-							+ "/travel/travelapi/trip/getFilterTripsDetailsPageNo/"
-							+ params;
-			lastPart = parseInt(lastPart);
-			if (lastPart && typeof lastPart === 'number')
-			{
-				START_PAGE = lastPart;
-			}
-			ctSetListingPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
-		}
+    } else {
+	if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE) {
+	    var params = JSON.stringify(requestedFilterParamsJSON);
+	    var lastPart = bmpUtil.getLastStartingURL(), URL = "http://"
+		    + location.host
+		    + "/travel/travelapi/trip/getFilterTripsDetailsPageNo/"
+		    + params;
+	    lastPart = parseInt(lastPart);
+	    if (lastPart && typeof lastPart === 'number') {
+		START_PAGE = lastPart;
+	    }
+	    ctSetListingPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
 	}
+    }
 </script>
 
