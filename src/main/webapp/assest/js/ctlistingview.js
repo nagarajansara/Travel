@@ -21,7 +21,6 @@ function ctSetFilterDatas(locationId, activityIds, fromPrice, toPrice) {
 	fromPrice =
 			(fromPrice && fromPrice.length > 0) ? fromPrice : MIN_RANGE_VALUES;
 	toPrice = (toPrice && toPrice.length > 0) ? toPrice : 3000;
-	console.log("toPrice :" +toPrice);
 	if (activityIds && activityIds != DEFDAULE_EMPTY)
 	{
 		activityIds = activityIds.split(",");
