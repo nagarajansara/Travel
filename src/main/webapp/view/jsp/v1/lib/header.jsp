@@ -20,7 +20,7 @@
 <c:set var="baseURL" value="${pageContext.request.contextPath}" />
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="hostName" value="http://${pageContext.request.serverName}" />
-<c:set var="port" value="8082" />
+<c:set var="port" value="${pageContext.request.serverPort}" />
 <c:set var="uploadedImageFolderName" value="travelimages" />
 
 <!-- Css Folder -->
