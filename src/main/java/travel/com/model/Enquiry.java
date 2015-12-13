@@ -150,7 +150,7 @@ public class Enquiry
 	public static final String STATUS_SENT = "sent";
 	public static final String STATUS_REJECTED = "rejected";
 	public static final int DEFAULT_ENQUIRY_DEDUCTION = 10; // 10 credits
-	public static final int DEFAULT_ENQUIRY_NON_DEDUCTION = 0; // 10 credits
+	public static final int DEFAULT_ENQUIRY_NON_DEDUCTION = 0; // 0 credits
 
 	public Enquiry()
 	{

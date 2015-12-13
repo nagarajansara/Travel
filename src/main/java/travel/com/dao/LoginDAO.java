@@ -29,6 +29,6 @@ public interface LoginDAO
 
 	int getCreditHistoryNumEntries(Login login) throws Exception;
 
-	void updateCredits(String email);
+	void updateCredits(String email, int credits);
 
 }

@@ -79,9 +79,9 @@ public class LoginServiceBO implements LoginService
 	}
 
 	@Override
-	public void updateCredits(String email) throws Exception
+	public void updateCredits(String email, int credits) throws Exception
 	{
-		loginDAO.updateCredits(email);
+		loginDAO.updateCredits(email, credits);
 	}
 
 }

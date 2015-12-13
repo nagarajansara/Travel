@@ -125,7 +125,7 @@
 						<!--// Comments //-->
 						<div id="kdcomments">
 							<c:if test="${not empty model.responseData.reviewsdetails}">
-								<h2>${model.responseData.reviewsNumEntries} Comments</h2>
+								<h2>${model.responseData.reviewsNumEntries}Comments</h2>
 								<ul class="ctReviewsDetailsUL">
 									<c:forEach items="${model.responseData.reviewsdetails}"
 										var="element" varStatus="loop">
@@ -242,6 +242,11 @@
 												<!-- <input type="text" class="form-control ctNoCreditsTxt"
 													name="name" value="" placeholder="Name *"> -->
 												<span class="ctNoCreditsTxt ctDangerDefaultTxt"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="ctAddCommentLoadingImage ctDefaultDisplayNone">
+												<img src="${baseURL}/assest/img/loading.gif">
 											</div>
 										</div>
 									</form>

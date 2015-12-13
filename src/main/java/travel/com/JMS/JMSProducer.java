@@ -137,6 +137,7 @@ public class JMSProducer
 			{
 				Trip trip = (Trip) list.get(0);
 				int totalCredist = trip.getCredits();
+				String tripOwnerEmail = trip.getEmail();
 				if (totalCredist >= Enquiry.DEFAULT_ENQUIRY_DEDUCTION)
 				{
 
@@ -145,13 +146,14 @@ public class JMSProducer
 					enquiryDeduction = Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
 					totalCredist =
 							totalCredist - Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
-					loginService.updateCredits(email);
+					loginService.updateCredits(tripOwnerEmail, totalCredist);
 
 				} else
 				{
 					enquiryStatus = Enquiry.STATUS_PENDING;
 					enquiryDeduction = Enquiry.DEFAULT_ENQUIRY_NON_DEDUCTION;
 				}
+
 				Enquiry enquiry =
 						new Enquiry(tripId, username, enquiryStatus, phoneno,
 								enquiryDeduction, email);
@@ -197,7 +199,7 @@ public class JMSProducer
 					enquiryDeduction = Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
 					totalCredist =
 							totalCredist - Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
-					loginService.updateCredits(email);
+					loginService.updateCredits(email, totalCredist);
 
 				}
 			}

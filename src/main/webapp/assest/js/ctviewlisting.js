@@ -13,16 +13,19 @@ function ctInitViewListing() {
 				"username" : name,
 				"phoneno" : phoneno,
 				"email" : email
-			    }
+			    };
+			    $('.ctAddCommentLoadingImage').show();	
 			    ctDAO
 				    .addEnquiry(
 					    param,
 					    function(data) {
 						if (data
 							&& bmpUtil.RESPONSE_STATUS == data.responseStatus) {
+						    $('.ctAddCommentLoadingImage').hide();
 						    $('.ctEnquiryModalClose')
 							    .trigger('click');
 						} else {
+						    $('.ctAddCommentLoadingImage').hide();
 						    $('.ctNoCreditsDiv').show();
 						    $('.ctNoCreditsTxt').text(
 							    data.responseMsg);

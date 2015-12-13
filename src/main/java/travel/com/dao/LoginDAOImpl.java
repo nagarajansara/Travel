@@ -262,11 +262,11 @@ public class LoginDAOImpl implements LoginDAO
 	}
 
 	@Override
-	public void updateCredits(String email)
+	public void updateCredits(String email, int credits)
 	{
 		Map map = new HashMap();
 		map.put("email", email);
-		map.put("credits", Enquiry.DEFAULT_ENQUIRY_DEDUCTION);
+		map.put("credits", credits);
 		namedParameterJdbcTemplate.update(UPDATE_CREDITS, map);
 	}
 }

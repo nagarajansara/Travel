@@ -204,6 +204,7 @@ public class TripDAOImpl implements TripDAO
 			Map<String, Object> activityTable, String status,
 			Map<String, Object> priceMap, int START_INDEX, int END_INDEX)
 	{
+		boolean isFilterValues = false;
 		Map map = new HashMap();
 		map.put("status", status);
 		map.put("defaultImage", DEFAULT_TRIP_IMAGE_PATH);
@@ -213,9 +214,18 @@ public class TripDAOImpl implements TripDAO
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(GET_FILTERED_TRIP_DETAILS);
 		stringBuffer.append(" td.status=:status");
-		stringBuffer.append(" AND ");
-		stringBuffer.append(" ( ");
-		stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
+		/*
+		 * stringBuffer.append(" AND "); stringBuffer.append(" ( ");
+		 */
+		if (_setActivityFilterValuesForPrice(priceMap) != null
+				&& _setActivityFilterValuesForPrice(priceMap).length() > 0)
+		{
+			isFilterValues = true;
+			stringBuffer.append(" AND ");
+			stringBuffer.append(" ( ");
+			stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
+		}
+
 		if (_setFilterActivityId(activityTable).length() > 0)
 		{
 			stringBuffer.append(" AND ");
@@ -228,7 +238,10 @@ public class TripDAOImpl implements TripDAO
 			stringBuffer
 					.append(_setActivityFilterValuesForAllFields(tripTable));
 		}
-		stringBuffer.append(" ) ");
+		if (isFilterValues)
+		{
+			stringBuffer.append(" ) ");
+		}
 		stringBuffer.append(" ");
 		stringBuffer.append(" LIMIT ");
 		stringBuffer.append(" :startIndx ");
@@ -248,13 +261,21 @@ public class TripDAOImpl implements TripDAO
 
 		Map map = new HashMap();
 		map.put("status", status);
-
+		boolean isFilterValues = false;
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(GET_FILTERED_TRIP_DETAILS_NUMENTRIES);
 		stringBuffer.append(" status=:status");
-		stringBuffer.append(" AND ");
-		stringBuffer.append(" ( ");
-		stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
+		// stringBuffer.append(" AND ");
+		// stringBuffer.append(" ( ");
+		// stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
+		if (_setActivityFilterValuesForPrice(priceMap) != null
+				&& _setActivityFilterValuesForPrice(priceMap).length() > 0)
+		{
+			isFilterValues = true;
+			stringBuffer.append(" AND ");
+			stringBuffer.append(" ( ");
+			stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
+		}
 		if (_setFilterActivityId(activityTable).length() > 0)
 		{
 			stringBuffer.append(" AND ");
@@ -267,8 +288,10 @@ public class TripDAOImpl implements TripDAO
 			stringBuffer
 					.append(_setActivityFilterValuesForAllFields(tripTable));
 		}
-		stringBuffer.append(" ) ");
-
+		if (isFilterValues)
+		{
+			stringBuffer.append(" ) ");
+		}
 		return namedParameterJdbcTemplate.queryForInt(stringBuffer.toString(),
 				map);
 
