@@ -363,12 +363,14 @@ public class TripController extends BaseController
 			HttpServletResponse res,
 			@RequestParam(value = "tripId") int tripId, @RequestParam(
 					value = "username") String username, @RequestParam(
-					value = "comment") String comment, ModelMap model)
+					value = "comment") String comment, @RequestParam(
+					value = "startrating") String startrating, ModelMap model)
 			throws Exception
 	{
 		try
 		{
-			Reviews reviews = new Reviews(tripId, username, comment);
+			Reviews reviews =
+					new Reviews(tripId, username, comment, startrating);
 			reviewsService.addComments(reviews);
 			utilities.setSuccessResponse(response);
 		} catch (Exception ex)

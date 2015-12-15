@@ -393,11 +393,14 @@ public class VendorController extends BaseController
 		{
 			Map<String, Object> map = new HashMap<String, Object>();
 			Map<String, Object> responseMap = new HashMap<String, Object>();
+			String STATUS_BOOKED = "booked";
 
 			String[][] responseBookingList = null;
 			String[][] responseEnquiryList = null;
 
-			map = vendorService.getVendorStatistic();
+			int vendorId = getUserId(request);
+
+			map = vendorService.getVendorStatistic(STATUS_BOOKED, vendorId);
 			if (map != null && !map.isEmpty())
 			{
 				List<Booking> listBookings = (List<Booking>) map.get("booking");
@@ -432,11 +435,13 @@ public class VendorController extends BaseController
 				}
 				responseMap.put(
 						"bookingStatistic",
-						(responseBookingList == null) ? "EMTPY" : Arrays
+						(responseBookingList == null) ? utilities
+								.getDefaultWord() : Arrays
 								.deepToString(responseBookingList));
 				responseMap.put(
 						"enquiryStatistic",
-						(responseEnquiryList == null) ? "EMTPY" : Arrays
+						(responseEnquiryList == null) ? utilities
+								.getDefaultWord() : Arrays
 								.deepToString(responseEnquiryList));
 
 				utilities.setSuccessResponse(response, responseMap);

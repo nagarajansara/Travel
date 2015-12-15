@@ -44,15 +44,20 @@ public class BookingDAOImpl implements BookingDAO
 			+ "WHERE td.userid =:vendorid AND b.status =:status";
 
 	final String GET_VENDOR_STATISTIC_BOOKING =
-			"SELECT  UNIX_TIMESTAMP(createdat)*1000 AS createdat, COUNT(*) AS totals "
-					+ "FROM booking "
-					+ "WHERE createdat BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() GROUP BY DATE_FORMAT(createdat, '%m/%d/%Y')";
+			"SELECT  UNIX_TIMESTAMP(b.createdat)*1000 AS createdat, COUNT(*) AS totals "
+					+ "FROM booking b "
+					+ "INNER JOIN tripdetails td ON "
+					+ "td.id = b.tripid "
+					+ "WHERE b.createdat BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() AND "
+					+ "b.status =:status AND td.userid =:vendorid GROUP BY DATE_FORMAT(b.createdat, '%m/%d/%Y')";
 
 	final String GET_VENDOR_STATISTIC_ENQUIRY =
-			"SELECT  UNIX_TIMESTAMP(createdat)*1000 AS createdat, COUNT(*) AS totals "
-					+ "FROM enquiry "
-					+ "WHERE createdat BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() GROUP BY DATE_FORMAT(createdat, '%m/%d/%Y') AND "
-					+ " status =:status";
+			"SELECT  UNIX_TIMESTAMP(e.createdat)*1000 AS createdat, COUNT(*) AS totals  "
+					+ "FROM enquiry e "
+					+ "INNER JOIN tripdetails td ON "
+					+ "td.id = e.tripid "
+					+ "WHERE e.createdat BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() GROUP BY DATE_FORMAT(e.createdat, '%m/%d/%Y') AND "
+					+ "e.status =:status AND td.userid =:vendorid";
 
 	public List<Booking> getBookingDetails(Booking booking) throws Exception
 	{
@@ -118,14 +123,19 @@ public class BookingDAOImpl implements BookingDAO
 	}
 
 	@Override
-	public Map<String, Object> getVendorStatistic() throws Exception
+	public Map<String, Object> getVendorStatistic(String status, int vendorId)
+			throws Exception
 	{
 		Map<String, Object> mapList = new HashMap<String, Object>();
 		Map params = new HashMap();
+		params.put("vendorid", vendorId);
+		params.put("status", status); // Booked Status
 		List<Booking> bookingList =
 				namedParameterJdbcTemplate.query(GET_VENDOR_STATISTIC_BOOKING,
 						params, new BeanPropertyRowMapper(Booking.class));
-		params.put("status", "enquiry"); // Enquire Status
+
+		params.put("status", "enquiry"); // Enquire Status (Override the status)
+
 		List<Enquiry> enquiryList =
 				namedParameterJdbcTemplate.query(GET_VENDOR_STATISTIC_ENQUIRY,
 						params, new BeanPropertyRowMapper(Enquiry.class));

@@ -1,5 +1,4 @@
 function ctRenderCharts(jqSelector, data, title) {
-    console.log(data);
     $(jqSelector)
 	    .highcharts(
 		    'StockChart',

@@ -44,11 +44,13 @@
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorStatisticsMenu').addClass('active');
     var bookingChart = '${model.responseData.bookingStatistic}', enquiryChart = '${model.responseData.enquiryStatistic}';
+   
     if (bookingChart == 'EMPTY') {
 	$('.ctVedorStatisticBookingChartEmpty').show();
     } else {
 	ctRenderCharts('.ctVendorStatistic', bookingChart, 'BOOKING');
     }
+    
     if (enquiryChart == 'EMPTY') {
 	$('.ctVedorStatisticEnquiryChartEmpty').show();
     } else {

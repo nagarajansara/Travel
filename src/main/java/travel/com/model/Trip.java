@@ -139,9 +139,23 @@ public class Trip
 	@Setter
 	private int credits;
 
+	public String getStartrating()
+	{
+		return startrating;
+	}
+
+	public void setStartrating(String startrating)
+	{
+		this.startrating = startrating;
+	}
+
 	@Getter
 	@Setter
 	private String email;
+
+	@Getter
+	@Setter
+	private String startrating;
 
 	public String getEmail()
 	{

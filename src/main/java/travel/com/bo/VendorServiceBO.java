@@ -50,9 +50,10 @@ public class VendorServiceBO implements VendorService
 	}
 
 	@Override
-	public Map<String, Object> getVendorStatistic() throws Exception
+	public Map<String, Object> getVendorStatistic(String status, int vendorId)
+			throws Exception
 	{
-		return bookingDAO.getVendorStatistic();
+		return bookingDAO.getVendorStatistic(status, vendorId);
 	}
 
 }

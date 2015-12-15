@@ -1,5 +1,14 @@
+var START_RATING_DEFAULT_VALUE = 0;
+
 function ctInitViewListing() {
     ctSubmitBtn();
+
+    $("#star > img").click(function() {
+	var score = $(this).attr("alt");
+	START_RATING_DEFAULT_VALUE = score;
+	console.log(START_RATING_DEFAULT_VALUE);
+    });
+
     $('.ctSUbmitEnquireForm')
 	    .click(
 		    function() {
@@ -14,18 +23,22 @@ function ctInitViewListing() {
 				"phoneno" : phoneno,
 				"email" : email
 			    };
-			    $('.ctAddCommentLoadingImage').show();	
+			    $('.ctAddCommentLoadingImage').show();
 			    ctDAO
 				    .addEnquiry(
 					    param,
 					    function(data) {
 						if (data
 							&& bmpUtil.RESPONSE_STATUS == data.responseStatus) {
-						    $('.ctAddCommentLoadingImage').hide();
+						    $(
+							    '.ctAddCommentLoadingImage')
+							    .hide();
 						    $('.ctEnquiryModalClose')
 							    .trigger('click');
 						} else {
-						    $('.ctAddCommentLoadingImage').hide();
+						    $(
+							    '.ctAddCommentLoadingImage')
+							    .hide();
 						    $('.ctNoCreditsDiv').show();
 						    $('.ctNoCreditsTxt').text(
 							    data.responseMsg);
@@ -111,6 +124,7 @@ function ctSubmitBtn() {
 		    params["username"] = name;
 		    params["comment"] = comment;
 		    params["tripId"] = bmpUtil.getLastStartingURL();
+		    params["startrating"] = START_RATING_DEFAULT_VALUE;
 		    $('.ctSuccessComment').hide();
 		    ctDAO.addComments(params, function(data) {
 			if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {

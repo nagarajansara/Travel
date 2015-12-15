@@ -111,9 +111,23 @@ public class Reviews
 	@Setter
 	private String createdate;
 
+	public String getStartrating()
+	{
+		return startrating;
+	}
+
+	public void setStartrating(String startrating)
+	{
+		this.startrating = startrating;
+	}
+
 	@Getter
 	@Setter
 	private String createdateformat;
+
+	@Getter
+	@Setter
+	private String startrating;
 
 	public String getCreatedate()
 	{
@@ -175,10 +189,12 @@ public class Reviews
 		this.endIndx = endindx;
 	}
 
-	public Reviews(int tripid, String username, String comment)
+	public Reviews(int tripid, String username, String comment,
+			String startrating)
 	{
 		this.tripid = tripid;
 		this.username = username;
 		this.comment = comment;
+		this.startrating = startrating;
 	}
 }

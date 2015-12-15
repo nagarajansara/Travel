@@ -26,7 +26,7 @@ public class ReviewsDAOImpl implements ReviewsDAO
 			"Select username, comment, DATE_FORMAT(createdate, '%d-%m-%y') AS createdateformat from reviews where tripid =:tripid  "
 					+ "ORDER BY createdate DESC  LIMIT :startIndx, :endIndx";
 	final String ADD_REVIEWS =
-			"INSERT INTO reviews (tripid, username, comment) Values (:tripid, :username, :comment)";
+			"INSERT INTO reviews (tripid, username, comment, startrating) Values (:tripid, :username, :comment, :startrating)";
 
 	final String GET_REVIEWS_NUMENTRIES =
 			"SELECT count(*) from reviews where tripid =:tripid";
@@ -55,7 +55,7 @@ public class ReviewsDAOImpl implements ReviewsDAO
 	{
 		Map map = new HashMap();
 		String[] params =
-		{ "tripid", "username", "comment" };
+		{ "tripid", "username", "comment", "startrating" };
 		try
 		{
 			baseDAO.setNamedParameter(reviews, params, map);

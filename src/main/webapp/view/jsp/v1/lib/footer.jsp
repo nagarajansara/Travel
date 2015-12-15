@@ -91,15 +91,16 @@
 <!-- jQuery (Necessary For JavaScript Plugins) -->
 
 <!-- MINIFY JS -->
-	<script src="${baseURL}/theme/js/jquery.js"></script>
-	<script src="${baseURL}/theme/js/bootstrap.min.js"></script>
-	<script src="${baseURL}/theme/plugin/datepicker/tsdatepicker.js"></script>
-	<script src="${baseURL}/assest/plugin/alert/sweetalert.min.js"></script>
-	<script src="${baseURL}/assest/plugin/alert/sweetalert-dev.js"></script>
-	<script src="${baseURL}/assest/plugin/numeric/numeric.min.js"></script>
-	<%-- <script src="${baseURL}/theme/js/jquery.bxslider.min.js"></script> --%>
-	<script src="${baseURL}/theme/js/waypoints-min.js"></script>
-	<%-- <script src="${baseURL}/theme/js/functions.js"></script> --%>
+<script src="${baseURL}/theme/js/jquery.js"></script>
+<script src="${baseURL}/theme/js/bootstrap.min.js"></script>
+<script src="${baseURL}/theme/plugin/datepicker/tsdatepicker.js"></script>
+<script src="${baseURL}/assest/plugin/alert/sweetalert.min.js"></script>
+<script src="${baseURL}/assest/plugin/alert/sweetalert-dev.js"></script>
+<script src="${baseURL}/assest/plugin/numeric/numeric.min.js"></script>
+<%-- <script src="${baseURL}/theme/js/jquery.bxslider.min.js"></script> --%>
+<script src="${baseURL}/theme/js/waypoints-min.js"></script>
+<%-- <script src="${baseURL}/theme/js/functions.js"></script> --%>
+
 <!-- END -->
 
 <%-- <script src="${baseURL}/theme/js/bootstrap-datepicker.js"></script> --%>

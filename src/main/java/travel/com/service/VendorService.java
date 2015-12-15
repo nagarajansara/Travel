@@ -15,6 +15,6 @@ public interface VendorService
 
 	Map<String, Object> getLeads(Booking booking) throws Exception;
 
-	Map<String, Object> getVendorStatistic() throws Exception;
+	Map<String, Object> getVendorStatistic(String status, int vendorId) throws Exception;
 
 }

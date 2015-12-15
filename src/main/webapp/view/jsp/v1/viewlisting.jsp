@@ -5,107 +5,131 @@
 	margin: 20px;
 }
 </style>
+<link rel="stylesheet"
+	href="${baseURL}/assest/plugin/slider/flexslider.css" media="screen" />
+
 <link rel="stylesheet" href="${baseURL}/assest/css/ctviewlisting.css"
 	media="screen" />
+
+<link rel="stylesheet"
+	href="${baseURL}/assest/plugin/startrating/raty.css" media="screen" />
+
 <div class="kd-content">
 	<section style="background: #ffffff; padding: 40px 0px;"
 		class="pagesection ctPagesection">
 		<div class="container ctVendorContainer">
 			<div class="row">
-				<div class="">
+				<div class="col-md-6 col-sm-6 ctViewListingKD-package-detail">
 					<div class="kd-package-detail">
-						<div id="jssor_1" class="detail-thumb"
-							style="position: relative; /* margin: 0 auto; */ top: 0px; left: 10px; width: 600px; height: 300px; overflow: hidden; visibility: hidden;">
-							<!-- Loading Screen -->
-							<div data-u="loading"
-								style="position: absolute; top: 0px; left: 0px;">
-								<div
-									style="filter: alpha(opacity = 70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-								<div
-									style="position: absolute; display: block; background: url('${baseURL}/assest/plugin/slider/img/loading.gif') no-repeat center center; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-							</div>
-							<div data-u="slides"
-								style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
-								<c:if test="${not empty model.responseData.tripdetails}">
+						<!-- Place somewhere in the <body> of your page -->
+						<c:if test="${not empty model.responseData.tripdetails}">
+							<div id="slider"
+								class="flexslider ctflexslider ctOriginalImgFlex">
+								<ul class="slides">
 									<c:forEach items="${model.responseData.tripdetails}"
 										var="element" varStatus="loop">
 										<c:set var="tripimages"
 											value="${fn:split(element.tripimagename, ',')}" />
 										<c:forEach var="arrayVar" items="${tripimages}">
-											<div data-p="112.50" style="display: none;">
-												<img data-u="image"
-													src="${hostName}:${port}/${ uploadedImageFolderName }/${arrayVar}" />
-											</div>
+											<li><img
+												src="${hostName}:${port}/${ uploadedImageFolderName }/${arrayVar}"
+												width="557px;" height="418px;" /></li>
 										</c:forEach>
 									</c:forEach>
-								</c:if>
+								</ul>
 							</div>
-							<!-- Bullet Navigator -->
-							<div data-u="navigator" class="jssorb01"
-								style="bottom: 16px; right: 16px;">
-								<div data-u="prototype" style="width: 12px; height: 12px;"></div>
+						</c:if>
+						<c:if test="${not empty model.responseData.tripdetails}">
+							<div id="carousel" class="flexslider ctflexslider ctThumbImgFlex">
+								<ul class="slides">
+									<c:forEach items="${model.responseData.tripdetails}"
+										var="element" varStatus="loop">
+										<c:set var="tripimages"
+											value="${fn:split(element.tripimagename, ',')}" />
+										<c:forEach var="arrayVar" items="${tripimages}">
+											<li><img
+												src="${hostName}:${port}/${ uploadedImageFolderName }/${arrayVar}"
+												height="80px !important;" width="120px;" /></li>
+										</c:forEach>
+									</c:forEach>
+								</ul>
 							</div>
-							<!-- Arrow Navigator -->
-							<span data-u="arrowleft" class="jssora05l"
-								style="top: 123px; left: 8px; width: 40px; height: 40px;"
-								data-autocenter="2"></span> <span data-u="arrowright"
-								class="jssora05r"
-								style="top: 123px; right: 8px; width: 40px; height: 40px;"
-								data-autocenter="2"></span> <a href="http://www.jssor.com"
-								style="display: none">Jssor Slider</a>
-						</div>
+						</c:if>
 					</div>
 				</div>
+				<div class="col-md-6 col-sm-6">
+					<c:if test="${not empty model.responseData.tripdetails}">
+						<c:forEach items="${model.responseData.tripdetails}" var="element"
+							varStatus="loop">
+							<div class="kd-pkg-info">
+								<ul class="ctKdpkgInfoList">
+									<li><i class="fa fa-map-marker"></i> <strong>Duration:</strong>
+										${element.dateformat} - ${element.todateformat}</li>
+									<li><i class="fa fa-paper-plane"></i> <strong>LOCATION:</strong>
+										${element.tocity}</li>
+									<li><i class="fa fa-ticket"></i> <strong>Route :</strong>
+										${element.route }</li>
+									<li><i class="fa fa-tag"></i> <strong>Price:</strong>
+										${element.price}</li>
+								</ul>
+								<div class="row" style="clear: both;">
+									<div class="col-md-4 col-sm-4">
+										<ul>
+											<li><i class="fa fa-eye"></i> <strong>Views:</strong> ${ element.views}</li>
+										</ul>
+									</div>
+									<div class="col-md-4 col-sm-4">
+										<ul>
+											<li><i class="fa fa-heart"></i> <strong>Favourite:</strong>
+												${ element.favourites}</li>
+										</ul>
+									</div>
+									<div class="col-md-4 col-sm-4">
+										<ul>
+											<li><i class="fa fa-comment"></i> <strong>Reviews:</strong>
+												${ element.reviews}</li>
+										</ul>
+									</div>
+								</div>
+								<a class="kd-booking-btn thbg-color ctBookingNow"
+									href="javascript:void(0)">enquiry nOW</a>
+							</div>
+							<div class="kd-pkg-info">
+								<div class="row">
+									<div class="col-md-6 col-sm-6">
+										<form class="form-horizontal">
+											<div class="form-group">
+												<label class="col-lg-3 col-md-3 col-sm-3 control-label">
+													<img class="ctVendorImage" src="${baseURL}/assest/img/vendor_image.png">
+												</label>
+												<div class="col-lg-4 col-md-4 col-sm-4">
+													<div id="ctRatedStar"></div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</c:if>
+				</div>
 			</div>
+			<br> <br>
 			<div class="row">
 				<div class="col-md-8">
 					<div class="kd-package-detail">
 						<c:if test="${not empty model.responseData.tripdetails}">
 							<c:forEach items="${model.responseData.tripdetails}"
 								var="element" varStatus="loop">
-								<div class="kd-pkg-info">
-									<ul>
-										<li><i class="fa fa-map-marker"></i> <strong>Duration:</strong>
-											${element.dateformat} - ${element.todateformat}</li>
-										<li><i class="fa fa-paper-plane"></i> <strong>LOCATION:</strong>
-											${element.tocity}</li>
-										<li><i class="fa fa-ticket"></i> <strong>Route :</strong>
-											${element.route }</li>
-										<li><i class="fa fa-tag"></i> <strong>Price:</strong>
-											${element.price}</li>
-									</ul>
-									<div class="row" style="clear: both;">
-										<div class="col-md-3">
-											<ul>
-												<li><i class="fa fa-eye"></i> <strong>Views:</strong>
-													${ element.views}</li>
-											</ul>
-										</div>
-										<div class="col-md-3">
-											<ul>
-												<li><i class="fa fa-heart"></i> <strong>Favourite:</strong>
-													${ element.favourites}</li>
-											</ul>
-										</div>
-										<div class="col-md-3">
-											<ul>
-												<li><i class="fa fa-comment"></i> <strong>Reviews:</strong>
-													${ element.reviews}</li>
-											</ul>
-										</div>
-									</div>
-									<a class="kd-booking-btn thbg-color ctBookingNow"
-										href="javascript:void(0)">enquiry nOW</a>
-								</div>
-								<blockquote>${ element.guidelines }</blockquote>
+								<c:set var="ratedStart" value="${element.startrating}"></c:set>
+								<blockquote>
+									<span class="ctDefaultHeaders">${ element.title }</span><br>
+									<span
+										style="text-transform: uppercase; font-size: 14px !important;">${ element.guidelines }</span>
+								</blockquote>
 								<div class="kd-rich-editor">
 									<div class="kd-imageframe">
-										<div class="row">
-											<div class="col-md-7">
-												<h2>Description</h2>
-												<p>${ element.description}</p>
-											</div>
-										</div>
+										<div class="row"></div>
 									</div>
 									<c:set var="tripdaysdesc"
 										value="${fn:split(element.daysdesc, ',')}" />
@@ -175,6 +199,7 @@
 						</div>
 						<!--// Comments //-->
 						<div id="respond">
+							<br>
 							<h2>Comments</h2>
 							<form>
 								<p>
@@ -185,7 +210,11 @@
 									<textarea class="ctViewListingComment ctIsChkEmptyVal"
 										placeholder="add your comment *"></textarea>
 								</p>
-								<p class="kd-button">
+								<br>
+								<p class="ctFontWeight_B">Start Rating</p>
+								<div id="star"></div>
+								<br>
+								<p class="kd-button" style="margin-top: 10px !important;">
 									<input type="button" value="Submit comment "
 										class="thbg-color ctSubmitCommentBtn"> <span
 										class="ctSuccessComment"
@@ -267,226 +296,46 @@
 </div>
 <div class="clear"></div>
 <%@ include file="lib/footer.jsp"%>
-<script src="${baseURL}/assest/plugin/slider/jssor.slider.mini.js"></script>
+<script src="${baseURL}/assest/plugin/slider/jquery.flexslider.js"></script>
+<script src="${baseURL}/assest/plugin/startrating/jquery.raty.js"></script>
 <script src="${baseURL}/assest/js/ctviewlisting.js"></script>
-<script>
-    $(document).ready(function() {
-	var jssor_1_SlideshowTransitions = [ {
-	    $Duration : 1200,
-	    x : 0.2,
-	    y : -0.1,
-	    $Delay : 20,
-	    $Cols : 8,
-	    $Rows : 4,
-	    $Clip : 15,
-	    $During : {
-		$Left : [ 0.3, 0.7 ],
-		$Top : [ 0.3, 0.7 ]
-	    },
-	    $Formation : $JssorSlideshowFormations$.$FormationStraightStairs,
-	    $Assembly : 260,
-	    $Easing : {
-		$Left : $Jease$.$InWave,
-		$Top : $Jease$.$InWave,
-		$Clip : $Jease$.$OutQuad
-	    },
-	    $Outside : true,
-	    $Round : {
-		$Left : 1.3,
-		$Top : 2.5
-	    }
-	}, {
-	    $Duration : 1500,
-	    x : 0.3,
-	    y : -0.3,
-	    $Delay : 20,
-	    $Cols : 8,
-	    $Rows : 4,
-	    $Clip : 15,
-	    $During : {
-		$Left : [ 0.1, 0.9 ],
-		$Top : [ 0.1, 0.9 ]
-	    },
-	    $SlideOut : true,
-	    $Formation : $JssorSlideshowFormations$.$FormationStraightStairs,
-	    $Assembly : 260,
-	    $Easing : {
-		$Left : $Jease$.$InJump,
-		$Top : $Jease$.$InJump,
-		$Clip : $Jease$.$OutQuad
-	    },
-	    $Outside : true,
-	    $Round : {
-		$Left : 0.8,
-		$Top : 2.5
-	    }
-	}, {
-	    $Duration : 1500,
-	    x : 0.2,
-	    y : -0.1,
-	    $Delay : 20,
-	    $Cols : 8,
-	    $Rows : 4,
-	    $Clip : 15,
-	    $During : {
-		$Left : [ 0.3, 0.7 ],
-		$Top : [ 0.3, 0.7 ]
-	    },
-	    $Formation : $JssorSlideshowFormations$.$FormationStraightStairs,
-	    $Assembly : 260,
-	    $Easing : {
-		$Left : $Jease$.$InWave,
-		$Top : $Jease$.$InWave,
-		$Clip : $Jease$.$OutQuad
-	    },
-	    $Outside : true,
-	    $Round : {
-		$Left : 0.8,
-		$Top : 2.5
-	    }
-	}, {
-	    $Duration : 1500,
-	    x : 0.3,
-	    y : -0.3,
-	    $Delay : 80,
-	    $Cols : 8,
-	    $Rows : 4,
-	    $Clip : 15,
-	    $During : {
-		$Left : [ 0.3, 0.7 ],
-		$Top : [ 0.3, 0.7 ]
-	    },
-	    $Easing : {
-		$Left : $Jease$.$InJump,
-		$Top : $Jease$.$InJump,
-		$Clip : $Jease$.$OutQuad
-	    },
-	    $Outside : true,
-	    $Round : {
-		$Left : 0.8,
-		$Top : 2.5
-	    }
-	}, {
-	    $Duration : 1800,
-	    x : 1,
-	    y : 0.2,
-	    $Delay : 30,
-	    $Cols : 10,
-	    $Rows : 5,
-	    $Clip : 15,
-	    $During : {
-		$Left : [ 0.3, 0.7 ],
-		$Top : [ 0.3, 0.7 ]
-	    },
-	    $SlideOut : true,
-	    $Reverse : true,
-	    $Formation : $JssorSlideshowFormations$.$FormationStraightStairs,
-	    $Assembly : 2050,
-	    $Easing : {
-		$Left : $Jease$.$InOutSine,
-		$Top : $Jease$.$OutWave,
-		$Clip : $Jease$.$InOutQuad
-	    },
-	    $Outside : true,
-	    $Round : {
-		$Top : 1.3
-	    }
-	}, {
-	    $Duration : 1000,
-	    $Delay : 30,
-	    $Cols : 8,
-	    $Rows : 4,
-	    $Clip : 15,
-	    $SlideOut : true,
-	    $Formation : $JssorSlideshowFormations$.$FormationStraightStairs,
-	    $Assembly : 2049,
-	    $Easing : $Jease$.$OutQuad
-	}, {
-	    $Duration : 1000,
-	    $Delay : 80,
-	    $Cols : 8,
-	    $Rows : 4,
-	    $Clip : 15,
-	    $SlideOut : true,
-	    $Easing : $Jease$.$OutQuad
-	}, {
-	    $Duration : 1000,
-	    y : -1,
-	    $Cols : 12,
-	    $Formation : $JssorSlideshowFormations$.$FormationStraight,
-	    $ChessMode : {
-		$Column : 12
-	    }
-	}, {
-	    $Duration : 1000,
-	    x : -0.2,
-	    $Delay : 40,
-	    $Cols : 12,
-	    $SlideOut : true,
-	    $Formation : $JssorSlideshowFormations$.$FormationStraight,
-	    $Assembly : 260,
-	    $Easing : {
-		$Left : $Jease$.$InOutExpo,
-		$Opacity : $Jease$.$InOutQuad
-	    },
-	    $Opacity : 2,
-	    $Outside : true,
-	    $Round : {
-		$Top : 0.5
-	    }
-	}, {
-	    $Duration : 2000,
-	    y : -1,
-	    $Delay : 60,
-	    $Cols : 15,
-	    $SlideOut : true,
-	    $Formation : $JssorSlideshowFormations$.$FormationStraight,
-	    $Easing : $Jease$.$OutJump,
-	    $Round : {
-		$Top : 1.5
-	    }
-	} ];
+<script type="text/javascript">
+    $(document).ready(
+	    function() {
+		var ctRatedStar = '${ratedStart}';
+		$('div#star').raty(
+			{
+			    "path" : "http://" + location.host + "/"
+				    + ctDAO.CONTEXT_NAME
+				    + "/assest/plugin/startrating/img/"
+			});
+		//$(this).raty('set', { score: 2 });
+		$('#ctRatedStar').raty(
+			{
+			    start : ctRatedStar,
+			    "path" : "http://" + location.host + "/"
+				    + ctDAO.CONTEXT_NAME
+				    + "/assest/plugin/startrating/img/"
+			});
+		// The slider being synced must be initialized first
+		$('#carousel').flexslider({
+		    animation : "slide",
+		    controlNav : false,
+		    animationLoop : false,
+		    slideshow : false,
+		    itemWidth : 110,
+		    itemMargin : 5,
+		    asNavFor : '#slider'
+		});
 
-	var jssor_1_options = {
-	    $AutoPlay : true,
-	    $SlideshowOptions : {
-		$Class : $JssorSlideshowRunner$,
-		$Transitions : jssor_1_SlideshowTransitions,
-		$TransitionsOrder : 1
-	    },
-	    $ArrowNavigatorOptions : {
-		$Class : $JssorArrowNavigator$
-	    },
-	    $BulletNavigatorOptions : {
-		$Class : $JssorBulletNavigator$
-	    }
-	};
+		$('#slider').flexslider({
+		    animation : "slide",
+		    controlNav : false,
+		    animationLoop : false,
+		    slideshow : false,
+		    sync : "#carousel"
+		});
 
-	var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-	//responsive code begin
-	//you can remove responsive code if you don't want the slider scales while window resizes
-	function ScaleSlider() {
-	    var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-	    if (refSize) {
-		refSize = Math.min(refSize, 600);
-		jssor_1_slider.$ScaleWidth(refSize);
-	    } else {
-		window.setTimeout(ScaleSlider, 30);
-	    }
-	}
-	ScaleSlider();
-	$(window).bind("load", ScaleSlider);
-	$(window).bind("resize", ScaleSlider);
-	$(window).bind("orientationchange", ScaleSlider);
-
-	//responsive code end
-	$('.ctPhoneNo').numeric();
-	$(".ctBookingNow").click(function() {
-	    $("#myModal").modal('show');
-	});
-
-	ctInitViewListing();
-
-    });
+		ctInitViewListing();
+	    });
 </script>

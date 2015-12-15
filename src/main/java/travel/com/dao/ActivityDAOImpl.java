@@ -40,7 +40,7 @@ public class ActivityDAOImpl implements ActivityDAO
 	}
 
 	@Override
-	public Map<String, Object> getVendorStatistic() throws Exception
+	public Map<String, Object> getVendorStatistic(String status, int vendorId) throws Exception
 	{
 		Map<String, Object> mapList = new HashMap<String, Object>();
 		Map params = new HashMap();
