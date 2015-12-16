@@ -1,4 +1,4 @@
-var MAX_RANGE_VALUES = 1000000, MIN_RANGE_VALUES = 0, DEFDAULE_EMPTY = "EMPTY";
+var MAX_RANGE_VALUES = 20000, MIN_RANGE_VALUES = 100, DEFDAULE_EMPTY = "EMPTY";
 $(function() {
 	$('#ctListingFromDate').Zebra_DatePicker();
 });
@@ -19,8 +19,8 @@ function ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice,
 };
 function ctSetFilterDatas(locationId, activityIds, fromPrice, toPrice) {
 	fromPrice =
-			(fromPrice && fromPrice.length > 0) ? fromPrice : MIN_RANGE_VALUES;
-	toPrice = (toPrice && toPrice.length > 0) ? toPrice : 3000;
+			(fromPrice && fromPrice.length > 0) ? fromPrice : 100;
+	toPrice = (toPrice && toPrice.length > 0) ? toPrice : 300;
 	if (activityIds && activityIds != DEFDAULE_EMPTY)
 	{
 		activityIds = activityIds.split(",");
@@ -30,7 +30,7 @@ function ctSetFilterDatas(locationId, activityIds, fromPrice, toPrice) {
 					'checked', true);
 		}
 	}
-
+	
 	$("#slider-3")
 			.slider(
 					{
