@@ -233,4 +233,9 @@ public class TripServiceBO implements TripService
 		return tripDAO.getCredits_AND_Email(tripId);
 	}
 
+	public List<Trip> getTripDetailsTitles_AND_Id(int userId, String status, String startTitle)
+			throws Exception
+	{
+		return tripDAO.getTripDetailsTitles_AND_Id(userId, status, startTitle);
+	}
 }

@@ -38,6 +38,10 @@ public class VendorServiceBO implements VendorService
 	@Qualifier("bookingDAO")
 	BookingDAO bookingDAO;
 
+	@Autowired
+	@Qualifier("dealsDAO")
+	DealsDAO dealsDAO;
+
 	public List<Activity> getActivitys(Activity activity) throws Exception
 	{
 		return activityDAO.getActivitys(activity);
@@ -56,4 +60,24 @@ public class VendorServiceBO implements VendorService
 		return bookingDAO.getVendorStatistic(status, vendorId);
 	}
 
+	public List<Deals> getDeals(Deals deals) throws Exception
+	{
+		return dealsDAO.getDeals(deals);
+	}
+
+	public void updateDeals(int offerPercentage, int id) throws Exception
+	{
+		dealsDAO.updateDeals(offerPercentage, id);
+	}
+
+	public int getDealsEntries(Deals deals) throws Exception
+	{
+		return dealsDAO.getDealsEntries(deals);
+	}
+
+	@Override
+	public void addDeals(Deals deals) throws Exception
+	{
+		dealsDAO.addDeals(deals);
+	}
 }

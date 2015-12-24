@@ -51,7 +51,7 @@
 																	value="${(element.activityname) }" /> </a></li>
 														<li><time datetime="2008-02-14 20:00">
 																|
-																<c:out value="${(element.createdat) }" />
+																<c:out value="${(element.fromdate) }" />
 															</time></li>
 													</ul>
 
@@ -101,7 +101,7 @@
 						</div>
 					</div>
 					<div class="pagination-wrap ctPaginationDiv" style="display: none;">
-						<ul id="pagination-demo" class="pagination-sm"></ul>
+						<ul id="pagination-demo" class="pagination-sm pull-right"></ul>
 					</div>
 				</div>
 				<div class="col-md-9 col-sm-9 ctAddListingDetails"
@@ -257,69 +257,63 @@
 <script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script type="text/javascript">
-	$('.ctVendorListMenu li').removeClass('active');
-	$('.ctVendorListMenu .ctVendorListingMenu').addClass('active');
-	$('.ctPriceTxt').numeric();
-	var searchTerm = null, numEntries = '${model.responseData.numEntries}', MAX_ENTRIES =
-			10, START_PAGE = 1;
-	var remoteDataConfig =
-	{
-		dropdownCssClass : 'bmSelect2Class',
-		cache : "true",
-		placeholder : "Enter your pickup pincode",
-		minimumInputLength : 2,
-		ajax :
-		{
-			url : '${baseURL}/travelapi/city/getCityApi.json',
-			dataType : 'json',
-			data : function(term, page) {
-				searchTerm = term.toUpperCase();
-				return{
-					locationname : term,
-					page_limit : 10
-				};
-			},
-			results : function(data, page) {
-				return{
-					results : getMockData(data.model)
-				};
-			}
-		},
-		formatResult : function(option) {
-			return "<div>" + option.text + "</div>";
-		},
-		formatSelection : function(option) {
-			return option.text;
-		}
-	};
-	function getMockData(mockData) {
-		mockData = JSON.parse(mockData);
-		var foundOptions = [];
-		for ( var key in mockData)
-		{
-			if (mockData[key].text.toUpperCase().indexOf(searchTerm) >= 0)
-			{
-				foundOptions.push(mockData[key]);
-			}
-		}
-
-		return foundOptions;
-	};
-
-	$("#ctSelectActivityType").select2(remoteDataConfig);
-	$("#ctSelectCity").select2(remoteDataConfig);
-
-	if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE)
-	{
-		var lastPart = bmpUtil.getLastStartingURL(), URL =
-				"http://" + location.host + "/travel/travelapi/vendor/listing";
-		lastPart = parseInt(lastPart);
-		if (lastPart && typeof lastPart === 'number')
-		{
-			START_PAGE = lastPart;
-		}
-
-		ctSetPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
+    $('.ctVendorListMenu li').removeClass('active');
+    $('.ctVendorListMenu .ctVendorListingMenu').addClass('active');
+    $('.ctPriceTxt').numeric();
+    var searchTerm = null, numEntries = '${model.responseData.numEntries}', MAX_ENTRIES = 5, START_PAGE = 1;
+    var remoteDataConfig = {
+	dropdownCssClass : 'bmSelect2Class',
+	cache : "true",
+	placeholder : "Enter your pickup pincode",
+	minimumInputLength : 2,
+	ajax : {
+	    url : '${baseURL}/travelapi/city/getCityApi.json',
+	    dataType : 'json',
+	    data : function(term, page) {
+		searchTerm = term.toUpperCase();
+		return {
+		    locationname : term,
+		    page_limit : 10
+		};
+	    },
+	    results : function(data, page) {
+		return {
+		    results : getMockData(data.model)
+		};
+	    }
+	},
+	formatResult : function(option) {
+	    return "<div>" + option.text + "</div>";
+	},
+	formatSelection : function(option) {
+	    return option.text;
 	}
+    };
+    function getMockData(mockData) {
+	mockData = JSON.parse(mockData);
+	var foundOptions = [];
+	for ( var key in mockData) {
+	    if (mockData[key].text.toUpperCase().indexOf(searchTerm) >= 0) {
+		foundOptions.push(mockData[key]);
+	    }
+	}
+
+	return foundOptions;
+    };
+
+    $("#ctSelectActivityType").select2(remoteDataConfig);
+    $("#ctSelectCity").select2(remoteDataConfig);
+
+    if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE) {
+	var lastPart = bmpUtil.getLastStartingURL(), URL = "http://"
+		+ location.host + "/travel/travelapi/vendor/listing";
+	lastPart = parseInt(lastPart);
+	if (lastPart && typeof lastPart === 'number') {
+	    START_PAGE = lastPart;
+	}
+
+	ctSetPagination(numEntries, ctDAO.TOTAL_RECORDS_PER_PAGE, 5,
+		START_PAGE, URL);
+    }
 </script>
 

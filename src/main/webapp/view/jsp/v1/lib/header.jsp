@@ -1,4 +1,5 @@
 <%@page import="travel.com.model.FBConnection"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	FBConnection fbConnection = new FBConnection();
 	String domainName = request.getServerName();

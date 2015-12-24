@@ -22,9 +22,17 @@ body .ctThumbImgFlex .slides  li img {
 	box-shadow: 1px 1px 6px #c2c5c5;
 	padding: 10px;
 }
-.ctVendorImage{
+
+.ctVendorImage {
 	height: 64px;
 	width: 64px;
+}
+
+.ctViewLisitingLoadMore {
+	background-color: #dedede;
+	cursor: pointer;
+	height: 30px;
+	padding: 5px;
 }
 /* @media screen and (min-width: 767px) {
    

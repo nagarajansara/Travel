@@ -92,7 +92,7 @@
 									</div>
 								</div>
 								<a class="kd-booking-btn thbg-color ctBookingNow"
-									href="javascript:void(0)">enquiry nOW</a>
+									href="#" data-toggle="modal" data-target="#myModal">enquiry nOW</a>
 							</div>
 							<div class="kd-pkg-info">
 								<div class="row">
@@ -309,7 +309,6 @@
 				    + ctDAO.CONTEXT_NAME
 				    + "/assest/plugin/startrating/img/"
 			});
-		//$(this).raty('set', { score: 2 });
 		$('#ctRatedStar').raty(
 			{
 			    start : ctRatedStar,

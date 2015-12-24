@@ -48,5 +48,9 @@
 	</bean>
 	<bean id="enquiryDAO" class="travel.com.dao.EnquiryDAOImpl">
 	</bean>
+	<bean id="dealsDAO" class="travel.com.dao.DealsDAOImpl">
+	</bean>
+	<bean id="adminDAO" class="travel.com.dao.AdminDAOImpl">
+	</bean>
 
 </beans>

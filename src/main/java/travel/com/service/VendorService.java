@@ -15,6 +15,14 @@ public interface VendorService
 
 	Map<String, Object> getLeads(Booking booking) throws Exception;
 
-	Map<String, Object> getVendorStatistic(String status, int vendorId) throws Exception;
+	Map<String, Object> getVendorStatistic(String status, int vendorId)
+			throws Exception;
 
+	List<Deals> getDeals(Deals deals) throws Exception;
+
+	void updateDeals(int offerPercentage, int id) throws Exception;
+
+	int getDealsEntries(Deals deals) throws Exception;
+	
+	void addDeals(Deals deals) throws Exception;
 }

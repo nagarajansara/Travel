@@ -1,4 +1,4 @@
-var MAX_RANGE_VALUES = 20000, MIN_RANGE_VALUES = 100, DEFDAULE_EMPTY = "EMPTY";
+var MAX_RANGE_VALUES = 10000, MIN_RANGE_VALUES = 100, DEFDAULE_EMPTY = "EMPTY";
 $(function() {
 	$('#ctListingFromDate').Zebra_DatePicker();
 });

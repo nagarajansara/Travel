@@ -1,0 +1,41 @@
+package travel.com.dao;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import travel.com.model.Admin;
+import travel.com.model.Trip;
+
+@SuppressWarnings(
+{ "unchecked", "unused" })
+public class AdminDAOImpl implements AdminDAO
+{
+
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	@Autowired
+	@Qualifier("baseDAO")
+	BaseDAO baseDAO;
+
+	final String GET_ADMIN_CONTACTS =
+			"SELECT * from admin where status =:status";
+	final String STATUS_ACTIVE = "active";
+
+	@Override
+	public List<Admin> getContacts() throws Exception
+	{
+		Map map = new HashMap();
+		map.put("status", STATUS_ACTIVE);
+
+		return namedParameterJdbcTemplate.query(GET_ADMIN_CONTACTS, map,
+				new BeanPropertyRowMapper(Admin.class));
+
+	}
+}

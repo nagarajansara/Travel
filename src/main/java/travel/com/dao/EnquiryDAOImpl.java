@@ -26,7 +26,7 @@ public class EnquiryDAOImpl implements EnquiryDAO
 	final String ADD_ENQUIRY =
 			"INSERT INTO enquiry (tripid, status, credits, name, email, phoneno) values (:tripid, :status, :credits, :name, :email, :phoneno)";
 	final String GET_ENQUIRY =
-			"SELECT u.email AS email, td.title AS title, td.id AS tripid, e.* FROM tripdetails td "
+			"SELECT u.credits AS credits, u.email AS email, td.title AS title, td.id AS tripid, e.* FROM tripdetails td "
 					+ "INNER JOIN enquiry e "
 					+ "ON td.id = e.tripid "
 					+ "INNER JOIN users u "

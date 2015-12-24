@@ -237,7 +237,8 @@
 	    if (lastPart && typeof lastPart === 'number') {
 		START_PAGE = lastPart;
 	    }
-	    ctSetListingPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
+	    ctSetListingPagination(numEntries, ctDAO.TOTAL_RECORDS_PER_PAGE, 5,
+		    START_PAGE, URL);
 	}
     } else {
 	if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE) {
@@ -250,7 +251,8 @@
 	    if (lastPart && typeof lastPart === 'number') {
 		START_PAGE = lastPart;
 	    }
-	    ctSetListingPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
+	    ctSetListingPagination(numEntries, ctDAO.TOTAL_RECORDS_PER_PAGE, 5,
+		    START_PAGE, URL);
 	}
     }
 </script>

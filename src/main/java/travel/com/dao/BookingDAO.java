@@ -5,7 +5,8 @@ import java.util.*;
 
 import travel.com.model.*;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public interface BookingDAO
 {
 	List<Booking> getBookingDetails(Booking booking) throws Exception;
@@ -17,5 +18,7 @@ public interface BookingDAO
 
 	int getNumEntries(Booking booking) throws Exception;
 
-	Map<String, Object> getVendorStatistic(String status, int vendorId) throws Exception;
+	Map<String, Object> getVendorStatistic(String status, int vendorId)
+			throws Exception;
+
 }

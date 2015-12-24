@@ -72,11 +72,13 @@
 
     if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE) {
 	var lastPart = bmpUtil.getLastStartingURL(), URL = "http://"
-		+ location.host + "/travel/travelapi/booking/getLeadsPagination";
+		+ location.host
+		+ "/travel/travelapi/booking/getLeadsPagination";
 	lastPart = parseInt(lastPart);
 	if (lastPart && typeof lastPart === 'number') {
 	    START_PAGE = lastPart;
 	}
-	ctMyleadsPagination(numEntries, MAX_ENTRIES, 5, START_PAGE, URL);
+	ctMyleadsPagination(numEntries, ctDAO.TOTAL_RECORDS_PER_PAGE, 5,
+		START_PAGE, URL);
     }
 </script>

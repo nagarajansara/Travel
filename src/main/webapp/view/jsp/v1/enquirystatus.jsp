@@ -15,11 +15,12 @@
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Enquire Status</h3>
 					</div>
+					<div class="kd-section-title ctUserCreditsValue"></div>
 					<div class="ctLoadingImg" style="display: none;">
 						<img src="${baseURL}/assest/img/loading.gif">
 					</div>
 					<c:if test="${not empty model.responseData}">
-						<table class="table table-striped">
+						<table class="table table-striped ctEnquiryTableStatus">
 							<thead>
 								<tr>
 									<th>S.No</th>
@@ -37,15 +38,16 @@
 											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.tripid}"
 											target="_blank">${element.title }</a></td>
 										<td style="text-transform: uppercase;">${element.status }</td>
-										<td style="text-transform: uppercase;"><div
-												class="checkbox">
+										<td class="ctEnquiryStatus" style="text-transform: uppercase;">
+											<div class="checkbox">
 												<label> <input data-toggle="toggle"
 													class="ctToggleBtn" pk_email="${ element.email }"
 													pk_ID="${element.id}" pk_tripId="${element.tripid }"
 													data-size="mini" type="checkbox">
-
 												</label>
-											</div></td>
+											</div>
+										</td>
+										<c:set var="USER_CREDITS" value="${ element.credits }"></c:set>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -67,6 +69,13 @@
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorPendingStatus').addClass('active');
+    var USER_CREDITS = '${USER_CREDITS}';
+    if (USER_CREDITS == ctDAO.INITIAL_USER_CREDITS) {
+	$('.ctUserCreditsValue')
+		.append(
+			'<a class="custom-btn frame-btn thbg-color" href="#" style="font-size: 12px;">Buy Credits</a>');
+    }
+
     $(".ctToggleBtn").change(
 	    function(event) {
 		var enquiryId = $(this).attr('pk_ID'), email = $(this).attr(

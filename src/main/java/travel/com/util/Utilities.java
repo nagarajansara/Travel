@@ -209,7 +209,7 @@ public class Utilities
 
 	public int getDefaultMaxIndx()
 	{
-		int MAX_INDX = 10;
+		int MAX_INDX = 5;
 		return MAX_INDX;
 	}
 	public String getServerName()

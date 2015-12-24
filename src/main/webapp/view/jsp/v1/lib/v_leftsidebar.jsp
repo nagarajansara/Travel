@@ -15,7 +15,7 @@
 				Bookings</a></li> -->
 		<li class="ctVendorStatisticsMenu"><a
 			href="${baseURL}/travelapi/vendor/getVendorStatistic">Statistics</a></li>
-		<li class="ctVendorDealsMenu"><a href="#messagesone">Deals</a></li>
+		<li class="ctVendorDealsMenu"><a href="${baseURL}/travelapi/vendor/getDeals">Deals</a></li>
 		<li class="ctVendorTutorialsMenu"><a href="#messagesone">Tutorials</a></li>
 		<li class="ctVendorContactMenu"><a href="#messagesone">Contact
 				Us</a></li>

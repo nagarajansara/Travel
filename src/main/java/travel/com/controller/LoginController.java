@@ -348,10 +348,12 @@ public class LoginController extends BaseController
 	{
 		try
 		{
+			Map<String, Object> map = new HashMap<String, Object>();
 			int userId = getUserId(request);
 			String status = Enquiry.STATUS_PENDING;
 			List<Enquiry> list =
 					enquiryService.getPendingEnquiry(userId, status);
+				
 			utilities.setSuccessResponse(response, list);
 		} catch (Exception ex)
 		{

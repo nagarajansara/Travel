@@ -73,7 +73,7 @@
 	font-family: verdana !important;
 }
 
-.ctFontWeight_B {
+.ctFontWeight_B,.bmSelect2Class {
 	font-weight: bold;
 }
 
@@ -93,4 +93,13 @@
 
 .ctDefaultHeaders {
 	text-transform: uppercase;
+}
+
+#pagination-demo li a:hover {
+	background-color: #337AB7 !important;
+	color: #ffffff !important;
+}
+#pagination-demo
+{
+	border: 0px solid #dadada !important;
 }

@@ -38,7 +38,8 @@ import travel.com.util.*;
 
 @Controller
 @RequestMapping("/vendor")
-@SuppressWarnings("unused")
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public class VendorController extends BaseController
 {
 	private static final Logger logger = Logger
@@ -92,7 +93,8 @@ public class VendorController extends BaseController
 			CommonMtd commonMtd = new CommonMtd();
 			map =
 					commonMtd.getListingDetails(userId, STATUS_ACTIVE,
-							startIndx, endIndx, isSuccess);
+							utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx(), isSuccess);
 
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
@@ -118,13 +120,14 @@ public class VendorController extends BaseController
 		{
 			Map<String, Object> map = new HashMap<String, Object>();
 			currPageNo = currPageNo - 1;
-			currPageNo = getStartIdx(currPageNo, endIndx);
+			currPageNo = getStartIdx(currPageNo, utilities.getDefaultMaxIndx());
 			int userId = getUserId(request);
 
 			CommonMtd commonMtd = new CommonMtd();
 			map =
 					commonMtd.getListingDetails(userId, STATUS_ACTIVE,
-							currPageNo, endIndx, isSuccess);
+							currPageNo, utilities.getDefaultMaxIndx(),
+							isSuccess);
 
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
@@ -337,6 +340,177 @@ public class VendorController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "credits";
+	}
+
+	@RequestMapping(value = "/getDeals", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getDeals(HttpServletRequest request,
+			@RequestParam(value = "startTitle", required = false,
+					defaultValue = "CT_EMPTY") String startTitle,
+			@RequestParam(value = "startIndx", required = false,
+					defaultValue = "0") int startIndx,
+			@RequestParam(value = "endIndx", required = false,
+					defaultValue = "10") int endIndx, ModelMap model)
+	{
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		JSONArray jSONArray = new JSONArray();
+		String STATUS_ACTIVE = "active";
+		List<Deals> dealsList = null;
+		int numEntries = 0;
+		try
+		{
+			int userId = getUserId(request);
+			List<Trip> list = null;
+			if (startTitle.equals("CT_EMPTY"))
+			{
+				Deals deals =
+						new Deals(userId, STATUS_ACTIVE,
+								utilities.getDefaultMinIndx(),
+								utilities.getDefaultMaxIndx());
+				dealsList = vendorService.getDeals(deals);
+				numEntries = vendorService.getDealsEntries(deals);
+				map.put("dealsList", dealsList);
+				map.put("numEntries", numEntries);
+			}
+			if (startTitle != null && !startTitle.equals("CT_EMPTY"))
+			{
+				list =
+						tripService.getTripDetailsTitles_AND_Id(userId,
+								STATUS_ACTIVE, startTitle);
+			}
+			if (list != null && list.size() > 0
+					&& !startTitle.equals("CT_EMPTY"))
+			{
+				for (int i = 0; i < list.size(); i++)
+				{
+					Trip trips = (Trip) list.get(i);
+					String title = (String) trips.getTitle();
+					int tripID = trips.getId();
+					JSONObject jSONObject = new JSONObject();
+					jSONObject.put("id", tripID);
+					jSONObject.put("text", title);
+					jSONArray.put(jSONObject);
+				}
+			} else
+			{
+				if (!startTitle.equals("CT_EMPTY"))
+				{
+					throw new ConstException(ConstException.ERR_CODE_NO_DATA,
+							ConstException.ERR_MSG_NO_DATA);
+				}
+			}
+			if (startTitle.equals("CT_EMPTY"))
+			{
+				utilities.setSuccessResponse(response, map);
+			} else
+			{
+				utilities.setSuccessResponse(response, jSONArray.toString());
+			}
+
+		} catch (Exception ex)
+		{
+			logger.error("getDeals :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		if (startTitle.equals("CT_EMPTY"))
+		{
+			model.addAttribute("model", response);
+		} else
+		{
+			model.addAttribute("model", jSONArray.toString());
+		}
+		return "deals";
+	}
+
+	@RequestMapping(value = "/getDealsPageNo/{currPageNo}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getDealsPageNo(HttpServletRequest request,
+			@PathVariable int currPageNo, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int userId = getUserId(request);
+			int MAX_INDX = 10;
+			String STATUS_ACTIVE = "active";
+			List<Deals> dealsList = null;
+			int numEntries = 0;
+			currPageNo = currPageNo - 1;
+			int startIndx = getStartIdx(currPageNo, MAX_INDX);
+			Deals deals =
+					new Deals(userId, STATUS_ACTIVE,
+							utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx());
+			dealsList = vendorService.getDeals(deals);
+			numEntries = vendorService.getDealsEntries(deals);
+			map.put("dealsList", dealsList);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("updateDeals :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "deals";
+	}
+
+	@RequestMapping(value = "/updateDeals", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String updateDeals(HttpServletRequest request, @RequestParam(
+			value = "offer_percentage") int offerPercentage, @RequestParam(
+			value = "dealId") int dealId, ModelMap model)
+	{
+		try
+		{
+			vendorService.updateDeals(offerPercentage, dealId);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("updateDeals :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "deals";
+	}
+
+	@RequestMapping(value = "/addDeals", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String addDeals(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int numEntries = 0;
+			int vedorId = getUserId(request);
+			String STATUS_ACTIVE = "active";
+			int startIndx = 0;
+			int endIndx = 10;
+			Deals deals = new Deals(vedorId, STATUS_ACTIVE, startIndx, endIndx);
+
+			List<Deals> dealsList = vendorService.getDeals(deals);
+			numEntries = vendorService.getDealsEntries(deals);
+
+			map.put("dealsList", dealsList);
+			map.put("numEntries", numEntries);
+
+			String[] requested_param = {};
+			int offerPercentage =
+					Integer.parseInt(request.getParameter("offerPercentage"));
+			String offerDesc = request.getParameter("offerdesc");
+			int tripID = Integer.parseInt(request.getParameter("tripID"));
+
+			deals = new Deals(vedorId, offerPercentage, offerDesc, tripID);
+			vendorService.addDeals(deals);
+
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("updateDeals :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "deals";
 	}
 
 	@RequestMapping(value = "/updateProfile", method =

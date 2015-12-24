@@ -16,7 +16,8 @@ import org.springframework.jdbc.core.namedparam.*;
 
 import travel.com.model.*;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings(
+{ "unchecked", "unused" })
 public class TripDAOImpl implements TripDAO
 {
 
@@ -38,7 +39,7 @@ public class TripDAOImpl implements TripDAO
 
 	final String GET_TRIP_DETAILS =
 			"SELECT td.title, td.id AS id, td.description AS description, td.guidelines AS guidelines, IF(SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1) IS NULL , :defaultImage, SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1))AS imageurls, "
-					+ "DATE_FORMAT(td.createdat, '%b %d, %Y') AS createdat, a.name AS activityname "
+					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS fromdate, a.name AS activityname "
 					+ "FROM tripdetails td "
 					+ "INNER JOIN activity a ON td.activityid = a.id "
 					+ "LEFT OUTER JOIN(SELECT * FROM tripimages WHERE STATUS =:status) AS ti ON td.id = ti.tripid "
@@ -103,6 +104,8 @@ public class TripDAOImpl implements TripDAO
 			"Select u.email, u.credits FROM users u "
 					+ "INNER JOIN tripdetails "
 					+ "td ON u.id = td.userid WHERE td.id =:id";
+	final String GET_TRIPDETAILS_AND_TITLE =
+			"Select title, id from tripdetails where fromdate >= NOW() AND status =:status AND userid =:userid AND title like :startLetter";
 
 	public Long addTripDetails(Trip trip) throws Exception
 	{
@@ -448,6 +451,21 @@ public class TripDAOImpl implements TripDAO
 		{
 			throw ex;
 		}
+		return list;
+	}
+
+	public List<Trip> getTripDetailsTitles_AND_Id(int userId, String status,
+			String startTitle) throws Exception
+	{
+		Map map = new HashMap();
+		map.put("userid", userId);
+		map.put("status", status);
+		map.put("startLetter", startTitle + "%");
+
+		List<Trip> list = null;
+		list =
+				namedParameterJdbcTemplate.query(GET_TRIPDETAILS_AND_TITLE,
+						map, new BeanPropertyRowMapper(Trip.class));
 		return list;
 	}
 }

@@ -23,10 +23,12 @@ function CtDAO() {
 	    + "/trip/getCommentsPagno.json";
     this.ADD_ENQUIRY_FORM = this.API_PREFIX + "/trip/addEnquiry.json";
     this.ACTIVATE_ENQUIRY = this.API_PREFIX + "/login/activateEnquiry.json";
+    this.UPDATE_DEALS = this.API_PREFIX + "/vendor/updateDeals.json";
 
     this.RESPONSE_CACHE = {};
 
-    this.TOTAL_RECORDS_PER_PAGE = 10;
+    this.TOTAL_RECORDS_PER_PAGE = 5;
+    this.INITIAL_USER_CREDITS = 0;
 
     this.CACHE_MAP = {};
 
@@ -66,6 +68,10 @@ CtDAO.prototype.addEnquiry = function(param, cbk) {
 CtDAO.prototype.activateEnquiry = function(param, cbk) {
     var tObj = this;
     tObj.getData(tObj.ACTIVATE_ENQUIRY, param, cbk);
+};
+CtDAO.prototype.updateDeals = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.UPDATE_DEALS, param, cbk);
 };
 CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	isParse) {
