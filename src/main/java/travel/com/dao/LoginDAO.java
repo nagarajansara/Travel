@@ -31,4 +31,6 @@ public interface LoginDAO
 
 	void updateCredits(String email, int credits);
 
+	List<Login> getUserDetailsBasedTripId(int tripId) throws Exception;
+
 }

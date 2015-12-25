@@ -82,6 +82,9 @@ public class LoginDAOImpl implements LoginDAO
 	final String UPDATE_CREDITS =
 			"Update users set credits =:credits where email =:email";
 
+	final String GET_USER_DETAILS_BASED_TRIPID =
+			"Select u.* from users u INNER JOIN tripdetails t ON t.userid = u.id WHERE t.id =:tripId";
+
 	public void insertCustomerData(Login login) throws Exception
 	{
 		Map map = new HashMap();
@@ -268,5 +271,17 @@ public class LoginDAOImpl implements LoginDAO
 		map.put("email", email);
 		map.put("credits", credits);
 		namedParameterJdbcTemplate.update(UPDATE_CREDITS, map);
+	}
+
+	@Override
+	public List<Login> getUserDetailsBasedTripId(int tripId) throws Exception
+	{
+		Map map = new HashMap();
+		map.put("tripId", tripId);
+		List<Login> list = null;
+		list =
+				namedParameterJdbcTemplate.query(GET_USER_DETAILS_BASED_TRIPID,
+						map, new BeanPropertyRowMapper(Login.class));
+		return list;
 	}
 }

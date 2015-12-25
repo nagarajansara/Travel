@@ -139,9 +139,12 @@ public class JMSProducer
 				String subject = (String) jsonObject2.get("subject");
 				String content = (String) jsonObject2.get("content");
 				String toEmail = (String) jsonObject2.get("toEmail");
+				String cutomerEmail = (String) jsonObject2.get("customerEmail");
 				String phoneno = (String) jsonObject2.get("phoneno");
 				int tripId = (Integer) jsonObject2.get("tripId");
-				List<Trip> list = tripService.getCredits_AND_Email(tripId);
+				
+				List<Trip> list = tripService.getCredits_AND_Email(tripId);   //TODO GET TO EMAIL ALSO
+				
 				String enquiryStatus = "";
 				int enquiryDeduction = 0;
 				if (list != null && list.size() > 0)
@@ -175,7 +178,7 @@ public class JMSProducer
 
 					Enquiry enquiry =
 							new Enquiry(tripId, username, enquiryStatus,
-									phoneno, enquiryDeduction, toEmail);
+									phoneno, enquiryDeduction, cutomerEmail);
 					enquiryService.addEnquiry(enquiry);
 				}
 

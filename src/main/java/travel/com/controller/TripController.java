@@ -94,6 +94,10 @@ public class TripController extends BaseController
 	@Qualifier("jMSProducer")
 	JMSProducer jMSProducer;
 
+	@Autowired
+	@Qualifier("loginService")
+	LoginService loginService;
+
 	@RequestMapping(value = "/addTripDetails", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String addTripDetails(HttpServletRequest request,
@@ -399,18 +403,29 @@ public class TripController extends BaseController
 			{
 				if (true)
 				{
-					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("name", username);
-					jsonObject.put("subject", appProp.getEnqurirySubject());
-					jsonObject.put("content", appProp.getEnquriryContent());
-					jsonObject.put("fromEmail", appProp.getAdminMailId());
-					jsonObject.put("toEmail", email);
-					jsonObject.put("tripId", tripId);
-					jsonObject.put("phoneno", phoneno);
 
-					jMSProducer.SendJMS_Message(jsonObject.toString()); // Add
-																		// JMS
-																		// QUEQUE
+					List<Login> list =
+							loginService.getUserDetailsBasedTripId(tripId);
+					if (list != null && list.size() > 0)
+					{
+						Login login = (Login) list.get(0);
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("name", username);
+						jsonObject.put("subject", appProp.getEnqurirySubject());
+						jsonObject.put("content", appProp.getEnquriryContent());
+						jsonObject.put("fromEmail", appProp.getAdminMailId());
+						jsonObject.put("toEmail", login.getEmail());
+						jsonObject.put("customerEmail", email);
+						jsonObject.put("tripId", tripId);
+						jsonObject.put("phoneno", phoneno);
+
+						jMSProducer.SendJMS_Message(jsonObject.toString()); // Add
+						// JMS
+						// QUEQUE
+					} else
+					{
+						throw new ConstException();
+					}
 
 				} else
 				{
@@ -616,7 +631,6 @@ public class TripController extends BaseController
 				map.put("requestedParam", requestedParam);
 				map.put("tripDetails", list);
 				map.put("numEntries", numEntries);
-
 
 			} catch (Exception ex)
 			{

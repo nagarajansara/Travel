@@ -52,6 +52,7 @@ public interface TripService
 
 	List<Trip> getCredits_AND_Email(int tripId) throws Exception;
 
-	List<Trip> getTripDetailsTitles_AND_Id(int userId, String status, String startTitle)
-			throws Exception;
+	List<Trip> getTripDetailsTitles_AND_Id(int userId, String status,
+			String startTitle) throws Exception;
+
 }

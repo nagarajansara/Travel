@@ -84,4 +84,9 @@ public class LoginServiceBO implements LoginService
 		loginDAO.updateCredits(email, credits);
 	}
 
+	public List<Login> getUserDetailsBasedTripId(int tripId) throws Exception
+	{
+		return loginDAO.getUserDetailsBasedTripId(tripId);
+	}
+
 }
