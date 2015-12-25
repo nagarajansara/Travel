@@ -103,7 +103,7 @@
 													<img class="ctVendorImage"
 													src="${baseURL}/assest/img/vendor_image.png">
 												</label>
-												<div class="col-lg-4 col-md-4 col-sm-4">
+												<div class="col-lg-6 col-md-6 col-sm-6">
 													<div id="ctRatedStar"></div>
 												</div>
 											</div>
@@ -313,6 +313,7 @@
 		$('#ctRatedStar').raty(
 			{
 			    start : ctRatedStar,
+			    readOnly: true,
 			    "path" : "http://" + location.host + "/"
 				    + ctDAO.CONTEXT_NAME
 				    + "/assest/plugin/startrating/img/"
