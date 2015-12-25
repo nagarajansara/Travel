@@ -62,6 +62,7 @@ public class AuthenticationFilter extends BaseController implements Filter
 		AUTHENTICATED_URL.add("addEnquiry.json");
 
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsBasedId");
+		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsPageno");
 		AUTHENTICATED_URL_INDEXOF.add("getFilterTripsDetailsPageNo");
 
 		/************** Role based urls ***********************/
