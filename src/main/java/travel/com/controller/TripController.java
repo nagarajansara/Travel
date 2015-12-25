@@ -222,6 +222,7 @@ public class TripController extends BaseController
 			Map<String, Object> map = new HashMap<String, Object>();
 			CommonMthds commonMthds = new CommonMthds();
 			map = commonMthds.getTripDetails(START_INDEX, END_INDEX);
+			map.put("istripDetails", true);
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
 		{
@@ -247,7 +248,7 @@ public class TripController extends BaseController
 			map =
 					commonMthds.getTripDetails(currPageNo,
 							utilities.getDefaultMaxIndx());
-
+			map.put("istripDetails", true);
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
 		{
@@ -266,7 +267,6 @@ public class TripController extends BaseController
 	{
 		try
 		{
-			System.out.println("Test......");
 			int START_INDEX = utilities.getDefaultMinIndx();
 			int END_INDEX = utilities.getDefaultMaxIndx();
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -274,6 +274,7 @@ public class TripController extends BaseController
 			map =
 					commonMthds.getTripDetailsBasedFilters(request, null,
 							START_INDEX, END_INDEX);
+			map.put("istripDetails", false);
 			utilities.setSuccessResponse(response, map);
 
 		} catch (Exception ex)
@@ -308,7 +309,7 @@ public class TripController extends BaseController
 			map =
 					commonMthds.getTripDetailsBasedFilters(null, jsonObject,
 							currPageNo, utilities.getDefaultMaxIndx());
-
+			map.put("istripDetails", false);
 			utilities.setSuccessResponse(response, map);
 
 		} catch (Exception ex)
@@ -570,7 +571,10 @@ public class TripController extends BaseController
 						String requestValues =
 								(String) jsonObject
 										.get(requestParam_activity[i]);
-						if (requestValues != null && requestValues.length() > 0)
+
+						if (!requestValues.equals(utilities.getDefaultWord())
+								&& requestValues != null
+								&& requestValues.length() > 0)
 						{
 							activityTable.put(requestParam_activity[i],
 									requestValues);
@@ -586,6 +590,7 @@ public class TripController extends BaseController
 						{
 							priceMap.put(requestParam_price[i], requestValues);
 						}
+
 					}
 				}
 				List<Trip> list =
@@ -607,9 +612,11 @@ public class TripController extends BaseController
 				Map requestedParam =
 						_getRequestedFilteredParam(request, jsonObject,
 								tripTable, activityTable, priceMap, numEntries);
+
 				map.put("requestedParam", requestedParam);
 				map.put("tripDetails", list);
 				map.put("numEntries", numEntries);
+
 
 			} catch (Exception ex)
 			{
@@ -655,6 +662,7 @@ public class TripController extends BaseController
 							jsonObject.get("startpoint"));
 					requestedParam.put("locationName",
 							jsonObject.get("startLocation"));
+
 					requestedParam
 							.put("activityIds",
 									(activityTable.get("activitytype") == null ? utilities

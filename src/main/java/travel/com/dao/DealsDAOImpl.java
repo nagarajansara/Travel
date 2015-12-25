@@ -24,7 +24,7 @@ public class DealsDAOImpl implements DealsDAO
 			"SELECT d.id, d.offer_percentage AS offer_percentage, d.offerdesc AS offerdesc, t.title AS title, t.price AS price FROM deals d "
 					+ "INNER JOIN tripdetails t "
 					+ "ON t.id = d.tripid "
-					+ "WHERE d.vendorid =:vendorid AND d.status =:status AND t.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') LIMIT :startIndx, :endIndx";
+					+ "WHERE d.vendorid =:vendorid AND d.status =:status AND t.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') ORDER BY d.createdat DESC LIMIT :startIndx, :endIndx";
 	String GET_NUMENTRIES_DEALS =
 			"SELECT count(*) From deals d "
 					+ "INNER JOIN tripdetails t "

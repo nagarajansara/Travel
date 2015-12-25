@@ -91,8 +91,8 @@
 										</ul>
 									</div>
 								</div>
-								<a class="kd-booking-btn thbg-color ctBookingNow"
-									href="#" data-toggle="modal" data-target="#myModal">enquiry nOW</a>
+								<a class="kd-booking-btn thbg-color ctBookingNow" href="#"
+									data-toggle="modal" data-target="#myModal">enquiry nOW</a>
 							</div>
 							<div class="kd-pkg-info">
 								<div class="row">
@@ -100,7 +100,8 @@
 										<form class="form-horizontal">
 											<div class="form-group">
 												<label class="col-lg-3 col-md-3 col-sm-3 control-label">
-													<img class="ctVendorImage" src="${baseURL}/assest/img/vendor_image.png">
+													<img class="ctVendorImage"
+													src="${baseURL}/assest/img/vendor_image.png">
 												</label>
 												<div class="col-lg-4 col-md-4 col-sm-4">
 													<div id="ctRatedStar"></div>
@@ -285,8 +286,8 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default ctEnquiryModalClose"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary ctSUbmitEnquireForm">Save
-								changes</button>
+							<button type="button" class="btn btn-primary ctSUbmitEnquireForm">Send
+							</button>
 						</div>
 					</div>
 				</div>

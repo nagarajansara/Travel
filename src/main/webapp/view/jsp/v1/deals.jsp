@@ -15,9 +15,8 @@
 						<h3 class="ctFont_FamilyStyle">Deals Status</h3>
 					</div>
 					<form onsubmit="return ctAddDealsFrmSubmit();"
-						enctype="multipart/form-data"
-						action="${baseURL}/api/vendor/addDeals" method="post" role="form"
-						class="form-horizontal">
+						action="${baseURL}/travelapi/vendor/addDeals" method="post"
+						role="form" class="form-horizontal">
 						<div class="form-group">
 							<label
 								class="col-lg-3 col-md-3 col-sm-3 control-label ctFontWeight_B">
@@ -101,7 +100,7 @@
 						</c:if>
 						<div class="pagination-wrap ctPaginationDiv"
 							style="display: none;">
-							<ul id="pagination-demo" class="pagination-sm"></ul>
+							<ul id="pagination-demo" class="pagination-sm pull-right"></ul>
 						</div>
 					</div>
 				</div>
@@ -113,6 +112,8 @@
 <%@ include file="lib/footer.jsp"%>
 <script src="${baseURL}/assest/js/ctdeals.js"></script>
 <script src="${baseURL}/assest/plugin/selecttwo/select_min.js"></script>
+<script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
+<script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorDealsMenu').addClass('active');
@@ -165,7 +166,7 @@
 
     if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE) {
 	var lastPart = bmpUtil.getLastStartingURL(), URL = "http://"
-		+ location.host + "/travel/travelapi/vendor/listing";
+		+ location.host + "/travel/travelapi/vendor/getDealsPageNo";
 	lastPart = parseInt(lastPart);
 	if (lastPart && typeof lastPart === 'number') {
 	    START_PAGE = lastPart;

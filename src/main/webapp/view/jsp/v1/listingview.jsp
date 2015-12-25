@@ -201,7 +201,7 @@
 						</div>
 						<div class="pagination-wrap ctListingPaginationDiv"
 							style="display: none;">
-							<ul id="pagination-demo" class="pagination-sm"></ul>
+							<ul id="pagination-demo" class="pagination-sm pull-right"></ul>
 						</div>
 					</div>
 				</div>
@@ -226,9 +226,13 @@
 	"toprice" : toPrice,
 	"fromprice" : fromPrice,
 	"startLocation" : locationName
-    };
+    }, isTripDetails = '${model.responseData.istripDetails}';
+    console.log("fromPrice :" +fromPrice);
+    console.log("toPrice :" +toPrice);
     ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate);
-    if (ctChkRequestedFilterParamsEmpty(requestedFilterParams)) {
+    if (ctChkRequestedFilterParamsEmpty(requestedFilterParams)
+	    || isTripDetails.indexOf('true') >= 0) {
+
 	if (numEntries && numEntries > ctDAO.TOTAL_RECORDS_PER_PAGE) {
 	    var lastPart = bmpUtil.getLastStartingURL(), URL = "http://"
 		    + location.host

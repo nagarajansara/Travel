@@ -37,6 +37,9 @@
 	</bean>
 	<bean id="adminService" class="travel.com.bo.AdminServiceBO">
 	</bean>
+	<bean id="sendMail" class="travel.com.model.SendMail">
+	</bean>
+
 
 
 	<bean
@@ -62,6 +65,11 @@
 		<property name="serverDomain" value="${app.uploadImageCompressFilePath}" />
 		<property name="enqurirySubject" value="${app.enquriry.subject}" />
 		<property name="enquriryContent" value="${app.enquriry.content}" />
+		<property name="authEmail" value="${app.auth.email}" />
+		<property name="authPass" value="${app.auth.password}" />
+		<property name="smtpHost" value="${app.smtp.host}" />
+		<property name="smtpPort" value="${app.smtp.port}" />
+		<property name="adminName" value="${app.admin.name}" />
 	</bean>
 
 </beans>

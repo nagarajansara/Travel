@@ -1,19 +1,78 @@
 package travel.com.util;
 
+@SuppressWarnings(
+{ "unchecked", "unused" })
 public class AppProp
 {
+
+	public String getAuthEmail()
+	{
+		return authEmail;
+	}
+
+	public void setAuthEmail(String authEmail)
+	{
+		this.authEmail = authEmail;
+	}
+
+	public String getAuthPass()
+	{
+		return authPass;
+	}
+
+	public void setAuthPass(String authPass)
+	{
+		this.authPass = authPass;
+	}
 
 	private String adminMailId;
 	private String mailSubject;
 	private String uploadedCsvPath;
+
+	public String getAdminName()
+	{
+		return adminName;
+	}
+
+	public void setAdminName(String adminName)
+	{
+		this.adminName = adminName;
+	}
+
 	private String FbAppId;
 	private String FbAppSecret;
 	private String FbAppURI;
 	private String uploadImagePath;
+	private String adminName;
+
+	public String getSmtpHost()
+	{
+		return smtpHost;
+	}
+
+	public void setSmtpHost(String smtpHost)
+	{
+		this.smtpHost = smtpHost;
+	}
+
+	public String getSmtpPort()
+	{
+		return smtpPort;
+	}
+
+	public void setSmtpPort(String smtpPort)
+	{
+		this.smtpPort = smtpPort;
+	}
+
 	private String uploadImageCompressPath;
 	private String serverDomain;
 	private String enquriryContent;
 	private String enqurirySubject;
+	private String authEmail;
+	private String authPass;
+	private String smtpHost;
+	private String smtpPort;
 
 	public String getEnquriryContent()
 	{

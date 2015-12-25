@@ -91,11 +91,23 @@ public class AuthenticationFilter extends BaseController implements Filter
 				&& !(AUTHENTICATED_URL.indexOf(lastURIWord) >= 0))
 		{
 
+			boolean isAuthntificated = false;
 			String lastURLIndex = uri.substring(0, uri.lastIndexOf("/"));
+			String[] params = lastURLIndex.split("/");
+			for (int i = 0; i < params.length; i++)
+			{
+				if (AUTHENTICATED_URL_INDEXOF.indexOf(params[i]) >= 0)
+				{
+					isAuthntificated = true;
+					break;
+				}
+			}
 			lastURLIndex =
 					lastURLIndex.substring(lastURLIndex.lastIndexOf("/") + 1,
 							lastURLIndex.length());
-			if (AUTHENTICATED_URL_INDEXOF.indexOf(lastURLIndex) >= 0)
+
+			if (AUTHENTICATED_URL_INDEXOF.indexOf(lastURLIndex) >= 0
+					|| isAuthntificated)
 			{
 				chain.doFilter(request, response);
 			} else

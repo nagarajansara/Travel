@@ -76,17 +76,17 @@ public class TripDAOImpl implements TripDAO
 	final String GET_FILTERED_TRIP_DETAILS =
 			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
 					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti  ON td.id = ti.tripid "
-					+ "WHERE td.fromdate >= NOW() AND ";
+					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d')  AND ";
 
 	final String GET_FILTERED_TRIP_DETAILS_NUMENTRIES =
-			"Select count(*) from tripdetails td where ";
+			"Select count(*) from tripdetails td where DATE_FORMAT(NOW(), '%y-%m-%d') ";
 	final String GET_ALL_TRIP_DETAILS =
 			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
 					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti ON td.id = ti.tripid "
-					+ "WHERE td.fromdate >= NOW() AND td.status =:status ORDER BY td.createdat DESC LIMIT :startIndx, :endIndx ";
+					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND td.status =:status ORDER BY td.createdat DESC LIMIT :startIndx, :endIndx ";
 
 	final String GET_ALL_TRIPDETAILS_NUMENTRIES =
-			"Select count(*) from tripdetails where fromdate >= NOW() AND status =:status";
+			"Select count(*) from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status";
 
 	final String GET_TRIP_DETAILS_BASED_ID =
 			"SELECT r.startrating, td.*, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
@@ -105,7 +105,7 @@ public class TripDAOImpl implements TripDAO
 					+ "INNER JOIN tripdetails "
 					+ "td ON u.id = td.userid WHERE td.id =:id";
 	final String GET_TRIPDETAILS_AND_TITLE =
-			"Select title, id from tripdetails where fromdate >= NOW() AND status =:status AND userid =:userid AND title like :startLetter";
+			"Select title, id from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status AND userid =:userid AND title like :startLetter";
 
 	public Long addTripDetails(Trip trip) throws Exception
 	{
@@ -267,7 +267,7 @@ public class TripDAOImpl implements TripDAO
 		boolean isFilterValues = false;
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(GET_FILTERED_TRIP_DETAILS_NUMENTRIES);
-		stringBuffer.append(" status=:status");
+		stringBuffer.append(" AND status=:status");
 		// stringBuffer.append(" AND ");
 		// stringBuffer.append(" ( ");
 		// stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));

@@ -22,10 +22,12 @@ import org.springframework.jms.core.SessionCallback;
 import travel.com.controller.TripController;
 import travel.com.dao.BaseDAO;
 import travel.com.model.Enquiry;
+import travel.com.model.SendMail;
 import travel.com.model.Trip;
 import travel.com.service.EnquiryService;
 import travel.com.service.LoginService;
 import travel.com.service.TripService;
+import travel.com.util.AppProp;
 
 @SuppressWarnings("unused")
 public class JMSProducer
@@ -45,6 +47,14 @@ public class JMSProducer
 	@Autowired
 	@Qualifier("loginService")
 	LoginService loginService;
+
+	@Autowired
+	@Qualifier("sendMail")
+	SendMail sendMail;
+
+	@Autowired
+	@Qualifier("appProp")
+	AppProp appProp;
 
 	final String ENQUIRY_MESSAGE_QUEQUE = "enquiryMsg";
 	public final String ACTIVATE_ENQUIRY_MESSAGE_QUEQUE = "activate_enquiryMsg";
@@ -118,51 +128,65 @@ public class JMSProducer
 	public void receiveJMS_Message() throws Exception
 	{
 		Message receivedMessage = jmsTemplate.receive(ENQUIRY_MESSAGE_QUEQUE);
-
-		if (receivedMessage instanceof TextMessage)
+		try
 		{
-			TextMessage textMessage = (TextMessage) receivedMessage;
-			String text = textMessage.getText();
-			JSONObject jsonObject2 = new JSONObject(text);
-			String username = (String) jsonObject2.get("name");
-			String subject = (String) jsonObject2.get("subject");
-			String content = (String) jsonObject2.get("content");
-			String email = (String) jsonObject2.get("toEmail");
-			String phoneno = (String) jsonObject2.get("phoneno");
-			int tripId = (Integer) jsonObject2.get("tripId");
-			List<Trip> list = tripService.getCredits_AND_Email(tripId);
-			String enquiryStatus = "";
-			int enquiryDeduction = 0;
-			if (list != null && list.size() > 0)
+			if (receivedMessage instanceof TextMessage)
 			{
-				Trip trip = (Trip) list.get(0);
-				int totalCredist = trip.getCredits();
-				String tripOwnerEmail = trip.getEmail();
-				if (totalCredist >= Enquiry.DEFAULT_ENQUIRY_DEDUCTION)
+				TextMessage textMessage = (TextMessage) receivedMessage;
+				String text = textMessage.getText();
+				JSONObject jsonObject2 = new JSONObject(text);
+				String username = (String) jsonObject2.get("name");
+				String subject = (String) jsonObject2.get("subject");
+				String content = (String) jsonObject2.get("content");
+				String toEmail = (String) jsonObject2.get("toEmail");
+				String phoneno = (String) jsonObject2.get("phoneno");
+				int tripId = (Integer) jsonObject2.get("tripId");
+				List<Trip> list = tripService.getCredits_AND_Email(tripId);
+				String enquiryStatus = "";
+				int enquiryDeduction = 0;
+				if (list != null && list.size() > 0)
 				{
+					Trip trip = (Trip) list.get(0);
+					int totalCredist = trip.getCredits();
+					String tripOwnerEmail = trip.getEmail();
+					if (totalCredist >= Enquiry.DEFAULT_ENQUIRY_DEDUCTION)
+					{
+						// Send email
+						String[] toAddr =
+						{ toEmail };
+						sendMail.sendMail(toAddr, subject, content,
+								appProp.getAdminMailId(),
+								appProp.getAdminName());
 
-					// Send email
-					enquiryStatus = Enquiry.STATUS_SENT;
-					enquiryDeduction = Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
-					totalCredist =
-							totalCredist - Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
-					loginService.updateCredits(tripOwnerEmail, totalCredist);
+						enquiryStatus = Enquiry.STATUS_SENT;
+						enquiryDeduction = Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
+						totalCredist =
+								totalCredist
+										- Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
+						loginService
+								.updateCredits(tripOwnerEmail, totalCredist);
 
-				} else
-				{
-					enquiryStatus = Enquiry.STATUS_PENDING;
-					enquiryDeduction = Enquiry.DEFAULT_ENQUIRY_NON_DEDUCTION;
+					} else
+					{
+						enquiryStatus = Enquiry.STATUS_PENDING;
+						enquiryDeduction =
+								Enquiry.DEFAULT_ENQUIRY_NON_DEDUCTION;
+					}
+
+					Enquiry enquiry =
+							new Enquiry(tripId, username, enquiryStatus,
+									phoneno, enquiryDeduction, toEmail);
+					enquiryService.addEnquiry(enquiry);
 				}
 
-				Enquiry enquiry =
-						new Enquiry(tripId, username, enquiryStatus, phoneno,
-								enquiryDeduction, email);
-				enquiryService.addEnquiry(enquiry);
+			} else
+			{
+				logger.info("receiveJMS_Message TextMessage :"
+						+ receivedMessage);
 			}
-
-		} else
+		} catch (Exception ex)
 		{
-			logger.info("receiveJMS_Message TextMessage :" + receivedMessage);
+			logger.error("receiveJMS_Message :" + ex.getMessage());
 		}
 	}
 

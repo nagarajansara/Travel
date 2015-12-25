@@ -436,10 +436,10 @@ public class VendorController extends BaseController
 			List<Deals> dealsList = null;
 			int numEntries = 0;
 			currPageNo = currPageNo - 1;
-			int startIndx = getStartIdx(currPageNo, MAX_INDX);
+			int startIndx =
+					getStartIdx(currPageNo, utilities.getDefaultMaxIndx());
 			Deals deals =
-					new Deals(userId, STATUS_ACTIVE,
-							utilities.getDefaultMinIndx(),
+					new Deals(userId, STATUS_ACTIVE, startIndx,
 							utilities.getDefaultMaxIndx());
 			dealsList = vendorService.getDeals(deals);
 			numEntries = vendorService.getDealsEntries(deals);
@@ -486,7 +486,10 @@ public class VendorController extends BaseController
 			String STATUS_ACTIVE = "active";
 			int startIndx = 0;
 			int endIndx = 10;
-			Deals deals = new Deals(vedorId, STATUS_ACTIVE, startIndx, endIndx);
+			Deals deals =
+					new Deals(vedorId, STATUS_ACTIVE,
+							utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx());
 
 			List<Deals> dealsList = vendorService.getDeals(deals);
 			numEntries = vendorService.getDealsEntries(deals);
@@ -495,6 +498,7 @@ public class VendorController extends BaseController
 			map.put("numEntries", numEntries);
 
 			String[] requested_param = {};
+
 			int offerPercentage =
 					Integer.parseInt(request.getParameter("offerPercentage"));
 			String offerDesc = request.getParameter("offerdesc");

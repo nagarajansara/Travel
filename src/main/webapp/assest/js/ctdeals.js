@@ -8,8 +8,8 @@ function ctDealsInit() {
 			var parent_tObj = $(this).parent().parent().parent(), tables = parent_tObj
 				.find('td').eq(2);
 			$('input', tables).prop('disabled', false);
-			$('.ctManageUpdateDealsAnchor').show();
-			$('.ctManageDealsEditIcon').hide();
+			$('.ctManageUpdateDealsAnchor', parent_tObj).show();
+			$('.ctManageDealsEditIcon', parent_tObj).hide();
 		    });
     $('.ctManageDealsUpdateIcon')
 	    .click(
@@ -25,22 +25,22 @@ function ctDealsInit() {
 				    .updateDeals(
 					    param,
 					    function(data) {
-						if (bmpUtil.RESPONSE_STATUS == data.responseData) {
+						if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {
 						    $(
-							    '.ctManageUpdateDealsAnchor')
-							    .hide();
-						    $('.ctManageDealsEditIcon')
-							    .show();
+							    '.ctManageUpdateDealsAnchor',
+							    parent_tObj).hide();
+						    $('.ctManageDealsEditIcon',
+							    parent_tObj).show();
 
 						} else {
-						    $('.ctManageDealsEditIcon')
-							    .show();
+						    $('.ctManageDealsEditIcon',
+							    parent_tObj).show();
 
 						}
 					    });
 			} else {
 			    alert('Please bellow the value 100');
-			    $('.ctManageDealsEditIcon').show();
+			    $('.ctManageDealsEditIcon', parent_tObj).show();
 
 			}
 			$('input', tables).prop('disabled', true);
@@ -72,8 +72,8 @@ function ctSetDealsPagination(numEntries, entryPerPage, visiblePageNo,
     }
 };
 function ctAddDealsFrmSubmit() {
-    var selectObj = $('#ctSelectListingViewActivityType').select2('data'), tripId, isSelected = true;
-    if (selectObj && bmpUtil.isTextFieldEmpty()) {
+    var selectObj = $('#ctSelectedTripId').select2('data'), tripId, isSelected = true;
+    if (selectObj && bmpUtil.isTextFieldEmpty('.ctIsChkEmptyVal')) {
 	tripId = selectObj.id;
 	$('.ctDealsTripID').val(tripId);
     } else {

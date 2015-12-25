@@ -20,10 +20,9 @@ public class SampleThread // extends Exce
 
 	public static void main(String args[]) throws Throwable
 	{
-		JSONObject jsonObject = new JSONObject();
-		String s = "Hello";
-		s = "\"" + s + "\"";
-		System.out.println(s);
+		String URL = "http://localhost/api/login/test.html";
+		String LASTURL = URL.substring(URL.lastIndexOf("/") + 2, URL.length());
+		System.out.println("LASTURL :" + LASTURL);
 	}
 }
 
