@@ -33,7 +33,10 @@ public interface TripDAO
 
 	List<Trip> getCredits_AND_Email(int tripId) throws Exception;
 
-	List<Trip> getTripDetailsTitles_AND_Id(int userId, String status, String startTitle)
+	List<Trip> getTripDetailsTitles_AND_Id(int userId, String status,
+			String startTitle) throws Exception;
+
+	List<Trip> getAllTripDetails(int userId, String sTATUS_ACTIVE, String startTitle)
 			throws Exception;
 
 }

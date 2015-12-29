@@ -106,6 +106,8 @@ public class TripDAOImpl implements TripDAO
 					+ "td ON u.id = td.userid WHERE td.id =:id";
 	final String GET_TRIPDETAILS_AND_TITLE =
 			"Select title, id from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status AND userid =:userid AND title like :startLetter";
+	final String GET_ALL_TRIPDETAILS =
+			"Select title, id from tripdetails where status =:status AND userid =:userid AND title like :startLetter";
 
 	public Long addTripDetails(Trip trip) throws Exception
 	{
@@ -467,5 +469,18 @@ public class TripDAOImpl implements TripDAO
 				namedParameterJdbcTemplate.query(GET_TRIPDETAILS_AND_TITLE,
 						map, new BeanPropertyRowMapper(Trip.class));
 		return list;
+	}
+
+	@Override
+	public List<Trip> getAllTripDetails(int userId, String sTATUS_ACTIVE,
+			String startTitle) throws Exception
+	{
+		Map map = new HashMap();
+		map.put("userid", userId);
+		map.put("status", sTATUS_ACTIVE);
+		map.put("startLetter", startTitle + "%");
+
+		return namedParameterJdbcTemplate.query(GET_ALL_TRIPDETAILS, map,
+				new BeanPropertyRowMapper(Trip.class));
 	}
 }

@@ -77,6 +77,7 @@ function ctAddDealsFrmSubmit() {
 	tripId = selectObj.id;
 	$('.ctDealsTripID').val(tripId);
     } else {
+	alert('Please fill all the details');
 	isSelected = false;
     }
     return isSelected;

@@ -80,4 +80,5 @@ public class VendorServiceBO implements VendorService
 	{
 		dealsDAO.addDeals(deals);
 	}
+
 }

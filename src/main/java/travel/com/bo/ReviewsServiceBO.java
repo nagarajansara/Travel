@@ -38,4 +38,17 @@ public class ReviewsServiceBO implements ReviewsService
 	{
 		return reviewsDAO.getCommentsPagno(reviews);
 	}
+
+	@Override
+	public List<Reviews> getVendorReviews(Reviews reviews) throws Exception
+	{
+		return reviewsDAO.getVendorReviews(reviews);
+	}
+
+	public int getVendorReviewsNumEntries(int tripId, int userId)
+			throws Exception
+	{
+		return reviewsDAO.getVendorReviewsNumEntries(tripId, userId);
+	}
+
 }

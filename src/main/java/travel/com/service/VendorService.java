@@ -23,6 +23,7 @@ public interface VendorService
 	void updateDeals(int offerPercentage, int id) throws Exception;
 
 	int getDealsEntries(Deals deals) throws Exception;
-	
+
 	void addDeals(Deals deals) throws Exception;
+	
 }

@@ -20,6 +20,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+@SuppressWarnings(
+{ "unchecked", "unused" })
 public class Deals
 {
 

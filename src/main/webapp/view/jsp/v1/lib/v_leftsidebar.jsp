@@ -15,10 +15,12 @@
 				Bookings</a></li> -->
 		<li class="ctVendorStatisticsMenu"><a
 			href="${baseURL}/travelapi/vendor/getVendorStatistic">Statistics</a></li>
-		<li class="ctVendorDealsMenu"><a href="${baseURL}/travelapi/vendor/getDeals">Deals</a></li>
+		<li class="ctVendorDealsMenu"><a
+			href="${baseURL}/travelapi/vendor/getDeals">Deals</a></li>
 		<li class="ctVendorTutorialsMenu"><a href="#messagesone">Tutorials</a></li>
 		<li class="ctVendorContactMenu"><a href="#messagesone">Contact
 				Us</a></li>
-		<li class="ctVendorReviewsMenu"><a href="#messagesone">Reviews</a></li>
+		<li class="ctVendorReviewsMenu"><a
+			href="${baseURL}/view/jsp/v1/vendorreview.jsp">Reviews</a></li>
 	</ul>
 </div>

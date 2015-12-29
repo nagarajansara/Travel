@@ -24,6 +24,10 @@ function CtDAO() {
     this.ADD_ENQUIRY_FORM = this.API_PREFIX + "/trip/addEnquiry.json";
     this.ACTIVATE_ENQUIRY = this.API_PREFIX + "/login/activateEnquiry.json";
     this.UPDATE_DEALS = this.API_PREFIX + "/vendor/updateDeals.json";
+    this.GET_VENDOR_REVIEW = this.API_PREFIX + "/vendor/getVendorReviews.json";
+    this.GET_VENDOR_REVIW_PAGENO = this.API_PREFIX
+	    + "/vendor/getVendorReviewsPageNo.json";
+    this.GET_ALL_TRIPDETAILS = this.API_PREFIX + "/vendor/getAllTripDetails.json";
 
     this.RESPONSE_CACHE = {};
 
@@ -72,6 +76,18 @@ CtDAO.prototype.activateEnquiry = function(param, cbk) {
 CtDAO.prototype.updateDeals = function(param, cbk) {
     var tObj = this;
     tObj.getData(tObj.UPDATE_DEALS, param, cbk);
+};
+CtDAO.prototype.getVendorReviews = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.GET_VENDOR_REVIEW, param, cbk);
+};
+CtDAO.prototype.getVendorReviewsPageNo = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.GET_VENDOR_REVIW_PAGENO, param, cbk);
+};
+CtDAO.prototype.getAllTripDetails = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.GET_ALL_TRIPDETAILS, param, cbk);
 };
 CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	isParse) {

@@ -142,9 +142,13 @@ public class JMSProducer
 				String cutomerEmail = (String) jsonObject2.get("customerEmail");
 				String phoneno = (String) jsonObject2.get("phoneno");
 				int tripId = (Integer) jsonObject2.get("tripId");
-				
-				List<Trip> list = tripService.getCredits_AND_Email(tripId);   //TODO GET TO EMAIL ALSO
-				
+
+				List<Trip> list = tripService.getCredits_AND_Email(tripId); // TODO
+																			// GET
+																			// TO
+																			// EMAIL
+																			// ALSO
+
 				String enquiryStatus = "";
 				int enquiryDeduction = 0;
 				if (list != null && list.size() > 0)
@@ -154,20 +158,26 @@ public class JMSProducer
 					String tripOwnerEmail = trip.getEmail();
 					if (totalCredist >= Enquiry.DEFAULT_ENQUIRY_DEDUCTION)
 					{
-						// Send email
-						String[] toAddr =
-						{ toEmail };
-						sendMail.sendMail(toAddr, subject, content,
-								appProp.getAdminMailId(),
-								appProp.getAdminName());
-
-						enquiryStatus = Enquiry.STATUS_SENT;
-						enquiryDeduction = Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
-						totalCredist =
-								totalCredist
-										- Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
-						loginService
-								.updateCredits(tripOwnerEmail, totalCredist);
+						try
+						{
+							// Send email
+							String[] toAddr =
+							{ toEmail };
+							sendMail.sendMail(toAddr, subject, content,
+									appProp.getAdminMailId(),
+									appProp.getAdminName());
+							enquiryStatus = Enquiry.STATUS_SENT;
+							enquiryDeduction =
+									Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
+							totalCredist =
+									totalCredist
+											- Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
+							loginService.updateCredits(tripOwnerEmail,
+									totalCredist);
+						} catch (Exception ex)
+						{
+							
+						}
 
 					} else
 					{
@@ -189,6 +199,7 @@ public class JMSProducer
 			}
 		} catch (Exception ex)
 		{
+
 			logger.error("receiveJMS_Message :" + ex.getMessage());
 		}
 	}

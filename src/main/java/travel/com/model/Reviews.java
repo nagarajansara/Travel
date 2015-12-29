@@ -35,6 +35,16 @@ public class Reviews
 	@Setter
 	private String username;
 
+	public int getVendorId()
+	{
+		return vendorId;
+	}
+
+	public void setVendorId(int vendorId)
+	{
+		this.vendorId = vendorId;
+	}
+
 	public int getId()
 	{
 		return id;
@@ -177,9 +187,35 @@ public class Reviews
 	@Setter
 	private int endIndx;
 
+	@Getter
+	@Setter
+	private int vendorId;
+	
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+
+	@Getter
+	@Setter
+	private String title;
+
 	public Reviews()
 	{
 
+	}
+
+	public Reviews(int tripId, int startIndx, int endindx, int vendorId)
+	{
+		this.tripid = tripId;
+		this.startIndx = startIndx;
+		this.endIndx = endindx;
+		this.vendorId = vendorId;
 	}
 
 	public Reviews(int tripId, int startIndx, int endindx)

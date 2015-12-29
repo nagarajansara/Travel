@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-@SuppressWarnings("unused")
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public class ReviewsDAOImpl implements ReviewsDAO
 {
 	@Autowired
@@ -30,6 +31,15 @@ public class ReviewsDAOImpl implements ReviewsDAO
 
 	final String GET_REVIEWS_NUMENTRIES =
 			"SELECT count(*) from reviews where tripid =:tripid";
+
+	final String GET_VENDOR_REVIEWS =
+			"SELECT r.*, t.title AS title FROM reviews r INNER JOIN tripdetails t "
+					+ "ON t.id = r.id where "
+					+ "r.tripid =:tripId AND t.userid =:userId  ORDER BY r.createdate DESC LIMIT :startIndx, :endIndx";
+	final String GET_VENDOR_REVIEWS_NUMENTRIES =
+			"SELECT count(*) FROM reviews r INNER JOIN tripdetails t "
+					+ "ON t.id = r.id  where "
+					+ "r.tripid =:tripId AND t.userid =:userId";
 
 	public List<Reviews> getReviewsBasedTripId(Reviews reviews)
 			throws Exception
@@ -104,5 +114,31 @@ public class ReviewsDAOImpl implements ReviewsDAO
 			throw ex;
 		}
 		return list;
+	}
+
+	@Override
+	public List<Reviews> getVendorReviews(Reviews reviews) throws Exception
+	{
+		Map map = new HashMap();
+		map.put("tripId", reviews.getTripid());
+		map.put("startIndx", reviews.getStartIndx());
+		map.put("endIndx", reviews.getEndIndx());
+		map.put("userId", reviews.getVendorId());
+
+		List<Reviews> list =
+				namedParameterJdbcTemplate.query(GET_VENDOR_REVIEWS, map,
+						new BeanPropertyRowMapper(Reviews.class));
+		return list;
+	}
+
+	@Override
+	public int getVendorReviewsNumEntries(int tripId, int userId)
+			throws Exception
+	{
+		Map map = new HashMap();
+		map.put("tripId", tripId);
+		map.put("userId", userId);
+		return namedParameterJdbcTemplate.queryForInt(
+				GET_VENDOR_REVIEWS_NUMENTRIES, map);
 	}
 }

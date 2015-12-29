@@ -33,7 +33,7 @@ public class DealsDAOImpl implements DealsDAO
 	String UPDATE_DEALS =
 			"update deals set offer_percentage =:offerPercentage where id =:id";
 	String ADD_DEALS =
-			"INSERT into deals (offer_percentage, offerdesc, vendorid, tripid) VALUES (:offer_percentage, :offerdesc, :vendorid, "
+			"INSERT IGNORE into deals (offer_percentage, offerdesc, vendorid, tripid) VALUES (:offer_percentage, :offerdesc, :vendorid, "
 					+ ":tripid)";
 
 	public List<Deals> getDeals(Deals deals) throws Exception

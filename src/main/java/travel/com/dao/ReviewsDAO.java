@@ -12,5 +12,9 @@ public interface ReviewsDAO
 
 	int getNumEntries(Reviews reviews) throws Exception;
 
-	List<Reviews> getCommentsPagno(Reviews reviews)  throws Exception;
+	List<Reviews> getCommentsPagno(Reviews reviews) throws Exception;
+
+	List<Reviews> getVendorReviews(Reviews reviews) throws Exception;
+
+	int getVendorReviewsNumEntries(int tripId, int userId) throws Exception;
 }

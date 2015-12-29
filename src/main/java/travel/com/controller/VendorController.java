@@ -73,6 +73,10 @@ public class VendorController extends BaseController
 	@Qualifier("loginService")
 	LoginService loginService;
 
+	@Autowired
+	@Qualifier("reviewsService")
+	ReviewsService reviewsService;
+
 	@RequestMapping(value = "/listing", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String index(HttpServletRequest request,
@@ -376,7 +380,8 @@ public class VendorController extends BaseController
 			{
 				list =
 						tripService.getTripDetailsTitles_AND_Id(userId,
-								STATUS_ACTIVE, startTitle);
+								STATUS_ACTIVE, startTitle); // Trip Details
+															// based userId
 			}
 			if (list != null && list.size() > 0
 					&& !startTitle.equals("CT_EMPTY"))
@@ -419,6 +424,51 @@ public class VendorController extends BaseController
 		{
 			model.addAttribute("model", jSONArray.toString());
 		}
+		return "deals";
+	}
+
+	@RequestMapping(value = "/getAllTripDetails", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getAllTripDetails(HttpServletRequest request, @RequestParam(
+			value = "startTitle") String startTitle, ModelMap model)
+	{
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		JSONArray jSONArray = new JSONArray();
+		String STATUS_ACTIVE = "active";
+		int numEntries = 0;
+		try
+		{
+			int userId = getUserId(request);
+			List<Trip> list =
+					tripService.getAllTripDetails(userId, STATUS_ACTIVE,
+							startTitle); // Trip Details
+											// based userId
+
+			if (list != null && list.size() > 0)
+			{
+				for (int i = 0; i < list.size(); i++)
+				{
+					Trip trips = (Trip) list.get(i);
+					String title = (String) trips.getTitle();
+					int tripID = trips.getId();
+					JSONObject jSONObject = new JSONObject();
+					jSONObject.put("id", tripID);
+					jSONObject.put("text", title);
+					jSONArray.put(jSONObject);
+				}
+			} else
+			{
+
+				throw new ConstException(ConstException.ERR_CODE_NO_DATA,
+						ConstException.ERR_MSG_NO_DATA);
+
+			}
+		} catch (Exception ex)
+		{
+			logger.error("getAllTripDetails :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", jSONArray.toString());
 		return "deals";
 	}
 
@@ -635,6 +685,65 @@ public class VendorController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "vendorstatistic";
+	}
+
+	@RequestMapping(value = "/getVendorReviews", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getVendorReviews(HttpServletRequest request, @RequestParam(
+			value = "tripId") int tripId, ModelMap model)
+	{
+		try
+		{
+			int userId = getUserId(request);
+			Map<String, Object> map = new HashMap<String, Object>();
+			int numEntries = 0;
+			Reviews reviews =
+					new Reviews(tripId, utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx(), userId);
+			List<Reviews> list = reviewsService.getVendorReviews(reviews);
+			numEntries =
+					reviewsService.getVendorReviewsNumEntries(tripId, userId);
+			map.put("reviews", list);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getVendorReviews :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "getVendorReviews";
+	}
+
+	@RequestMapping(value = "/getVendorReviewsPageNo", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getVendorReviewsPageNo(HttpServletRequest request,
+			@RequestParam(value = "tripId") int tripId, @RequestParam(
+					value = "startIndx") int startIndx, ModelMap model)
+	{
+		try
+		{
+			int userId = getUserId(request);
+			Map<String, Object> map = new HashMap<String, Object>();
+			int numEntries = 0;
+			Reviews reviews =
+					new Reviews(tripId, getStartIdx(startIndx,
+							utilities.getDefaultMaxIndx()),
+							utilities.getDefaultMaxIndx(), userId);
+			List<Reviews> list = reviewsService.getVendorReviews(reviews);
+			numEntries =
+					reviewsService.getVendorReviewsNumEntries(tripId, userId);
+			map.put("reviews", list);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getVendorReviewsPageNo :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "getVendorReviews";
+
 	}
 
 	class CommonMtd
