@@ -34,11 +34,11 @@ public class ReviewsDAOImpl implements ReviewsDAO
 
 	final String GET_VENDOR_REVIEWS =
 			"SELECT r.*, t.title AS title FROM reviews r INNER JOIN tripdetails t "
-					+ "ON t.id = r.id where "
+					+ "ON t.id = r.tripid where "
 					+ "r.tripid =:tripId AND t.userid =:userId  ORDER BY r.createdate DESC LIMIT :startIndx, :endIndx";
 	final String GET_VENDOR_REVIEWS_NUMENTRIES =
 			"SELECT count(*) FROM reviews r INNER JOIN tripdetails t "
-					+ "ON t.id = r.id  where "
+					+ "ON t.id = r.tripid  where "
 					+ "r.tripid =:tripId AND t.userid =:userId";
 
 	public List<Reviews> getReviewsBasedTripId(Reviews reviews)
