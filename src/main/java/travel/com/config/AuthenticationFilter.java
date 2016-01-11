@@ -64,6 +64,7 @@ public class AuthenticationFilter extends BaseController implements Filter
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsBasedId");
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsPageno");
 		AUTHENTICATED_URL_INDEXOF.add("getFilterTripsDetailsPageNo");
+		AUTHENTICATED_URL_INDEXOF.add("getAdminLoginValidate");
 
 		/************** Role based urls ***********************/
 

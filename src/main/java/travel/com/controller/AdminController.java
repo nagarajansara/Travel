@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,7 +37,7 @@ import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 @SuppressWarnings(
 { "unused", "unchecked" })
@@ -78,4 +79,36 @@ public class AdminController extends BaseController
 		return "contact";
 	}
 
+	@RequestMapping(value = "/getAdminLoginValidate/{userName}/{password}",
+			method =
+			{ RequestMethod.GET, RequestMethod.POST })
+	public Response getAdminLoginValidate(@PathVariable String userName,
+			@PathVariable String password, HttpServletRequest request,
+			HttpServletResponse res, ModelMap model)
+	{
+		try
+		{
+			utilities.setAccessCrossDomainResponse(res); // Give cross domain
+															// access
+
+			String STATUS_ACTIVE = "active";
+			Admin admin = new Admin(userName, password, STATUS_ACTIVE);
+			List<Admin> list = adminService.getAdminLoginValidate(admin);
+			if (list != null && list.size() > 0)
+			{
+				utilities.setSuccessResponse(response, list);
+			} else
+			{
+				throw new ConstException(ConstException.ERR_CODE_INVALID_LOGIN,
+						ConstException.ERR_MSG_INVALID_LOGIN);
+			}
+
+		} catch (Exception ex)
+		{
+			logger.error("getAdminLoginValidate :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return response;
+	}
 }

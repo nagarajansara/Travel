@@ -21,4 +21,10 @@ public class AdminServiceBO implements AdminService
 		return adminDAO.getContacts();
 	}
 
+	@Override
+	public List<Admin> getAdminLoginValidate(Admin admin) throws Exception
+	{
+		return adminDAO.getAdminLoginValidate(admin);
+	}
+
 }

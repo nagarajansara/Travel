@@ -26,6 +26,8 @@ public class AdminDAOImpl implements AdminDAO
 
 	final String GET_ADMIN_CONTACTS =
 			"SELECT * from admin where status =:status";
+	final String ADMIN_LOGIN_VALIDATE =
+			"Select * from admin where name =:name and password =:password";
 	final String STATUS_ACTIVE = "active";
 
 	@Override
@@ -37,5 +39,16 @@ public class AdminDAOImpl implements AdminDAO
 		return namedParameterJdbcTemplate.query(GET_ADMIN_CONTACTS, map,
 				new BeanPropertyRowMapper(Admin.class));
 
+	}
+
+	@Override
+	public List<Admin> getAdminLoginValidate(Admin admin) throws Exception
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("name", admin.getName());
+		map.put("password", admin.getPassword());
+
+		return namedParameterJdbcTemplate.query(ADMIN_LOGIN_VALIDATE, map,
+				new BeanPropertyRowMapper(Admin.class));
 	}
 }

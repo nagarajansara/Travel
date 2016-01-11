@@ -1,6 +1,7 @@
 package travel.com.util;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.ModelMap;
 
@@ -212,8 +213,18 @@ public class Utilities
 		int MAX_INDX = 5;
 		return MAX_INDX;
 	}
+
 	public String getServerName()
 	{
 		return appProp.getServerDomain();
+	}
+
+	public void setAccessCrossDomainResponse(HttpServletResponse res)
+	{
+		res.setHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Access-Control-Allow-Methods",
+				"POST, GET, OPTIONS, DELETE");
+		res.setHeader("Access-Control-Max-Age", "3600");
+		res.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 	}
 }

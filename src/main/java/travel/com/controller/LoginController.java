@@ -170,7 +170,6 @@ public class LoginController extends BaseController
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
-
 		return "vendorregister";
 	}
 

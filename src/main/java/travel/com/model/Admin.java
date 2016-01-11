@@ -140,4 +140,11 @@ public class Admin
 		this.createdat = createdat;
 	}
 
+	public Admin(String name, String password, String status)
+	{
+		this.name = name;
+		this.password = password;
+		this.status = status;
+	}
+
 }

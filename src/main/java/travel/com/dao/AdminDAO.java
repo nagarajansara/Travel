@@ -9,4 +9,6 @@ public interface AdminDAO
 
 	List<Admin> getContacts() throws Exception;
 
+	List<Admin> getAdminLoginValidate(Admin admin) throws Exception;
+
 }
