@@ -64,10 +64,13 @@ public class AdminController extends BaseController
 
 	@RequestMapping(value = "/getContacts", method =
 	{ RequestMethod.GET, RequestMethod.POST })
-	public String getContacts(HttpServletRequest request, ModelMap model)
+	public Response getContacts(HttpServletRequest request,
+			HttpServletResponse res, ModelMap model)
 	{
 		try
 		{
+			utilities.setAccessCrossDomainResponse(res); // Give cross domain
+			// access
 			List<Admin> list = adminService.getContacts();
 			utilities.setSuccessResponse(response);
 		} catch (Exception ex)
@@ -76,7 +79,7 @@ public class AdminController extends BaseController
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
-		return "contact";
+		return response;
 	}
 
 	@RequestMapping(value = "/getAdminLoginValidate/{userName}/{password}",
@@ -96,6 +99,10 @@ public class AdminController extends BaseController
 			List<Admin> list = adminService.getAdminLoginValidate(admin);
 			if (list != null && list.size() > 0)
 			{
+				Admin adminList = (Admin) list.get(0);
+				setUserSession(request, adminList);
+				String email = getSessionAttr(request, ATTR_EMAIL);
+				System.out.println("ATTR_EMAIL :" + email);
 				utilities.setSuccessResponse(response, list);
 			} else
 			{
@@ -106,6 +113,36 @@ public class AdminController extends BaseController
 		} catch (Exception ex)
 		{
 			logger.error("getAdminLoginValidate :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return response;
+	}
+
+	@RequestMapping(value = "/getAdminLoginStatus/{userName}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public
+			Response getAdminLoginStatus(@PathVariable String userName,
+					HttpServletRequest request, HttpServletResponse res,
+					ModelMap model)
+	{
+		try
+		{
+			utilities.setAccessCrossDomainResponse(res); // Give cross domain
+			// access
+			String email = getSessionAttr(request, ATTR_EMAIL);
+			if (email != null && email.equals(userName))
+			{
+				utilities.setSuccessResponse(response);
+			} else
+			{
+				throw new ConstException(ConstException.ERR_CODE_INVALID_LOGIN,
+						ConstException.ERR_MSG_INVALID_LOGIN);
+			}
+
+		} catch (Exception ex)
+		{
+			logger.error("getAdminLoginStatus :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);

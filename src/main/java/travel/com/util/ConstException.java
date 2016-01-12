@@ -13,6 +13,7 @@ public class ConstException extends Exception
 	public static int ERR_CODE_FILE_RENAME = 20;
 	public static int ERR_CODE_NO_DATA = 21;
 	public static int ERR_CODE_NO_CREDITS = 22;
+	
 
 	public static String ERR_MSG_SUCCESS = "Success";
 	public static String ERR_MSG_SESSION_EXP = "Session expired";

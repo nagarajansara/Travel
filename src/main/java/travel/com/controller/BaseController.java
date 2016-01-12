@@ -98,6 +98,20 @@ public class BaseController
 		}
 	}
 
+	public void setUserSession(HttpServletRequest request, Admin user)
+			throws ConstException
+	{
+		if (user != null && user.getId() > 0)
+		{
+			HttpSession session = request.getSession();
+			session.setAttribute(ATTR_USER_ID, user.getId());
+			session.setAttribute(ATTR_ROLE, user.getName());
+			session.setAttribute(ATTR_LNAME, user.getName());
+			session.setAttribute(ATTR_FNAME, user.getName());
+			session.setAttribute(ATTR_EMAIL, user.getName());
+		}
+	}
+
 	public int getStartIdx(int currPage, int maxEntriesPerPage)
 			throws ConstException
 	{

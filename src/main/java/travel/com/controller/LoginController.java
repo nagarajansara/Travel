@@ -315,7 +315,6 @@ public class LoginController extends BaseController
 	public String sessionfailure(HttpServletRequest req,
 			HttpServletResponse res, ModelMap model) throws Exception
 	{
-
 		return "403";
 	}
 
