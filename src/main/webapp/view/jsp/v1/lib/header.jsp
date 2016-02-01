@@ -52,7 +52,7 @@
 <body>
 	<header id="mainheader">
 		<!--// Top Baar //-->
-		<div class="kd-topbar">
+		<div class="kd-topbar ctFont_FamilyStyle">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-7">
@@ -200,7 +200,7 @@
 			</div>
 		</div>
 		<!--// Header Baar //-->
-		<div class="kd-headbar">
+		<div class="kd-headbar ctFont_FamilyStyle">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
@@ -208,7 +208,7 @@
 							src="${baseURL}/theme/images/logo.png" alt=""></a>
 					</div>
 					<div class="col-md-9">
-						<div class="kd-rightside">
+						<div class="kd-rightside ">
 							<nav class="navbar navbar-default navigation">
 								<div class="navbar-header">
 									<button type="button" class="navbar-toggle collapsed"
