@@ -1,5 +1,5 @@
 <%@page import="travel.com.model.FBConnection"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	FBConnection fbConnection = new FBConnection();
 	String domainName = request.getServerName();
@@ -153,13 +153,14 @@
 												<a href="#" class="close" data-dismiss="modal"
 													aria-label="Close"><span aria-hidden="true">&times;</span></a>
 												<div class="kd-login-title">
-													<h2>LOGIN TO</h2>
+													<h2 style="font-size: 12px !important;">LOGIN TO</h2>
 													<span>Your Account</span>
 													<div class="kd-login-network">
 														<ul>
 															<li><a
 																href="<%=fbConnection.getFBAuthUrl(domainName)%>"
-																data-original-title="Facebook"><i
+																data-original-title="Facebook"
+																style="font-size: 12px !important;"><i
 																	class="fa fa-facebook"></i> Login with Facebook</a></li>
 															<!--<li><a href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i> Login with Twitter</a></li>-->
 														</ul>
@@ -185,8 +186,9 @@
 															name="password" id="password" placeholder="Your Password">
 													</p>
 													<p>
-														<input type="submit" value="Login now" class="thbg-color">
-														<a href="#">Forget Password?</a>
+														<input type="submit" value="Login now" class="thbg-color"
+															style="font-size: 12px !important;"> <a href="#">Forget
+															Password?</a>
 													</p>
 												</form>
 
