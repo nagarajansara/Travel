@@ -70,6 +70,7 @@
 		<property name="smtpHost" value="${app.smtp.host}" />
 		<property name="smtpPort" value="${app.smtp.port}" />
 		<property name="adminName" value="${app.admin.name}" />
+		<property name="HTMLDir" value="${app.html.dir}" />
 	</bean>
 
 </beans>

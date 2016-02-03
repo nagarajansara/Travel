@@ -113,7 +113,7 @@
 							</div>
 						</c:forEach>
 					</c:if>
-				</div>"C:/Users/Nagaraj/AppData/Local/Temp/ena0eyla.bmp"
+				</div>
 			</div>
 			<br> <br>
 			<div class="row">
@@ -313,7 +313,7 @@
 		$('#ctRatedStar').raty(
 			{
 			    start : ctRatedStar,
-			    readOnly: true,
+			    readOnly : true,
 			    "path" : "http://" + location.host + "/"
 				    + ctDAO.CONTEXT_NAME
 				    + "/assest/plugin/startrating/img/"

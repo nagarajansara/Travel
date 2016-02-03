@@ -84,6 +84,12 @@ public class LoginDAOImpl implements LoginDAO
 
 	final String GET_USER_DETAILS_BASED_TRIPID =
 			"Select u.* from users u INNER JOIN tripdetails t ON t.userid = u.id WHERE t.id =:tripId";
+	final String GET_USER_DETAILS_BASED_ENQUIRY =
+			"SELECT u.email AS tripowneremail, u.credits AS totalcredits, e.email AS enquiredemail"
+					+ " FROM enquiry e " + "INNER JOIN tripdetails t " + "ON "
+					+ "t.id = e.tripid " + "INNER JOIN " + "users u " + "ON "
+					+ "t.userid = u.id "
+					+ "WHERE e.tripid =:tripId AND e.id =:enquiryId";
 
 	public void insertCustomerData(Login login) throws Exception
 	{
@@ -282,6 +288,22 @@ public class LoginDAOImpl implements LoginDAO
 		list =
 				namedParameterJdbcTemplate.query(GET_USER_DETAILS_BASED_TRIPID,
 						map, new BeanPropertyRowMapper(Login.class));
+		return list;
+	}
+
+	@Override
+	public List<Login> getUserDetailsBasedEnquiry(int enquiryId, int tripId)
+			throws Exception
+	{
+		Map map = new HashMap();
+		map.put("tripId", tripId);
+		map.put("enquiryId", enquiryId);
+		List<Login> list = null;
+		list =
+				namedParameterJdbcTemplate.query(
+						GET_USER_DETAILS_BASED_ENQUIRY, map,
+						new BeanPropertyRowMapper(Login.class));
+
 		return list;
 	}
 }

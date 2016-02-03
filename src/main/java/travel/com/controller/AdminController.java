@@ -102,7 +102,6 @@ public class AdminController extends BaseController
 				Admin adminList = (Admin) list.get(0);
 				setUserSession(request, adminList);
 				String email = getSessionAttr(request, ATTR_EMAIL);
-				System.out.println("ATTR_EMAIL :" + email);
 				utilities.setSuccessResponse(response, list);
 			} else
 			{

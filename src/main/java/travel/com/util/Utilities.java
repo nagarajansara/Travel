@@ -136,7 +136,8 @@ public class Utilities
 					|| IP.getHostAddress().toString().equals("172.31.40.246")
 					|| IP.getHostAddress().toString().equals("128.199.237.142")
 					|| IP.getHostAddress().toString()
-							.equals("saracourierservice.tk"))
+							.equals("saracourierservice.tk")
+					|| IP.getHostAddress().toString().equals("saratravel.tk"))
 			{
 				isServer = true;
 			}
@@ -217,6 +218,64 @@ public class Utilities
 	public String getServerName()
 	{
 		return appProp.getServerDomain();
+	}
+
+	public String getFileContent(String filePath) throws Exception
+	{
+		return getFileContent(new File(filePath));
+	}
+
+	public String getFileContent(File file) throws Exception
+	{
+		BufferedReader br = null;
+		String content = "";
+		try
+		{
+			String sCurrentLine;
+			br = new BufferedReader(new FileReader(file));
+			while ((sCurrentLine = br.readLine()) != null)
+			{
+				content += sCurrentLine;
+			}
+		} catch (Exception e)
+		{
+			throw new Exception(e);
+		} finally
+		{
+			try
+			{
+				if (br != null)
+				{
+					br.close();
+				}
+			} catch (Exception ex)
+			{
+			}
+		}
+
+		return content;
+	}
+
+	public static String replaceMacro(String content,
+			HashMap<String, String> map) throws Exception
+	{
+		for (Map.Entry<String, String> entry : map.entrySet())
+		{
+			String key = entry.getKey();
+			String value = entry.getValue() != null ? entry.getValue() : "";
+			content = content.replaceAll(key, value);
+		}
+		return content;
+	}
+
+	public String getDateTime()
+	{
+
+		Date curDate = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+		String DateToStr = format.format(curDate);
+		return DateToStr;
+
 	}
 
 	public void setAccessCrossDomainResponse(HttpServletResponse res)

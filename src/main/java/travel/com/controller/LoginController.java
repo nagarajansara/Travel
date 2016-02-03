@@ -39,7 +39,8 @@ import travel.com.util.*;
 
 @Controller
 @RequestMapping("/login")
-@SuppressWarnings("unused")
+@SuppressWarnings(
+{ "unused", "unchecked" })
 public class LoginController extends BaseController
 {
 
@@ -104,6 +105,16 @@ public class LoginController extends BaseController
 
 				loginService.insertCustomerData(login);
 
+				// ADD ACTIVE_MQ FOR VERIFICATION PURPOSE
+
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("email", email);
+				jsonObject.put("name", firstName + " " + lastName);
+				jsonObject.put("role", role);
+
+				jMSProducer.SendJMS_Message(jsonObject.toString(),
+						jMSProducer.REGISTERATION_QUEUE);
+
 				utilities.setSuccessResponse(response);
 			} else
 			{
@@ -157,6 +168,22 @@ public class LoginController extends BaseController
 								role, ip);
 
 				loginService.insertVendorData(login);
+
+				// ADD ACTIVE_MQ FOR VERIFICATION PURPOSE
+
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("email", email);
+				jsonObject.put("name", firstName + " " + lastName);
+				jsonObject.put("nameoforganization", nameOrganization);
+				jsonObject.put("address", address);
+				jsonObject.put("mobile", mobile);
+				jsonObject.put("contact", phoneno);
+				jsonObject.put("pancard", pancard);
+				jsonObject.put("role", role);
+				jsonObject.put("stateName", stateName);
+
+				jMSProducer.SendJMS_Message(jsonObject.toString(),
+						jMSProducer.REGISTERATION_QUEUE);
 
 				utilities.setSuccessResponse(response);
 			} else
@@ -351,7 +378,7 @@ public class LoginController extends BaseController
 			String status = Enquiry.STATUS_PENDING;
 			List<Enquiry> list =
 					enquiryService.getPendingEnquiry(userId, status);
-				
+
 			utilities.setSuccessResponse(response, list);
 		} catch (Exception ex)
 		{
@@ -364,24 +391,51 @@ public class LoginController extends BaseController
 
 	@RequestMapping(value = "/activateEnquiry", method =
 	{ RequestMethod.GET, RequestMethod.POST })
-	public String activateEnquiry(HttpServletRequest request,
-			HttpServletResponse res, ModelMap model, @RequestParam(
-					value = "enquiryid") int enquiryId, @RequestParam(
-					value = "email") String email, @RequestParam(
-					value = "tripId") int tripId) throws Exception
+	public
+			String activateEnquiry(HttpServletRequest request,
+					HttpServletResponse res, ModelMap model, @RequestParam(
+							value = "enquiryid") int enquiryId, @RequestParam(
+							value = "email", defaultValue = "",
+							required = false) String email, @RequestParam(
+							value = "tripId") int tripId, @RequestParam(
+							value = "mobileNo") String mobileNo)
+					throws Exception
 	{
 		try
 		{
 			int userId = getUserId(request);
 			JSONObject jsonObject = new JSONObject();
+
 			jsonObject.put("enquiryid", enquiryId);
-			jsonObject.put("email", email);
 			jsonObject.put("tripId", tripId);
-			jMSProducer.SendJMS_Message(jsonObject.toString(),
-					jMSProducer.ACTIVATE_ENQUIRY_MESSAGE_QUEQUE); // Add
-			// JMS
-			// QUEQUE
-			utilities.setSuccessResponse(response);
+			jsonObject.put("mobileNo", mobileNo);
+
+			List<Login> list =
+					loginService.getUserDetailsBasedEnquiry(enquiryId, tripId);
+
+			if (list != null && list.size() > 0)
+			{
+				Login login = (Login) list.get(0);
+				int credits = login.getTotalcredits();
+				if (Enquiry.DEFAULT_ENQUIRY_DEDUCTION <= credits)
+				{
+
+					jsonObject.put("tripowneremail", login.getTripowneremail());
+					jsonObject.put("enquiredemail", login.getEnquiredemail());
+
+					// JMS QUEQUE RESEND
+					jMSProducer.SendJMS_Message(jsonObject.toString(),
+							jMSProducer.ACTIVATE_ENQUIRY_MESSAGE_QUEQUE);
+					utilities.setSuccessResponse(response);
+
+				} else
+				{
+					throw new ConstException(
+							ConstException.ERR_CODE_NO_CREDITS,
+							ConstException.ERR_MSG_NO_CREDITS);
+				}
+			}
+
 		} catch (Exception ex)
 		{
 			logger.error("activateEnquiry :" + ex.getMessage());

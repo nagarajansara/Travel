@@ -35,4 +35,6 @@ public interface LoginService
 	void updateCredits(String email, int credits) throws Exception;
 
 	List<Login> getUserDetailsBasedTripId(int tripId) throws Exception;
+
+	List<Login> getUserDetailsBasedEnquiry(int enquiryId, int tripId) throws Exception;
 }

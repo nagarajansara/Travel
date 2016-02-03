@@ -99,7 +99,63 @@ public class Login
 
 	@Getter
 	@Setter
+	private int totalcredits;
+
+	public int getTotalcredits()
+	{
+		return totalcredits;
+	}
+
+	public void setTotalcredits(int totalcredits)
+	{
+		this.totalcredits = totalcredits;
+	}
+
+	@Getter
+	@Setter
 	private String reason;
+
+	public String getTripowneremail()
+	{
+		return tripowneremail;
+	}
+
+	public void setTripowneremail(String tripowneremail)
+	{
+		this.tripowneremail = tripowneremail;
+	}
+
+	public String getEnquiredemail()
+	{
+		return enquiredemail;
+	}
+
+	public void setEnquiredemail(String enquiredemail)
+	{
+		this.enquiredemail = enquiredemail;
+	}
+
+	@Getter
+	@Setter
+	private String tripowneremail;
+
+	@Getter
+	@Setter
+	private String enquiredemail;
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	@Getter
+	@Setter
+	private String name;
 
 	public int getUserid()
 	{
@@ -114,7 +170,7 @@ public class Login
 	@Getter
 	@Setter
 	private int initialcredits;
-	
+
 	@Getter
 	@Setter
 	private int userid;

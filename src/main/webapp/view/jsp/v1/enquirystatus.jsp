@@ -19,6 +19,11 @@
 					<div class="ctLoadingImg" style="display: none;">
 						<img src="${baseURL}/assest/img/loading.gif">
 					</div>
+					<div class="ctNoCreditsWarning" style="display: none;">
+						<span
+							style="font-family: verdana; color: red; font-size: 12px;">
+							Credits limit not eligible </span>
+					</div>
 					<c:if test="${not empty model.responseData}">
 						<table class="table table-striped ctEnquiryTableStatus">
 							<thead>
@@ -43,7 +48,8 @@
 												<label> <input data-toggle="toggle"
 													class="ctToggleBtn" pk_email="${ element.email }"
 													pk_ID="${element.id}" pk_tripId="${element.tripid }"
-													data-size="mini" type="checkbox">
+													pk_MobileNO="${element.phoneno }" data-size="mini"
+													type="checkbox">
 												</label>
 											</div>
 										</td>
@@ -76,20 +82,23 @@
 			'<a class="custom-btn frame-btn thbg-color" href="#" style="font-size: 12px;">Buy Credits</a>');
     }
 
-    $(".ctToggleBtn").change(
-	    function(event) {
-		var enquiryId = $(this).attr('pk_ID'), email = $(this).attr(
-			'pk_email'), tObj = this, currentValue = $(this).prop(
-			'checked'), tripId = $(this).attr('pk_tripId');
-		console.log("currentValue :" + currentValue);
-		if (currentValue) {
-		    $('.ctLoadingImg').show();
-		    ctActivateEnquiryData(enquiryId, email, tripId, function() {
-			$('.ctLoadingImg').hide();
-		    });
-		} else {
-		    alert("Once you click you can't do it again");
-		}
+    $(".ctToggleBtn")
+	    .change(
+		    function(event) {
+			var enquiryId = $(this).attr('pk_ID'), email = $(this)
+				.attr('pk_email'), tObj = this, currentValue = $(
+				this).prop('checked'), tripId = $(this).attr(
+				'pk_tripId'), mobileNo = $(this).attr(
+				'pk_MobileNO');
+			if (currentValue) {
+			    $('.ctLoadingImg').show();
+			    ctActivateEnquiryData(enquiryId, email, tripId,
+				    mobileNo, function() {
+					$('.ctLoadingImg').hide();
+				    });
+			} else {
+			    alert("Once you click you can't do it again");
+			}
 
-	    });
+		    });
 </script>

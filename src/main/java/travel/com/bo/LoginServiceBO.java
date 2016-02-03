@@ -89,4 +89,11 @@ public class LoginServiceBO implements LoginService
 		return loginDAO.getUserDetailsBasedTripId(tripId);
 	}
 
+	@Override
+	public List<Login> getUserDetailsBasedEnquiry(int enquiryId, int tripId)
+			throws Exception
+	{
+		return loginDAO.getUserDetailsBasedEnquiry(enquiryId, tripId);
+	}
+
 }

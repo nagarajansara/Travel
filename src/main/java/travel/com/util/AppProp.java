@@ -39,11 +39,22 @@ public class AppProp
 		this.adminName = adminName;
 	}
 
+	public String getHTMLDir()
+	{
+		return HTMLDir;
+	}
+
+	public void setHTMLDir(String hTMLDir)
+	{
+		HTMLDir = hTMLDir;
+	}
+
 	private String FbAppId;
 	private String FbAppSecret;
 	private String FbAppURI;
 	private String uploadImagePath;
 	private String adminName;
+	private String HTMLDir;
 
 	public String getSmtpHost()
 	{

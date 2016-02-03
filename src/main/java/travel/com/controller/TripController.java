@@ -419,9 +419,9 @@ public class TripController extends BaseController
 						jsonObject.put("tripId", tripId);
 						jsonObject.put("phoneno", phoneno);
 
-						jMSProducer.SendJMS_Message(jsonObject.toString()); // Add
-						// JMS
-						// QUEQUE
+						// Add JMS QUEQUE
+						jMSProducer.SendJMS_Message(jsonObject.toString());
+
 					} else
 					{
 						throw new ConstException();

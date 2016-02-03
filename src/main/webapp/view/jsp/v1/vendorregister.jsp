@@ -30,7 +30,7 @@
 
 .ctWrapper {
 	/*margin-top: 25px !important;*/
-	
+	margin-left: 0px !important;
 }
 
 .ctWrapper {
@@ -66,7 +66,7 @@ body {
 		</div>
 		<div id="content" class="ctWrapper">
 			<div class="row">
-				<div class="col-xs-12 col-sm-8">
+				<div class="col-xs-12 col-sm-12">
 					<div class="row ctOpenLoginRow">
 						<!--<div class="col-xs-12 col-sm-6">
 								<a href="">
@@ -277,7 +277,7 @@ body {
 	<script src="/travel/assest/plugin/numeric/numeric.min.js"></script>
 </body>
 <script type="text/javascript">
-	$('select').select2();
-	$('#mobile').numeric();
-	$('#contact').numeric();
+    $('select').select2();
+    $('#mobile').numeric();
+    $('#contact').numeric();
 </script>
