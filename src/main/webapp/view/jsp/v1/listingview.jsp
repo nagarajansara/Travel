@@ -115,7 +115,7 @@
 											<div class="panel-body">
 												<p>
 													<input type="text" disabled id="price"
-														style="border: 0; color: #000000; font-weight: bold;">
+														style="border: 0; width: 100%; color: #000000; font-weight: bold;">
 												</p>
 												<input type="hidden" value="10" class="ctFromPriceHidden"
 													name="fromprice"> <input type="hidden"

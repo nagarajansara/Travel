@@ -97,8 +97,10 @@
 									</ul>
 								</div>
 							</li>
-							<li><a href="#" data-toggle="modal"
-								data-target="#registerModalbox">Register</a> <!-- Modal -->
+							<li><c:if test="${sessionScope.fName == null}">
+									<a href="#" data-toggle="modal" data-target="#registerModalbox">
+										Register </a>
+								</c:if> <!-- Modal -->
 								<div class="modal fade kd-loginbox" id="registerModalbox"
 									tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 									aria-hidden="true">
