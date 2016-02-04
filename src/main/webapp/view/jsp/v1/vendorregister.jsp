@@ -102,7 +102,9 @@ body {
 							</div>
 						</c:if>
 						<c:if test="${model.responseStatus eq 200}">
-							<c:redirect url="/view/jsp/v1/home.jsp" />
+							<span style="font-family: verdana; color: red">Registered
+								success. Please wait untill admin approve your request</span>
+							<%-- <c:redirect url="/view/jsp/v1/home.jsp" /> --%>
 						</c:if>
 					</c:if>
 					<div class="widget-box">
