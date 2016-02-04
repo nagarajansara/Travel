@@ -443,6 +443,7 @@ public class JMSProducer
 		public void receiveRegistration_JMS_Message(String quequeName)
 		{
 			Message receivedMessage = jmsTemplate.receive(quequeName);
+			String CUSTOMER_ROLE = "ROLE_CUSTOMER";
 			try
 			{
 				if (receivedMessage instanceof TextMessage)
@@ -454,9 +455,9 @@ public class JMSProducer
 					{ (String) jsonObject.get("email") };
 					String[] adminEmail =
 					{ appProp.getAdminMailId() };
+
 					String role = (String) jsonObject.get("role");
 					String name = (String) jsonObject.get("name");
-					String mobile = (String) jsonObject.get("mobile");
 					String stateName = (String) jsonObject.get("stateName");
 
 					// CLIENT NOTIFICATION
@@ -467,7 +468,6 @@ public class JMSProducer
 					HashMap<String, String> map = new HashMap<String, String>();
 					map.put("CT_EMAIL_MACRO", toEmail[0]);
 					map.put("CT_NAME_MACRO", name);
-					map.put("CT_MOBILE_MACRO", mobile);
 					map.put("CT_ROLE_MACRO", role);
 					map.put("CT_CITY_MACRO", stateName);
 

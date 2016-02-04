@@ -111,6 +111,7 @@ public class LoginController extends BaseController
 				jsonObject.put("email", email);
 				jsonObject.put("name", firstName + " " + lastName);
 				jsonObject.put("role", role);
+				jsonObject.put("stateName", cityName);
 
 				jMSProducer.SendJMS_Message(jsonObject.toString(),
 						jMSProducer.REGISTERATION_QUEUE);
