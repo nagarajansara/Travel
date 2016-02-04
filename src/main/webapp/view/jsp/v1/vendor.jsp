@@ -60,6 +60,10 @@
 													</p>
 													<div class="kd-usernetwork">
 														<ul class="kd-blogcomment">
+															<li><a href="#" class="thcolorhover"><i
+																	class="fa fa-comments-o"></i> ${element.reviewscount }</a></li>
+															<li><a href="#" class="thcolorhover"><i
+																	class="fa fa-eye"></i> ${element.viwerscount }</a></li>
 															<li><a pk_ID="${(element.id) }"
 																href="javascript:void(0)"
 																class="thcolorhover ctTripDetailsDel"><img

@@ -139,6 +139,34 @@ public class Trip
 	@Setter
 	private int credits;
 
+	@Getter
+	@Setter
+	private int reviewscount;
+
+	@Getter
+	@Setter
+	private int viwerscount;
+
+	public int getViwerscount()
+	{
+		return viwerscount;
+	}
+
+	public void setViwerscount(int viwerscount)
+	{
+		this.viwerscount = viwerscount;
+	}
+
+	public int getReviewscount()
+	{
+		return reviewscount;
+	}
+
+	public void setReviewscount(int reviewscount)
+	{
+		this.reviewscount = reviewscount;
+	}
+
 	public String getStartrating()
 	{
 		return startrating;

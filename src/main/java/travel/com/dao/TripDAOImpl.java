@@ -37,11 +37,17 @@ public class TripDAOImpl implements TripDAO
 					+ ") VALUES (:userid, :locationid, :activityid, :duration, :fromdate, :todate, :startpoint, :route, :description, "
 					+ ":guidelines, :title, :price)";
 
+	// USER BASED
 	final String GET_TRIP_DETAILS =
 			"SELECT td.title, td.id AS id, td.description AS description, td.guidelines AS guidelines, IF(SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1) IS NULL , :defaultImage, SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1))AS imageurls, "
+					+ "IFNULL(r.reviewscount, 0) AS reviewscount, IFNULL(v.viwerscount, 0) AS viwerscount, "
 					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS fromdate, a.name AS activityname "
 					+ "FROM tripdetails td "
 					+ "INNER JOIN activity a ON td.activityid = a.id "
+					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS reviewscount FROM reviews GROUP BY tripid) AS r "
+					+ "ON r.tripid = td.id "
+					+"LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
+					+"ON v.tripid = td.id " 
 					+ "LEFT OUTER JOIN(SELECT * FROM tripimages WHERE STATUS =:status) AS ti ON td.id = ti.tripid "
 					+ "where "
 					+ "td.status =:status and td.userid =:userId "
@@ -74,14 +80,24 @@ public class TripDAOImpl implements TripDAO
 			"UPDATE tripdetails set status =:status where userid =:userid AND id =:id";
 
 	final String GET_FILTERED_TRIP_DETAILS =
-			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
+			"SELECT td.*, IFNULL(r.reviewscount, 0) AS reviewscount, IFNULL(v.viwerscount, 0) AS viwerscount, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
+					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS reviewscount FROM reviews GROUP BY tripid) AS r "
+					+ "ON r.tripid = td.id "
+					+"LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
+					+"ON v.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti  ON td.id = ti.tripid "
 					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d')  AND ";
 
 	final String GET_FILTERED_TRIP_DETAILS_NUMENTRIES =
 			"Select count(*) from tripdetails td where DATE_FORMAT(NOW(), '%y-%m-%d') ";
+
+	// NON USER BASED
 	final String GET_ALL_TRIP_DETAILS =
-			"SELECT td.*, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
+			"SELECT td.*, IFNULL(r.reviewscount, 0) AS reviewscount, IFNULL(v.viwerscount, 0) AS viwerscount, IF(ti.name IS NULL, :defaultImage, ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM tripdetails td "
+					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS reviewscount FROM reviews GROUP BY tripid) AS r "
+					+ "ON r.tripid = td.id "
+					+"LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
+					+"ON v.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti ON td.id = ti.tripid "
 					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND td.status =:status ORDER BY td.createdat DESC LIMIT :startIndx, :endIndx ";
 

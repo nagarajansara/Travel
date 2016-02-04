@@ -170,9 +170,9 @@
 													<div class="kd-usernetwork">
 														<ul class="kd-blogcomment">
 															<li><a href="#" class="thcolorhover"><i
-																	class="fa fa-comments-o"></i> 15</a></li>
+																	class="fa fa-comments-o"></i> ${element.reviewscount }</a></li>
 															<li><a href="#" class="thcolorhover"><i
-																	class="fa fa-heart-o"></i> 456</a></li>
+																	class="fa fa-eye"></i> ${element.viwerscount }</a></li>
 														</ul>
 														<div class="kd-social-network">
 															<ul>
