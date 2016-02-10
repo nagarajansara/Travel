@@ -229,6 +229,7 @@
     }, isTripDetails = '${model.responseData.istripDetails}';
     console.log("fromPrice :" +fromPrice);
     console.log("toPrice :" +toPrice);
+    console.log("numEntries :" +numEntries);
     ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate);
     if (ctChkRequestedFilterParamsEmpty(requestedFilterParams)
 	    || isTripDetails.indexOf('true') >= 0) {
