@@ -390,7 +390,7 @@ public class JMSProducer
 				try
 				{
 					receiveJMS_Message(ACTIVATE_ENQUIRY_MESSAGE_QUEQUE);
-					TimeUnit.MILLISECONDS.sleep(60);
+					TimeUnit.MINUTES.sleep(1);
 				} catch (Exception e)
 				{
 					logger.error("Start_JMS_THREAD :" + e.getMessage());
@@ -432,7 +432,7 @@ public class JMSProducer
 				try
 				{
 					receiveRegistration_JMS_Message(REGISTERATION_QUEUE);
-					TimeUnit.MILLISECONDS.sleep(60);
+					TimeUnit.MINUTES.sleep(1);
 				} catch (Exception e)
 				{
 					logger.error("Start_JMS_REGISTRATION_THREAD :"
