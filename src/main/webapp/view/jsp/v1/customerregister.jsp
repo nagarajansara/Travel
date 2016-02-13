@@ -58,6 +58,10 @@ body {
 .ctHeaderTag {
 	background-color: rgb(8, 125, 194) !important;
 }
+
+.ctRequired {
+	color: red;
+}
 </style>
 
 </head>
@@ -109,7 +113,7 @@ body {
 						<c:if test="${model.responseStatus eq 200}">
 							<%-- <c:redirect url="/view/jsp/v1/home.jsp" /> --%>
 							<span style="font-family: verdana; color: red">Registered
-								success. Please wait untill admin approve your request</span>
+								success. Please check your email and activate your account</span>
 						</c:if>
 					</c:if>
 					<div class="widget-box">
@@ -124,7 +128,8 @@ body {
 								name="basic_validate" id="basic_validate"
 								novalidate="novalidate">
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Email</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Email<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm" name="email"
 											id="email">
@@ -132,7 +137,8 @@ body {
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">First
-										Name</label>
+										Name<span class="ctRequired"> (*)</span>
+									</label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm"
 											name="firstName" id="firstName">
@@ -140,21 +146,24 @@ body {
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Last
-										Name</label>
+										Name<span class="ctRequired"> (*)</span>
+									</label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm"
 											name="lastName" id="lastName">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Password</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Password<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="password" class="form-control input-sm"
 											name="password" id="password">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">City</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">City<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<select name="cityName" class="ctRegCitySelect">
 											<option value="Achhnera">Achhnera</option>

@@ -39,6 +39,8 @@
 	</bean>
 	<bean id="sendMail" class="travel.com.model.SendMail">
 	</bean>
+	<bean id="loginValidateService" class="travel.com.Redis.LoginValidateServiceImpl">
+	</bean>
 
 
 
@@ -49,6 +51,7 @@
 				<value>classpath:constants-msg.properties</value>
 				<value>classpath:db.properties</value>
 				<value>classpath:application.properties</value>
+				<value>classpath:redis.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -62,7 +65,7 @@
 		<property name="FbAppURI" value="${app.REDIRECT_URI}" />
 		<property name="uploadImagePath" value="${app.uploadImagePath}" />
 		<property name="uploadImageCompressPath" value="${app.uploadImageCompressFilePath}" />
-		<property name="serverDomain" value="${app.uploadImageCompressFilePath}" />
+		<property name="serverDomain" value="${app.serverDomain}" />
 		<property name="enqurirySubject" value="${app.enquriry.subject}" />
 		<property name="enquriryContent" value="${app.enquriry.content}" />
 		<property name="authEmail" value="${app.auth.email}" />

@@ -36,5 +36,8 @@ public interface LoginService
 
 	List<Login> getUserDetailsBasedTripId(int tripId) throws Exception;
 
-	List<Login> getUserDetailsBasedEnquiry(int enquiryId, int tripId) throws Exception;
+	List<Login> getUserDetailsBasedEnquiry(int enquiryId, int tripId)
+			throws Exception;
+
+	int activatecustomer(String uUID) throws Exception;
 }

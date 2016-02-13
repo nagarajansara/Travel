@@ -31,7 +31,7 @@ public class LoginDAOImpl implements LoginDAO
 
 	final String INSERT_CUSTOMER_QUERY =
 			"INSERT INTO users (email, firstname, lastname, password, role, city,"
-					+ "ip) VALUES (:email, :firstname, :lastname, :password, :role, :city, :ip)";
+					+ "ip, verificationcode) VALUES (:email, :firstname, :lastname, :password, :role, :city, :ip, :verificationcode)";
 
 	final String SIGN_UP_FB_QUERY =
 			"INSERT INTO users (email, firstname, lastname, role, city, openid, openiddata, "
@@ -43,8 +43,8 @@ public class LoginDAOImpl implements LoginDAO
 
 	final String INSERT_VENDOR_QUERY =
 			"INSERT into users (organizationname, email, firstname, lastname, password, role, state, mobile, phoneno, address,"
-					+ "ip) VALUES (:organizationname, :email, :firstname, :lastname, :password, :role, :state, :mobile, "
-					+ ":phoneno, :address, :ip)";
+					+ "ip, verificationcode) VALUES (:organizationname, :email, :firstname, :lastname, :password, :role, :state, :mobile, "
+					+ ":phoneno, :address, :ip, :verificationcode)";
 
 	final String VALIDATE_QUERY =
 			"SELECT * from users where email =:email and password =:password and isapproved =:isapproved";
@@ -86,10 +86,17 @@ public class LoginDAOImpl implements LoginDAO
 			"Select u.* from users u INNER JOIN tripdetails t ON t.userid = u.id WHERE t.id =:tripId";
 	final String GET_USER_DETAILS_BASED_ENQUIRY =
 			"SELECT u.email AS tripowneremail, u.credits AS totalcredits, e.email AS enquiredemail"
-					+ " FROM enquiry e " + "INNER JOIN tripdetails t " + "ON "
-					+ "t.id = e.tripid " + "INNER JOIN " + "users u " + "ON "
+					+ " FROM enquiry e "
+					+ "INNER JOIN tripdetails t "
+					+ "ON "
+					+ "t.id = e.tripid "
+					+ "INNER JOIN "
+					+ "users u "
+					+ "ON "
 					+ "t.userid = u.id "
 					+ "WHERE e.tripid =:tripId AND e.id =:enquiryId";
+	final String ACTIVATE_CUSTOMER =
+			"Update users set isapproved =:isapproved where verificationcode =:UUID";
 
 	public void insertCustomerData(Login login) throws Exception
 	{
@@ -101,6 +108,8 @@ public class LoginDAOImpl implements LoginDAO
 		map.put("role", login.getRole());
 		map.put("ip", login.getIp());
 		map.put("city", login.getCity());
+		map.put("verificationcode", login.getVerificationcode());
+
 		try
 		{
 
@@ -152,7 +161,7 @@ public class LoginDAOImpl implements LoginDAO
 		String[] params =
 				{ "organizationname", "email", "state", "password", "phoneno",
 						"mobile", "firstname", "lastname", "role", "address",
-						"ip" };
+						"ip", "verificationcode" };
 		try
 		{
 			baseDAO.setNamedParameter(login, params, map);
@@ -305,5 +314,16 @@ public class LoginDAOImpl implements LoginDAO
 						new BeanPropertyRowMapper(Login.class));
 
 		return list;
+	}
+
+	public int activatecustomer(String uUID) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("UUID", uUID);
+		paramMap.put("isapproved", "yes");
+
+		int updatedCount =
+				namedParameterJdbcTemplate.update(ACTIVATE_CUSTOMER, paramMap);
+		return updatedCount;
 	}
 }

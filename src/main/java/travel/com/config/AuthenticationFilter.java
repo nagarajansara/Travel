@@ -15,15 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import travel.com.controller.BaseController;
+import travel.com.util.Utilities;
 
 @WebFilter("/AuthenticationFilter")
 public class AuthenticationFilter extends BaseController implements Filter
 
 {
 
-	private String SESSION_FAILURE_URL =
-			"/travel/travelapi/login/sessionfailure";
+	public String SERVER_NAME = "localhost:8080";
+
+	private String SESSION_FAILURE_URL = "http://" + SERVER_NAME
+			+ "/travel/view/jsp/v1/home.jsp";
 	private List<String> AUTHENTICATED_URL = new ArrayList<String>();
 	private List<String> AUTHENTICATED_URL_INDEXOF = new ArrayList<String>();
 	private List<String> ROLE_CUSTOMER_URL = new ArrayList<String>();
@@ -65,6 +71,7 @@ public class AuthenticationFilter extends BaseController implements Filter
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsPageno");
 		AUTHENTICATED_URL_INDEXOF.add("getFilterTripsDetailsPageNo");
 		AUTHENTICATED_URL_INDEXOF.add("getAdminLoginValidate");
+		AUTHENTICATED_URL_INDEXOF.add("activatecustomer");
 
 		/************** Role based urls ***********************/
 

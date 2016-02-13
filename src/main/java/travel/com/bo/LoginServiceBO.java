@@ -96,4 +96,9 @@ public class LoginServiceBO implements LoginService
 		return loginDAO.getUserDetailsBasedEnquiry(enquiryId, tripId);
 	}
 
+	public int activatecustomer(String uUID) throws Exception
+	{
+		return loginDAO.activatecustomer(uUID);
+	}
+
 }

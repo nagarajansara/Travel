@@ -81,7 +81,7 @@
 												value="${element.offer_percentage}"></td>
 											<td><fmt:formatNumber type="number"
 													maxFractionDigits="3"
-													value="${element.price - element.price * (element.offer_percentage / 100)}" />
+													value="${element.price - (element.price * (element.offer_percentage / 100))}" />
 											</td>
 											<td><a class="ctManageDealsAnchor"
 												href="javascript:void(0)"><i

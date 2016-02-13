@@ -147,6 +147,20 @@ public class Trip
 	@Setter
 	private int viwerscount;
 
+	@Getter
+	@Setter
+	private double offer_percentage;
+
+	public double getOffer_percentage()
+	{
+		return offer_percentage;
+	}
+
+	public void setOffer_percentage(double offer_percentage)
+	{
+		this.offer_percentage = offer_percentage;
+	}
+
 	public int getViwerscount()
 	{
 		return viwerscount;

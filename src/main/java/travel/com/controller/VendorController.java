@@ -547,15 +547,20 @@ public class VendorController extends BaseController
 			map.put("dealsList", dealsList);
 			map.put("numEntries", numEntries);
 
-			String[] requested_param = {};
+			String[] requested_param =
+			{ "offerPercentage", "offerdesc", "tripID" };
 
-			int offerPercentage =
-					Integer.parseInt(request.getParameter("offerPercentage"));
-			String offerDesc = request.getParameter("offerdesc");
-			int tripID = Integer.parseInt(request.getParameter("tripID"));
+			if (!utilities.isChkRequsetParamsNull(request, requested_param))
+			{
+				int offerPercentage =
+						Integer.parseInt(request
+								.getParameter("offerPercentage"));
+				String offerDesc = request.getParameter("offerdesc");
+				int tripID = Integer.parseInt(request.getParameter("tripID"));
 
-			deals = new Deals(vedorId, offerPercentage, offerDesc, tripID);
-			vendorService.addDeals(deals);
+				deals = new Deals(vedorId, offerPercentage, offerDesc, tripID);
+				vendorService.addDeals(deals);
+			}
 
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)

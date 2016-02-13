@@ -24,6 +24,7 @@ import org.springframework.jms.core.SessionCallback;
 import travel.com.controller.TripController;
 import travel.com.dao.BaseDAO;
 import travel.com.model.Enquiry;
+import travel.com.model.Login;
 import travel.com.model.SendMail;
 import travel.com.model.Trip;
 import travel.com.service.EnquiryService;
@@ -455,25 +456,39 @@ public class JMSProducer
 					{ (String) jsonObject.get("email") };
 					String[] adminEmail =
 					{ appProp.getAdminMailId() };
-
 					String role = (String) jsonObject.get("role");
 					String name = (String) jsonObject.get("name");
 					String stateName = (String) jsonObject.get("stateName");
-
-					// CLIENT NOTIFICATION
-					sendMail.sendMail(toEmail, appProp.getMailSubject(),
-							"Wellcome", appProp.getAdminMailId(),
-							appProp.getAdminName());
-
+					String UUID = "";
+					String filePath = "";
+					String content = "";
 					HashMap<String, String> map = new HashMap<String, String>();
+					if (!role.equals("ROLE_VENDOR"))
+					{
+						UUID = (String) jsonObject.get("UUID");
+						map.put("VC_MACRO_URL",
+								"http://"
+										+ utilities.getServerName()
+										+ "/travel/travelapi/login/activatecustomer/"
+										+ UUID);
+						filePath = appProp.getHTMLDir() + "activation.html";
+						content = utilities.getFileContent(filePath);
+						content = utilities.replaceMacro(content, map);
+
+						// CLIENT NOTIFICATION ONLY FOR ROLE_CUSTOMER
+						sendMail.sendMail(toEmail, appProp.getMailSubject(),
+								content, appProp.getAdminMailId(),
+								appProp.getAdminName());
+					}
+
+					map = new HashMap<String, String>();
 					map.put("CT_EMAIL_MACRO", toEmail[0]);
 					map.put("CT_NAME_MACRO", name);
 					map.put("CT_ROLE_MACRO", role);
 					map.put("CT_CITY_MACRO", stateName);
 
-					String filePath =
-							appProp.getHTMLDir() + "userregister.html";
-					String content = utilities.getFileContent(filePath);
+					filePath = appProp.getHTMLDir() + "userregister.html";
+					content = utilities.getFileContent(filePath);
 					content = utilities.replaceMacro(content, map);
 
 					// ADMIN NOTIFICATION
@@ -484,7 +499,8 @@ public class JMSProducer
 				}
 			} catch (Exception ex)
 			{
-
+				logger.error("receiveRegistration_JMS_Message :"
+						+ ex.getMessage());
 			}
 
 		}

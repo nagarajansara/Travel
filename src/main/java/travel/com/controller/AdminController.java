@@ -91,8 +91,8 @@ public class AdminController extends BaseController
 	{
 		try
 		{
-			utilities.setAccessCrossDomainResponse(res); // Give cross domain
-															// access
+			// Give cross domain access
+			utilities.setAccessCrossDomainResponse(res);
 
 			String STATUS_ACTIVE = "active";
 			Admin admin = new Admin(userName, password, STATUS_ACTIVE);

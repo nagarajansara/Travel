@@ -22,7 +22,7 @@ import java.io.Serializable;
 
 @SuppressWarnings(
 { "unused", "unchecked" })
-public class Login
+public class Login implements Serializable
 {
 
 	@Getter
@@ -100,6 +100,20 @@ public class Login
 	@Getter
 	@Setter
 	private int totalcredits;
+
+	@Getter
+	@Setter
+	private String verificationcode;
+
+	public String getVerificationcode()
+	{
+		return verificationcode;
+	}
+
+	public void setVerificationcode(String verificationcode)
+	{
+		this.verificationcode = verificationcode;
+	}
 
 	public int getTotalcredits()
 	{
@@ -311,6 +325,20 @@ public class Login
 		this.ip = ip;
 	}
 
+	public Login(String email, String firstName, String lastName,
+			String password, String city, String role, String ip,
+			String verificationcode)
+	{
+		this.email = email;
+		this.firstname = firstName;
+		this.lastname = lastName;
+		this.password = password;
+		this.city = city;
+		this.role = role;
+		this.ip = ip;
+		this.verificationcode = verificationcode;
+	}
+
 	public Login(String email, String firstName, String lastName, String city,
 			String role, String ip, String openId, String signupType,
 			String openIdData)
@@ -341,6 +369,25 @@ public class Login
 		this.address = address;
 		this.mobile = mobile;
 		this.phoneno = phoneno;
+	}
+
+	public Login(String nameOrganization, String email, String firstName,
+			String lastName, String password, String stateName, String address,
+			String mobile, String phoneno, String role, String ip,
+			String verificationcode)
+	{
+		this.organizationname = nameOrganization;
+		this.email = email;
+		this.password = password;
+		this.firstname = firstName;
+		this.lastname = lastName;
+		this.state = stateName;
+		this.role = role;
+		this.ip = ip;
+		this.address = address;
+		this.mobile = mobile;
+		this.phoneno = phoneno;
+		this.verificationcode = verificationcode;
 	}
 
 	public int getId()

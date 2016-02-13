@@ -33,6 +33,8 @@ import java.net.URL;
 
 import travel.com.service.*;
 import travel.com.JMS.JMSProducer;
+import travel.com.Redis.LoginValidateService;
+import travel.com.bean.LoginValidatedBean;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
@@ -75,6 +77,10 @@ public class LoginController extends BaseController
 	@Qualifier("enquiryService")
 	EnquiryService enquiryService;
 
+	@Autowired
+	@Qualifier("loginValidateService")
+	LoginValidateService loginValidateService;
+
 	@RequestMapping(value = "/customerregister", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String customerRegister(HttpServletRequest request, ModelMap model)
@@ -99,9 +105,12 @@ public class LoginController extends BaseController
 
 			if (!utilities.isChkRequsetParamsNull(request, params))
 			{
+
+				String UUID = utilities.UUID();
+
 				Login login =
 						new Login(email, firstName, lastName, password,
-								cityName, role, ip);
+								cityName, role, ip, UUID);
 
 				loginService.insertCustomerData(login);
 
@@ -112,6 +121,7 @@ public class LoginController extends BaseController
 				jsonObject.put("name", firstName + " " + lastName);
 				jsonObject.put("role", role);
 				jsonObject.put("stateName", cityName);
+				jsonObject.put("UUID", UUID);
 
 				jMSProducer.SendJMS_Message(jsonObject.toString(),
 						jMSProducer.REGISTERATION_QUEUE);
@@ -163,10 +173,11 @@ public class LoginController extends BaseController
 
 			if (!utilities.isChkRequsetParamsNull(request, params))
 			{
+				String UUID = utilities.UUID();
 				Login login =
 						new Login(nameOrganization, email, firstName, lastName,
 								password, stateName, address, phoneno, mobile,
-								role, ip);
+								role, ip, UUID);
 
 				loginService.insertVendorData(login);
 
@@ -284,7 +295,6 @@ public class LoginController extends BaseController
 		try
 		{
 			String email = request.getParameter("email");
-			;
 			String password = request.getParameter("password");
 			String isApproved = "yes";
 
@@ -444,5 +454,27 @@ public class LoginController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "enquirystatus";
+	}
+
+	@RequestMapping(value = "/activatecustomer/{UUID}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String activateCustomer(HttpServletRequest request,
+			@PathVariable String UUID, HttpServletResponse res, ModelMap model)
+			throws Exception
+	{
+		try
+		{
+
+			int updatedCount = 0;
+			updatedCount = loginService.activatecustomer(UUID);
+			utilities.setSuccessResponse(response, updatedCount);
+
+		} catch (Exception ex)
+		{
+			logger.error("activatecustomer :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "customerregisterresponse";
 	}
 }

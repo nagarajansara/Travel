@@ -70,7 +70,7 @@
 									<li><i class="fa fa-ticket"></i> <strong>Route :</strong>
 										${element.route }</li>
 									<li><i class="fa fa-tag"></i> <strong>Price:</strong>
-										${element.price}</li>
+										${element.offer_percentage}</li>
 								</ul>
 								<div class="row" style="clear: both;">
 									<div class="col-md-4 col-sm-4">
@@ -150,7 +150,7 @@
 						<!--// Comments //-->
 						<div id="kdcomments">
 							<c:if test="${not empty model.responseData.reviewsdetails}">
-								<h2>${model.responseData.reviewsNumEntries}  Comments</h2>
+								<h2>${model.responseData.reviewsNumEntries}Comments</h2>
 								<ul class="ctReviewsDetailsUL">
 									<c:forEach items="${model.responseData.reviewsdetails}"
 										var="element" varStatus="loop">

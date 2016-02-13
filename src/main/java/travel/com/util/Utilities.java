@@ -286,4 +286,10 @@ public class Utilities
 		res.setHeader("Access-Control-Max-Age", "1728000");
 		res.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 	}
+
+	public String UUID()
+	{
+		UUID id = UUID.randomUUID();
+		return id.toString();
+	}
 }

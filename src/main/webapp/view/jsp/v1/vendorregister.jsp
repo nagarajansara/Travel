@@ -53,6 +53,10 @@ body {
 .ctHeaderTag {
 	background-color: rgb(8, 125, 194) !important;
 }
+
+.ctRequired {
+	color: red;
+}
 </style>
 
 </head>
@@ -120,7 +124,8 @@ body {
 								novalidate="novalidate">
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Name
-										of organization</label>
+										of organization <span class="ctRequired"> (*)</span>
+									</label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm"
 											name="nameoforganization" id="nameoforganization">
@@ -128,7 +133,8 @@ body {
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">First
-										Name</label>
+										Name<span class="ctRequired"> (*)</span>
+									</label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm"
 											name="firstName" id="firstName">
@@ -136,28 +142,32 @@ body {
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Last
-										Name</label>
+										Name<span class="ctRequired"> (*)</span>
+									</label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm"
 											name="lastName" id="lastName">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Email</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Email<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm" name="email"
 											id="email">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Password</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Password<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="password" class="form-control input-sm"
 											name="password" id="password">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">State</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">State<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-9">
 										<select name="stateName">
 											<option value="Rajasthan">Rajasthan</option>
@@ -227,21 +237,24 @@ body {
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Address<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-6">
 										<textarea name="ctAddress" id="ctAddress" class="form-control"
 											rows="2"></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Mobile</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Mobile<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm" name="mobile"
 											id="mobile" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Contact</label>
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Contact<span
+										class="ctRequired"> (*)</span></label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm"
 											name="contact" id="contact" />
@@ -249,7 +262,8 @@ body {
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">PAN
-										Card</label>
+										Card<span class="ctRequired"> (*)</span>
+									</label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="text" class="form-control input-sm"
 											name="pancard" id="pancard" />

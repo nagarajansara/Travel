@@ -84,7 +84,10 @@
 .ctDefaultDisplayNone {
 	display: none;
 }
-
+.ctRequired
+{
+	color: red;
+}
 .ctDangerDefaultTxt {
 	font-family: verdana;
 	font-size: 12px;
