@@ -32,9 +32,9 @@
 	</bean>
 	<bean id="enquiryService" class="travel.com.bo.EnquiryServiceBO">
 	</bean>
-	<bean id="jMSProducer" class="travel.com.JMS.JMSProducer"
-		init-method="startJMSThread">
+	<bean id="jMSProducer" class="travel.com.JMS.JMSProducer">
 	</bean>
+	<!-- init-method="startJMSThread" -->
 	<bean id="adminService" class="travel.com.bo.AdminServiceBO">
 	</bean>
 	<bean id="sendMail" class="travel.com.model.SendMail">
