@@ -193,7 +193,8 @@ function ctInsertTripData() {
 	{
 		
 		if (bmpUtil.isTextFieldEmpty('.ctIsChkEmptyVal') && 
-				$(".ctVendorActivitySelectOPtion").prop("selectedIndex") > 0
+				$(".ctVendorActivitySelectOPtion").prop("selectedIndex") > 0 &&
+				$(".ctVendorSubActivitySelectOPtion").prop("selectedIndex") > 0
 				&& ctChkFileUploaded()) 
 		{
 			var ctRouteFormLen = $('.ctRouteFormDiv').length, 

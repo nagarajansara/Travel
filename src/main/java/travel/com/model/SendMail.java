@@ -84,6 +84,63 @@ public class SendMail
 		return messageID;
 	}
 
+	public String sendMail(String[] toAddr, String subject, String content)
+			throws Exception
+	{
+		String smtpHost = appProp.getSmtpHost();
+		String smtpPort = appProp.getSmtpPort();
+		final String username = appProp.getAuthEmail();
+		final String password = appProp.getAuthPass();
+
+		String messageID = "";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", smtpHost);
+		props.put("mail.smtp.port", smtpPort);
+
+		String fromEmail = appProp.getAdminMailId();
+		String fromName = appProp.getAdminName();
+
+		String dsn = "SUCCESS,FAILURE,DELAY ORCPT=rfc822;" + username;
+		props.put("mail.smtp.dsn.notify", dsn);
+
+		Session session =
+				Session.getInstance(props, new javax.mail.Authenticator()
+				{
+					protected
+							PasswordAuthentication getPasswordAuthentication()
+					{
+						return new PasswordAuthentication(username, password);
+					}
+				});
+		try
+		{
+			messageID = getUUID();
+			CustomMimeMessage message =
+					new CustomMimeMessage(session, messageID);
+			message.setReplyTo(new javax.mail.Address[]
+			{ new javax.mail.internet.InternetAddress(appProp.getAdminMailId()) });
+			message.setFrom(new InternetAddress(fromEmail, fromName));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(toAddr[0]));
+			message.setSubject(subject);
+			message.setContent(content, "text/html; charset=utf-8");
+			Transport.send(message);
+
+			messageID = message.getMessageID();
+		} catch (Exception e)
+		{
+			logger.error("sendMail :" + e.getMessage());
+			throw e;
+		} finally
+		{
+			props.clear();
+		}
+		return messageID;
+	}
+
 	public String getUUID() throws Exception
 	{
 		String uuid = null;

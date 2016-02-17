@@ -37,8 +37,18 @@ public interface TripService
 			Map<String, Object> activityTable, String status,
 			Map<String, Object> priceMap, int START_INDEX, int END_INDEX);
 
+	List<Trip> getFilterTripsDetails(Map<String, Object> tripTable,
+			Map<String, Object> activityTable,
+			Map<String, Object> subActivityTable, String status,
+			Map<String, Object> priceMap, int START_INDEX, int END_INDEX);
+
 	int getFilterTripsDetailsnumEntries(Map<String, Object> tripTable,
 			Map<String, Object> activityTable, String status,
+			Map<String, Object> priceMap);
+
+	int getFilterTripsDetailsnumEntries(Map<String, Object> tripTable,
+			Map<String, Object> activityTable,
+			Map<String, Object> subActivityTable, String status,
 			Map<String, Object> priceMap);
 
 	List<Trip> getTripDetails_Users(Trip trip) throws Exception; // Get all the
@@ -55,7 +65,7 @@ public interface TripService
 	List<Trip> getTripDetailsTitles_AND_Id(int userId, String status,
 			String startTitle) throws Exception;
 
-	List<Trip> getAllTripDetails(int userId, String sTATUS_ACTIVE, String startTitle)
-			throws Exception;
+	List<Trip> getAllTripDetails(int userId, String sTATUS_ACTIVE,
+			String startTitle) throws Exception;
 
 }

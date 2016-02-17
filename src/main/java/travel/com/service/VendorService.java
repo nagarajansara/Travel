@@ -25,5 +25,7 @@ public interface VendorService
 	int getDealsEntries(Deals deals) throws Exception;
 
 	void addDeals(Deals deals) throws Exception;
-	
+
+	List<SubActivity> getSubActivity(String sTATUS_ACTIVE) throws Exception;
+
 }

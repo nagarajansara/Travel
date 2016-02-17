@@ -30,6 +30,8 @@
 							value="${model.responseData.requestedParam.fromPrice}" />
 						<c:set var="toPrice"
 							value="${model.responseData.requestedParam.toPrice}" />
+						<c:set var="subActivityIds"
+							value="${model.responseData.requestedParam.subActivityIds}" />
 					</c:if>
 				</c:if>
 			</c:if>
@@ -72,10 +74,6 @@
 												</c:choose>
 
 											</div>
-											<div class="panel-body">
-												<input type="text" name="fromdate" placeholder="From Date"
-													class="bmQuoteCommonFontStyle" id="ctListingFromDate" />
-											</div>
 										</div>
 									</div>
 									<div class="panel panel-default">
@@ -102,6 +100,46 @@
 
 												</div>
 											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a href="#collapseOne" data-parent="#accordion"
+													data-toggle="" class="">Sub Activity</a>
+											</h4>
+										</div>
+										<div class="panel-collapse collapse in" id="collapseOne"
+											style="height: auto;">
+											<div class="panel-body ctListViewSubActivity">
+												<div class="checkbox">
+													<c:if
+														test="${not empty model.responseData.subActivityType}">
+														<c:forEach items="${model.responseData.subActivityType}"
+															var="element" varStatus="loop">
+															<label> <input type="checkbox"
+																name="subactivitytype" pk_name="${element.name }"
+																class="fuelType ctsubActivityTypeId"
+																value="${element.id}"> <c:out
+																	value="${element.name}">${element.name }</c:out>
+															</label>
+														</c:forEach>
+													</c:if>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a href="#collapseOne" data-parent="#accordion"
+													data-toggle="" class="">Month</a>
+											</h4>
+										</div>
+										<div class="panel-body">
+											<input type="text" name="fromdate" placeholder="From Date"
+												class="bmQuoteCommonFontStyle" id="ctListingFromDate" />
 										</div>
 									</div>
 									<div class="panel panel-default">
@@ -219,18 +257,21 @@
 <script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script type="text/javascript">
     var numEntries = '${numEntries}', locationId = '${locationId}', locationName = '${locationName}', activityIds = '${activityIds}', fromdate = '${fromdate}', fromPrice = '${fromPrice}', toPrice = '${toPrice}', START_PAGE = 1, MAX_ENTRIES = 2, requestedFilterParams = [
-	    locationId, locationName, activityIds, fromdate, toPrice ], requestedFilterParamsJSON = {
-	"startpoint" : locationId,
-	"fromdate" : fromdate,
-	"activitytype" : activityIds,
-	"toprice" : toPrice,
-	"fromprice" : fromPrice,
-	"startLocation" : locationName
+	    locationId, locationName, activityIds, fromdate, toPrice ], subActivityIds = '${subActivityIds}', requestedFilterParamsJSON = {
+	"startpoint": locationId,
+	"fromdate": fromdate,
+	"activitytype": activityIds,
+	"toprice": toPrice,
+	"fromprice": fromPrice,
+	"startLocation": locationName,
+	"subactivitytype": subActivityIds
     }, isTripDetails = '${model.responseData.istripDetails}';
-    console.log("fromPrice :" +fromPrice);
-    console.log("toPrice :" +toPrice);
-    console.log("numEntries :" +numEntries);
-    ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate);
+
+    console.log("subActivityIds :" + '${subActivityIds}');
+    console.log("numEntries :" + '${numEntries}');
+
+    ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate,
+	    subActivityIds);
     if (ctChkRequestedFilterParamsEmpty(requestedFilterParams)
 	    || isTripDetails.indexOf('true') >= 0) {
 

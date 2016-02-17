@@ -151,6 +151,34 @@ public class Trip
 	@Setter
 	private double offer_percentage;
 
+	@Getter
+	@Setter
+	private int subactivityid;
+
+	public String getSubactivityname()
+	{
+		return subactivityname;
+	}
+
+	public void setSubactivityname(String subactivityname)
+	{
+		this.subactivityname = subactivityname;
+	}
+
+	@Getter
+	@Setter
+	private String subactivityname;
+
+	public int getSubactivityid()
+	{
+		return subactivityid;
+	}
+
+	public void setSubactivityid(int subactivityid)
+	{
+		this.subactivityid = subactivityid;
+	}
+
 	public double getOffer_percentage()
 	{
 		return offer_percentage;
@@ -330,6 +358,26 @@ public class Trip
 		this.price = price;
 	}
 
+	public Trip(int userid, int activityid, int duration, int locationid,
+			String fromdate, String todate, int startpoint, String route,
+			String description, String guidelines, String title, double price,
+			int subactivityid)
+	{
+		this.userid = userid;
+		this.activityid = activityid;
+		this.duration = duration;
+		this.locationid = locationid;
+		this.fromdate = fromdate;
+		this.todate = todate;
+		this.startpoint = startpoint;
+		this.route = route;
+		this.description = description;
+		this.guidelines = guidelines;
+		this.title = title;
+		this.price = price;
+		this.subactivityid = subactivityid;
+	}
+
 	public Trip(int id, int userid, int activityid, int duration,
 			int locationid, String fromdate, String todate, int startpoint,
 			String route, String description, String guidelines, String title,
@@ -348,6 +396,27 @@ public class Trip
 		this.title = title;
 		this.id = id;
 		this.price = price;
+	}
+
+	public Trip(int id, int userid, int activityid, int duration,
+			int locationid, String fromdate, String todate, int startpoint,
+			String route, String description, String guidelines, String title,
+			double price, int subactivityid)
+	{
+		this.userid = userid;
+		this.activityid = activityid;
+		this.duration = duration;
+		this.locationid = locationid;
+		this.fromdate = fromdate;
+		this.todate = todate;
+		this.startpoint = startpoint;
+		this.route = route;
+		this.description = description;
+		this.guidelines = guidelines;
+		this.title = title;
+		this.id = id;
+		this.price = price;
+		this.subactivityid = subactivityid;
 	}
 
 	public Trip(int userId, String status, int startIndx, int endIndx)

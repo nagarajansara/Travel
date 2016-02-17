@@ -69,8 +69,18 @@
 										${element.tocity}</li>
 									<li><i class="fa fa-ticket"></i> <strong>Route :</strong>
 										${element.route }</li>
-									<li><i class="fa fa-tag"></i> <strong>Price:</strong>
-										${element.offer_percentage}</li>
+									<li><c:choose>
+											<c:when test="${element.offer_percentage eq element.price}">
+												<i class="fa fa-tag"></i>
+												<strong>Price:</strong>${element.offer_percentage}
+									</c:when>
+											<c:otherwise>
+												<i class="fa fa-tag"></i>
+												<strong>Price:</strong>
+												<span style="text-decoration: line-through;">${element.price}</span>
+												${element.offer_percentage}
+											</c:otherwise>
+										</c:choose></li>
 								</ul>
 								<div class="row" style="clear: both;">
 									<div class="col-md-4 col-sm-4">
@@ -245,6 +255,12 @@
 							<div class="row">
 								<div class="col-md-8">
 									<form class="ctEnquiryNow" action="" method="POST">
+										<div class="form-group">
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<label style="color: red; display: none"
+													class="col-lg-12 col-md-12 col-sm-12 control-label ctEnquiryStatus"></label>
+											</div>
+										</div>
 										<div class="form-group">
 											<div class="col-lg-12 col-md-12 col-sm-12">
 												<input type="text"

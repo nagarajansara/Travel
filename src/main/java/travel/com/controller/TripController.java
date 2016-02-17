@@ -115,6 +115,7 @@ public class TripController extends BaseController
 
 				String fromDate = (String) map.get("fromdate");
 				String toDate = (String) map.get("todate");
+				String subActivityType = (String) map.get("subactivitytype");
 				int startPoint =
 						Integer.parseInt((String) map.get("startpoint")); // Start
 																			// point
@@ -142,7 +143,9 @@ public class TripController extends BaseController
 								Integer.parseInt(totalDuration),
 								Integer.parseInt(locationId), fromDate, toDate,
 								startPoint, route, description, guideLines,
-								tripTitle, price);
+								tripTitle, price,
+								Integer.parseInt(subActivityType));
+
 				Long tripId = tripService.addTripDetails(trip);
 				for (int i = 0; i < imageURL.length; i++)
 				{
@@ -393,7 +396,7 @@ public class TripController extends BaseController
 			@RequestParam(value = "tripId") int tripId, @RequestParam(
 					value = "username") String username, @RequestParam(
 					value = "phoneno") String phoneno, @RequestParam(
-					value = "email") String email, ModelMap model)
+					value = "email") String cutomerEmail, ModelMap model)
 			throws Exception
 	{
 		try
@@ -403,27 +406,100 @@ public class TripController extends BaseController
 				if (true)
 				{
 
-					List<Login> list =
-							loginService.getUserDetailsBasedTripId(tripId);
-					if (list != null && list.size() > 0)
 					{
-						Login login = (Login) list.get(0);
-						JSONObject jsonObject = new JSONObject();
-						jsonObject.put("name", username);
-						jsonObject.put("subject", appProp.getEnqurirySubject());
-						jsonObject.put("content", appProp.getEnquriryContent());
-						jsonObject.put("fromEmail", appProp.getAdminMailId());
-						jsonObject.put("toEmail", login.getEmail());
-						jsonObject.put("customerEmail", email);
-						jsonObject.put("tripId", tripId);
-						jsonObject.put("phoneno", phoneno);
+						List<Trip> list =
+								tripService.getCredits_AND_Email(tripId); // TODO
 
-						// Add JMS QUEQUE
-						jMSProducer.SendJMS_Message(jsonObject.toString());
+						String enquiryStatus = "";
+						int enquiryDeduction = 0;
+						if (list != null && list.size() > 0)
+						{
+							Trip trip = (Trip) list.get(0);
+							int totalCredist = trip.getCredits();
+							String tripOwnerEmail = trip.getEmail();
+							String content = "";
+							String toEmail = trip.getEmail();
+							if (totalCredist >= Enquiry.DEFAULT_ENQUIRY_DEDUCTION)
+							{
+								try
+								{
 
-					} else
-					{
-						throw new ConstException();
+									HashMap<String, String> map =
+											new HashMap<String, String>();
+									String tripURL =
+											(utilities.isServer()) ? ("<a href=\"http://www.saratravel.tk/travel/travelapi/trip/getTripDetailsBasedId/"
+													+ tripId + "\">Trip Details</a>")
+													: "<a href=\"http://localhost:8082/travel/travelapi/trip/getTripDetailsBasedId/"
+															+ tripId
+															+ "\">Trip Details</a>";
+
+									map.put("CT_TRIP_URL_MACRO", tripURL);
+									map.put("CT_CUST_EMAIL_MACRO", cutomerEmail);
+									map.put("CT_MOBILE_MACRO", phoneno);
+
+									String filePath =
+											appProp.getHTMLDir()
+													+ "enquiry.html";
+									content =
+											utilities.getFileContent(filePath);
+									content =
+											utilities
+													.replaceMacro(content, map);
+
+									String[] toAddr =
+									{ toEmail };
+									enquiryStatus = Enquiry.STATUS_SENT;
+									enquiryDeduction =
+											Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
+									totalCredist =
+											totalCredist
+													- Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
+									loginService.updateCredits(tripOwnerEmail,
+											totalCredist);
+
+									utilities.setJMS_Enqueued(toEmail, content,
+											appProp.getAdminName(),
+											appProp.getMailSubject(),
+											JMSProducer.EMAIL_QUEUE);
+
+								} catch (Exception ex)
+								{
+									throw ex;
+								}
+
+							} else
+							{
+
+								HashMap<String, String> map =
+										new HashMap<String, String>();
+
+								String filePath =
+										appProp.getHTMLDir()
+												+ "pendingenquiry.html";
+								content = utilities.getFileContent(filePath);
+								content = utilities.replaceMacro(content, map);
+
+								// SEND EMAIL
+								String[] toAddr =
+								{ toEmail };
+
+								enquiryStatus = Enquiry.STATUS_PENDING;
+								enquiryDeduction =
+										Enquiry.DEFAULT_ENQUIRY_NON_DEDUCTION;
+
+								utilities.setJMS_Enqueued(toEmail, content,
+										appProp.getAdminName(),
+										"Enquiry pending",
+										JMSProducer.EMAIL_QUEUE);
+							}
+
+							Enquiry enquiry =
+									new Enquiry(tripId, username,
+											enquiryStatus, phoneno,
+											enquiryDeduction, cutomerEmail);
+							enquiryService.addEnquiry(enquiry);
+						}
+
 					}
 
 				} else
@@ -496,7 +572,10 @@ public class TripController extends BaseController
 
 				Activity activity = new Activity(STATUS_ACTIVE);
 				List<Activity> lists = vendorService.getActivitys(activity);
+				List<SubActivity> subActivity =
+						vendorService.getSubActivity(STATUS_ACTIVE);
 				map.put("activityType", lists);
+				map.put("subActivityType", subActivity);
 
 				/******************************************* End ********************************/
 			} catch (Exception ex)
@@ -513,6 +592,8 @@ public class TripController extends BaseController
 			String STATUS_ACTIVE = "active";
 			Map<String, Object> tripTable = new HashMap<String, Object>();
 			Map<String, Object> activityTable = new HashMap<String, Object>();
+			Map<String, Object> subActivityTable =
+					new HashMap<String, Object>();
 			Map<String, Object> priceMap = new HashMap<String, Object>();
 			Map<String, Object> map = new HashMap<String, Object>();
 			try
@@ -523,10 +604,15 @@ public class TripController extends BaseController
 				String[] requestParam_activity =
 				{ "activitytype" };
 
+				String[] requestParam_subActivity =
+				{ "subactivitytype" };
+
 				String[] requestParam_price =
 				{ "fromprice", "toprice" };
-				if (request != null)
+
+				if (request != null) // check request have the parameter
 				{
+
 					for (int i = 0; i < requestParams_tripTable.length; i++)
 					{
 						String requestValues =
@@ -553,6 +639,18 @@ public class TripController extends BaseController
 													.convertToCommaDelimited(requestValues));
 						}
 					}
+					for (int i = 0; i < requestParam_subActivity.length; i++)
+					{
+						String[] requestValues =
+								request.getParameterValues(requestParam_subActivity[i]);
+						if (requestValues != null && requestValues.length > 0)
+						{
+							subActivityTable
+									.put(requestParam_subActivity[i],
+											utilities
+													.convertToCommaDelimited(requestValues));
+						}
+					}
 					for (int i = 0; i < requestParam_price.length; i++)
 					{
 						String requestValues =
@@ -565,6 +663,7 @@ public class TripController extends BaseController
 						}
 					}
 				} else
+				// Filter pagination have the parameter
 				{
 					for (int i = 0; i < requestParams_tripTable.length; i++)
 					{
@@ -594,6 +693,20 @@ public class TripController extends BaseController
 									requestValues);
 						}
 					}
+					for (int i = 0; i < requestParam_subActivity.length; i++)
+					{
+						String requestValues =
+								(String) jsonObject
+										.get(requestParam_subActivity[i]);
+
+						if (!requestValues.equals(utilities.getDefaultWord())
+								&& requestValues != null
+								&& requestValues.length() > 0)
+						{
+							subActivityTable.put(requestParam_subActivity[i],
+									requestValues);
+						}
+					}
 					for (int i = 0; i < requestParam_price.length; i++)
 					{
 						String requestValues =
@@ -607,25 +720,31 @@ public class TripController extends BaseController
 
 					}
 				}
+
 				List<Trip> list =
 						tripService.getFilterTripsDetails(tripTable,
-								activityTable, STATUS_ACTIVE, priceMap,
-								START_INDEX, END_INDEX);
+								activityTable, subActivityTable, STATUS_ACTIVE,
+								priceMap, START_INDEX, END_INDEX);
 
 				int numEntries =
 						tripService.getFilterTripsDetailsnumEntries(tripTable,
-								activityTable, STATUS_ACTIVE, priceMap);
+								activityTable, subActivityTable, STATUS_ACTIVE,
+								priceMap);
 
 				/******************************************* Common Code For List Viewing Page ***********/
 
 				Activity activity = new Activity(STATUS_ACTIVE);
 				List<Activity> lists = vendorService.getActivitys(activity);
+				List<SubActivity> subActivity =
+						vendorService.getSubActivity(STATUS_ACTIVE);
 				map.put("activityType", lists);
+				map.put("subActivityType", subActivity);
 
 				/******************************************* END ********************************/
 				Map requestedParam =
 						_getRequestedFilteredParam(request, jsonObject,
-								tripTable, activityTable, priceMap, numEntries);
+								tripTable, activityTable, subActivityTable,
+								priceMap, numEntries);
 
 				map.put("requestedParam", requestedParam);
 				map.put("tripDetails", list);
@@ -641,9 +760,11 @@ public class TripController extends BaseController
 		private Map _getRequestedFilteredParam(HttpServletRequest request,
 				org.json.JSONObject jsonObject, Map<String, Object> tripTable,
 				Map<String, Object> activityTable,
+				Map<String, Object> subActivityTable,
 				Map<String, Object> priceMap, int numEntries) throws Exception
 		{
 			Map requestedParam = new HashMap();
+
 			try
 			{
 				/*************************** REQUESTED PARAMS *************************************/
@@ -659,6 +780,12 @@ public class TripController extends BaseController
 									(activityTable.get("activitytype") == null ? utilities
 											.getDefaultWord() : activityTable
 											.get("activitytype")));
+					requestedParam
+							.put("subActivityIds",
+									(subActivityTable.get("subactivitytype") == null ? utilities
+											.getDefaultWord()
+											: subActivityTable
+													.get("subactivitytype")));
 					requestedParam
 							.put("fromdate",
 									request.getParameter("fromdate") == null ? utilities
@@ -681,6 +808,12 @@ public class TripController extends BaseController
 									(activityTable.get("activitytype") == null ? utilities
 											.getDefaultWord() : activityTable
 											.get("activitytype")));
+					requestedParam
+							.put("subActivityIds",
+									(subActivityTable.get("subactivitytype") == null ? utilities
+											.getDefaultWord()
+											: subActivityTable
+													.get("subactivitytype")));
 					requestedParam.put(
 							"fromdate",
 							jsonObject.get("fromdate") == null ? utilities

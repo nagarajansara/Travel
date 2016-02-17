@@ -31,6 +31,7 @@ public class TripDAOImpl implements TripDAO
 	final String DEFAULT_TRIP_IMAGE_PATH =
 			"defaulttripimage/default_tripimage.jpg";
 	final String ACTIVITY_ID_ATTRIBUTE = "activityid";
+	final String SUB_ACTIVITY_ID_ATTRIBUTE = "subactivityid";
 
 	final String INSERT_TRIP_DETAILS =
 			"INSERT into tripdetails (userid, locationid, activityid, duration, fromdate, todate, startpoint, route, description, guidelines, title, price "
@@ -61,9 +62,11 @@ public class TripDAOImpl implements TripDAO
 			"SELECT td.id AS id, td.locationid AS locationid, td.startpoint AS startpoint, td.fromdate AS fromdate, td.todate AS todate, td.description AS description, td.guidelines AS guidelines, "
 					+ "i.id AS itenaryid, i.day AS itenaryday, i.daywisedescription AS daysdesc, td.price AS price, "
 					+ "fc.city AS fromcity, tc.city AS tocity, td.route AS route, td.duration AS duration, "
-					+ "DATE_FORMAT(td.createdat, '%b %d, %Y') AS createdat, a.name AS activityname "
+					+ "DATE_FORMAT(td.createdat, '%b %d, %Y') AS createdat, a.name AS activityname, "
+					+ "sa.name AS subactivityname "
 					+ "FROM tripdetails td "
 					+ "INNER JOIN activity a ON td.activityid = a.id "
+					+ "INNER JOIN subactivity sa ON td.subactivityid = sa.id "
 					+ "INNER JOIN itenary i ON td.id = i.tripid "
 					+ "INNER JOIN city fc ON td.startpoint = fc.id "
 					+ "INNER JOIN city tc ON td.locationid = tc.id "
@@ -74,7 +77,7 @@ public class TripDAOImpl implements TripDAO
 	final String UPDATE_TRIP_DETAILS =
 			"UPDATE tripdetails set locationid =:locationid, activityid =:activityid, duration =:duration, "
 					+ "fromdate =:fromdate, todate =:todate, startpoint =:startpoint, route =:route, description =:description, "
-					+ "guidelines =:guidelines, title =:title, price =:price where id =:id and userid =:userId";
+					+ "guidelines =:guidelines, title =:title, price =:price, subactivityid =:subactivityid where id =:id and userid =:userId";
 
 	final String UPDATE_TRIP_DETAILS_STATUS =
 			"UPDATE tripdetails set status =:status where userid =:userid AND id =:id";
@@ -105,7 +108,7 @@ public class TripDAOImpl implements TripDAO
 			"Select count(*) from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status";
 
 	final String GET_TRIP_DETAILS_BASED_ID =
-			"SELECT r.startrating, td.*, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
+			"SELECT r.startrating, td.*, td.price, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
 					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat,  "
 					+ " IFNULL(v.views, 0) AS views, IFNULL(f.favourites, 0) AS favourites, IFNULL(r.reviews, 0) AS reviews "
 					+ " FROM tripdetails td "
@@ -208,6 +211,7 @@ public class TripDAOImpl implements TripDAO
 		map.put("id", trip.getId());
 		map.put("userId", trip.getUserid());
 		map.put("price", trip.getPrice());
+		map.put("subactivityid", trip.getSubactivityid());
 
 		namedParameterJdbcTemplate.update(UPDATE_TRIP_DETAILS, map);
 	}
@@ -236,9 +240,7 @@ public class TripDAOImpl implements TripDAO
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(GET_FILTERED_TRIP_DETAILS);
 		stringBuffer.append(" td.status=:status");
-		/*
-		 * stringBuffer.append(" AND "); stringBuffer.append(" ( ");
-		 */
+
 		if (_setActivityFilterValuesForPrice(priceMap) != null
 				&& _setActivityFilterValuesForPrice(priceMap).length() > 0)
 		{
@@ -318,9 +320,10 @@ public class TripDAOImpl implements TripDAO
 
 	}
 
-	private String _setFilterActivityId(Map<String, Object> activityTable) // TO-DO
-																			// Activity
-																			// Id's
+	// TO-DO
+	// Activity
+	// Id's
+	private String _setFilterActivityId(Map<String, Object> activityTable)
 	{
 		StringBuffer stringBuffer = new StringBuffer("");
 		if (activityTable != null && activityTable.size() > 0)
@@ -329,6 +332,27 @@ public class TripDAOImpl implements TripDAO
 			{
 				stringBuffer.append("( ");
 				stringBuffer.append("td." + ACTIVITY_ID_ATTRIBUTE);
+				stringBuffer.append(" IN ");
+				stringBuffer.append("( ");
+				stringBuffer.append(entry.getValue());
+				stringBuffer.append(" )");
+				stringBuffer.append(" )");
+			}
+		}
+		return stringBuffer.toString();
+	}
+
+	private
+			String
+			_setFilterSubActivityId(Map<String, Object> subActivityTable)
+	{
+		StringBuffer stringBuffer = new StringBuffer("");
+		if (subActivityTable != null && subActivityTable.size() > 0)
+		{
+			for (Map.Entry<String, Object> entry : subActivityTable.entrySet())
+			{
+				stringBuffer.append("( ");
+				stringBuffer.append("td." + SUB_ACTIVITY_ID_ATTRIBUTE);
 				stringBuffer.append(" IN ");
 				stringBuffer.append("( ");
 				stringBuffer.append(entry.getValue());
@@ -372,13 +396,17 @@ public class TripDAOImpl implements TripDAO
 			stringBuffer.append("( ");
 			for (Map.Entry<String, Object> entry : tripCommonFields.entrySet())
 			{
-				stringBuffer.append("td." + entry.getKey());
-				stringBuffer.append(" = ");
+
 				if (containsStringValues.contains(entry.getKey()))
 				{
+					stringBuffer.append("DATE_FORMAT(td." + entry.getKey()
+							+ ", '%Y-%m')");
+					stringBuffer.append(" = ");
 					stringBuffer.append("\'" + entry.getValue() + "\'");
 				} else
 				{
+					stringBuffer.append("td." + entry.getKey());
+					stringBuffer.append(" = ");
 					stringBuffer.append(entry.getValue());
 				}
 				stringBuffer.append(" OR ");
@@ -498,5 +526,109 @@ public class TripDAOImpl implements TripDAO
 
 		return namedParameterJdbcTemplate.query(GET_ALL_TRIPDETAILS, map,
 				new BeanPropertyRowMapper(Trip.class));
+	}
+
+	public List<Trip> getFilterTripsDetails(Map<String, Object> tripTable,
+			Map<String, Object> activityTable,
+			Map<String, Object> subActivityTable, String status,
+			Map<String, Object> priceMap, int START_INDEX, int END_INDEX)
+	{
+		boolean isFilterValues = false;
+		Map map = new HashMap();
+		map.put("status", status);
+		map.put("defaultImage", DEFAULT_TRIP_IMAGE_PATH);
+		map.put("startIndx", START_INDEX);
+		map.put("endIndx", END_INDEX);
+
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(GET_FILTERED_TRIP_DETAILS);
+		stringBuffer.append(" td.status=:status");
+
+		if (_setActivityFilterValuesForPrice(priceMap) != null
+				&& _setActivityFilterValuesForPrice(priceMap).length() > 0)
+		{
+			isFilterValues = true;
+			stringBuffer.append(" AND ");
+			stringBuffer.append(" ( ");
+			stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
+		}
+
+		if (_setFilterActivityId(activityTable).length() > 0)
+		{
+			stringBuffer.append(" AND ");
+			stringBuffer.append(_setFilterActivityId(activityTable));
+		}
+		if (_setFilterSubActivityId(subActivityTable).length() > 0)
+		{
+			stringBuffer.append(" AND ");
+			stringBuffer.append(_setFilterSubActivityId(subActivityTable));
+		}
+		if (_setActivityFilterValuesForAllFields(tripTable) != null
+				&& _setActivityFilterValuesForAllFields(tripTable).length() > 0)
+		{
+			stringBuffer.append(" AND ");
+			stringBuffer
+					.append(_setActivityFilterValuesForAllFields(tripTable));
+		}
+		if (isFilterValues)
+		{
+			stringBuffer.append(" ) ");
+		}
+		stringBuffer.append(" ");
+		stringBuffer.append(" LIMIT ");
+		stringBuffer.append(" :startIndx ");
+		stringBuffer.append(" , ");
+		stringBuffer.append(" :endIndx ");
+
+		System.out.println("_setFilterSubActivityId :" + stringBuffer);
+
+		return namedParameterJdbcTemplate.query(stringBuffer.toString(), map,
+				new BeanPropertyRowMapper(Trip.class));
+	}
+
+	public int getFilterTripsDetailsnumEntries(Map<String, Object> tripTable,
+			Map<String, Object> activityTable,
+			Map<String, Object> subActivityTable, String status,
+			Map<String, Object> priceMap)
+	{
+		Map map = new HashMap();
+		map.put("status", status);
+		boolean isFilterValues = false;
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(GET_FILTERED_TRIP_DETAILS_NUMENTRIES);
+		stringBuffer.append(" AND status=:status");
+
+		if (_setActivityFilterValuesForPrice(priceMap) != null
+				&& _setActivityFilterValuesForPrice(priceMap).length() > 0)
+		{
+			isFilterValues = true;
+			stringBuffer.append(" AND ");
+			stringBuffer.append(" ( ");
+			stringBuffer.append(_setActivityFilterValuesForPrice(priceMap));
+		}
+		if (_setFilterActivityId(activityTable).length() > 0)
+		{
+			stringBuffer.append(" AND ");
+			stringBuffer.append(_setFilterActivityId(activityTable));
+		}
+		if (_setFilterSubActivityId(subActivityTable).length() > 0)
+		{
+			stringBuffer.append(" AND ");
+			stringBuffer.append(_setFilterSubActivityId(subActivityTable));
+		}
+		if (_setActivityFilterValuesForAllFields(tripTable) != null
+				&& _setActivityFilterValuesForAllFields(tripTable).length() > 0)
+		{
+			stringBuffer.append(" AND ");
+			stringBuffer
+					.append(_setActivityFilterValuesForAllFields(tripTable));
+		}
+		if (isFilterValues)
+		{
+			stringBuffer.append(" ) ");
+		}
+
+		return namedParameterJdbcTemplate.queryForInt(stringBuffer.toString(),
+				map);
 	}
 }

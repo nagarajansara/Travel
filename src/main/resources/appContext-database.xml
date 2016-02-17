@@ -52,5 +52,8 @@
 	</bean>
 	<bean id="adminDAO" class="travel.com.dao.AdminDAOImpl">
 	</bean>
+	<bean id="subActivityDAO" class="travel.com.dao.SubActivityDAOImpl">
+	</bean>
+	
 
 </beans>

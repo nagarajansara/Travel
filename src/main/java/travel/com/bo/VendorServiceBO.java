@@ -42,6 +42,10 @@ public class VendorServiceBO implements VendorService
 	@Qualifier("dealsDAO")
 	DealsDAO dealsDAO;
 
+	@Autowired
+	@Qualifier("subActivityDAO")
+	SubActivityDAO subActivityDAO;
+
 	public List<Activity> getActivitys(Activity activity) throws Exception
 	{
 		return activityDAO.getActivitys(activity);
@@ -81,4 +85,9 @@ public class VendorServiceBO implements VendorService
 		dealsDAO.addDeals(deals);
 	}
 
+	public List<SubActivity> getSubActivity(String sTATUS_ACTIVE)
+			throws Exception
+	{
+		return subActivityDAO.getSubActivity(sTATUS_ACTIVE);
+	}
 }

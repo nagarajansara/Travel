@@ -12,10 +12,11 @@ function ctInitViewListing() {
     $('.ctSUbmitEnquireForm')
 	    .click(
 		    function() {
-
+					
 			var name = $('.ctName').val(), email = $(
 				'.ctEnquiryEmail').val(), phoneno = $(
 				'.ctPhoneNo').val(), param = {};
+			$('.ctEnquiryStatus').hide();
 			if (bmpUtil.isTextFieldEmpty('.ctIsChkEmptyEnquiryVal')) {
 			    param = {
 				"tripId" : bmpUtil.getLastStartingURL(),
@@ -33,8 +34,11 @@ function ctInitViewListing() {
 						    $(
 							    '.ctAddCommentLoadingImage')
 							    .hide();
-						    $('.ctEnquiryModalClose')
-							    .trigger('click');
+						    $('.ctEnquiryStatus').show();
+						    $('.ctEnquiryStatus')
+							    .text(
+								    "Vendor call you soon");
+
 						} else {
 						    $(
 							    '.ctAddCommentLoadingImage')

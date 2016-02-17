@@ -3,6 +3,7 @@ package travel.com.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.springframework.ui.ModelMap;
 
 import java.text.SimpleDateFormat;
@@ -34,6 +35,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+import travel.com.JMS.JMSProducer;
+
 import java.io.*;
 import java.util.*;
 import java.sql.*;
@@ -49,6 +52,10 @@ public class Utilities
 	@Autowired
 	@Qualifier("appProp")
 	AppProp appProp;
+
+	@Autowired
+	@Qualifier("jMSProducer")
+	JMSProducer jMSProducer;
 
 	public String getIpAddress(HttpServletRequest request) throws Exception
 	{
@@ -291,5 +298,20 @@ public class Utilities
 	{
 		UUID id = UUID.randomUUID();
 		return id.toString();
+	}
+
+	public void setJMS_Enqueued(String toEmail, String content, String name,
+			String subject, String JMSQueue_Type) throws Exception
+	{
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("toEmail", toEmail);
+		jsonObject.put("content", content);
+		jsonObject.put("name", name);
+		jsonObject.put("subject", subject);
+		jsonObject.put("type", JMSQueue_Type);
+		jsonObject.put("msgId", UUID());
+
+		jMSProducer.SendJMS_Message(jsonObject.toString(),
+				jMSProducer.EMAIL_QUEUE);
 	}
 }

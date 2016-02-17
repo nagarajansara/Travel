@@ -159,12 +159,14 @@ public class VendorController extends BaseController
 
 			CommonMtd commonMtd = new CommonMtd();
 			List<Activity> activityList = commonMtd.getActivityList();
+			List<SubActivity> subActivityList = commonMtd.getSubActivity();
 
 			TripImage tripImage = new TripImage(listingId, "", "active");
 			List<TripImage> tripImagesList =
 					tripService.getTripImages(tripImage);
 
 			map.put("activityList", activityList);
+			map.put("subActivityList", subActivityList);
 			map.put("trip", trips);
 			map.put("tripImagesList", tripImagesList);
 
@@ -211,6 +213,9 @@ public class VendorController extends BaseController
 						(String) request.getParameter("totalduration");
 				String tripTitle =
 						(String) request.getParameter("edittriptitle");
+				String subactivityId =
+						(String) request.getParameter("subactivitytype");
+
 				int durationCounts = Integer.parseInt(durationcount);
 				double price =
 						Double.parseDouble(request.getParameter("price"));
@@ -229,7 +234,8 @@ public class VendorController extends BaseController
 								Integer.parseInt(totalDuration),
 								Integer.parseInt(locationId), fromDate, toDate,
 								startPoint, routeDetails, description,
-								guideLines, tripTitle, price);
+								guideLines, tripTitle, price,
+								Integer.parseInt(subactivityId));
 
 				tripService.update(trip);
 				tripService.deleteItenary(tripId);
@@ -761,7 +767,10 @@ public class VendorController extends BaseController
 			{
 
 				List<Activity> activityList = getActivityList();
+				List<SubActivity> subActivityList = getSubActivity();
 				map.put("activityList", activityList);
+				map.put("subActivityList", subActivityList);
+
 				Trip trip = new Trip(userId, status, startIndx, maxIndx);
 				Map<String, Object> tripMap = tripService.getTripDetails(trip);
 				List<Trip> trips = (List<Trip>) tripMap.get("trips");
@@ -794,6 +803,20 @@ public class VendorController extends BaseController
 				throw ex;
 			}
 			return activityList;
+		}
+
+		public List<SubActivity> getSubActivity() throws Exception
+		{
+			List<SubActivity> list = null;
+			String STATUS_ACTIVE = "active";
+			try
+			{
+				list = vendorService.getSubActivity(STATUS_ACTIVE);
+			} catch (Exception ex)
+			{
+				throw ex;
+			}
+			return list;
 		}
 	}
 

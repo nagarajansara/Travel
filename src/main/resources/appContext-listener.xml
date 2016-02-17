@@ -32,7 +32,8 @@
 	</bean>
 	<bean id="enquiryService" class="travel.com.bo.EnquiryServiceBO">
 	</bean>
-	<bean id="jMSProducer" class="travel.com.JMS.JMSProducer">
+	<bean id="jMSProducer" class="travel.com.JMS.JMSProducer"
+		init-method="startJMSThread">
 	</bean>
 	<!-- init-method="startJMSThread" -->
 	<bean id="adminService" class="travel.com.bo.AdminServiceBO">

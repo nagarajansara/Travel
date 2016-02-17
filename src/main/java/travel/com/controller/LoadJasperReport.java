@@ -65,7 +65,8 @@ public class LoadJasperReport
 		return "loadJasper";
 	}
 
-	@RequestMapping(value = "/generateReport", method = RequestMethod.POST)
+	@RequestMapping(value = "/generateReport", method =
+	{ RequestMethod.POST, RequestMethod.GET })
 	public String generateReport(HttpServletRequest request,
 			HttpServletResponse response) throws ParseException
 	{
@@ -78,6 +79,8 @@ public class LoadJasperReport
 		 * }
 		 */
 		String reportFileName = "JREmp1";
+
+		System.out.println("COMMMMMM");
 
 		Connection conn = null;
 		try
@@ -118,8 +121,7 @@ public class LoadJasperReport
 
 			hmParams.put("Title", "Employees working more than " + noy
 					+ " Years");
-			BufferedImage image =
-					ImageIO.read(getClass().getResource(""));
+			BufferedImage image = ImageIO.read(getClass().getResource(""));
 			hmParams.put("logo", image);
 
 			JasperReport jasperReport =

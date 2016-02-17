@@ -33,6 +33,7 @@
 							<c:set var="locationid" value="${element.locationid}" />
 							<c:set var="startpoint" value="${element.startpoint}" />
 							<c:set var="activityname" value="${element.activityname}" />
+							<c:set var="subactivityname" value="${element.subactivityname}" />
 							<c:set var="price" value="${element.price}" />
 						</c:forEach>
 					</c:if>
@@ -52,6 +53,24 @@
 												var="element" varStatus="loop">
 												<option
 													<c:if test="${activityname eq element.name}"><c:out value="selected" /></c:if>
+													value="${(element.id)}"><c:out
+														value="${(element.name) }" /></option>
+											</c:forEach>
+										</c:if>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-3 col-md-3 col-sm-3 control-label">SubActivity
+									Type</label>
+								<div class="col-lg-4 col-md-4 col-sm-4">
+									<select name="subactivitytype"
+										class="form-control ctEditSelectActivityType">
+										<c:if test="${not empty model.responseData.subActivityList}">
+											<c:forEach items="${model.responseData.subActivityList}"
+												var="element" varStatus="loop">
+												<option
+													<c:if test="${subactivityname eq element.name}"><c:out value="selected" /></c:if>
 													value="${(element.id)}"><c:out
 														value="${(element.name) }" /></option>
 											</c:forEach>
@@ -190,12 +209,10 @@
 						</table>
 					</c:if>
 					<c:if test="${empty model.responseData.tripImagesList}">
-						<span style="color: red; font-family: verdana; font-weight: bold">No existing image
-							found</span>
+						<span style="color: red; font-family: verdana; font-weight: bold">No
+							existing image found</span>
 					</c:if>
-					</br> </br>
-					</br> </br>
-					</br> </br>
+					</br> </br> </br> </br> </br> </br>
 					<%-- <c:if test="${not empty model.responseData.tripImagesList}"> --%>
 					<form enctype="multipart/form-data"
 						onsubmit="return ctEditImageListingData();"
@@ -260,192 +277,175 @@
 <script src="${baseURL}/assest/plugin/datepicker/tsdatepicker.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
+    $(document)
+	    .ready(
+		    function() {
+			var searchTerm = null, numEntries = '${model.responseData.numEntries}', MAX_ENTRIES = 10, START_PAGE = 1;
+			$('.ctPriceTxt').numeric();
+			var remoteDataConfig = {
+			    dropdownCssClass : 'bmSelect2Class',
+			    triggerChange : true,
+			    cache : true,
+			    placeholder : "Enter your pickup pincode",
+			    minimumInputLength : 1,
+			    ajax : {
+				url : '${baseURL}/travelapi/city/getCityApi.json',
+				dataType : 'json',
+				data : function(term, page) {
+				    searchTerm = term.toUpperCase();
+				    return {
+					locationname : term,
+					page_limit : 10
+				    };
+				},
+				results : function(data, page) {
+				    return {
+					results : getMockData(data.model)
+				    };
+				}
+			    },
+			    formatResult : function(option) {
+				return "<div>" + option.text + "</div>";
+			    },
+			    formatSelection : function(option) {
+				return option.text;
+			    },
+			    initSelection : function(element, callback) {
+				var id = element.val();
+				var text = element.data('option');
+				var data = {
+				    id : id,
+				    text : text
+				};
+				callback(data);
+			    },
+			    escapeMarkup : function(m) {
+				return m;
+			    }
+			};
+
+			function getMockData(mockData) {
+			    mockData = JSON.parse(mockData);
+			    var foundOptions = [];
+			    for ( var key in mockData) {
+				if (mockData[key].text.toUpperCase().indexOf(
+					searchTerm) >= 0) {
+				    foundOptions.push(mockData[key]);
+				}
+			    }
+			    return foundOptions;
+			}
+			;
+
+			$("#ctEditSelectActivityLocation").select2(
+				remoteDataConfig)
+			$('#ctEditSelectActivityLocation').select2('val',
+				'${startpoint}');
+			$('#ctEditStartPointCity').select2(remoteDataConfig);
+			$('#ctEditStartPointCity').select2('val',
+				'${locationid}');
+
+			$(".ctEditTripImageDel")
+				.click(
 					function() {
-						var searchTerm = null, numEntries =
-								'${model.responseData.numEntries}', MAX_ENTRIES =
-								10, START_PAGE = 1;
-						$('.ctPriceTxt').numeric();
-						var remoteDataConfig =
-								{
-									dropdownCssClass : 'bmSelect2Class',
-									triggerChange : true,
-									cache : true,
-									placeholder : "Enter your pickup pincode",
-									minimumInputLength : 1,
-									ajax :
-									{
-										url : '${baseURL}/travelapi/city/getCityApi.json',
-										dataType : 'json',
-										data : function(term, page) {
-											searchTerm = term.toUpperCase();
-											return{
-												locationname : term,
-												page_limit : 10
-											};
-										},
-										results : function(data, page) {
-											return{
-												results : getMockData(data.model)
-											};
+					    var param = {
+						"tripId" : $(this).attr(
+							'pk_tripID'),
+						"id" : $(this).attr('pk_ID')
+					    }, tObj = this;
+					    swal(
+						    {
+							title : "Are you sure?",
+							text : "You will not be able to recover this imaginary file!",
+							type : "warning",
+							showCancelButton : true,
+							confirmButtonColor : "#DD6B55",
+							confirmButtonText : "Yes, delete it!",
+							cancelButtonText : "No, cancel plx!",
+							closeOnConfirm : false,
+							closeOnCancel : false
+						    },
+						    function(isConfirm) {
+							if (isConfirm) {
+							    ctDAO
+								    .getDeleteTripImage(
+									    param,
+									    function(
+										    responseDatas) {
+										if (responseDatas.responseStatus == 200) {
+										    swal(
+											    "Deleted!",
+											    "Your imaginary file has been deleted.",
+											    "success");
+										    $(
+											    tObj)
+											    .parent()
+											    .parent()
+											    .remove();
 										}
-									},
-									formatResult : function(option) {
-										return "<div>" + option.text + "</div>";
-									},
-									formatSelection : function(option) {
-										return option.text;
-									},
-									initSelection : function(element, callback) {
-										var id = element.val();
-										var text = element.data('option');
-										var data =
-										{
-											id : id,
-											text : text
-										};
-										callback(data);
-									},
-									escapeMarkup : function(m) {
-										return m;
-									}
-								};
-
-						function getMockData(mockData) {
-							mockData = JSON.parse(mockData);
-							var foundOptions = [];
-							for ( var key in mockData)
-							{
-								if (mockData[key].text.toUpperCase().indexOf(
-										searchTerm) >= 0)
-								{
-									foundOptions.push(mockData[key]);
-								}
+									    });
+							} else {
+							    swal(
+								    "Cancelled",
+								    "Your imaginary file is safe :)",
+								    "error");
 							}
-							return foundOptions;
-						}
-						;
-
-						$("#ctEditSelectActivityLocation").select2(
-								remoteDataConfig)
-						$('#ctEditSelectActivityLocation').select2('val',
-								'${startpoint}');
-						$('#ctEditStartPointCity').select2(remoteDataConfig);
-						$('#ctEditStartPointCity').select2('val',
-								'${locationid}');
-
-						$(".ctEditTripImageDel")
-								.click(
-										function() {
-											var param =
-													{
-														"tripId" : $(this)
-																.attr(
-																		'pk_tripID'),
-														"id" : $(this).attr(
-																'pk_ID')
-													}, tObj = this;
-											swal(
-													{
-														title : "Are you sure?",
-														text : "You will not be able to recover this imaginary file!",
-														type : "warning",
-														showCancelButton : true,
-														confirmButtonColor : "#DD6B55",
-														confirmButtonText : "Yes, delete it!",
-														cancelButtonText : "No, cancel plx!",
-														closeOnConfirm : false,
-														closeOnCancel : false
-													},
-													function(isConfirm) {
-														if (isConfirm)
-														{
-															ctDAO
-																	.getDeleteTripImage(
-																			param,
-																			function(
-																					responseDatas) {
-																				if (responseDatas.responseStatus == 200)
-																				{
-																					swal(
-																							"Deleted!",
-																							"Your imaginary file has been deleted.",
-																							"success");
-																					$(
-																							tObj)
-																							.parent()
-																							.parent()
-																							.remove();
-																				}
-																			});
-														}
-														else
-														{
-															swal(
-																	"Cancelled",
-																	"Your imaginary file is safe :)",
-																	"error");
-														}
-													});
-
-										});
+						    });
 
 					});
-	function ctChkEditFileUploaded() {
-		var isUploaded = true;
-		$('.ctPhotogalleryFileName').each(function() {
-			if (!$(this).val())
-			{
-				isUploaded = false;
-				return isUploaded;
-			}
-		});
+
+		    });
+    function ctChkEditFileUploaded() {
+	var isUploaded = true;
+	$('.ctPhotogalleryFileName').each(function() {
+	    if (!$(this).val()) {
+		isUploaded = false;
 		return isUploaded;
-	};
-	function ctEditListingData() {
-		var isNotEmpty = true, editDurationValues =
-				$('.ctEditNoDurationTxt').val();
-		if (bmpUtil.isTextFieldEmpty('.ctIsChkEmptyVal') && editDurationValues
-				&& parseInt(editDurationValues) > 0)
-		{
-			var ctRouteFormLen = $('.ctRouteFormDiv').length, ctDurationLen =
-					$('.ctEditItenaryParentDiv').length, convertDateENG =
-					bmpUtil.convertDateENG($("#ctEditfromDatePicker").val()), location =
-					$("#ctEditSelectActivityLocation").select2('data').text, tripTitle =
-					$('.ctEditSelectActivityType option:selected').text()
-							+ ", " + location + " - " + convertDateENG["month"]
-							+ " & " + convertDateENG["year"];
-			$('.ctEditVendorListingForm')
-					.append(
-							'<input type="hidden" class="ctDurationHidden" value="'+ ctDurationLen +'" name="durationcount">');
-			$('.ctEditVendorListingForm')
-					.append(
-							'<input type="hidden" class="ctDurationHidden" value="'+ ctDurationLen +'" name="durationcount">');
-			$('.ctEditVendorListingForm')
-					.append(
-							'<input type="hidden" class="ctTipTitle" value="'+ tripTitle +'" name="edittriptitle">');
-		}
-		else
-		{
-			isNotEmpty = false;
-			sweetAlert("Oops...", "Please enter all values!", "error");
-		}
-		return isNotEmpty;
-	};
-	function ctEditImageListingData() {
-		var isNotEmpty = true;
-		$('.ctEditPhotogalleryFile').each(function() {
-			var tempFile = $(this).val();
-			if (tempFile.length == 0)
-			{
-				isNotEmpty = false;
-			}
-		});
-		if (!isNotEmpty)
-		{
-			sweetAlert("Oops...", "Please enter all values!", "error");
-		}
-		return isNotEmpty;
-	};
+	    }
+	});
+	return isUploaded;
+    };
+    function ctEditListingData() {
+	var isNotEmpty = true, editDurationValues = $('.ctEditNoDurationTxt')
+		.val();
+	if (bmpUtil.isTextFieldEmpty('.ctIsChkEmptyVal') && editDurationValues
+		&& parseInt(editDurationValues) > 0) {
+	    var ctRouteFormLen = $('.ctRouteFormDiv').length, ctDurationLen = $('.ctEditItenaryParentDiv').length, convertDateENG = bmpUtil
+		    .convertDateENG($("#ctEditfromDatePicker").val()), location = $(
+		    "#ctEditSelectActivityLocation").select2('data').text, tripTitle = $(
+		    '.ctEditSelectActivityType option:selected').text()
+		    + ", "
+		    + location
+		    + " - "
+		    + convertDateENG["month"]
+		    + " & "
+		    + convertDateENG["year"];
+	    $('.ctEditVendorListingForm')
+		    .append(
+			    '<input type="hidden" class="ctDurationHidden" value="'+ ctDurationLen +'" name="durationcount">');
+	    $('.ctEditVendorListingForm')
+		    .append(
+			    '<input type="hidden" class="ctDurationHidden" value="'+ ctDurationLen +'" name="durationcount">');
+	    $('.ctEditVendorListingForm')
+		    .append(
+			    '<input type="hidden" class="ctTipTitle" value="'+ tripTitle +'" name="edittriptitle">');
+	} else {
+	    isNotEmpty = false;
+	    sweetAlert("Oops...", "Please enter all values!", "error");
+	}
+	return isNotEmpty;
+    };
+    function ctEditImageListingData() {
+	var isNotEmpty = true;
+	$('.ctEditPhotogalleryFile').each(function() {
+	    var tempFile = $(this).val();
+	    if (tempFile.length == 0) {
+		isNotEmpty = false;
+	    }
+	});
+	if (!isNotEmpty) {
+	    sweetAlert("Oops...", "Please enter all values!", "error");
+	}
+	return isNotEmpty;
+    };
 </script>

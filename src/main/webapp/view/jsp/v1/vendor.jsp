@@ -141,6 +141,23 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-lg-3 col-md-3 col-sm-3 control-label">SubActivity
+								Type</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<c:if test="${not empty model.responseData.subActivityList}">
+									<select name="subactivitytype"
+										class="form-control ctVendorSubActivitySelectOPtion">
+										<option value="">Select SubActivity</option>
+										<c:forEach items="${model.responseData.subActivityList}"
+											var="element" varStatus="loop">
+											<option value="${(element.id)}"><c:out
+													value="${(element.name) }" /></option>
+										</c:forEach>
+									</select>
+								</c:if>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label">Location
 								of Activity</label>
 							<div class="col-lg-4 col-md-4 col-sm-4">

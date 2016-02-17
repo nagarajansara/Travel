@@ -245,4 +245,24 @@ public class TripServiceBO implements TripService
 	{
 		return tripDAO.getAllTripDetails(userId, sTATUS_ACTIVE, startTitle);
 	}
+
+	public List<Trip> getFilterTripsDetails(Map<String, Object> tripTable,
+			Map<String, Object> activityTable,
+			Map<String, Object> subActivityTable, String status,
+			Map<String, Object> priceMap, int START_INDEX, int END_INDEX)
+	{
+		return tripDAO.getFilterTripsDetails(tripTable, activityTable,
+				subActivityTable, status, priceMap, START_INDEX, END_INDEX);
+	}
+
+	@Override
+	public int getFilterTripsDetailsnumEntries(Map<String, Object> tripTable,
+			Map<String, Object> activityTable,
+			Map<String, Object> subActivityTable, String status,
+			Map<String, Object> priceMap)
+	{
+		return tripDAO.getFilterTripsDetailsnumEntries(tripTable,
+				activityTable, subActivityTable, status, priceMap);
+	}
+
 }

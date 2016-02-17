@@ -70,10 +70,6 @@ public class LoginController extends BaseController
 	AppProp appProp;
 
 	@Autowired
-	@Qualifier("jMSProducer")
-	JMSProducer jMSProducer;
-
-	@Autowired
 	@Qualifier("enquiryService")
 	EnquiryService enquiryService;
 
@@ -88,7 +84,6 @@ public class LoginController extends BaseController
 	{
 
 		String CUSTOMER_ROLE = "ROLE_CUSTOMER";
-		Map<Object, Object> map = new HashMap<Object, Object>();
 		try
 		{
 
@@ -115,16 +110,25 @@ public class LoginController extends BaseController
 				loginService.insertCustomerData(login);
 
 				// ADD ACTIVE_MQ FOR VERIFICATION PURPOSE
+				HashMap<String, String> map = new HashMap<String, String>();
+				String filePath = "";
+				String content = "";
+				if (!role.equals("ROLE_VENDOR"))
+				{
+					map.put("VC_MACRO_URL",
+							"http://"
+									+ utilities.getServerName()
+									+ "/travel/travelapi/login/activatecustomer/"
+									+ UUID);
+					filePath = appProp.getHTMLDir() + "activation.html";
+					content = utilities.getFileContent(filePath);
+					content = utilities.replaceMacro(content, map);
+				}
 
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("email", email);
-				jsonObject.put("name", firstName + " " + lastName);
-				jsonObject.put("role", role);
-				jsonObject.put("stateName", cityName);
-				jsonObject.put("UUID", UUID);
-
-				jMSProducer.SendJMS_Message(jsonObject.toString(),
-						jMSProducer.REGISTERATION_QUEUE);
+				// ADD MAIL QUEUE JMS
+				utilities.setJMS_Enqueued(email, content,
+						appProp.getAdminName(), appProp.getMailSubject(),
+						JMSProducer.EMAIL_QUEUE);
 
 				utilities.setSuccessResponse(response);
 			} else
@@ -182,20 +186,12 @@ public class LoginController extends BaseController
 				loginService.insertVendorData(login);
 
 				// ADD ACTIVE_MQ FOR VERIFICATION PURPOSE
+				String content =
+						"Please wait untill admin verify your details. Its takes couple of hour";
 
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("email", email);
-				jsonObject.put("name", firstName + " " + lastName);
-				jsonObject.put("nameoforganization", nameOrganization);
-				jsonObject.put("address", address);
-				jsonObject.put("mobile", mobile);
-				jsonObject.put("contact", phoneno);
-				jsonObject.put("pancard", pancard);
-				jsonObject.put("role", role);
-				jsonObject.put("stateName", stateName);
-
-				jMSProducer.SendJMS_Message(jsonObject.toString(),
-						jMSProducer.REGISTERATION_QUEUE);
+				utilities.setJMS_Enqueued(email, content,
+						appProp.getAdminMailId(), appProp.getMailSubject(),
+						JMSProducer.EMAIL_QUEUE);
 
 				utilities.setSuccessResponse(response);
 			} else
@@ -369,7 +365,7 @@ public class LoginController extends BaseController
 			jsonObject.put("content", "Mail content");
 			jsonObject.put("fromEmail", "rnagarajan.ramalingam@gmail.com");
 			jsonObject.put("toEmail", "nagarajan@vidcampaign.com");
-			jMSProducer.SendJMS_Message(jsonObject.toString());
+			// jMSProducer.SendJMS_Message(jsonObject.toString());
 		} catch (Exception ex)
 		{
 			logger.error("chkJMSAPI : " + ex.getMessage());
@@ -435,8 +431,10 @@ public class LoginController extends BaseController
 					jsonObject.put("enquiredemail", login.getEnquiredemail());
 
 					// JMS QUEQUE RESEND
-					jMSProducer.SendJMS_Message(jsonObject.toString(),
-							jMSProducer.ACTIVATE_ENQUIRY_MESSAGE_QUEQUE);
+					/*
+					 * jMSProducer.SendJMS_Message(jsonObject.toString(),
+					 * jMSProducer.ACTIVATE_ENQUIRY_MESSAGE_QUEQUE);
+					 */
 					utilities.setSuccessResponse(response);
 
 				} else
