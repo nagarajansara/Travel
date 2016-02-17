@@ -36,7 +36,7 @@
 												<figure>
 													<a href="javascript:void(0)"><img width="255"
 														height="191"
-														src="${hostName}:${port}/travelimages/${(element.imageurls)}"
+														src="${hostName}:${port}/${uploadedImageFolderName}/${(element.imageurls)}"
 														alt=""></a>
 												</figure>
 												<section class="kd-bloginfo">

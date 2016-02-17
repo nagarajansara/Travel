@@ -118,7 +118,9 @@
 								<label class="col-lg-3 col-md-3 col-sm-3 control-label">Route</label>
 								<div class="col-lg-4 col-md-4  col-sm-4 ctEditRouteDiv">
 									<input value="${route}" name="route1" type="text" name="todate"
-										class="form-control ctIsChkEmptyVal">
+										class="form-control ctIsChkEmptyVal"> <span
+										style="font-family: verdana; font-size: 10px; color: #c64837;">Using
+										same route format like (X->Y)</span>
 								</div>
 							</div>
 							<div class="form-group ctEditDurationTxt">
@@ -194,11 +196,10 @@
 								<c:forEach items="${model.responseData.tripImagesList}"
 									var="elements" varStatus="loops">
 									<tr>
-										<td style="line-height: 5.5"><img width="20%"
-											height="20%"
-											src="${request.serverName}/${uploadedImageFolderName}/${elements.name}">
+										<td style="line-height: 5.5; height: 156px;"><img
+											style="width: 50%; height: 100%" src="${request.serverName}/${uploadedImageFolderName}/${elements.name}">
 										</td>
-										<td style="line-height: 5.5"><img
+										<td style="line-height: 5.5; width: 20%; height: 20%;"><img
 											style="cursor: pointer;" class="ctEditTripImageDel"
 											pk_tripID="${tripId}" pk_ID="${elements.id}"
 											src="/travel/theme/images/x.png" title="Delete Image" alt="">

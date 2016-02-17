@@ -34,9 +34,9 @@ public class TripDAOImpl implements TripDAO
 	final String SUB_ACTIVITY_ID_ATTRIBUTE = "subactivityid";
 
 	final String INSERT_TRIP_DETAILS =
-			"INSERT into tripdetails (userid, locationid, activityid, duration, fromdate, todate, startpoint, route, description, guidelines, title, price "
+			"INSERT into tripdetails (userid, locationid, activityid, duration, fromdate, todate, startpoint, route, description, guidelines, title, price, subactivityid"
 					+ ") VALUES (:userid, :locationid, :activityid, :duration, :fromdate, :todate, :startpoint, :route, :description, "
-					+ ":guidelines, :title, :price)";
+					+ ":guidelines, :title, :price, :subactivityid)";
 
 	// USER BASED
 	final String GET_TRIP_DETAILS =
@@ -145,7 +145,8 @@ public class TripDAOImpl implements TripDAO
 						.addValue("description", trip.getDescription())
 						.addValue("guidelines", trip.getGuidelines())
 						.addValue("price", trip.getPrice())
-						.addValue("title", trip.getTitle());
+						.addValue("title", trip.getTitle())
+						.addValue("subactivityid", trip.getSubactivityid());
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedParameterJdbcTemplate.update(INSERT_TRIP_DETAILS, parameters,
 				keyHolder, new String[]

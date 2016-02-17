@@ -22,7 +22,7 @@
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="hostName" value="http://${pageContext.request.serverName}" />
 <c:set var="port" value="${pageContext.request.serverPort}" />
-<c:set var="uploadedImageFolderName" value="travelimages" />
+<c:set var="uploadedImageFolderName" value="travelimages/compress" />
 
 <!-- Css Folder -->
 <link href="${baseURL}/theme/css/bootstrap.css" rel="stylesheet">
