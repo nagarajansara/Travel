@@ -12,7 +12,7 @@ function ctInitViewListing() {
     $('.ctSUbmitEnquireForm')
 	    .click(
 		    function() {
-					
+
 			var name = $('.ctName').val(), email = $(
 				'.ctEnquiryEmail').val(), phoneno = $(
 				'.ctPhoneNo').val(), param = {};
@@ -34,7 +34,8 @@ function ctInitViewListing() {
 						    $(
 							    '.ctAddCommentLoadingImage')
 							    .hide();
-						    $('.ctEnquiryStatus').show();
+						    $('.ctEnquiryStatus')
+							    .show();
 						    $('.ctEnquiryStatus')
 							    .text(
 								    "Vendor call you soon");
@@ -53,6 +54,9 @@ function ctInitViewListing() {
 			}
 
 		    });
+    $('.ctEnquiryModalClose, .ctViewListingCloseBtn').click(function() {
+	$('.ctEnquiryStatus').hide();
+    });
 
     $('.ctViewLisitingLoadMore')
 	    .click(

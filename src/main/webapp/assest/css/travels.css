@@ -3,6 +3,16 @@
 	font-family: verdana;
 }
 
+.ctTravelSearchTxt {
+	border: 1px solid #f0ede8;
+	border-radius: 4px;
+	color: #999999;
+	float: left;
+	height: 54px;
+	padding: 10px 0 10px 60px;
+	width: 100%;
+}
+
 .tsDefaultSearchFontStyle input,.tsDefaultSearchFontStyle {
 	font-size: 12px;
 	font-family: verdana;
@@ -84,10 +94,11 @@
 .ctDefaultDisplayNone {
 	display: none;
 }
-.ctRequired
-{
+
+.ctRequired {
 	color: red;
 }
+
 .ctDangerDefaultTxt {
 	font-family: verdana;
 	font-size: 12px;
@@ -102,7 +113,7 @@
 	background-color: #337AB7 !important;
 	color: #ffffff !important;
 }
-#pagination-demo
-{
+
+#pagination-demo {
 	border: 0px solid #dadada !important;
 }

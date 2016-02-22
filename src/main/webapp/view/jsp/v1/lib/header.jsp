@@ -224,6 +224,14 @@
 
 								<div class="collapse navbar-collapse" id="navbar-collapse-1">
 									<ul class="nav navbar-nav">
+										<li><form>
+												<p>
+													<input type="text" class="ctTravelSearchTxt" placeholder="Enter Your Keyword">
+												</p>
+												<p>
+													<!-- <input type="submit" value="Search" class="thbg-color"> -->
+												</p>
+											</form></li>
 										<li><a href="${baseURL}/view/jsp/v1/home.jsp">Home</a>
 											<ul class="sub-dropdown">
 												<li><a href="index-map.html">Map HomePage</a></li>

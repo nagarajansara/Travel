@@ -247,7 +247,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
+							<button type="button" class="close ctViewListingCloseBtn" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
 							<h4 class="modal-title">Enquire Confirmation</h4>
 						</div>
@@ -320,6 +320,7 @@
     $(document).ready(
 	    function() {
 		var ctRatedStar = '${ratedStart}';
+		$('.ctPhoneNo').numeric();
 		$('div#star').raty(
 			{
 			    "path" : "http://" + location.host + "/"
