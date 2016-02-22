@@ -225,12 +225,15 @@
 								<div class="collapse navbar-collapse" id="navbar-collapse-1">
 									<ul class="nav navbar-nav">
 										<li><form>
-												<p>
-													<input type="text" class="ctTravelSearchTxt" placeholder="Enter Your Keyword">
-												</p>
-												<p>
-													<!-- <input type="submit" value="Search" class="thbg-color"> -->
-												</p>
+												<div class="ctTravelSearchTxt input-group add-on">
+													<input class="form-control" placeholder="Search"
+														name="srch-term" id="srch-term" type="text">
+													<div class="input-group-btn">
+														<button class="btn btn-default" type="submit">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
 											</form></li>
 										<li><a href="${baseURL}/view/jsp/v1/home.jsp">Home</a>
 											<ul class="sub-dropdown">
@@ -282,8 +285,8 @@
 								<!-- /.navbar-collapse -->
 							</nav>
 							<div class="kd-search">
-								<a href="#" class="kd-searchbtn" data-toggle="modal"
-									data-target="#searchmodalbox"><i class="fa fa-search"></i></a>
+								<!-- <a href="#" class="kd-searchbtn" data-toggle="modal"
+									data-target="#searchmodalbox"><i class="fa fa-search"></i></a> -->
 								<!-- Modal -->
 								<div class="modal fade kd-loginbox" id="searchmodalbox"
 									tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
