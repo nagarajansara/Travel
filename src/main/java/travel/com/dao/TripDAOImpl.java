@@ -75,7 +75,7 @@ public class TripDAOImpl implements TripDAO
 					+ "ORDER BY td.createdat DESC";
 
 	final String UPDATE_TRIP_DETAILS =
-			"UPDATE tripdetails set locationid =:locationid, activityid =:activityid, duration =:duration, "
+			"UPDATE tripdetails set status =:status, locationid =:locationid, activityid =:activityid, duration =:duration, "
 					+ "fromdate =:fromdate, todate =:todate, startpoint =:startpoint, route =:route, description =:description, "
 					+ "guidelines =:guidelines, title =:title, price =:price, subactivityid =:subactivityid where id =:id and userid =:userId";
 
@@ -213,6 +213,9 @@ public class TripDAOImpl implements TripDAO
 		map.put("userId", trip.getUserid());
 		map.put("price", trip.getPrice());
 		map.put("subactivityid", trip.getSubactivityid());
+
+		// SET STATUS DEACTIVE
+		map.put("status", "deactive");
 
 		namedParameterJdbcTemplate.update(UPDATE_TRIP_DETAILS, map);
 	}

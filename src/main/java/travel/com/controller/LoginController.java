@@ -376,7 +376,11 @@ public class LoginController extends BaseController
 	@RequestMapping(value = "/getpendingenquiry", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String getPendingEnquiry(HttpServletRequest request,
-			HttpServletResponse res, ModelMap model) throws Exception
+			HttpServletResponse res, ModelMap model,
+			@RequestParam(value = "startIndx", required = false,
+					defaultValue = "0") int startIndx,
+			@RequestParam(value = "endIndx", required = false,
+					defaultValue = "10") int endIndx) throws Exception
 	{
 		try
 		{
@@ -384,12 +388,102 @@ public class LoginController extends BaseController
 			int userId = getUserId(request);
 			String status = Enquiry.STATUS_PENDING;
 			List<Enquiry> list =
-					enquiryService.getPendingEnquiry(userId, status);
+					enquiryService.getPendingEnquiry(userId, status, startIndx,
+							utilities.getDefaultMaxIndx());
+			int numEntries =
+					enquiryService.getPendingEnquiryNumEntries(userId, status);
 
-			utilities.setSuccessResponse(response, list);
+			List<Enquiry> sentEnquiryDetails =
+					enquiryService.getPendingEnquiry(userId,
+							Enquiry.STATUS_SENT, startIndx,
+							utilities.getDefaultMaxIndx());
+			int sentEnquiryDetailsNumEntries =
+					enquiryService.getPendingEnquiryNumEntries(userId,
+							Enquiry.STATUS_SENT);
+
+			map.put("enquiry", list);
+			map.put("numEntries", numEntries);
+			map.put("sentEnquiryDetails", sentEnquiryDetails);
+			map.put("sentEnquiryDetailsNumEntries",
+					sentEnquiryDetailsNumEntries);
+
+			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
 		{
 			logger.error("getpendingenquiry :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "enquirystatus";
+	}
+
+	@RequestMapping(value = "/getpendingenquiryPagination/{currPage}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getpendingenquiryPagination(HttpServletRequest request,
+			HttpServletResponse res, ModelMap model,
+			@PathVariable("currPage") int currPage) throws Exception
+	{
+		try
+		{
+			currPage = currPage - 1;
+			int startIndx =
+					getStartIdx(currPage, utilities.getDefaultMaxIndx());
+			Map<String, Object> map = new HashMap<String, Object>();
+			int userId = getUserId(request);
+			String status = Enquiry.STATUS_PENDING;
+			List<Enquiry> list =
+					enquiryService.getPendingEnquiry(userId, status, startIndx,
+							utilities.getDefaultMaxIndx());
+			int numEntries =
+					enquiryService.getPendingEnquiryNumEntries(userId, status);
+			List<Enquiry> sentEnquiryDetails =
+					enquiryService.getPendingEnquiry(userId,
+							Enquiry.STATUS_SENT, startIndx,
+							utilities.getDefaultMaxIndx());
+			int sentEnquiryDetailsNumEntries =
+					enquiryService.getPendingEnquiryNumEntries(userId,
+							Enquiry.STATUS_SENT);
+
+			map.put("enquiry", list);
+			map.put("numEntries", numEntries);
+			map.put("sentEnquiryDetails", sentEnquiryDetails);
+			map.put("sentEnquiryDetailsNumEntries",
+					sentEnquiryDetailsNumEntries);
+
+			utilities.setSuccessResponse(response, map);
+
+		} catch (Exception ex)
+		{
+			logger.error("getpendingenquiryPagination :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "enquirystatus";
+	}
+
+	@RequestMapping(value = "/getMoreSentEnquireDetails", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getMoreSentEnquireDetails(HttpServletRequest request,
+			HttpServletResponse res, ModelMap model) throws Exception
+	{
+		try
+		{
+			int vendorId = getUserId(request);
+			String email = getSessionAttr(request, ATTR_EMAIL);
+			String name =
+					getSessionAttr(request, ATTR_FNAME) + " "
+							+ getSessionAttr(request, ATTR_LNAME);
+
+			// SEND THE EMAIL FOR ADMIN
+			utilities
+					.setJMS_Enqueued(appProp.getAdminMailId(),
+							"Please send me the more email details", name,
+							"More enquiry details. Please send this email ID: "
+									+ email, JMSProducer.EMAIL_QUEUE);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("getMoreSentEnquireDetails :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);

@@ -16,6 +16,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:url"
+	content="http://www.saratravel.tk/travel/travelapi/trip/getTripDetails" />
+
 <title>Travel</title>
 
 <c:set var="baseURL" value="${pageContext.request.contextPath}" />
@@ -225,15 +231,8 @@
 								<div class="collapse navbar-collapse" id="navbar-collapse-1">
 									<ul class="nav navbar-nav">
 										<li><form>
-												<div class="ctTravelSearchTxt input-group add-on">
-													<input class="form-control" placeholder="Search"
-														name="srch-term" id="srch-term" type="text">
-													<div class="input-group-btn">
-														<button class="btn btn-default" type="submit">
-															<i class="fa fa-search"></i>
-														</button>
-													</div>
-												</div>
+												<input type="text" id="srch-term" name="srch-term"
+													placeholder="Search" class="form-control">
 											</form></li>
 										<li><a href="${baseURL}/view/jsp/v1/home.jsp">Home</a>
 											<ul class="sub-dropdown">

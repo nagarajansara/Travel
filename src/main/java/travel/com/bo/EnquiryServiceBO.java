@@ -21,14 +21,20 @@ public class EnquiryServiceBO implements EnquiryService
 		enquiryDAO.addEnquiry(enquiry);
 	}
 
-	public List<Enquiry> getPendingEnquiry(int userId, String status)
-			throws Exception
+	public List<Enquiry> getPendingEnquiry(int userId, String status,
+			int startIndx, int endIndx) throws Exception
 	{
-		return enquiryDAO.getPendingEnquiry(userId, status);
+		return enquiryDAO.getPendingEnquiry(userId, status, startIndx, endIndx);
 	}
 
 	public void updateEnquiryStatus(Enquiry enquiry) throws Exception
 	{
 		enquiryDAO.updateEnquiryStatus(enquiry);
+	}
+
+	public int getPendingEnquiryNumEntries(int userId, String status)
+			throws Exception
+	{
+		return enquiryDAO.getPendingEnquiryNumEntries(userId, status);
 	}
 }

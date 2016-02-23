@@ -32,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import travel.com.service.*;
+import travel.com.JMS.JMSProducer;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
@@ -754,6 +755,38 @@ public class VendorController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "getVendorReviews";
+
+	}
+
+	@RequestMapping(value = "/getCreditsReductionMoreDetails", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getCreditsReductionMoreDetails(HttpServletRequest request,
+			ModelMap model)
+
+	{
+		try
+		{
+			int vendorId = getUserId(request);
+			String email = getSessionAttr(request, ATTR_EMAIL);
+			String name =
+					getSessionAttr(request, ATTR_FNAME) + " "
+							+ getSessionAttr(request, ATTR_LNAME);
+
+			// SEND NOFIFICATION FOR ADMIN
+			utilities.setJMS_Enqueued(appProp.getAdminMailId(),
+					"I need all the credits reduction details. This is my email ID :"
+							+ email, name, "Request for more credits details",
+					JMSProducer.EMAIL_QUEUE);
+			utilities.setSuccessResponse(response);
+
+		} catch (Exception ex)
+		{
+			logger.error("requestCreditsreductionMoreDetails :"
+					+ ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "credits";
 
 	}
 

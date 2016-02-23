@@ -13,7 +13,7 @@
 	                	<div class="alert alert-success alert-dismissable">
 	                        <i class="fa fa-check"></i>
 	                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-	                        <b>Alert!</b> Successfully updated.
+	                        <b>Alert!</b> Successfully updated. Please wait untill admin approve your updates
 	                    </div>
 	                </div>
 	             </div>   

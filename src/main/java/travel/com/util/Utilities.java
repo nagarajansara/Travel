@@ -43,6 +43,8 @@ import java.sql.*;
 import java.util.Collections;
 import java.net.*;
 
+@SuppressWarnings(
+{ "unchecked", "unused" })
 public class Utilities
 {
 

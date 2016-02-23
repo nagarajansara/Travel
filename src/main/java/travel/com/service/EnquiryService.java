@@ -8,8 +8,11 @@ public interface EnquiryService
 {
 	void addEnquiry(Enquiry enquiry) throws Exception;
 
-	List<Enquiry> getPendingEnquiry(int userId, String status) throws Exception;
+	List<Enquiry> getPendingEnquiry(int userId, String status, int startIndx,
+			int endIndx) throws Exception;
 
 	void updateEnquiryStatus(Enquiry enquiry) throws Exception;
+
+	int getPendingEnquiryNumEntries(int userId, String status) throws Exception;
 
 }

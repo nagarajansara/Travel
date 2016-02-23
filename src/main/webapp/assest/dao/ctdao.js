@@ -27,7 +27,12 @@ function CtDAO() {
     this.GET_VENDOR_REVIEW = this.API_PREFIX + "/vendor/getVendorReviews.json";
     this.GET_VENDOR_REVIW_PAGENO = this.API_PREFIX
 	    + "/vendor/getVendorReviewsPageNo.json";
-    this.GET_ALL_TRIPDETAILS = this.API_PREFIX + "/vendor/getAllTripDetails.json";
+    this.GET_ALL_TRIPDETAILS = this.API_PREFIX
+	    + "/vendor/getAllTripDetails.json";
+    this.GET_CREDITS_REDUCTION_MORE_DETAILS = this.API_PREFIX
+	    + "/vendor/getCreditsReductionMoreDetails.json";
+    this.GET_MORE_SENT_ENQUIRY_DETAILS = this.API_PREFIX
+	    + "/login/getMoreSentEnquireDetails.json";
 
     this.RESPONSE_CACHE = {};
 
@@ -89,6 +94,17 @@ CtDAO.prototype.getAllTripDetails = function(param, cbk) {
     var tObj = this;
     tObj.getData(tObj.GET_ALL_TRIPDETAILS, param, cbk);
 };
+CtDAO.prototype.getCreditsReductionMoreDetails = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.GET_CREDITS_REDUCTION_MORE_DETAILS, param, cbk);
+
+};
+CtDAO.prototype.getMoreSentEnquireDetails = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.GET_MORE_SENT_ENQUIRY_DETAILS, param, cbk);
+    
+};
+
 CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	isParse) {
     var tObj = this, cbk = function(data) {
