@@ -364,7 +364,7 @@ public class TripController extends BaseController
 				List<Trip> list = new ArrayList<Trip>();
 				list = tripService.getTripDetailsBasedId(trip);
 				map.put("tripdetails", list);
-				if (IS_REDIS_SERVER_ENABLE)
+				/*if (IS_REDIS_SERVER_ENABLE)
 				{
 					if (list != null && list.size() > 0)
 					{
@@ -408,15 +408,16 @@ public class TripController extends BaseController
 
 						}
 					}
-				}
-			} else
+				}*/
+			} 
+			/*else
 			{
 				logger.info("Tripdetails data extract from REDIS server");
 
 				List<TripDetailsBean> list = new ArrayList<TripDetailsBean>();
 				list.add(tripDetailsBeanService.find(String.valueOf(tripId)));
 				map.put("tripdetails", list);
-			}
+			}*/
 
 			Reviews reviews =
 					new Reviews(tripId, utilities.getDefaultMinIndx(),
