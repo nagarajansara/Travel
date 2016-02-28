@@ -276,7 +276,7 @@
 										</c:if>
 										<c:if
 											test="${(sessionScope.role != null) && (sessionScope.role eq 'ROLE_CUSTOMER')}">
-											<li><a href="${baseURL}/view/jsp/v1/customer.jsp">Customer</a></li>
+											<li><a href="${baseURL}/travelapi/consumer/getprofile">Customer</a></li>
 										</c:if>
 										<!--<li><a href="contact-us.html">contact us</a></li>-->
 									</ul>

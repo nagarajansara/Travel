@@ -223,7 +223,7 @@
 						<div
 							class="form-group ctEditPhotogalleryParentDiv ctEditPhotogalleryParentLen1">
 							<div class="col-lg-5 col-md-5 col-sm-5">
-								<label class="custom-file-input"> <input
+								<label class=""> <input
 									class="ctEditPhotogalleryFile" type="file" name="file">
 								</label>
 							</div>

@@ -48,6 +48,11 @@ public class Points
 
 	}
 
+	public Points(int userid)
+	{
+		this.userid = userid;
+	}
+
 	public int getId()
 	{
 		return id;

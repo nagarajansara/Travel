@@ -127,8 +127,9 @@ public class AdminController extends BaseController
 	{
 		try
 		{
-			utilities.setAccessCrossDomainResponse(res); // Give cross domain
+			// Give cross domain
 			// access
+			utilities.setAccessCrossDomainResponse(res);
 			String email = getSessionAttr(request, ATTR_EMAIL);
 			if (email != null && email.equals(userName))
 			{

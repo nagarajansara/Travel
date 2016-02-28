@@ -325,6 +325,14 @@ public class Login implements Serializable
 		this.ip = ip;
 	}
 
+	public Login(String firstName, String lastName, String city, int id)
+	{
+		this.firstname = firstName;
+		this.lastname = lastName;
+		this.city = city;
+		this.id = id;
+	}
+
 	public Login(String email, String firstName, String lastName,
 			String password, String city, String role, String ip,
 			String verificationcode)

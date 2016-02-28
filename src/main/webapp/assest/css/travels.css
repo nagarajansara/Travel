@@ -3,17 +3,18 @@
 	font-family: verdana;
 }
 
-
-.ctTravelSearchTxt .input-group-btn > .btn {
-  /* border-left-width:0;left:-2px;
+.ctTravelSearchTxt .input-group-btn>.btn {
+	/* border-left-width:0;left:-2px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); */
+	
 }
 /* stop the glowing blue shadow */
 .ctTravelSearchTxt .form-control:focus {
- /* box-shadow:none;
+	/* box-shadow:none;
  -webkit-box-shadow:none; 
  border-color:#cccccc;  */
+	
 }
 
 .tsDefaultSearchFontStyle input,.tsDefaultSearchFontStyle {
@@ -38,7 +39,7 @@
 	list-style: none;
 }
 
-.ctVendorListMenu li {
+.ctVendorListMenu li,.ctCustomerListMenu li {
 	list-style: none;
 	padding: 5px 10px;
 	/*border: 1px solid #0F7DC1;*/
@@ -47,17 +48,18 @@
 	border-bottom: 3px solid #eeeeee !important;
 }
 
-.ctVendorListMenu li:hover {
+.ctVendorListMenu li:hover,.ctCustomerListMenu li:hover {
 	background-color: #0F7DC1 !important;
 	cursor: pointer !important;
 }
 
-.ctVendorListMenu li.active,.ctVendorListMenu .active a {
+.ctVendorListMenu li.active,.ctVendorListMenu .active a,.ctCustomerListMenu li.active,.ctCustomerListMenu .active a
+	{
 	background-color: #0F7DC1 !important;
 	color: #fff;
 }
 
-.ctVendorListMenu li:hover a {
+.ctVendorListMenu li:hover a,.ctCustomerListMenu li:hover a {
 	color: #fff;
 }
 

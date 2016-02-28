@@ -17,4 +17,12 @@
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
 		p:connection-factory-ref="jedisConnFactory" />
 
+	<bean id="tripDetailsBeanService" class="travel.com.bean.serviceImpl.TripDetailsBeanServiceImpl">
+		<property name="redisTemplate" ref="redisTemplate" />
+	</bean>
+
+	<bean id="reviewsBeanService" class="travel.com.bean.serviceImpl.ReviewsBeanServiceImpl">
+		<property name="redisTemplate" ref="redisTemplate" />
+	</bean>
+
 </beans>

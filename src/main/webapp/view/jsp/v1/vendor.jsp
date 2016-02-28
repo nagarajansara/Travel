@@ -238,8 +238,8 @@
 							class="form-group ctPhotogalleryParentDiv ctPhotogalleryParentLen1">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label">Photogallery</label>
 							<div class="col-lg-4 col-md-4 col-sm-4">
-								<label class="custom-file-input"> <input
-									class="ctPhotogalleryFileName" name="file" type="file">
+								<label class=""> <input class="ctPhotogalleryFileName"
+									name="file" type="file">
 								</label>
 							</div>
 							<div class="col-lg-1 col-md-1">

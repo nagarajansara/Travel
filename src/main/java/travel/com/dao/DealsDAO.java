@@ -14,4 +14,8 @@ public interface DealsDAO
 	int getDealsEntries(Deals deals) throws Exception;
 
 	void addDeals(Deals deals) throws Exception;
+
+	List<Deals> getAllDeals(int startIndx, int maxIndx) throws Exception;
+
+	int getAllDealsNumEntries() throws Exception;
 }

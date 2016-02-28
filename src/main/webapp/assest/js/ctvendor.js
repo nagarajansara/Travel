@@ -290,7 +290,7 @@ function ctgetPhotoGalleryFileField(jqSel) {
 	var html = '<div class="form-group ctPhotogalleryParentDiv ' + jqSel + '">'
 			+ '<label class="col-lg-3 col-sm-3 control-label"></label>'
 			+ '<div class="col-lg-4 col-sm-4">'
-			+ '<label class="custom-file-input">'
+			+ '<label class="">'  //custom-file-input
 			+ '<input class="ctPhotogalleryFileName" name="file" type="file">'
 			+ '</label>' + '</div>' + '</div>';
 	return html;

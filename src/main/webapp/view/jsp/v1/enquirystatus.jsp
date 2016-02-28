@@ -23,8 +23,8 @@
 						<span style="font-family: verdana; color: red; font-size: 12px;">
 							Credits limit not eligible </span>
 					</div>
+					<h1>Pending Enquiry</h1>
 					<c:if test="${not empty model.responseData.enquiry}">
-						<h1>Pending Enquiry</h1>
 						<table class="table table-striped ctEnquiryTableStatus">
 							<thead>
 								<tr>

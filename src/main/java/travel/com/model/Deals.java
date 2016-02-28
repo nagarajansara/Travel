@@ -29,6 +29,20 @@ public class Deals
 	@Setter
 	private int id;
 
+	public int getTotaldeals()
+	{
+		return totaldeals;
+	}
+
+	public void setTotaldeals(int totaldeals)
+	{
+		this.totaldeals = totaldeals;
+	}
+
+	@Getter
+	@Setter
+	private int totaldeals;
+
 	@Getter
 	@Setter
 	private int price;

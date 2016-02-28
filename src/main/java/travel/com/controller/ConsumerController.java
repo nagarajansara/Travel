@@ -24,7 +24,6 @@ import java.io.*;
 import java.net.*;
 import java.text.*;
 import java.util.*;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -69,15 +68,201 @@ public class ConsumerController extends BaseController
 		{
 			int userId = getUserId(request);
 			List<Login> login = consumerService.getProfile(userId);
-			utilities.setSuccessResponse(response, login);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userDetails", login);
+			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
 		{
-			logger.error("getprofile :" + ex.getMessage());
+			logger.error("getprofile consumer :" + ex.getMessage());
 			utilities.setErrResponse(ex, response);
 		}
 		model.addAttribute("model", response);
 
-		return "customer";
+		return "consumerprofile";
+	}
+
+	@RequestMapping(value = "/updateConsumerProfile", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String updateConsumerProfile(HttpServletRequest request,
+			ModelMap model)
+
+	{
+		try
+		{
+			int userId = getUserId(request);
+
+			String firstName = request.getParameter("fname");
+			String lastName = request.getParameter("lname");
+			String city = request.getParameter("city");
+
+			if (firstName != null && lastName != null && city != null
+					&& firstName.length() > 0 && lastName.length() > 0
+					&& city.length() > 0)
+			{
+				Login login = new Login(firstName, lastName, city, userId);
+				consumerService.updateConsumerProfile(login);
+				List<Login> loginTemp = consumerService.getProfile(userId);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("userDetails", loginTemp);
+				utilities.setSuccessResponse(response, map);
+			} else
+			{
+				throw new ConstException(ConstException.ERR_CODE_NO_DATA,
+						ConstException.ERR_MSG_NO_DATA);
+			}
+
+		} catch (Exception ex)
+		{
+			logger.error("updateProfile consumer :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "consumerprofile";
+	}
+
+	@RequestMapping(value = "/getConsumerTravels", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public
+			String
+			getConsumerTravels(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			int startIndx = utilities.getDefaultMinIndx();
+			int maxIndx = utilities.getDefaultMaxIndx();
+			Map<String, Object> map = new HashMap<String, Object>();
+			int consumerId = getUserId(request);
+			Booking booking =
+					new Booking(consumerId, Booking.BOOKING_STATUS_BOOKED,
+							startIndx, maxIndx);
+			int numEntries =
+					consumerService.getConsumerTripDetailsNumEntries(booking);
+			map.put("numEntries", numEntries);
+
+			List<Trip> list = consumerService.getConsumerTripDetails(booking);
+			map.put("tripDetails", list);
+			utilities.setSuccessResponse(response, map);
+
+		} catch (Exception ex)
+		{
+			logger.error("getConsumerTravels :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "consumermytravels";
+	}
+
+	@RequestMapping(value = "/getConsumerTravelsPagination/{startIndx}",
+			method =
+			{ RequestMethod.GET, RequestMethod.POST })
+	public String getConsumerTravelsPagination(HttpServletRequest request,
+			@PathVariable int startIndx, ModelMap model)
+	{
+		try
+		{
+			startIndx = startIndx - 1;
+			startIndx = getStartIdx(startIndx, utilities.getDefaultMaxIndx());
+			Map<String, Object> map = new HashMap<String, Object>();
+			int consumerId = getUserId(request);
+			Booking booking =
+					new Booking(consumerId, Booking.BOOKING_STATUS_BOOKED,
+							startIndx, utilities.getDefaultMaxIndx());
+			int numEntries =
+					consumerService.getConsumerTripDetailsNumEntries(booking);
+			map.put("numEntries", numEntries);
+
+			List<Trip> list = consumerService.getConsumerTripDetails(booking);
+			map.put("tripDetails", list);
+			utilities.setSuccessResponse(response, map);
+
+		} catch (Exception ex)
+		{
+			logger.error("getConsumerTravelsPagination :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "consumermytravels";
+	}
+
+	@RequestMapping(value = "/getConsumerPoints", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getConsumerPoints(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int consumerId = getUserId(request);
+			Points points = new Points(consumerId);
+			List<Points> pList = consumerService.getPoints(points);
+			map.put("points", pList);
+			utilities.setSuccessResponse(response, map);
+
+		} catch (Exception ex)
+		{
+			logger.error("getConsumerPoints :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "consumerearnpoints";
+	}
+
+	@RequestMapping(value = "/getAllDeals", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getAllDeals(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int consumerId = getUserId(request);
+			List<Deals> deals =
+					consumerService.getAllDeals(utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx());
+			int numEntries = consumerService.getAllDealsNumEntries();
+			map.put("deals", deals);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+
+		} catch (Exception ex)
+		{
+			logger.error("getAllDeals :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "consumerdeals";
+	}
+
+	@RequestMapping(value = "/getAllDealsPagination/{startIndx}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getAllDeals(HttpServletRequest request,
+			@PathVariable int startIndx, ModelMap model)
+	{
+		try
+		{
+			startIndx = startIndx - 1;
+			startIndx = getStartIdx(startIndx, utilities.getDefaultMaxIndx());
+			Map<String, Object> map = new HashMap<String, Object>();
+			int consumerId = getUserId(request);
+			List<Deals> deals =
+					consumerService.getAllDeals(startIndx,
+							utilities.getDefaultMaxIndx());
+			int numEntries = consumerService.getAllDealsNumEntries();
+			map.put("deals", deals);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+
+		} catch (Exception ex)
+		{
+			logger.error("getAllDeals :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "consumerdeals";
 	}
 
 	@RequestMapping(value = "/getcallbacksdetails", method =

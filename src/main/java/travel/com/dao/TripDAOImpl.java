@@ -40,7 +40,8 @@ public class TripDAOImpl implements TripDAO
 
 	// USER BASED
 	final String GET_TRIP_DETAILS =
-			"SELECT td.title, td.id AS id, td.description AS description, td.guidelines AS guidelines, IF(SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1) IS NULL , :defaultImage, SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1))AS imageurls, "
+			"SELECT td.title, td.id AS id, td.description AS description, td.guidelines AS guidelines, IF(SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1) IS NULL , :defaultImage, "
+					+ "SUBSTRING_INDEX(GROUP_CONCAT(ti.name), ',', 1))AS imageurls, "
 					+ "IFNULL(r.reviewscount, 0) AS reviewscount, IFNULL(v.viwerscount, 0) AS viwerscount, "
 					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS fromdate, a.name AS activityname "
 					+ "FROM tripdetails td "

@@ -40,6 +40,10 @@ import java.net.URL;
 
 import travel.com.service.*;
 import travel.com.JMS.JMSProducer;
+import travel.com.bean.ReviewsBean;
+import travel.com.bean.TripDetailsBean;
+import travel.com.bean.service.ReviewsBeanService;
+import travel.com.bean.service.TripDetailsBeanService;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
@@ -53,6 +57,7 @@ public class TripController extends BaseController
 
 	private static final Logger logger = Logger.getLogger(TripController.class
 			.getName());
+	private boolean IS_REDIS_SERVER_ENABLE = false;
 
 	@Autowired
 	@Qualifier("cityService")
@@ -97,6 +102,14 @@ public class TripController extends BaseController
 	@Autowired
 	@Qualifier("loginService")
 	LoginService loginService;
+
+	@Autowired
+	@Qualifier("tripDetailsBeanService")
+	TripDetailsBeanService tripDetailsBeanService;
+
+	@Autowired
+	@Qualifier("reviewsBeanService")
+	ReviewsBeanService reviewsBeanService;
 
 	@RequestMapping(value = "/addTripDetails", method =
 	{ RequestMethod.GET, RequestMethod.POST })
@@ -343,16 +356,78 @@ public class TripController extends BaseController
 					new Viewers(tripId, credits, Viewers.STATUS_VIEWED);
 			viewersService.insertViewers(viewers);
 			Trip trip = new Trip(tripId, STATUS_ACTIVE);
-			List<Trip> list = tripService.getTripDetailsBasedId(trip);
+			String tripIds = String.valueOf(tripId);
+
+			// tripDetailsBeanService.find(tripIds) == null
+			if (true)
+			{
+				List<Trip> list = new ArrayList<Trip>();
+				list = tripService.getTripDetailsBasedId(trip);
+				map.put("tripdetails", list);
+				if (IS_REDIS_SERVER_ENABLE)
+				{
+					if (list != null && list.size() > 0)
+					{
+						for (int index = 0; index < list.size(); index++)
+						{
+							Trip tripObj = (Trip) list.get(index);
+							String startrating =
+									(tripObj.getStartrating() != null ? tripObj
+											.getStartrating() : "0");
+							String tripIdTemp = String.valueOf(tripObj.getId());
+							TripDetailsBean tripDetailsBean =
+									new TripDetailsBean(tripObj.getUserid(),
+											startrating, tripIdTemp,
+											tripObj.getTitle(),
+											tripObj.getLocationid(),
+											tripObj.getSubactivityid(),
+											tripObj.getActivityid(),
+											tripObj.getDuration(),
+											tripObj.getFromdate(),
+											tripObj.getTodate(),
+											tripObj.getStartpoint(),
+											tripObj.getRoute(),
+											tripObj.getDescription(),
+											tripObj.getPrice(),
+											tripObj.getGuidelines(),
+											tripObj.getStatus(),
+											tripObj.getCreatedat(),
+											tripObj.getOffer_percentage(),
+											tripObj.getTocity(),
+											tripObj.getTripimagename(),
+											tripObj.getDaysdesc(),
+											tripObj.getDateformat(),
+											tripObj.getTodateformat(),
+											tripObj.getViews(),
+											tripObj.getViews(),
+											tripObj.getReviews());
+							tripDetailsBeanService.save(tripDetailsBean);
+
+							logger.info("Data added in REDIS server : "
+									+ tripIdTemp);
+
+						}
+					}
+				}
+			} else
+			{
+				logger.info("Tripdetails data extract from REDIS server");
+
+				List<TripDetailsBean> list = new ArrayList<TripDetailsBean>();
+				list.add(tripDetailsBeanService.find(String.valueOf(tripId)));
+				map.put("tripdetails", list);
+			}
+
 			Reviews reviews =
 					new Reviews(tripId, utilities.getDefaultMinIndx(),
 							utilities.getDefaultMaxIndx());
+
 			List<Reviews> reviewList =
 					reviewsService.getReviewsBasedTripId(reviews);
 			int numEntries = reviewsService.getNumEntries(reviews);
-			map.put("tripdetails", list);
 			map.put("reviewsdetails", reviewList);
 			map.put("reviewsNumEntries", numEntries);
+
 			map.put("reviewsCurrentPage", utilities.getDefaultMinIndx());
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)

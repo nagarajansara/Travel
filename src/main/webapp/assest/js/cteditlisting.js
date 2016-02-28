@@ -108,7 +108,7 @@ function ctgetEditPhotoGalleryFileField(jqSel) {
 					+ jqSel
 					+ '">'
 					+ '<div class="col-lg-4 col-sm-4">'
-					+ '<label class="custom-file-input">'
+					+ '<label class="">'
 					+ '<input class="ctEditPhotogalleryFile" name="file" type="file">'
 					+ '</label>' + '</div>' + '</div>';
 	return html;

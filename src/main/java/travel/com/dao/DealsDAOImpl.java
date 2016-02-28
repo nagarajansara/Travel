@@ -36,6 +36,18 @@ public class DealsDAOImpl implements DealsDAO
 			"INSERT IGNORE into deals (offer_percentage, offerdesc, vendorid, tripid) VALUES (:offer_percentage, :offerdesc, :vendorid, "
 					+ ":tripid)";
 
+	String GET_ALL_DEALS =
+			"SELECT d.id, d.tripid AS tripid, d.offer_percentage AS offer_percentage, d.offerdesc AS offerdesc, t.title AS title, t.price AS price FROM deals d "
+					+ "INNER JOIN tripdetails t "
+					+ "ON t.id = d.tripid "
+					+ "WHERE d.status =:status AND t.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') ORDER BY d.createdat DESC LIMIT :startIndx, :endIndx";
+
+	String GET_ALL_DEALS_NUMENTRIES =
+			"SELECT count(*) as totaldeals FROM deals d "
+					+ "INNER JOIN tripdetails t "
+					+ "ON t.id = d.tripid "
+					+ "WHERE d.status =:status AND t.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d')";
+
 	public List<Deals> getDeals(Deals deals) throws Exception
 	{
 		Map map = new HashMap();
@@ -77,6 +89,27 @@ public class DealsDAOImpl implements DealsDAO
 
 		namedParameterJdbcTemplate.update(ADD_DEALS, map);
 
+	}
+
+	@Override
+	public List<Deals> getAllDeals(int startIndx, int maxIndx) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("startIndx", startIndx);
+		paramMap.put("endIndx", maxIndx);
+		paramMap.put("status", "active");
+
+		return namedParameterJdbcTemplate.query(GET_ALL_DEALS, paramMap,
+				new BeanPropertyRowMapper(Deals.class));
+	}
+
+	@Override
+	public int getAllDealsNumEntries() throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("status", "active");
+		return namedParameterJdbcTemplate.queryForInt(GET_ALL_DEALS_NUMENTRIES,
+				paramMap);
 	}
 
 }
