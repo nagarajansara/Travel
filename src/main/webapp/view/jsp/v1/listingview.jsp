@@ -172,61 +172,66 @@
 							</form>
 						</div>
 					</div>
-					<div class="col-md-8">
+					<div class="col-md-9">
 						<div class="kd-section-title">
 							<h3>Listing View</h3>
 						</div>
-						<div class="kd-blog-list kd-blogmedium">
+						<div class="kd-package-list">
 							<c:if test="${not empty model.responseData.tripDetails}">
 								<c:set var="numEntries" value="${model.responseData.numEntries}" />
 								<div class="row">
 									<c:forEach items="${model.responseData.tripDetails}"
 										var="element" varStatus="loop">
-										<article class="col-md-12">
-											<div class="bloginner" style="width: 100% !important">
+										<article class="col-md-12 ctBlogborderstyle">
+											<article class="col-md-5">
 												<figure>
-													<a href="#"><img width="255" height="191"
-														src="${hostName}:${port}/travelimages/compress/${(element.tripimagename)}"
-														alt=""></a>
+													<a href="#"><img alt=""
+														src="${baseURL}/theme/extraimages/pakege2.jpg"></a>
 													<figcaption>
-														<a target="_blank"
-															href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}"
-															" class="fa fa-plus-circle"></a>
+														<span class="package-price thbg-color">RS ${ element.price}</span>
+														<div class="kd-bottomelement">
+															<h5>
+																<a href="#">${ element.title}</a>
+															</h5>
+															<div class="days-counter ctDaysCounter">
+																<span>${ element.duration}</span> <br> days
+															</div>
+														</div>
 													</figcaption>
 												</figure>
-												<section class="kd-bloginfo">
-													<h2>
-														<a class="ctListingTitle" target="_blank"
-															href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}">${ element.title}
-														</a>
-													</h2>
-													<ul class="kd-postoption">
-														<li><a href="#" class="thcolorhover">Start Date </a></li>
-														<li><time datetime="">| ${ element.dateformat }</time></li>
+											</article>
+											<section class="kd-bloginfo col-md-7">
+												<h2>
+													<a class="ctListingTitle" target="_blank"
+														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}">${ element.title}
+													</a>
+												</h2>
+												<ul class="kd-postoption">
+													<li><a href="#" class="thcolorhover">Start Date </a></li>
+													<li><time datetime="">| ${ element.dateformat }</time></li>
+												</ul>
+												<p>${element.guidelines }</p>
+												<div class="kd-usernetwork">
+													<ul class="kd-blogcomment">
+														<li><a href="#" class="thcolorhover"><i
+																class="fa fa-comments-o"></i> ${element.reviewscount }</a></li>
+														<li><a href="#" class="thcolorhover"><i
+																class="fa fa-eye"></i> ${element.viwerscount }</a></li>
 													</ul>
-													<p>${element.guidelines }</p>
-													<div class="kd-usernetwork">
-														<ul class="kd-blogcomment">
+													<div class="kd-social-network">
+														<ul>
 															<li><a href="#" class="thcolorhover"><i
-																	class="fa fa-comments-o"></i> ${element.reviewscount }</a></li>
+																	class="fa fa-facebook"></i></a></li>
 															<li><a href="#" class="thcolorhover"><i
-																	class="fa fa-eye"></i> ${element.viwerscount }</a></li>
+																	class="fa fa-twitter"></i></a></li>
+															<li><a href="#" class="thcolorhover"><i
+																	class="fa fa-tumblr"></i></a></li>
+															<li><a href="#" class="thcolorhover"><i
+																	class="fa fa-google-plus"></i></a></li>
 														</ul>
-														<div class="kd-social-network">
-															<ul>
-																<li><a href="#" class="thcolorhover"><i
-																		class="fa fa-facebook"></i></a></li>
-																<li><a href="#" class="thcolorhover"><i
-																		class="fa fa-twitter"></i></a></li>
-																<li><a href="#" class="thcolorhover"><i
-																		class="fa fa-tumblr"></i></a></li>
-																<li><a href="#" class="thcolorhover"><i
-																		class="fa fa-google-plus"></i></a></li>
-															</ul>
-														</div>
 													</div>
-												</section>
-											</div>
+												</div>
+											</section>
 										</article>
 									</c:forEach>
 								</div>
@@ -258,13 +263,13 @@
 <script type="text/javascript">
     var numEntries = '${numEntries}', locationId = '${locationId}', locationName = '${locationName}', activityIds = '${activityIds}', fromdate = '${fromdate}', fromPrice = '${fromPrice}', toPrice = '${toPrice}', START_PAGE = 1, MAX_ENTRIES = 2, requestedFilterParams = [
 	    locationId, locationName, activityIds, fromdate, toPrice ], subActivityIds = '${subActivityIds}', requestedFilterParamsJSON = {
-	"startpoint": locationId,
-	"fromdate": fromdate,
-	"activitytype": activityIds,
-	"toprice": toPrice,
-	"fromprice": fromPrice,
-	"startLocation": locationName,
-	"subactivitytype": subActivityIds
+	"startpoint" : locationId,
+	"fromdate" : fromdate,
+	"activitytype" : activityIds,
+	"toprice" : toPrice,
+	"fromprice" : fromPrice,
+	"startLocation" : locationName,
+	"subactivitytype" : subActivityIds
     }, isTripDetails = '${model.responseData.istripDetails}';
 
     console.log("subActivityIds :" + '${subActivityIds}');

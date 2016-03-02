@@ -42,3 +42,24 @@
 	margin-bottom: 20px;
 	overflow-y: scroll;
 }
+
+.ctBlogborderstyle {
+	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+	background-color: #fcfcfc;
+	padding: 15px 20px 15px 15px;
+}
+
+.ctBlogborderstyle h5, .ctDaysCounter {
+	font-family: verdana;
+	font-size: 12px;
+}
+
+.ctDaysCounter span {
+	font-family: verdana;
+	font-size: 20px;
+}
+
+.ctBlogborderstyle .kd-postoption li,.ctBlogborderstyle .kd-blogcomment li
+	{
+	list-style: none;
+}

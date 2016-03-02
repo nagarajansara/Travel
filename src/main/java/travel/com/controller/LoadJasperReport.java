@@ -78,7 +78,7 @@ public class LoadJasperReport
 		 * 
 		 * }
 		 */
-		String reportFileName = "JREmp1";
+		String reportFileName = "customer";
 
 		System.out.println("COMMMMMM");
 
@@ -98,7 +98,7 @@ public class LoadJasperReport
 
 			conn =
 					DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/travels", "root", "");
+							"jdbc:mysql://localhost:3306/sakila", "root", "");
 
 			if (conn != null)
 			{
@@ -223,7 +223,7 @@ public class LoadJasperReport
 			JasperReport jasperReport, Connection conn) throws JRException,
 			NamingException, SQLException, IOException
 	{
-		byte[] bytes = null;
+		/*byte[] bytes = null;
 		bytes = JasperRunManager.runReportToPdf(jasperReport, parameters, conn);
 		resp.reset();
 		resp.resetBuffer();
@@ -232,7 +232,7 @@ public class LoadJasperReport
 		ServletOutputStream ouputStream = resp.getOutputStream();
 		ouputStream.write(bytes, 0, bytes.length);
 		ouputStream.flush();
-		ouputStream.close();
+		ouputStream.close();*/
 	}
 
 }
