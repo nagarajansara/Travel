@@ -160,7 +160,7 @@
 						<!--// Comments //-->
 						<div id="kdcomments">
 							<c:if test="${not empty model.responseData.reviewsdetails}">
-								<h2>${model.responseData.reviewsNumEntries} Comments</h2>
+								<h2>${model.responseData.reviewsNumEntries}Comments</h2>
 								<ul class="ctReviewsDetailsUL">
 									<c:forEach items="${model.responseData.reviewsdetails}"
 										var="element" varStatus="loop">
@@ -247,8 +247,8 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close ctViewListingCloseBtn" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
+							<button type="button" class="close ctViewListingCloseBtn"
+								data-dismiss="modal" aria-hidden="true">&times;</button>
 							<h4 class="modal-title">Enquire Confirmation</h4>
 						</div>
 						<div class="modal-body">

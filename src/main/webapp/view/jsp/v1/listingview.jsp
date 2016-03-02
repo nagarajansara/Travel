@@ -185,8 +185,9 @@
 										<article class="col-md-12 ctBlogborderstyle">
 											<article class="col-md-5">
 												<figure>
-													<a href="#"><img alt=""
-														src="${baseURL}/theme/extraimages/pakege2.jpg"></a>
+													<a href="#"><img width="315" height="235"
+														alt="${ element.title}" title="${ element.title}"
+														src="${hostName}:${port}/${uploadedImageFolderName}/${element.tripimagename}"></a>
 													<figcaption>
 														<span class="package-price thbg-color">RS ${ element.price}</span>
 														<div class="kd-bottomelement">

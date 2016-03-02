@@ -49,9 +49,14 @@
 	padding: 15px 20px 15px 15px;
 }
 
-.ctBlogborderstyle h5, .ctDaysCounter {
+.ctBlogborderstyle h5,.ctDaysCounter {
 	font-family: verdana;
 	font-size: 12px;
+}
+
+.ctBlogborderstyle h5 {
+	width: 70%;
+	text-transform: uppercase;
 }
 
 .ctDaysCounter span {
@@ -62,4 +67,8 @@
 .ctBlogborderstyle .kd-postoption li,.ctBlogborderstyle .kd-blogcomment li
 	{
 	list-style: none;
+}
+
+.ctBlogborderstyle {
+	box-shadow: 0 2px 5px 0px !important;
 }
