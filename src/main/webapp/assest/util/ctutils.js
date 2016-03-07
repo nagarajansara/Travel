@@ -102,6 +102,14 @@ BmpUtil.prototype.validateURL = function(str) {
     var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
     return regexp.test(str);
 };
+BmpUtil.prototype.validateEmail = function(email) {
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (filter.test(email)) {
+	return true;
+    } else {
+	return false;
+    }
+};
 BmpUtil.prototype.convertDateENG = function(currDate) {
     var months = new Array(12), month_value = '', day_value = '', year_value = '', current_date, convertedJSON = {};
     months[0] = "January";

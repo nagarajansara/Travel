@@ -225,7 +225,21 @@ public class Trip
 
 	@Getter
 	@Setter
+	private String firstname;
+
+	@Getter
+	@Setter
 	private String startrating;
+
+	public String getFirstname()
+	{
+		return firstname;
+	}
+
+	public void setFirstname(String firstname)
+	{
+		this.firstname = firstname;
+	}
 
 	public String getEmail()
 	{

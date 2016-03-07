@@ -61,7 +61,11 @@
 					<c:if test="${not empty model.responseData.tripdetails}">
 						<c:forEach items="${model.responseData.tripdetails}" var="element"
 							varStatus="loop">
-							<div class="kd-pkg-info">
+							<c:set var="tourProvidedEmail" value="${element.email }"
+								scope="request" />
+							<c:set var="tourProvidedName" value="${element.firstname }"
+								scope="request" />
+							<div class="kd-pkg-info ctNoborder">
 								<ul class="ctKdpkgInfoList">
 									<li><i class="fa fa-map-marker"></i> <strong>Duration:</strong>
 										${element.dateformat} - ${element.todateformat}</li>
@@ -101,20 +105,48 @@
 										</ul>
 									</div>
 								</div>
-								<a class="kd-booking-btn thbg-color ctBookingNow" href="#"
-									data-toggle="modal" data-target="#myModal">enquiry nOW</a>
+								<!-- <a class="kd-booking-btn thbg-color ctBookingNow" href="#"
+									data-toggle="modal" data-target="#myModal">enquiry nOW</a> -->
 							</div>
-							<div class="kd-pkg-info">
+							<div class="kd-pkg-info ctNoborder">
 								<div class="row">
-									<div class="col-md-6 col-sm-6">
+									<div class="col-md-12 col-sm-12">
 										<form class="form-horizontal">
 											<div class="form-group">
-												<label class="col-lg-3 col-md-3 col-sm-3 control-label">
+												<label
+													class="col-lg-4 col-md-4 col-sm-4 control-label ctViewListingFont_B">
+													TOUR PROVIDED BY </label>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-2 col-md-2 col-sm-2 control-label">
 													<img class="ctVendorImage"
 													src="${baseURL}/assest/img/vendor_image.png">
 												</label>
 												<div class="col-lg-6 col-md-6 col-sm-6">
 													<div id="ctRatedStar"></div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label
+													class="col-lg-2 col-md-2 col-sm-2 control-label ctViewListingFont_B">
+													Name :</label>
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													${tourProvidedName}</div>
+											</div>
+											<div class="form-group">
+												<label
+													class="col-lg-2 col-md-2 col-sm-2 control-label ctViewListingFont_B">
+													Email :</label>
+												<div class="col-lg-6 col-md-6 col-sm-6">
+													${tourProvidedEmail}</div>
+											</div>
+											<div class="form-group">
+												<!-- <label class="col-lg-4 col-md-4 col-sm-4 control-label">
+												</label> -->
+												<div
+													class="col-lg-12 col-md-12 col-sm-12 ctViewListingFont_B">
+													<a class="kd-booking-btn thbg-color ctBookingNow" href="#"
+														data-toggle="modal" data-target="#myModal">enquiry nOW</a>
 												</div>
 											</div>
 										</form>
@@ -130,37 +162,71 @@
 				<div class="col-md-8">
 					<div class="kd-package-detail">
 						<c:if test="${not empty model.responseData.tripdetails}">
-							<c:forEach items="${model.responseData.tripdetails}"
-								var="element" varStatus="loop">
-								<c:set var="ratedStart" value="${element.startrating}"></c:set>
-								<blockquote>
-									<span class="ctDefaultHeaders">${ element.title }</span><br>
-									<span
-										style="text-transform: uppercase; font-size: 14px !important;">${ element.guidelines }</span>
-								</blockquote>
-								<div class="kd-rich-editor">
-									<div class="kd-imageframe">
-										<div class="row"></div>
+							<div class="kd-tab kd-horizontal-tab ctViewListingMenu">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#home"
+										aria-controls="home" role="tab" data-toggle="tab">Title</a></li>
+									<li role="presentation"><a href="#profile"
+										aria-controls="profile" role="tab" data-toggle="tab">Guidelines</a></li>
+									<li role="presentation"><a href="#messages"
+										aria-controls="messages" role="tab" data-toggle="tab">Itenary</a></li>
+									<li role="presentation"><a href="#dates"
+										aria-controls=dates role="tab" data-toggle="tab">Dates</a></li>
+									<li class="pull-right ctSavedListTrip"><c:choose>
+											<c:when test="${(sessionScope.role != null)}">
+												<a class="ctSavedTripList" style="">SavedTripList</a>
+											</c:when>
+											<c:otherwise>
+												<a class="ctSavedTripList" title="Please login and continue">SavedTripList</a>
+											</c:otherwise>
+										</c:choose>
+								</ul>
+								<c:forEach items="${model.responseData.tripdetails}"
+									var="element" varStatus="loop">
+									<div class="tab-content">
+										<div role="tabpanel" class="tab-pane active" id="home">
+											<div class="kd-dropcap">
+												<p class="ctDefaultHeaders">${ element.title }</p>
+											</div>
+										</div>
+										<div role="tabpanel" class="tab-pane" id="profile">
+											<div class="kd-dropcap">
+												<p class="ctDefaultHeaders">${ element.guidelines }</p>
+											</div>
+										</div>
+										<div role="tabpanel" class="tab-pane" id="dates">
+											<div class="">
+												<p class="ctDefaultHeaders">${element.dateformat}-
+													${element.todateformat}</p>
+											</div>
+										</div>
+										<div role="tabpanel" class="tab-pane" id="messages">
+											<div class="">
+												<div class="kd-rich-editor">
+													<c:set var="tripdaysdesc"
+														value="${fn:split(element.daysdesc, ',')}" />
+													<c:forEach items="${tripdaysdesc}"
+														var="tripdaysdescElement" varStatus="loopElement">
+														<h1>
+															DAY
+															<c:out value="${ loopElement.index + 1}"></c:out>
+														</h1>
+														<p>
+															<c:out value="${tripdaysdescElement }"></c:out>
+														</p>
+													</c:forEach>
+												</div>
+											</div>
+										</div>
 									</div>
-									<c:set var="tripdaysdesc"
-										value="${fn:split(element.daysdesc, ',')}" />
-									<c:forEach items="${tripdaysdesc}" var="tripdaysdescElement"
-										varStatus="loopElement">
-										<h1>
-											DAY
-											<c:out value="${ loopElement.index + 1}"></c:out>
-										</h1>
-										<p>
-											<c:out value="${tripdaysdescElement }"></c:out>
-										</p>
-									</c:forEach>
-								</div>
-							</c:forEach>
+								</c:forEach>
+							</div>
 						</c:if>
 						<!--// Comments //-->
 						<div id="kdcomments">
 							<c:if test="${not empty model.responseData.reviewsdetails}">
-								<h2>${model.responseData.reviewsNumEntries}Comments</h2>
+								<h2>Comments (${model.responseData.reviewsNumEntries})</h2>
 								<ul class="ctReviewsDetailsUL">
 									<c:forEach items="${model.responseData.reviewsdetails}"
 										var="element" varStatus="loop">
@@ -214,6 +280,10 @@
 							<h2>Comments</h2>
 							<form>
 								<p>
+									<input class="ctViewListingEmail ctIsChkEmptyVal" type="text"
+										placeholder="Email *">
+								</p>
+								<p>
 									<input class="ctViewListingName ctIsChkEmptyVal" type="text"
 										placeholder="Name *">
 								</p>
@@ -222,10 +292,12 @@
 										placeholder="add your comment *"></textarea>
 								</p>
 								<br>
-								<p class="ctFontWeight_B">Start Rating</p>
-								<div id="star"></div>
+								<!-- <p class="ctFontWeight_B">Start Rating</p>
+								<div id="star"></div> -->
 								<br>
 								<p class="kd-button" style="margin-top: 10px !important;">
+									<img class="ctTravelLoader"
+										src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 									<input type="button" value="Submit comment "
 										class="thbg-color ctSubmitCommentBtn"> <span
 										class="ctSuccessComment"
@@ -236,6 +308,54 @@
 						</div>
 					</div>
 				</div>
+				<aside class="col-md-4">
+					<div class="widget widget-blogpost ctViewListingWigetBlogPost">
+						<div class="kd-widget-title">
+							<h2>Related Trips</h2>
+						</div>
+						<ul>
+							<li>
+								<figure>
+									<a href="#"><img
+										src="http://localhost:8082/travelimages/compress/23038picture0006.jpg"
+										alt=""></a>
+								</figure>
+								<div class="kd-post-info ">
+									<h6>
+										<a href="#">Watch this Chinese airport dummy...</a>
+									</h6>
+									<time datetime="2008-02-14 20:00">January 15, 2015</time>
+								</div>
+							</li>
+							<li>
+								<figure>
+									<a href="#"><img
+										src="http://localhost:8082/travelimages/compress/23038picture0006.jpg"
+										alt=""></a>
+								</figure>
+								<div class="kd-post-info">
+									<h6>
+										<a href="#">Watch this Chinese airport dummy...</a>
+									</h6>
+									<time datetime="2008-02-14 20:00">January 15, 2015</time>
+								</div>
+							</li>
+							<li>
+								<figure>
+									<a href="#"><img
+										src="http://localhost:8082/travelimages/compress/2469611855641_455679057938263_6088867645054996865_n.jpg"
+										alt=""></a>
+								</figure>
+								<div class="kd-post-info">
+									<h6>
+										<a href="#">Watch this Chinese airport dummy...</a>
+									</h6>
+									<time datetime="2008-02-14 20:00">January 15, 2015</time>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</aside>
 			</div>
 		</div>
 		<div class="bs-example">
@@ -329,7 +449,7 @@
 			});
 		$('#ctRatedStar').raty(
 			{
-			    start : ctRatedStar,
+			    start : 0,
 			    readOnly : true,
 			    "path" : "http://" + location.host + "/"
 				    + ctDAO.CONTEXT_NAME

@@ -1,3 +1,4 @@
+var TRIP_IMAGE_TYPE_COVER = "coverimage";
 $(function() {
 
 	$('#ctEditfromDatePicker').Zebra_DatePicker();
@@ -136,3 +137,28 @@ function ctEditgetAddItenaryDiv(jqSel, nameLen) {
 	return html;
 
 };
+function ctUpdateTripImgType()
+{
+    $("input[name=coverImg]:radio").change(function () {
+	var imgID = $(this).attr('pk_ID'),
+		tripID = $(this).attr('pk_tripID'),
+		status = TRIP_IMAGE_TYPE_COVER,
+		param = {};
+	param = {
+		"tripId": tripID,
+		"imgId": imgID
+	};
+	ctDAO.updateTripImgType(param, function(data){
+	    if(data && data.responseStatus == 200)
+		{
+			alert("Successfully updated");
+		}
+	    else
+		{
+			alert("Error occur");
+		}
+	}); 
+	
+    });
+    
+}

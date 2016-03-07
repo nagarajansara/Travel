@@ -33,6 +33,7 @@ function CtDAO() {
 	    + "/vendor/getCreditsReductionMoreDetails.json";
     this.GET_MORE_SENT_ENQUIRY_DETAILS = this.API_PREFIX
 	    + "/login/getMoreSentEnquireDetails.json";
+    this.UPDATE_TRIPIMAGE_TYPE = this.API_PREFIX + "/trip/updateTripImgType.json";    //IMAGE_TYPE (COVERIMAGE OR PROFILE IMAGE)
 
     this.RESPONSE_CACHE = {};
 
@@ -102,9 +103,13 @@ CtDAO.prototype.getCreditsReductionMoreDetails = function(param, cbk) {
 CtDAO.prototype.getMoreSentEnquireDetails = function(param, cbk) {
     var tObj = this;
     tObj.getData(tObj.GET_MORE_SENT_ENQUIRY_DETAILS, param, cbk);
-    
-};
 
+};
+CtDAO.prototype.updateTripImgType = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.UPDATE_TRIPIMAGE_TYPE, param, cbk);
+
+};
 CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	isParse) {
     var tObj = this, cbk = function(data) {

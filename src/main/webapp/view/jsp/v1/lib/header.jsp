@@ -61,45 +61,26 @@
 		<div class="kd-topbar ctFont_FamilyStyle">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-7">
+					<div class="col-md-5">
 						<ul class="kd-topinfo">
 							<li>
 								<div id="lang_sel">
 									<ul>
-										<li><a class="lang_sel_sel icl-en" href="#">EN</a>
-											<ul>
-												<li class="icl-fr"><a href="#">FR</a></li>
-												<li class="icl-de"><a href="#">DE</a></li>
-												<li class="icl-nl"><a href="#">NL</a></li>
-											</ul></li>
+										<li><i class="fa fa-phone"></i> Phone: +44 123 456 789</li>
 									</ul>
 								</div>
 							</li>
-							<li><i class="fa fa-phone"></i> Phone: +44 123 456 789</li>
-							<c:choose>
-								<c:when test="${sessionScope.fName != null}">
-									<li><i class="fa fa-user"></i> <a href="#"><c:out
-												value='${sessionScope["fName"]}' /></a></li>
-								</c:when>
-								<c:otherwise>
-									<!--<li>
-		                  <i class="fa fa-user"></i> <a href="#">User Name</a>
-		                </li>-->
-								</c:otherwise>
-							</c:choose>
+							<li><i class="fa fa-envelope-o"></i> Info@kodeforest.com</li>
+
 						</ul>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-7">
 						<ul class="kd-userinfo">
 							<li>
 								<div class="kd-social-network">
 									<ul>
 										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fa fa-tumblr"></i></a></li>
-										<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-										<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-										<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 									</ul>
 								</div>
 							</li>
@@ -204,6 +185,39 @@
 										</div>
 									</div>
 								</div></li>
+							<c:choose>
+								<c:when test="${sessionScope.fName != null}">
+									<li><i class="fa fa-user"></i> <a href="#"><c:out
+												value='${sessionScope["fName"]}' /></a></li>
+								</c:when>
+								<c:otherwise>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${sessionScope.fName != null}">
+									<li><i class=""></i> <a href="#"><c:out
+												value='Saved Trips' /> </a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="${baseURL}/view/jsp/v1/vendorregister.jsp"
+										data-toggle="" data-target="#" target="_blank">Are you
+											trip provider</a></li>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when
+									test="${(sessionScope.role != null) && (sessionScope.role eq 'ROLE_VENDOR')}">
+									<li><i class=""></i> <a
+										href="${baseURL}/travelapi/vendor/listing"> <c:out
+												value='Dashboard' /></a></li>
+								</c:when>
+								<c:otherwise>
+									<c:if
+										test="${(sessionScope.role != null) && (sessionScope.role eq 'ROLE_CUSTOMER')}">
+										<li><a href="${baseURL}/travelapi/consumer/getprofile">Dashboard</a></li>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
 						</ul>
 					</div>
 				</div>
@@ -214,7 +228,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-						<a href="index.html" class="logo"><img
+						<a href="index.html" class="logo ctTravelLogo_Padding"><img
 							src="${baseURL}/theme/images/logo.png" alt=""></a>
 					</div>
 					<div class="col-md-9">
@@ -229,7 +243,7 @@
 								</div>
 
 								<div class="collapse navbar-collapse" id="navbar-collapse-1">
-									<ul class="nav navbar-nav">
+									<ul class="nav navbar-nav ctTravelNavBar-Nav">
 										<li><form>
 												<input type="text" id="srch-term" name="srch-term"
 													placeholder="Search" class="form-control">
@@ -265,19 +279,15 @@
                           </li>
                         </ul>
                       </li>-->
-										<c:if
+										<%-- <c:if
 											test="${(sessionScope.role != null) && (sessionScope.role eq 'ROLE_VENDOR')}">
 											<li><a href="${baseURL}/travelapi/vendor/listing">Vendor</a>
-												<!--<ul class="sub-dropdown">
-	                          <li><a href="gallery-2column.html">Gallery 2Column</a></li>
-	                          <li><a href="gallery-3column.html">Gallery 3Column</a></li>
-	                          <li><a href="gallery.html">Gallery 4Column</a></li>
-	                        </ul>--></li>
-										</c:if>
-										<c:if
+											</li>
+										</c:if> --%>
+										<%-- <c:if
 											test="${(sessionScope.role != null) && (sessionScope.role eq 'ROLE_CUSTOMER')}">
 											<li><a href="${baseURL}/travelapi/consumer/getprofile">Customer</a></li>
-										</c:if>
+										</c:if> --%>
 										<!--<li><a href="contact-us.html">contact us</a></li>-->
 									</ul>
 								</div>

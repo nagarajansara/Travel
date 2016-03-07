@@ -68,4 +68,12 @@ public interface TripService
 	List<Trip> getAllTripDetails(int userId, String sTATUS_ACTIVE,
 			String startTitle) throws Exception;
 
+	List<Trip> getTopActivitys(int visibleTopActivitys) throws Exception;
+
+	void updateTripImgType(int tripId, int imageId, String IMAGE_TYPE)
+			throws Exception;
+
+	void updateTripImgType_ViaTripId(int tripId, int imageId,
+			String iMAGE_TYPE_PROFILE) throws Exception;
+
 }

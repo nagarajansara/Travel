@@ -185,11 +185,11 @@
 				</div>
 				<div class="col-md-5">
 					<div class="kd-section-title">
-						<h2 class="ctFont_FamilyStyle">Edit Image</h2>
+						<h2 class="ctFont_FamilyStyle">Uploaded Imgae</h2>
 					</div>
 					<c:if test="${not empty model.responseData.tripImagesList}">
 						<table class="kd-table kd-tabletwo"
-							style="border-top: 3px solid; border-bottom: 3px solid; border-right: 3px solid; border-left: 3px solid;">
+							style="border-top: 1px; border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid;">
 							<thead>
 							</thead>
 							<tbody>
@@ -197,7 +197,8 @@
 									var="elements" varStatus="loops">
 									<tr>
 										<td style="line-height: 5.5; height: 156px;"><img
-											style="width: 50%; height: 100%" src="${request.serverName}/${uploadedImageFolderName}/${elements.name}">
+											style="width: 50%; height: 100%"
+											src="${request.serverName}/${uploadedImageFolderName}/${elements.name}">
 										</td>
 										<td style="line-height: 5.5; width: 20%; height: 20%;"><img
 											style="cursor: pointer;" class="ctEditTripImageDel"
@@ -222,9 +223,12 @@
 						class="form-horizontal ctFontWeight_B ctEditVendorListingImgForm">
 						<div
 							class="form-group ctEditPhotogalleryParentDiv ctEditPhotogalleryParentLen1">
+							<div class="kd-section-title">
+								<h2 class="ctFont_FamilyStyle">Upload New Image</h2>
+							</div>
 							<div class="col-lg-5 col-md-5 col-sm-5">
-								<label class=""> <input
-									class="ctEditPhotogalleryFile" type="file" name="file">
+								<label class=""> <input class="ctEditPhotogalleryFile"
+									type="file" name="file">
 								</label>
 							</div>
 							<div class="col-lg-1 col-md-1">
@@ -250,7 +254,44 @@
 							</div>
 						</div>
 					</form>
-					<%-- </c:if> --%>
+					<div class="kd-section-title">
+						<h2 class="ctFont_FamilyStyle">Choose Cover Imgae</h2>
+					</div>
+					<c:if test="${not empty model.responseData.tripImagesList}">
+						<table class="kd-table kd-tabletwo"
+							style="border-top: 1px; border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid;">
+							<thead>
+							</thead>
+							<tbody>
+								<c:forEach items="${model.responseData.tripImagesList}"
+									var="elements" varStatus="loops">
+									<tr>
+										<td style="line-height: 5.5; height: 156px;"><img
+											style="width: 50%; height: 50%"
+											src="${request.serverName}/${uploadedImageFolderName}/${elements.name}">
+										</td>
+										<c:choose>
+											<c:when test="${elements.imagetype eq 'coverimage'}">
+												<td style="line-height: 5.5; width: 20%; height: 20%;"><input
+													type="radio" class="ctSelectCoverImg" checked="checked"
+													name="coverImg" pk_ID="${elements.id}"
+													pk_tripID="${elements.tripid}"></td>
+											</c:when>
+											<c:otherwise>
+												<td style="line-height: 5.5; width: 20%; height: 20%;"><input
+													type="radio" class="ctSelectCoverImg" name="coverImg"
+													pk_ID="${elements.id}" pk_tripID="${elements.tripid}"></td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+					<c:if test="${empty model.responseData.tripImagesList}">
+						<span style="color: red; font-family: verdana; font-weight: bold">No
+							existing image found</span>
+					</c:if>
 				</div>
 				<c:if test="${empty model.responseData.trip}">
 					<div class="row">
@@ -281,6 +322,7 @@
     $(document)
 	    .ready(
 		    function() {
+			ctUpdateTripImgType();
 			var searchTerm = null, numEntries = '${model.responseData.numEntries}', MAX_ENTRIES = 10, START_PAGE = 1;
 			$('.ctPriceTxt').numeric();
 			var remoteDataConfig = {

@@ -50,7 +50,11 @@ public class TripDAOImpl implements TripDAO
 					+ "ON r.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
 					+ "ON v.tripid = td.id "
-					+ "LEFT OUTER JOIN(SELECT * FROM tripimages WHERE STATUS =:status) AS ti ON td.id = ti.tripid "
+					+ "LEFT OUTER JOIN (SELECT IFNULL(t.name, i.name) AS NAME, i.tripid, IFNULL(t.imagetype, i.imagetype) FROM tripimages i "
+					+ "LEFT OUTER JOIN(SELECT name, imagetype, tripid FROM tripimages WHERE imagetype = 'coverimage') AS t "
+					+ "ON i.tripid = t.tripid GROUP BY i.tripid) AS ti ON td.id = ti.tripid "
+					// +
+					// "LEFT OUTER JOIN(SELECT * FROM tripimages WHERE STATUS =:status ORDER BY imagetype) AS ti ON td.id = ti.tripid "
 					+ "where "
 					+ "td.status =:status and td.userid =:userId "
 					+ "GROUP BY td.description, td.guidelines, td.createdat, a.name "
@@ -89,7 +93,11 @@ public class TripDAOImpl implements TripDAO
 					+ "ON r.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
 					+ "ON v.tripid = td.id "
-					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti  ON td.id = ti.tripid "
+					+ "LEFT OUTER JOIN (SELECT IFNULL(t.name, i.name) AS NAME, i.tripid, IFNULL(t.imagetype, i.imagetype) FROM tripimages i "
+					+ "LEFT OUTER JOIN(SELECT name, imagetype, tripid FROM tripimages WHERE imagetype = 'coverimage') AS t "
+					+ "ON i.tripid = t.tripid GROUP BY i.tripid) AS ti ON td.id = ti.tripid "
+					// +
+					// "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid ORDER BY imagetype) AS ti  ON td.id = ti.tripid "
 					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d')  AND ";
 
 	final String GET_FILTERED_TRIP_DETAILS_NUMENTRIES =
@@ -102,23 +110,33 @@ public class TripDAOImpl implements TripDAO
 					+ "ON r.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
 					+ "ON v.tripid = td.id "
-					+ "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid) AS ti ON td.id = ti.tripid "
+					+ "LEFT OUTER JOIN (SELECT IFNULL(t.name, i.name) AS NAME, i.tripid, IFNULL(t.imagetype, i.imagetype) FROM tripimages i "
+					+ "LEFT OUTER JOIN(SELECT name, imagetype, tripid FROM tripimages WHERE imagetype = 'coverimage') AS t "
+					+ "ON i.tripid = t.tripid GROUP BY i.tripid) AS ti ON td.id = ti.tripid "
+					// +
+					// "LEFT OUTER JOIN (SELECT * FROM tripimages WHERE STATUS =:status  GROUP BY tripid ORDER BY imagetype) AS ti ON td.id = ti.tripid "
 					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND td.status =:status ORDER BY td.createdat DESC LIMIT :startIndx, :endIndx ";
 
 	final String GET_ALL_TRIPDETAILS_NUMENTRIES =
 			"Select count(*) from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status";
 
 	final String GET_TRIP_DETAILS_BASED_ID =
-			"SELECT r.startrating, td.*, td.price, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
+			"SELECT u.*, td.*, td.price, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
 					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat,  "
-					+ " IFNULL(v.views, 0) AS views, IFNULL(f.favourites, 0) AS favourites, IFNULL(r.reviews, 0) AS reviews "
+					+ " IFNULL(v.views, 0) AS views, IFNULL(f.favourites, 0) AS favourites "
 					+ " FROM tripdetails td "
 					+ " INNER JOIN (SELECT * FROM itenary ORDER BY DAY) AS it ON it.tripid = td.id "
 					+ "INNER JOIN city c ON c.id = td.locationid "
+					+ "INNER JOIN users u "
+					+ "ON "
+					+ "u.id = td.userid "
 					+ " LEFT OUTER JOIN (SELECT tripid, GROUP_CONCAT(NAME) AS tripimagename FROM tripimages WHERE STATUS =:status GROUP BY tripid) AS ti ON ti.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS views FROM viewers WHERE STATUS = 'viewed' GROUP BY tripid) v ON td.id = v.tripid "
 					+ " LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS favourites FROM viewers WHERE STATUS = 'liked' GROUP BY tripid) f ON td.id = f.tripid "
-					+ "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS reviews, AVG(startrating) AS startrating FROM reviews GROUP BY tripid) r ON td.id = r.tripid "
+					/*
+					 * +
+					 * "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS reviews, AVG(startrating) AS startrating FROM reviews GROUP BY tripid) r ON td.id = r.tripid "
+					 */
 					+ "LEFT OUTER JOIN  (SELECT tripid, offer_percentage AS offer_percentage FROM deals) d ON td.id = d.tripid "
 					+ "WHERE td.id =:id";
 	final String GET_CREDITS_BASED_TRIPID =
@@ -129,6 +147,21 @@ public class TripDAOImpl implements TripDAO
 			"Select title, id from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status AND userid =:userid AND title like :startLetter";
 	final String GET_ALL_TRIPDETAILS =
 			"Select title, id from tripdetails where status =:status AND userid =:userid AND title like :startLetter";
+	final String GET_TOP_ACTIVITYS =
+			"SELECT SUBSTRING_INDEX(GROUP_CONCAT(IFNULL(tm.name, :defaultImage)), ',', 1) AS defaultImage, a.id, t.title FROM (SELECT tripid AS id, 'a' AS titles FROM admin_topactivity "
+					+ "UNION "
+					+ "SELECT id, 'b' AS titles FROM tripdetails) AS a "
+					+ "INNER JOIN tripdetails t "
+					+ "ON t.id = a.id "
+					+ "LEFT OUTER JOIN "
+					+ "tripimages tm "
+					+ "ON tm.tripid = a.id "
+					+ "GROUP BY a.id "
+					+ "ORDER BY a.titles " + "LIMIT :visibleTopActivitys";
+	final String UPDATE_TRIP_CONVER_IMAGE =
+			"Update tripimages set imagetype =:iMAGE_TYPE where id =:id and tripid =:tripId";
+	final String UPDATE_TRIP_CONVER_IMAGE_VIA_TRIPID =
+			"Update tripimages set imagetype =:iMAGE_TYPE where id <>:id and tripid =:tripId";
 
 	public Long addTripDetails(Trip trip) throws Exception
 	{
@@ -633,5 +666,41 @@ public class TripDAOImpl implements TripDAO
 
 		return namedParameterJdbcTemplate.queryForInt(stringBuffer.toString(),
 				map);
+	}
+
+	@Override
+	public List<Trip> getTopActivitys(int visibleTopActivitys) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("visibleTopActivitys", visibleTopActivitys);
+		paramMap.put("defaultImage", DEFAULT_TRIP_IMAGE_PATH);
+		return namedParameterJdbcTemplate.query(GET_TOP_ACTIVITYS, paramMap,
+				new BeanPropertyRowMapper(Trip.class));
+	}
+
+	@Override
+	public void updateTripImgType(int tripId, int imageId, String iMAGE_TYPE)
+			throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("tripId", tripId);
+		paramMap.put("id", imageId);
+		paramMap.put("iMAGE_TYPE", iMAGE_TYPE);
+
+		namedParameterJdbcTemplate.update(UPDATE_TRIP_CONVER_IMAGE, paramMap);
+
+	}
+
+	@Override
+	public void updateTripImgType_ViaTripId(int tripId, int imageId,
+			String iMAGE_TYPE_PROFILE) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("tripId", tripId);
+		paramMap.put("id", imageId);
+		paramMap.put("iMAGE_TYPE", iMAGE_TYPE_PROFILE);
+
+		namedParameterJdbcTemplate.update(UPDATE_TRIP_CONVER_IMAGE_VIA_TRIPID,
+				paramMap);
 	}
 }

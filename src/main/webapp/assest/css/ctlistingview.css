@@ -49,6 +49,10 @@
 	padding: 15px 20px 15px 15px;
 }
 
+.ctBlogborderstyle article {
+	margin-bottom: 2.5px !important;
+}
+
 .ctBlogborderstyle h5,.ctDaysCounter {
 	font-family: verdana;
 	font-size: 12px;

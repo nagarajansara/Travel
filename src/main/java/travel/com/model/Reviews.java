@@ -139,6 +139,20 @@ public class Reviews
 	@Setter
 	private String startrating;
 
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	@Getter
+	@Setter
+	private String email;
+
 	public String getCreatedate()
 	{
 		return createdate;
@@ -190,7 +204,7 @@ public class Reviews
 	@Getter
 	@Setter
 	private int vendorId;
-	
+
 	public String getTitle()
 	{
 		return title;
@@ -232,5 +246,15 @@ public class Reviews
 		this.username = username;
 		this.comment = comment;
 		this.startrating = startrating;
+	}
+
+	public Reviews(int tripid, String username, String comment,
+			String startrating, String email)
+	{
+		this.tripid = tripid;
+		this.username = username;
+		this.comment = comment;
+		this.startrating = startrating;
+		this.email = email;
 	}
 }

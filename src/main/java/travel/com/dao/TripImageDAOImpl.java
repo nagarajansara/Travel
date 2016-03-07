@@ -21,7 +21,7 @@ public class TripImageDAOImpl implements TripImageDAO
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	final String ADD_IMAGE = "INSERT into tripimages (tripid, name) VALUES (:tripId, :name)";
-	final String GET_IMAGE_DETAILS = "SELECT id, name, imagetype from tripimages where tripid =:tripId AND status =:status LIMIT 0, 10";
+	final String GET_IMAGE_DETAILS = "SELECT tripid, id, name, imagetype from tripimages where tripid =:tripId AND status =:status LIMIT 0, 10";
 	final String DELETE_TRIP_IMAGE = "Update tripimages set status =:status where tripid =:tripid and id =:id";
 
 	public void addTripImage(TripImage tripImage) throws Exception   //Change to bulk INSERT

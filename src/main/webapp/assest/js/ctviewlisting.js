@@ -127,27 +127,37 @@ function ctSubmitBtn() {
     $('.ctSubmitCommentBtn').click(
 	    function() {
 		var name = $('.ctViewListingName').val(), comment = $(
-			'.ctViewListingComment').val(), params = {};
+			'.ctViewListingComment').val(), email = $(
+			'.ctViewListingEmail').val(), params = {};
 		if (name && name.length > 0 && comment && comment.length > 0) {
 		    params["username"] = name;
 		    params["comment"] = comment;
 		    params["tripId"] = bmpUtil.getLastStartingURL();
 		    params["startrating"] = START_RATING_DEFAULT_VALUE;
+		    params["email"] = email;
 		    $('.ctSuccessComment').hide();
-		    ctDAO.addComments(params, function(data) {
-			if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {
-			    $('.ctSuccessComment').show();
-			    $('.ctSuccessComment').html(
-				    'Successfully commented');
-			} else {
-			    $('.ctSuccessComment').show();
-			    $('.ctSuccessComment').html(data.responseData);
-
-			}
-		    });
-		} else {
-		    alert("Please fill all the datas");
+		    if(bmpUtil.validateEmail(email))
+			{
+        		   	$('.ctTravelLoader').show();
+				ctDAO.addComments(params, function(data) {
+        			if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {
+        			    $('.ctSuccessComment').show();
+        			    $('.ctSuccessComment').html(
+        				    'Successfully commented');
+        			    $('.ctTravelLoader').hide();
+        			} else {
+        			    $('.ctSuccessComment').show();
+        			    $('.ctSuccessComment').html(data.responseData);
+        			    $('.ctTravelLoader').hide();	
+        			}
+        		    });
+        		} else {
+        		    alert("Please enter the valid email id");
+        		}
 		}
-
+		else
+		    {
+		    	alert("Please fill all the datas");
+		    }
 	    });
 }

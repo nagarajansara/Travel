@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html"%>
+<%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <%@ include file="lib/header.jsp"%>
 <link rel="stylesheet" href="${baseURL}/assest/css/ctlistingview.css"
 	media="screen" />
@@ -204,7 +205,7 @@
 											<section class="kd-bloginfo col-md-7">
 												<h2>
 													<a class="ctListingTitle" target="_blank"
-														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}">${ element.title}
+														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }">${ element.title}
 													</a>
 												</h2>
 												<ul class="kd-postoption">

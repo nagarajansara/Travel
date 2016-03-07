@@ -34,9 +34,33 @@ body .ctThumbImgFlex .slides  li img {
 	height: 30px;
 	padding: 5px;
 }
-/* @media screen and (min-width: 767px) {
-   
+
+.ctViewListingFont_B {
+	font-weight: bold;
 }
-@media screen and (min-width: 480px) {
-    
-} */
+
+.ctTravelLoader {
+	display: none;
+}
+
+.ctViewListingMenu ul {
+	font-weight: bold;
+}
+
+.ctViewListingMenu li.ctSavedListTrip a:hover,.ctSavedListTrip a {
+	background-color: #FAD160 !important;
+	color: #000000;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.ctViewListingWigetBlogPost,.ctViewListingWigetBlogPost a,.ctViewListingWigetBlogPost h2
+	{
+	font-family: verdana;
+}
+
+.ctNoborder {
+	border: 0px !important;
+	padding: 10px !important;
+	margin-bottom: 0px !important;
+}

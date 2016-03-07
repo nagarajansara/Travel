@@ -1,5 +1,6 @@
 package travel.com.controller;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -111,6 +112,28 @@ public class TripController extends BaseController
 	@Qualifier("reviewsBeanService")
 	ReviewsBeanService reviewsBeanService;
 
+	// Top relative activitys
+	@RequestMapping(value = "/getTopActivitys", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getTopActivitys(HttpServletRequest request,
+			HttpServletResponse res, ModelMap model) throws Exception
+	{
+		try
+		{
+
+			int visibleTopActivitys = 5;
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<Trip> list = tripService.getTopActivitys(visibleTopActivitys);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("getTopActivitys :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "home";
+	}
+
 	@RequestMapping(value = "/addTripDetails", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String addTripDetails(HttpServletRequest request,
@@ -129,13 +152,14 @@ public class TripController extends BaseController
 				String fromDate = (String) map.get("fromdate");
 				String toDate = (String) map.get("todate");
 				String subActivityType = (String) map.get("subactivitytype");
+				// Start point
 				int startPoint =
-						Integer.parseInt((String) map.get("startpoint")); // Start
-																			// point
+						Integer.parseInt((String) map.get("startpoint"));
 				String description = (String) map.get("description");
 				String guideLines = (String) map.get("guideline");
 				String totalDuration = (String) map.get("totalduration");
-				String locationId = (String) map.get("city"); // Destination
+				// Destination
+				String locationId = (String) map.get("city");
 				String activityId = (String) map.get("activitytype");
 				String routecount = (String) map.get("routecount");
 				String durationcount = (String) map.get("durationcount");
@@ -343,12 +367,13 @@ public class TripController extends BaseController
 	@RequestMapping(value = "/getTripDetailsBasedId/{tripId}", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String getTripDetailsBasedId(HttpServletRequest request,
-			@PathVariable("tripId") int tripId, HttpServletResponse res,
+			@PathVariable("tripId") String tripId_INT, HttpServletResponse res,
 			ModelMap model) throws Exception
 	{
 		try
 		{
-
+			String deCodedValue = utilities.getDecodedString(tripId_INT, 1);
+			int tripId = Integer.parseInt(new String(deCodedValue));
 			Map<String, Object> map = new HashMap<String, Object>();
 			String STATUS_ACTIVE = "active";
 			int credits = 0;
@@ -357,67 +382,13 @@ public class TripController extends BaseController
 			viewersService.insertViewers(viewers);
 			Trip trip = new Trip(tripId, STATUS_ACTIVE);
 			String tripIds = String.valueOf(tripId);
-
-			// tripDetailsBeanService.find(tripIds) == null
 			if (true)
 			{
 				List<Trip> list = new ArrayList<Trip>();
 				list = tripService.getTripDetailsBasedId(trip);
 				map.put("tripdetails", list);
-				/*if (IS_REDIS_SERVER_ENABLE)
-				{
-					if (list != null && list.size() > 0)
-					{
-						for (int index = 0; index < list.size(); index++)
-						{
-							Trip tripObj = (Trip) list.get(index);
-							String startrating =
-									(tripObj.getStartrating() != null ? tripObj
-											.getStartrating() : "0");
-							String tripIdTemp = String.valueOf(tripObj.getId());
-							TripDetailsBean tripDetailsBean =
-									new TripDetailsBean(tripObj.getUserid(),
-											startrating, tripIdTemp,
-											tripObj.getTitle(),
-											tripObj.getLocationid(),
-											tripObj.getSubactivityid(),
-											tripObj.getActivityid(),
-											tripObj.getDuration(),
-											tripObj.getFromdate(),
-											tripObj.getTodate(),
-											tripObj.getStartpoint(),
-											tripObj.getRoute(),
-											tripObj.getDescription(),
-											tripObj.getPrice(),
-											tripObj.getGuidelines(),
-											tripObj.getStatus(),
-											tripObj.getCreatedat(),
-											tripObj.getOffer_percentage(),
-											tripObj.getTocity(),
-											tripObj.getTripimagename(),
-											tripObj.getDaysdesc(),
-											tripObj.getDateformat(),
-											tripObj.getTodateformat(),
-											tripObj.getViews(),
-											tripObj.getViews(),
-											tripObj.getReviews());
-							tripDetailsBeanService.save(tripDetailsBean);
 
-							logger.info("Data added in REDIS server : "
-									+ tripIdTemp);
-
-						}
-					}
-				}*/
-			} 
-			/*else
-			{
-				logger.info("Tripdetails data extract from REDIS server");
-
-				List<TripDetailsBean> list = new ArrayList<TripDetailsBean>();
-				list.add(tripDetailsBeanService.find(String.valueOf(tripId)));
-				map.put("tripdetails", list);
-			}*/
+			}
 
 			Reviews reviews =
 					new Reviews(tripId, utilities.getDefaultMinIndx(),
@@ -447,13 +418,14 @@ public class TripController extends BaseController
 			@RequestParam(value = "tripId") int tripId, @RequestParam(
 					value = "username") String username, @RequestParam(
 					value = "comment") String comment, @RequestParam(
-					value = "startrating") String startrating, ModelMap model)
+					value = "startrating") String startrating, @RequestParam(
+					value = "email") String email, ModelMap model)
 			throws Exception
 	{
 		try
 		{
 			Reviews reviews =
-					new Reviews(tripId, username, comment, startrating);
+					new Reviews(tripId, username, comment, startrating, email);
 			reviewsService.addComments(reviews);
 			utilities.setSuccessResponse(response);
 		} catch (Exception ex)
@@ -622,6 +594,31 @@ public class TripController extends BaseController
 		}
 		model.addAttribute("model", response);
 		return "viewlisting";
+	}
+
+	@RequestMapping(value = "/updateTripImgType", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String updateCoverImg(HttpServletRequest request,
+			HttpServletResponse res,
+			@RequestParam(value = "tripId") int tripId, @RequestParam(
+					value = "imgId") int imageId, ModelMap model)
+			throws Exception
+	{
+		try
+		{
+			String IMAGE_TYPE_PROFILE = "profileimage";
+			tripService.updateTripImgType_ViaTripId(tripId, imageId,
+					IMAGE_TYPE_PROFILE);
+			String IMAGE_TYPE_COVER = "coverimage";
+			tripService.updateTripImgType(tripId, imageId, IMAGE_TYPE_COVER);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("updateTripImgType : " + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "editlisting";
 	}
 
 	class CommonMthds

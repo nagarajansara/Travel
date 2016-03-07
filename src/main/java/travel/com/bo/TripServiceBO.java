@@ -265,4 +265,24 @@ public class TripServiceBO implements TripService
 				activityTable, subActivityTable, status, priceMap);
 	}
 
+	@Override
+	public List<Trip> getTopActivitys(int visibleTopActivitys) throws Exception
+	{
+		return tripDAO.getTopActivitys(visibleTopActivitys);
+	}
+
+	@Override
+	public void updateTripImgType(int tripId, int imageId, String IMAGE_TYPE)
+			throws Exception
+	{
+		tripDAO.updateTripImgType(tripId, imageId, IMAGE_TYPE);
+	}
+
+	@Override
+	public void updateTripImgType_ViaTripId(int tripId, int imageId,
+			String iMAGE_TYPE_PROFILE) throws Exception
+	{
+		tripDAO.updateTripImgType_ViaTripId(tripId, imageId, iMAGE_TYPE_PROFILE);
+	}
+
 }

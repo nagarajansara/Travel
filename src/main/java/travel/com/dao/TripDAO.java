@@ -49,4 +49,12 @@ public interface TripDAO
 			Map<String, Object> subActivityTable, String status,
 			Map<String, Object> priceMap);
 
+	List<Trip> getTopActivitys(int visibleTopActivitys) throws Exception;
+
+	void updateTripImgType(int tripId, int imageId, String iMAGE_TYPE)
+			throws Exception;
+
+	void updateTripImgType_ViaTripId(int tripId, int imageId,
+			String iMAGE_TYPE_PROFILE) throws Exception;
+
 }

@@ -122,3 +122,15 @@
 #pagination-demo {
 	border: 0px solid #dadada !important;
 }
+
+.ctTravelNavBar-Nav li {
+	padding: 30px 16px 20px !important;
+}
+
+.ctTravelLogo_Padding {
+	padding: 5px 0 !important;
+}
+
+.ctTravelFooterColor::before {
+	/* background-color: #aad5f4 !important; */
+}

@@ -1,72 +1,77 @@
 <!--// Footer //-->
-<footer id="footer-widget">
+<footer id="footer-widget" class="ctFont_FamilyStyle ctTravelFooterColor">
 	<div class="container">
 		<div class="row">
-
-			<div class="widget col-md-4 kd-textwidget">
+			<div class="widget col-md-2 kd-textwidget">
 				<div class="kd-widget-title">
-					<h2>About KodeForest</h2>
+					<img alt="" src="/travel/theme/images/logo.png">
 				</div>
-				<div class="kd-contactinfo">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Nulla ullamcorper lorem non est mattis molestie. Vestibulum ante
-						ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-						Curae; Aenean convallis nulla sed nisi bibendum, quis vehicula
-						neque vestibulum..</p>
-					<!-- <ul>
-                <li><i class="fa fa-map-marker"></i> 360, Galaxy ApartmentNear Rekon Estate, limbasa margnexton lita, Australia</li>
-                <li><i class="fa fa-phone"></i> 1 808 603 6035</li>
-                <li><i class="fa fa-envelope-o"></i> <a href="#">info@kodeforest.com</a></li>
-              </ul> -->
-				</div>
+				<div class="kd-contactinfo"></div>
 			</div>
-
-			<div class="widget col-md-4 kd-followus-widget">
+			<div class="widget col-md-2 kd-userinfo-widget">
 				<div class="kd-widget-title">
-					<h2>Follow Us</h2>
+					<h2 class="ctFont_FamilyStyle">Brand Name</h2>
 				</div>
 				<ul>
-					<li><a href="#" data-original-title="Facebook"><i
-							class="fa fa-facebook"></i></a></li>
-					<li><a href="#" data-original-title="Twitter"><i
-							class="fa fa-twitter"></i></a></li>
-					<li><a href="#" data-original-title="Linkedin"><i
-							class="fa fa-linkedin"></i></a></li>
-					<li><a href="#" data-original-title="instagram"><i
-							class="fa fa-instagram"></i></a></li>
-					<li><a href="#" data-original-title="Rss"><i
-							class="fa fa-rss"></i></a></li>
-					<li><a href="#" data-original-title="Youtube"><i
-							class="fa fa-youtube"></i></a></li>
-					<li><a href="#" data-original-title="Pinterest"><i
-							class="fa fa-pinterest"></i></a></li>
-					<li><a href="#" data-original-title="Dribbble"><i
-							class="fa fa-dribbble"></i></a></li>
-					<li><a href="#" data-original-title="Google-Plus"><i
-							class="fa fa-google-plus"></i></a></li>
-					<li><a href="#" data-original-title="skype"><i
-							class="fa fa-skype"></i></a></li>
+					<li><a href="#"> About us </a></li>
+					<li><a href="#"> Contact us </a></li>
+					<li><a href="#"> Press Room </a></li>
+					<li><a href="#"> Careers </a></li>
+					<li><a href="#"> Invite friend </a></li>
+					<li><a href="#"> What people are saying </a></li>
 				</ul>
 			</div>
-
-			<div class="widget col-md-4 kd-userinfo-widget">
+			<div class="widget col-md-2 kd-userinfo-widget">
 				<div class="kd-widget-title">
-					<h2>Contact</h2>
+					<h2 class="ctFont_FamilyStyle">Trip Seekers</h2>
 				</div>
 				<ul>
-					<li><i class="fa fa-map-marker"></i> 15489 Vegas Drive, Las
-						Vegas, Neveda</li>
-					<li><i class="fa fa-phone-square"></i> +1 808 603 6035, +1 808
-						603 6035</li>
-					<li><i class="fa fa-envelope"></i> Kodeforest.Theme</li>
-					<li><i class="fa fa-skype"></i> <a href="#">info@kodeforest.com</a></li>
+					<li><a href="#"> My Account </a></li>
+					<li><a href="#"> Find a Vendor </a></li>
+					<li><a href="#"> Blog </a></li>
+					<li><a href="#"> Get a Quote </a></li>
 				</ul>
+			</div>
+			<div class="widget col-md-2 kd-userinfo-widget">
+				<div class="kd-widget-title">
+					<h2 class="ctFont_FamilyStyle">Trip Provider</h2>
+				</div>
+				<ul>
+					<li><a href="#"> Join us </a></li>
+					<li><a href="#"> How it works </a></li>
+					<li><a href="#"> Login </a></li>
+					<li><a href="#"> What vendor have to say </a></li>
+				</ul>
+			</div>
+			<div class="widget col-md-3 kd-userinfo-widget">
+				<div class="kd-widget-title">
+					<h2 class="ctFont_FamilyStyle">Contact with us</h2>
+				</div>
+				<ul>
+					<li><a href="#"> Facebook </a></li>
+					<li><a href="#"> Twitter </a></li>
+					<li><a href="#"> Pinrest </a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="widget col-md-2 kd-textwidget">
+				
+			</div>
+			<div class="widget col-md-2 kd-textwidget">
+				
+			</div>
+			<div class="widget col-md-3 kd-textwidget">
+				<p>© Copyright 2014 All Rights Reserved by KodeForest</p>
+			</div>
+			<div class="widget col-md-2 kd-textwidget">
+				
 			</div>
 		</div>
 	</div>
 </footer>
 <!--// CopyRight //-->
-<div id="copyright">
+<!-- <div id="copyright">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
@@ -86,7 +91,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <!--// CopyRight //-->
 <!-- jQuery (Necessary For JavaScript Plugins) -->
 

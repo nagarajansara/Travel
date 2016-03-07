@@ -11,6 +11,7 @@ import java.util.Date;
 
 import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.*;
 import org.apache.commons.httpclient.methods.multipart.*;
@@ -315,5 +316,23 @@ public class Utilities
 
 		jMSProducer.SendJMS_Message(jsonObject.toString(),
 				jMSProducer.EMAIL_QUEUE);
+	}
+
+	public String getDecodedString(String paramValue, int deCodedType)
+	{
+		// 1. base64 decode
+		String deCodedValue = "";
+		switch (deCodedType)
+		{
+		case 1:
+			byte[] valueDecoded = Base64.decodeBase64(paramValue.getBytes());
+			deCodedValue = new String(valueDecoded);
+			break;
+
+		default:
+			break;
+		}
+		return deCodedValue;
+
 	}
 }

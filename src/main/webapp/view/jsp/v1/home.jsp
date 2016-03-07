@@ -2,7 +2,7 @@
 <%@ include file="lib/header.jsp"%>
 <!--// MainBanner //-->
 <div id="mainbanner">
-	<ul class="bxslider">
+	<!--<ul class="bxslider">
 		<li><img src="${baseURL}/theme/extraimages/banner1.jpg" alt="" />
 			<div class="kd-caption">
 				<h2>Looking For Best Trip</h2>
@@ -10,8 +10,8 @@
 				<div class="linksection">
 					<a href="#">Get Deal Now</a>
 				</div>
-			</div></li>
-		<!--<li><img src="${baseURL}/theme/extraimages/banner2.jpg" alt="" />
+			</div></li>-->
+	<!--<li><img src="${baseURL}/theme/extraimages/banner2.jpg" alt="" />
 	          <div class="kd-caption">
 	            <h2>We Plan Your Trip</h2>
 	            <h1>Best Available Choice in town</h1>
@@ -32,9 +32,9 @@
 	            <div class="linksection"> <a href="#">Get started now</a></div>
 	          </div>
 	        </li>-->
-	</ul>
+	<!-- </ul> -->
 
-	<div class="kd-tourform" style="display: none">
+	<!--<div class="kd-tourform" style="display: none">
 		<div class="container">
 			<a href="#" class="formbtn">Find the tour</a>
 			<form>
@@ -74,28 +74,64 @@
 				</ul>
 			</form>
 		</div>
-	</div>
+	</div>-->
+	<section class="kd-pagesection" style="padding: 50px 0px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="kd-modrentitle thememargin">
+						<h3>Book your perfect Adventure Trip...</h3>
+						<!-- <div class="kd-divider">
+							<div class="short-seprator">
+								<span><i class="fa fa-globe"></i></span>
+							</div>
+						</div> -->
+						<br /> <span> Enjoy the serene beauty right at tha laps of
+							Nature with a thing of adventure </span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="kd-package-list">
+						<div class="row">
+							<article class="col-md-2"></article>
+							<article class="col-md-8">
+								<figure>
+									<ul class="bxslider">
+										<li style="list-style: none"><img
+											src="${baseURL}/theme/extraimages/banner1.jpg" alt="" />
+											<div class="kd-caption">
+												<h2>Looking For Best Trip</h2>
+												<h1>We Offer Best Services</h1>
+												<div class="linksection">
+													<a href="#">Get Deal Now</a>
+												</div>
+											</div></li>
+									</ul>
+								</figure>
+							</article>
+							<article class="col-md-2"></article>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!--// Page Section //-->
 	<section class="kd-pagesection"
 		style="padding: 50px 0px; background: url(${baseURL}/theme/extraimages/pakege1.jpg); background-size: cover;">
 		<div class="container">
 			<div class="row">
-
 				<div class="col-md-12">
 					<div class="kd-modrentitle thememargin">
-						<h3>explore the world</h3>
+						<h3>TOP ACTIVITIES</h3>
 						<div class="kd-divider">
 							<div class="short-seprator">
 								<span><i class="fa fa-globe"></i></span>
 							</div>
 						</div>
 						<br />
-						<!-- <p>Mauris ullamcorper nibh quis leo ultrices in hendrerit
-							velit tristiqueut augue in nulla lacinia bibendum liberoras
-							rutrum ut tristique.</p> -->
 					</div>
 				</div>
-
 				<div class="col-md-12">
 					<div class="kd-package-list">
 						<div class="row">
