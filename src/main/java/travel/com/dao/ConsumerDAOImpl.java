@@ -57,6 +57,27 @@ public class ConsumerDAOImpl implements ConsumerDAO
 
 	final String GET_CONSUMER_TRIPS_NUMENTRIES =
 			"Select count(*) from booking where consumerid =:consumerid AND status =:status";
+	final String ADD_SAVED_TRIPS =
+			"INSERT IGNORE INTO savedtrips (userid, tripid) values(:userid, :tripid)";
+	final String GET_SAVED_TRIPS_NUMENTRIES =
+			"SELECT count(*) from savedtrips where userid =:userId AND status =:status";
+	final String GET_SAVED_TRIPS =
+			"SELECT s.*, td.title,td.description, td.price, td.duration, td.guidelines, IFNULL(r.reviewscount, 0) AS reviewscount, IFNULL(v.viwerscount, 0) AS viewrscount, "
+					+ "IF(ti.name IS NULL, '', ti.name) AS tripimagename, DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat FROM savedtrips s "
+					+ "INNER JOIN tripdetails td "
+					+ "ON td.id = s.tripid "
+					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS reviewscount FROM reviews GROUP BY tripid) AS r "
+					+ "ON r.tripid = s.tripid "
+					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
+					+ "ON v.tripid = s.tripid "
+					+ "LEFT OUTER JOIN (SELECT IFNULL(t.name, i.name) AS NAME, i.tripid, IFNULL(t.imagetype, i.imagetype) FROM tripimages i "
+					+ "LEFT OUTER JOIN "
+					+ "( "
+					+ "SELECT NAME, imagetype, tripid FROM tripimages WHERE imagetype = 'coverimage') AS t "
+					+ "ON i.tripid = t.tripid GROUP BY i.tripid) AS ti ON td.id = ti.tripid "
+					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d' "
+					+ ") "
+					+ "AND td.status ='active' AND s.userid = 1 ORDER BY s.created_at DESC LIMIT :startIndx, :endIndx";
 
 	public List<Login> getProfile(int userId) throws Exception
 	{
@@ -109,6 +130,44 @@ public class ConsumerDAOImpl implements ConsumerDAO
 
 		return namedParameterJdbcTemplate.queryForInt(
 				GET_CONSUMER_TRIPS_NUMENTRIES, paramMap);
+
+	}
+
+	@Override
+	public void addSavedTrips(int userId, int tripId) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("userid", userId);
+		paramMap.put("tripid", tripId);
+
+		namedParameterJdbcTemplate.update(ADD_SAVED_TRIPS, paramMap);
+
+	}
+
+	@Override
+	public List<SavedTrips> getSavedTrips(int userId, String sTATTUS_SAVED,
+			int startIndx, int endIndx) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("userId", userId);
+		paramMap.put("status", sTATTUS_SAVED);
+		paramMap.put("startIndx", startIndx);
+		paramMap.put("endIndx", endIndx);
+		return namedParameterJdbcTemplate.query(GET_SAVED_TRIPS, paramMap,
+				new BeanPropertyRowMapper(SavedTrips.class));
+
+	}
+
+	@Override
+	public int getSavedTripNumEntries(int userId, String sTATTUS_SAVED)
+			throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("userId", userId);
+		paramMap.put("status", sTATTUS_SAVED);
+
+		return namedParameterJdbcTemplate.queryForInt(
+				GET_SAVED_TRIPS_NUMENTRIES, paramMap);
 
 	}
 }

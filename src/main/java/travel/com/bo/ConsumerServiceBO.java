@@ -96,4 +96,25 @@ public class ConsumerServiceBO implements ConsumerService
 	{
 		return dealsDAO.getAllDealsNumEntries();
 	}
+
+	@Override
+	public void addSavedTrips(int userId, int tripId) throws Exception
+	{
+		consumerDAO.addSavedTrips(userId, tripId);
+	}
+
+	@Override
+	public List<SavedTrips> getSavedTrips(int userId, String sTATTUS_SAVED,
+			int startIndx, int endIndx) throws Exception
+	{
+		return consumerDAO.getSavedTrips(userId, sTATTUS_SAVED, startIndx,
+				endIndx);
+	}
+
+	@Override
+	public int getSavedTripNumEntries(int userId, String sTATTUS_SAVED)
+			throws Exception
+	{
+		return consumerDAO.getSavedTripNumEntries(userId, sTATTUS_SAVED);
+	}
 }

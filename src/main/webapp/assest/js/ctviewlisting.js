@@ -2,6 +2,7 @@ var START_RATING_DEFAULT_VALUE = 0;
 
 function ctInitViewListing() {
     ctSubmitBtn();
+    ctSetSavedTrips();
 
     $("#star > img").click(function() {
 	var score = $(this).attr("alt");
@@ -124,40 +125,66 @@ function ctInitViewListing() {
 
 };
 function ctSubmitBtn() {
-    $('.ctSubmitCommentBtn').click(
-	    function() {
-		var name = $('.ctViewListingName').val(), comment = $(
-			'.ctViewListingComment').val(), email = $(
-			'.ctViewListingEmail').val(), params = {};
-		if (name && name.length > 0 && comment && comment.length > 0) {
-		    params["username"] = name;
-		    params["comment"] = comment;
-		    params["tripId"] = bmpUtil.getLastStartingURL();
-		    params["startrating"] = START_RATING_DEFAULT_VALUE;
-		    params["email"] = email;
-		    $('.ctSuccessComment').hide();
-		    if(bmpUtil.validateEmail(email))
-			{
-        		   	$('.ctTravelLoader').show();
-				ctDAO.addComments(params, function(data) {
-        			if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {
-        			    $('.ctSuccessComment').show();
-        			    $('.ctSuccessComment').html(
-        				    'Successfully commented');
-        			    $('.ctTravelLoader').hide();
-        			} else {
-        			    $('.ctSuccessComment').show();
-        			    $('.ctSuccessComment').html(data.responseData);
-        			    $('.ctTravelLoader').hide();	
-        			}
-        		    });
-        		} else {
-        		    alert("Please enter the valid email id");
-        		}
-		}
-		else
-		    {
-		    	alert("Please fill all the datas");
-		    }
-	    });
+    $('.ctSubmitCommentBtn')
+	    .click(
+		    function() {
+			var name = $('.ctViewListingName').val(), comment = $(
+				'.ctViewListingComment').val(), email = $(
+				'.ctViewListingEmail').val(), params = {};
+			if (name && name.length > 0 && comment
+				&& comment.length > 0) {
+			    params["username"] = name;
+			    params["comment"] = comment;
+			    params["tripId"] = bmpUtil.getLastStartingURL();
+			    params["startrating"] = START_RATING_DEFAULT_VALUE;
+			    params["email"] = email;
+			    $('.ctSuccessComment').hide();
+			    if (bmpUtil.validateEmail(email)) {
+				$('.ctTravelLoader').show();
+				ctDAO
+					.addComments(
+						params,
+						function(data) {
+						    if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {
+							$('.ctSuccessComment')
+								.show();
+							$('.ctSuccessComment')
+								.html(
+									'Successfully commented');
+							$('.ctTravelLoader')
+								.hide();
+						    } else {
+							$('.ctSuccessComment')
+								.show();
+							$('.ctSuccessComment')
+								.html(
+									data.responseData);
+							$('.ctTravelLoader')
+								.hide();
+						    }
+						});
+			    } else {
+				alert("Please enter the valid email id");
+			    }
+			} else {
+			    alert("Please fill all the datas");
+			}
+		    });
+};
+function ctSetSavedTrips() {
+    $('.ctSavedTripList').click(function() {
+	var tripId = bmpUtil.getLastStartingURL(), param = {};
+	param = {
+	    "tripId" : tripId
+	};
+	ctDAO.addSavedTrips(param, function(data) {
+	    if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {
+		alert("Successfully added");
+	    } else {
+		alert(data.responseData);
+	    }
+
+	});
+    });
+
 }

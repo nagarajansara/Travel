@@ -26,4 +26,12 @@ public interface ConsumerService
 	List<Deals> getAllDeals(int startIndx, int maxIndx) throws Exception;
 
 	int getAllDealsNumEntries() throws Exception;
+
+	void addSavedTrips(int userId, int tripId) throws Exception;
+
+	List<SavedTrips> getSavedTrips(int userId, String sTATTUS_SAVED,
+			int startIndx, int endIndx) throws Exception;
+
+	int getSavedTripNumEntries(int userId, String sTATTUS_SAVED)
+			throws Exception;
 }

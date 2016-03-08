@@ -344,4 +344,92 @@ public class ConsumerController extends BaseController
 		return "customer";
 	}
 
+	@RequestMapping(value = "/addSavedTrips", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String addSavedTrips(HttpServletRequest request, @RequestParam(
+			value = "tripId") String tripIdStr, ModelMap model)
+
+	{
+		try
+		{
+			int tripId =
+					Integer.parseInt(utilities.getDecodedString(tripIdStr, 1));
+			int userId = getUserId(request);
+			consumerService.addSavedTrips(userId, tripId);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("addSavedTrips :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "savedtrips";
+	}
+
+	@RequestMapping(value = "/getSavedTrips", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getSavedTrips(HttpServletRequest request, ModelMap model)
+
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int startIndx = utilities.getDefaultMinIndx();
+			int endIndx = utilities.getDefaultMaxIndx();
+			String STATTUS_SAVED = "saved";
+			int userId = getUserId(request);
+			List<SavedTrips> savedTrips =
+					consumerService.getSavedTrips(userId, STATTUS_SAVED,
+							startIndx, endIndx);
+			int numEntries =
+					consumerService.getSavedTripNumEntries(userId,
+							STATTUS_SAVED);
+
+			map.put("savedTrips", savedTrips);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getSavedTrips :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+		return "savedtrips";
+	}
+
+	@RequestMapping(value = "/getSavedTripsPagination/{startIndx}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getSavedTripsPagination(HttpServletRequest request,
+			@PathVariable(value = "startIndx") int startIndx, @RequestParam(
+					value = "tripId") String tripIdStr, ModelMap model)
+
+	{
+		try
+		{
+			startIndx = startIndx - 1;
+			Map<String, Object> map = new HashMap<String, Object>();
+			startIndx = getStartIdx(startIndx, utilities.getDefaultMaxIndx());
+			int endIndx = utilities.getDefaultMaxIndx();
+			String STATTUS_SAVED = "saved";
+			int userId = getUserId(request);
+			List<SavedTrips> savedTrips =
+					consumerService.getSavedTrips(userId, STATTUS_SAVED,
+							startIndx, endIndx);
+			int numEntries =
+					consumerService.getSavedTripNumEntries(userId,
+							STATTUS_SAVED);
+			map.put("savedTrips", savedTrips);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getSavedTripsPagination :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "savedtrips";
+	}
+
 }

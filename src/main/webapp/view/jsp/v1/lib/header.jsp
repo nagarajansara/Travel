@@ -84,46 +84,38 @@
 									</ul>
 								</div>
 							</li>
-							<li><c:if test="${sessionScope.fName == null}">
-									<a href="#" data-toggle="modal" data-target="#registerModalbox">
-										Register </a>
-								</c:if> <!-- Modal -->
-								<div class="modal fade kd-loginbox" id="registerModalbox"
-									tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-									aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-body">
-												<a href="#" class="close" data-dismiss="modal"
-													aria-label="Close"><span aria-hidden="true">&times;</span></a>
-												<div class="kd-login-title">
-													<h2>Register TO</h2>
-													<span>Your Account</span>
-													<div class="kd-login-network">
-														<ul>
-															<!--<li><a href="#" data-original-title="Facebook"><i class="fa fa-facebook"></i> Login with Facebook</a></li>
+							<c:if test="${sessionScope.fName == null}">
+								<li><a href="#" data-toggle="modal"
+									data-target="#registerModalbox"> Register </a>
+									<div class="modal fade kd-loginbox" id="registerModalbox"
+										tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+										aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-body">
+													<a href="#" class="close" data-dismiss="modal"
+														aria-label="Close"><span aria-hidden="true">&times;</span></a>
+													<div class="kd-login-title">
+														<h2>Register TO</h2>
+														<span>Your Account</span>
+														<div class="kd-login-network">
+															<ul>
+																<!--<li><a href="#" data-original-title="Facebook"><i class="fa fa-facebook"></i> Login with Facebook</a></li>
                                 <li><a href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i> Login with Twitter</a></li>-->
-															<li><a class="btn btn-primary dropdown-toggle"
-																href="${baseURL}/view/jsp/v1/customerregister.jsp"><i
-																	class="fa fa-user icon-white"></i> Customer </a></li>
-															<li><a class="btn btn-primary dropdown-toggle"
-																href="${baseURL}/view/jsp/v1/vendorregister.jsp"><i
-																	class="fa fa-user icon-white"></i> Vendor </a></li>
-														</ul>
+																<li><a class="btn btn-primary dropdown-toggle"
+																	href="${baseURL}/view/jsp/v1/customerregister.jsp"><i
+																		class="fa fa-user icon-white"></i> Customer </a></li>
+																<li><a class="btn btn-primary dropdown-toggle"
+																	href="${baseURL}/view/jsp/v1/vendorregister.jsp"><i
+																		class="fa fa-user icon-white"></i> Vendor </a></li>
+															</ul>
+														</div>
 													</div>
 												</div>
-												<!--<div class="kd-login-sepratore"><span>OR</span></div>
-
-                          <form>
-                            <p><i class="fa fa-envelope-o"></i> <input type="text" placeholder="Email Address"></p>
-                            <p><i class="fa fa-lock"></i> <input type="password" placeholder="Your Password"></p>
-                            <p><input type="submit" value="Register now" class="thbg-color"> </p>
-                          </form>
-
-                        </div>-->
 											</div>
-										</div>
-									</div></li>
+										</div></li>
+							</c:if>
+							<!-- Modal -->
 							<li><c:choose>
 									<c:when test="${sessionScope.fName != null}">
 										<a href="${baseURL}/travelapi/login/logout" data-toggle=""
@@ -195,7 +187,8 @@
 							</c:choose>
 							<c:choose>
 								<c:when test="${sessionScope.fName != null}">
-									<li><i class=""></i> <a href="#"><c:out
+									<li><i class=""></i> <a
+										href="${baseURL}/travelapi/consumer/getSavedTrips"><c:out
 												value='Saved Trips' /> </a></li>
 								</c:when>
 								<c:otherwise>
