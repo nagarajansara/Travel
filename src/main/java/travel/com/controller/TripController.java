@@ -415,7 +415,7 @@ public class TripController extends BaseController
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String addComments(HttpServletRequest request,
 			HttpServletResponse res,
-			@RequestParam(value = "tripId") int tripId, @RequestParam(
+			@RequestParam(value = "tripId") String tripIdStr, @RequestParam(
 					value = "username") String username, @RequestParam(
 					value = "comment") String comment, @RequestParam(
 					value = "startrating") String startrating, @RequestParam(
@@ -424,6 +424,8 @@ public class TripController extends BaseController
 	{
 		try
 		{
+			int tripId =
+					Integer.parseInt(utilities.getDecodedString(tripIdStr, 1));
 			Reviews reviews =
 					new Reviews(tripId, username, comment, startrating, email);
 			reviewsService.addComments(reviews);
@@ -571,12 +573,15 @@ public class TripController extends BaseController
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String getCommentsPagno(HttpServletRequest request,
 			HttpServletResponse res,
-			@RequestParam(value = "tripId") int tripId, @RequestParam(
+			@RequestParam(value = "tripId") String tripIdStr, @RequestParam(
 					value = "startIndx") int startIndx, ModelMap model)
 			throws Exception
 	{
 		try
 		{
+
+			int tripId =
+					Integer.parseInt(utilities.getDecodedString(tripIdStr, 1));
 			int currentPage =
 					getStartIdx(startIndx, utilities.getDefaultMaxIndx());
 			Reviews reviews =
