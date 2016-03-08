@@ -3,8 +3,10 @@ package travel.com.dao;
 import java.io.*;
 import java.util.*;
 
+import travel.com.controller.LoginController;
 import travel.com.model.*;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,6 +22,9 @@ public class ConsumerDAOImpl implements ConsumerDAO
 
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+	private static final Logger logger = Logger.getLogger(LoginController.class
+			.getName());
 
 	final String STATUS_BOOKED = "booked";
 
@@ -153,6 +158,9 @@ public class ConsumerDAOImpl implements ConsumerDAO
 		paramMap.put("status", sTATTUS_SAVED);
 		paramMap.put("startIndx", startIndx);
 		paramMap.put("endIndx", endIndx);
+
+		logger.info("getSavedTrips :" + GET_SAVED_TRIPS);
+
 		return namedParameterJdbcTemplate.query(GET_SAVED_TRIPS, paramMap,
 				new BeanPropertyRowMapper(SavedTrips.class));
 
