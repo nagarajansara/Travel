@@ -23,9 +23,6 @@ public class ConsumerDAOImpl implements ConsumerDAO
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-	private static final Logger logger = Logger.getLogger(LoginController.class
-			.getName());
-
 	final String STATUS_BOOKED = "booked";
 
 	final String CONSUMER_ROLE = "ROLE_CUSTOMER";
@@ -82,7 +79,7 @@ public class ConsumerDAOImpl implements ConsumerDAO
 					+ "ON i.tripid = t.tripid GROUP BY i.tripid) AS ti ON td.id = ti.tripid "
 					+ "WHERE td.fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d' "
 					+ ") "
-					+ "AND td.status ='active' AND s.userid = 1 ORDER BY s.created_at DESC LIMIT :startIndx, :endIndx";
+					+ "AND td.status ='active' AND s.userid =:userId ORDER BY s.created_at DESC LIMIT :startIndx, :endIndx";
 
 	public List<Login> getProfile(int userId) throws Exception
 	{
@@ -158,9 +155,6 @@ public class ConsumerDAOImpl implements ConsumerDAO
 		paramMap.put("status", sTATTUS_SAVED);
 		paramMap.put("startIndx", startIndx);
 		paramMap.put("endIndx", endIndx);
-
-		logger.info("getSavedTrips :" + GET_SAVED_TRIPS);
-
 		return namedParameterJdbcTemplate.query(GET_SAVED_TRIPS, paramMap,
 				new BeanPropertyRowMapper(SavedTrips.class));
 
