@@ -1,0 +1,46 @@
+.ctBlogborderstyle {
+	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+	background-color: #fcfcfc;
+	padding: 15px 20px 15px 15px;
+}
+
+.ctBlogborderstyle article {
+	margin-bottom: 2.5px !important;
+}
+
+.ctBlogborderstyle h5,.ctDaysCounter {
+	font-family: verdana;
+	font-size: 12px;
+}
+
+.ctBlogborderstyle h5 {
+	width: 70%;
+	text-transform: uppercase;
+}
+
+.ctDaysCounter span {
+	font-family: verdana;
+	font-size: 20px;
+}
+
+.ctBlogborderstyle .kd-postoption li,.ctBlogborderstyle .kd-blogcomment li
+	{
+	list-style: none;
+}
+
+.ctBlogborderstyle {
+	box-shadow: 0 2px 5px 0px !important;
+}
+
+.ctListingTitle {
+	font-family: verdana !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+	text-transform: capitalize !important;
+}
+
+.ctNoDataFoundRow span {
+	font-family: verdana;
+	color: red;
+	font-weight: bold;
+}
