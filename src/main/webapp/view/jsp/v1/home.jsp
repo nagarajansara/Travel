@@ -93,8 +93,8 @@
 				<div class="col-md-12">
 					<div class="kd-package-list">
 						<div class="row">
-							<article class="col-md-2"></article>
-							<article class="col-md-8">
+
+							<article class="col-md-12">
 								<figure>
 									<ul class="bxslider">
 										<li style="list-style: none"><img
@@ -109,7 +109,41 @@
 									</ul>
 								</figure>
 							</article>
-							<article class="col-md-2"></article>
+
+						</div>
+						<div class="row">
+							<article class="col-md-4">
+								<article class="col-md-12 ctHomeRowArticle">
+									<h3>What is "Brand Name"</h3>
+									<p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
+										Ipsum Lorem Ipsum Lorem Ipsum</p>
+									<div class="kd-button">
+										<a class="custom-btn" href="#">How will "Brand" help me?</a>
+									</div>
+								</article>
+							</article>
+							<article class="col-md-4">
+								<article class="col-md-12 ctHomeRowArticle ctHomeRowArticleR">
+									<h3>Save Time And Money</h3>
+									<div class="kd-button">
+										<a class="custom-btn" href="#">Choose your Adventure</a>
+									</div>
+								</article>
+							</article>
+							<article class="col-md-4">
+								<article class="col-md-12 ctHomeRowArticle">
+									<h3>Get a Quote</h3>
+									<div class="kd-button">
+										<a class="custom-btn" href="#">You Need?</a>
+									</div>
+								</article>
+								<article class="col-md-12 ctHomeRowArticle">
+									<h3>Share Your Experience</h3>
+									<div class="kd-button">
+										<a class="custom-btn" href="#">Share Now!</a>
+									</div>
+								</article>
+							</article>
 						</div>
 					</div>
 				</div>
