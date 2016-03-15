@@ -35,6 +35,20 @@ public class Reviews
 	@Setter
 	private String username;
 
+	@Getter
+	@Setter
+	private boolean isreviewed;
+
+	public boolean isIsreviewed()
+	{
+		return isreviewed;
+	}
+
+	public void setIsreviewed(boolean isreviewed)
+	{
+		this.isreviewed = isreviewed;
+	}
+
 	public int getVendorId()
 	{
 		return vendorId;

@@ -133,4 +133,9 @@
 
 .ctTravelFooterColor::before {
 	/* background-color: #aad5f4 !important; */
+	
+}
+
+.ctDefaultDisplayNone {
+	display: none;
 }

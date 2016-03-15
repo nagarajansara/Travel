@@ -24,7 +24,7 @@ public class EnquiryDAOImpl implements EnquiryDAO
 	BaseDAO baseDAO;
 
 	final String ADD_ENQUIRY =
-			"INSERT INTO enquiry (tripid, status, credits, name, email, phoneno) values (:tripid, :status, :credits, :name, :email, :phoneno)";
+			"INSERT INTO enquiry (tripid, status, credits, name, email, phoneno, userid) values (:tripid, :status, :credits, :name, :email, :phoneno, :userid)";
 	final String GET_ENQUIRY =
 			"SELECT u.credits AS credits, u.email AS email, td.title AS title, td.id AS tripid, e.* FROM tripdetails td "
 					+ "INNER JOIN enquiry e "
@@ -47,7 +47,7 @@ public class EnquiryDAOImpl implements EnquiryDAO
 	{
 		Map map = new HashMap();
 		String[] params =
-		{ "tripid", "status", "credits", "email", "name", "phoneno" };
+		{ "tripid", "status", "credits", "email", "name", "phoneno", "userid" };
 		try
 		{
 			baseDAO.setNamedParameter(enquiry, params, map);

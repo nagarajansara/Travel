@@ -105,9 +105,9 @@
 																<li><a class="btn btn-primary dropdown-toggle"
 																	href="${baseURL}/view/jsp/v1/customerregister.jsp"><i
 																		class="fa fa-user icon-white"></i> Customer </a></li>
-																<li><a class="btn btn-primary dropdown-toggle"
+																<%-- <li><a class="btn btn-primary dropdown-toggle"
 																	href="${baseURL}/view/jsp/v1/vendorregister.jsp"><i
-																		class="fa fa-user icon-white"></i> Vendor </a></li>
+																		class="fa fa-user icon-white"></i> Vendor </a></li> --%>
 															</ul>
 														</div>
 													</div>

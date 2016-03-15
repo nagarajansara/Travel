@@ -432,4 +432,62 @@ public class ConsumerController extends BaseController
 		return "savedtrips";
 	}
 
+	@RequestMapping(value = "/getConsumerReview", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getConsumerReview(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			int startIndx = utilities.getDefaultMinIndx();
+			int endIndx = utilities.getDefaultMaxIndx();
+			Map<String, Object> map = new HashMap<String, Object>();
+			// HERE CONSUMER MAY BE VENDOR
+			int userId = getUserId(request);
+			List<Reviews> reviews =
+					consumerService.getConsumerReview(userId, startIndx,
+							endIndx);
+			int numEntries =
+					consumerService.getConsumerReviewNumEntries(userId);
+			map.put("reviewsList", reviews);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getConsumerReview :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "consumerreviews";
+	}
+
+	@RequestMapping(value = "/getConsumerReviewPagination/{currPage}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getConsumerReviewPagination(HttpServletRequest request,
+			@PathVariable(value = "currPage") int currPage, ModelMap model)
+	{
+		try
+		{
+			int startIndx = currPage - 1;
+			int endIndx = utilities.getDefaultMaxIndx();
+			startIndx = getStartIdx(startIndx, endIndx);
+			Map<String, Object> map = new HashMap<String, Object>();
+			// HERE CONSUMER MAY BE VENDOR
+			int userId = getUserId(request);
+			List<Reviews> reviews =
+					consumerService.getConsumerReview(userId, startIndx,
+							endIndx);
+			int numEntries =
+					consumerService.getConsumerReviewNumEntries(userId);
+			map.put("reviewsList", reviews);
+			map.put("numEntries", numEntries);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getConsumerReviewPagination :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "consumerreviews";
+	}
+
 }

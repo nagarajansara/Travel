@@ -8,7 +8,8 @@
 		<li class="ctCustomerPointsMenu"><a
 			href="${baseURL}/travelapi/consumer/getConsumerPoints">Points
 				Earned</a></li>
-		<li class="ctCustomerReviewsMenu"><a href="#messagesone">Reviews</a></li>
+		<li class="ctCustomerReviewsMenu"><a
+			href="${baseURL}/travelapi/consumer/getConsumerReview">Reviews</a></li>
 		<li class="ctCustomerDealsMenu"><a
 			href="${baseURL}/travelapi/consumer/getAllDeals">Current Deals</a></li>
 		<li class="ctCustomerContactusMenu"><a href="#messagesone">Contact

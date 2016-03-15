@@ -103,6 +103,48 @@ public class Login implements Serializable
 
 	@Getter
 	@Setter
+	private int starrating;
+
+	@Getter
+	@Setter
+	private int totaltrip;
+
+	@Getter
+	@Setter
+	private int totalreviews;
+
+	public int getTotalreviews()
+	{
+		return totalreviews;
+	}
+
+	public void setTotalreviews(int totalreviews)
+	{
+		this.totalreviews = totalreviews;
+	}
+
+	public int getTotaltrip()
+	{
+		return totaltrip;
+	}
+
+	public void setTotaltrip(int totaltrip)
+	{
+		this.totaltrip = totaltrip;
+	}
+
+	public int getStarrating()
+	{
+		return starrating;
+	}
+
+	public void setStarrating(int starrating)
+	{
+		this.starrating = starrating;
+	}
+
+	@Getter
+	@Setter
 	private String verificationcode;
 
 	public String getVerificationcode()

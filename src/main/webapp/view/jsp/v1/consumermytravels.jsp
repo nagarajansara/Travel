@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html"%>
+<%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <%@ include file="lib/header.jsp"%>
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
@@ -12,7 +13,7 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">My Travels</h3>
+						<h3 class="ctFont_FamilyStyle">Travel History</h3>
 					</div>
 					<div class="kd-blog-list kd-blogmedium">
 						<c:if test="${not empty model.responseData.tripDetails}">
@@ -28,14 +29,14 @@
 													alt=""></a>
 												<figcaption>
 													<a target="_blank"
-														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}"
-														" class="fa fa-plus-circle"></a>
+														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }"
+														class="fa fa-plus-circle"></a>
 												</figcaption>
 											</figure>
 											<section class="kd-bloginfo">
 												<h2>
 													<a class="ctListingTitle" target="_blank"
-														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.id}">${ element.title}
+														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }">${ element.title}
 													</a>
 												</h2>
 												<ul class="kd-postoption">

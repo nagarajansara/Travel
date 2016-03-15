@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.*;
 import org.hibernate.HibernateException;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -788,6 +789,117 @@ public class VendorController extends BaseController
 		model.addAttribute("model", response);
 		return "credits";
 
+	}
+
+	@RequestMapping(value = "/addNewActivity", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public void addNewActivity(HttpServletRequest request, @RequestParam(
+			value = "activityName") String activityName, ModelMap model)
+	{
+		try
+		{
+			int vendorId = getUserId(request);
+			vendorService.addNewActivity(activityName);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("addNewActivity :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+	}
+
+	@RequestMapping(value = "/addNewSubActivity", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public void addNewSubActivity(HttpServletRequest request, @RequestParam(
+			value = "activityName") String activityName, ModelMap model)
+	{
+		try
+		{
+			int vendorId = getUserId(request);
+			vendorService.addNewSubActivity(activityName);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("addNewSubActivity :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+
+	}
+
+	@RequestMapping(value = "/getReviews", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getReviews(HttpServletRequest request, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			int vendorId = getUserId(request);
+			int startIndx = utilities.getDefaultMinIndx();
+			int endIndx = utilities.getDefaultMaxIndx();
+			List<Reviews> list =
+					vendorService.getReviews(vendorId, startIndx, endIndx);
+			int numEntries = vendorService.getReviewsNumEntries(vendorId);
+			map.put("numEntries", numEntries);
+			map.put("reviewList", list);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getReviews :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "vendorreview";
+	}
+
+	@RequestMapping(value = "/getReviewsPagination/{currPage}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getReviewsPagination(HttpServletRequest request,
+			@PathVariable("currPage") int currPage, ModelMap model)
+
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			currPage = currPage - 1;
+			int vendorId = getUserId(request);
+			currPage = getStartIdx(currPage, utilities.getDefaultMaxIndx());
+			int endIndx = utilities.getDefaultMaxIndx();
+			List<Reviews> list =
+					vendorService.getReviews(vendorId, currPage, endIndx);
+			int numEntries = vendorService.getReviewsNumEntries(vendorId);
+			map.put("numEntries", numEntries);
+			map.put("reviewList", list);
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getReviewsPagination :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "vendorreview";
+	}
+
+	@RequestMapping(value = "/getVendorDetailsBasedId/{vendorId}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getVendorDetailsBasedId(HttpServletRequest request,
+			@PathVariable(value = "vendorId") int vendorId, ModelMap model)
+
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<Login> list = vendorService.getVendorDetailsBasedId(vendorId);
+			utilities.setSuccessResponse(response, list);
+		} catch (Exception ex)
+		{
+			logger.error("getVendorDetailsBasedId :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "viewvendor";
 	}
 
 	class CommonMtd

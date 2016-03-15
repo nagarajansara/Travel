@@ -24,4 +24,5 @@ public interface ConsumerDAO
 
 	int getSavedTripNumEntries(int userId, String sTATTUS_SAVED)
 			throws Exception;
+
 }

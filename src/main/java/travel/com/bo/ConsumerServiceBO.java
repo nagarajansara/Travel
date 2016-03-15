@@ -44,6 +44,10 @@ public class ConsumerServiceBO implements ConsumerService
 	@Qualifier("dealsDAO")
 	DealsDAO dealsDAO;
 
+	@Autowired
+	@Qualifier("reviewsDAO")
+	ReviewsDAO reviewsDAO;
+
 	public List<Login> getProfile(int userId) throws Exception
 	{
 		return consumerDAO.getProfile(userId);
@@ -116,5 +120,18 @@ public class ConsumerServiceBO implements ConsumerService
 			throws Exception
 	{
 		return consumerDAO.getSavedTripNumEntries(userId, sTATTUS_SAVED);
+	}
+
+	@Override
+	public List<Reviews> getConsumerReview(int userId, int startIndx,
+			int endIndx) throws Exception
+	{
+		return reviewsDAO.getConsumerReview(userId, startIndx, endIndx);
+	}
+
+	@Override
+	public int getConsumerReviewNumEntries(int userId) throws Exception
+	{
+		return reviewsDAO.getConsumerReviewNumEntries(userId);
 	}
 }

@@ -7,13 +7,10 @@
 </style>
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/slider/flexslider.css" media="screen" />
-
 <link rel="stylesheet" href="${baseURL}/assest/css/ctviewlisting.css"
 	media="screen" />
-
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/startrating/raty.css" media="screen" />
-
 <div class="kd-content">
 	<section style="background: #ffffff; padding: 40px 0px;"
 		class="pagesection ctPagesection">
@@ -28,12 +25,13 @@
 								<ul class="slides">
 									<c:forEach items="${model.responseData.tripdetails}"
 										var="element" varStatus="loop">
+										<c:set var="ratedStart" value="${element.startrating }"></c:set>
 										<c:set var="tripimages"
 											value="${fn:split(element.tripimagename, ',')}" />
 										<c:forEach var="arrayVar" items="${tripimages}">
 											<li><img
 												src="${hostName}:${port}/${ uploadedImageFolderName }/${arrayVar}"
-												width="557px;" height="418px;" /></li>
+												width="100px" height="100px;" /></li>
 										</c:forEach>
 									</c:forEach>
 								</ul>
@@ -64,6 +62,8 @@
 							<c:set var="tourProvidedEmail" value="${element.email }"
 								scope="request" />
 							<c:set var="tourProvidedName" value="${element.firstname }"
+								scope="request" />
+							<c:set var="tourProvidedUserId" value="${element.userid }"
 								scope="request" />
 							<div class="kd-pkg-info ctNoborder">
 								<ul class="ctKdpkgInfoList">
@@ -138,7 +138,10 @@
 													class="col-lg-2 col-md-2 col-sm-2 control-label ctViewListingFont_B">
 													Email :</label>
 												<div class="col-lg-6 col-md-6 col-sm-6">
-													${tourProvidedEmail}</div>
+													<a
+														href="${baseURL}/travelapi/vendor/getVendorDetailsBasedId/${tourProvidedUserId}"
+														target="_balnk">${tourProvidedEmail}</a>
+												</div>
 											</div>
 											<div class="form-group">
 												<!-- <label class="col-lg-4 col-md-4 col-sm-4 control-label">
@@ -175,10 +178,11 @@
 										aria-controls=dates role="tab" data-toggle="tab">Dates</a></li>
 									<li class="pull-right ctSavedListTrip"><c:choose>
 											<c:when test="${(sessionScope.role != null)}">
-												<a class="ctSavedTripList" style="">SavedTripList</a>
+												<a class="ctSavedTripList" style="">Saved Trip List</a>
 											</c:when>
 											<c:otherwise>
-												<a class="ctSavedTripList" title="Please login and continue">SavedTripList</a>
+												<a class="ctSavedTripList" title="Please login and continue">Saved
+													Trip List</a>
 											</c:otherwise>
 										</c:choose>
 								</ul>
@@ -360,8 +364,6 @@
 		</div>
 		<div class="bs-example">
 			<!-- Button HTML (to Trigger Modal) -->
-
-
 			<!-- Modal HTML -->
 			<div id="myModal" class="modal fade">
 				<div class="modal-dialog">
@@ -434,46 +436,38 @@
 <div class="clear"></div>
 <%@ include file="lib/footer.jsp"%>
 <script src="${baseURL}/assest/plugin/slider/jquery.flexslider.js"></script>
-<script src="${baseURL}/assest/plugin/startrating/jquery.raty.js"></script>
+<script src="${baseURL}/assest/plugin/startrating/jquery.raty-fa.js"></script>
 <script src="${baseURL}/assest/js/ctviewlisting.js"></script>
 <script type="text/javascript">
-    $(document).ready(
-	    function() {
-		var ctRatedStar = '${ratedStart}';
-		$('.ctPhoneNo').numeric();
-		$('div#star').raty(
-			{
-			    "path" : "http://" + location.host + "/"
-				    + ctDAO.CONTEXT_NAME
-				    + "/assest/plugin/startrating/img/"
-			});
-		$('#ctRatedStar').raty(
-			{
-			    start : 0,
-			    readOnly : true,
-			    "path" : "http://" + location.host + "/"
-				    + ctDAO.CONTEXT_NAME
-				    + "/assest/plugin/startrating/img/"
-			});
-		// The slider being synced must be initialized first
-		$('#carousel').flexslider({
-		    animation : "slide",
-		    controlNav : false,
-		    animationLoop : false,
-		    slideshow : false,
-		    itemWidth : 110,
-		    itemMargin : 5,
-		    asNavFor : '#slider'
-		});
+    $(document).ready(function() {
+	var ctRatedStar = '${ratedStart}';
+	console.log("ctRatedStar :" + ctRatedStar);
+	$('.ctPhoneNo').numeric();
+	$('#ctRatedStar').raty({
+	    score : ctRatedStar,
+	    readOnly : true,
+	    halfShow : true
 
-		$('#slider').flexslider({
-		    animation : "slide",
-		    controlNav : false,
-		    animationLoop : false,
-		    slideshow : false,
-		    sync : "#carousel"
-		});
+	});
+	// The slider being synced must be initialized first
+	$('#carousel').flexslider({
+	    animation : "slide",
+	    controlNav : false,
+	    animationLoop : false,
+	    slideshow : false,
+	    itemWidth : 110,
+	    itemMargin : 5,
+	    asNavFor : '#slider'
+	});
 
-		ctInitViewListing();
-	    });
+	$('#slider').flexslider({
+	    animation : "slide",
+	    controlNav : false,
+	    animationLoop : false,
+	    slideshow : false,
+	    sync : "#carousel"
+	});
+
+	ctInitViewListing();
+    });
 </script>

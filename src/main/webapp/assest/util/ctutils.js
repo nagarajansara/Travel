@@ -110,6 +110,33 @@ BmpUtil.prototype.validateEmail = function(email) {
 	return false;
     }
 };
+BmpUtil.prototype.passwordStrength = function(event, tObj, jqSelector) {
+    var strongRegex = new RegExp(
+	    "^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+    var mediumRegex = new RegExp(
+	    "^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
+	    "g");
+    var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+    if (false == enoughRegex.test($(tObj).val())) {
+	$(jqSelector).html('More Characters');
+    } else if (strongRegex.test($(tObj).val())) {
+	$(jqSelector).className = 'ok';
+	$(jqSelector).css({
+	    'background-color' : '#36BA38'
+	});
+	$(jqSelector).html('Strong!');
+    } else if (mediumRegex.test($(tObj).val())) {
+	$(jqSelector).className = 'alert';
+	$(jqSelector).html('Medium!');
+    } else {
+	$(jqSelector).className = 'error';
+	$(jqSelector).css({
+	    'background-color' : '#F20000'
+	});
+	$(jqSelector).html('Weak!');
+    }
+    return true;
+};
 BmpUtil.prototype.convertDateENG = function(currDate) {
     var months = new Array(12), month_value = '', day_value = '', year_value = '', current_date, convertedJSON = {};
     months[0] = "January";

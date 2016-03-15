@@ -17,7 +17,7 @@
 				<%@ include file="lib/v_leftsidebar.jsp"%>
 				<div class="col-md-8 ctExistingTripDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Listing</h3>
+						<h3 class="ctFont_FamilyStyle">List a Trip</h3>
 						<div
 							class="ctOperationVendorBtn ctAddNewLisiting pull-right frame-btn thbg-color"
 							style="cursor: pointer; color: rgb(255, 255, 255) ! important;">
@@ -139,6 +139,13 @@
 									</select>
 								</c:if>
 							</div>
+							<div class="col-lg-1 col-md-1">
+								<button type="button" title="Add New Activity"
+									class="btn btn-success" data-toggle="modal"
+									data-target="#myModal">
+									<i class="fa fa-plus"></i>
+								</button>
+							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label">SubActivity
@@ -155,6 +162,13 @@
 										</c:forEach>
 									</select>
 								</c:if>
+							</div>
+							<div class="col-lg-1 col-md-1">
+								<button type="button" title="Add Sub Activity"
+									class="btn btn-success" data-toggle="modal"
+									data-target="#ctMyModal">
+									<i class="fa fa-plus"></i>
+								</button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -263,6 +277,78 @@
 							</div>
 						</div>
 					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Activity Name</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-8">
+								<form class="ctEnquiryNow" action="" method="POST">
+									<div class="form-group">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<input type="text"
+												class="form-control ctActivityName ctIsChkEmptyEnquiryVal"
+												name="name" value="" placeholder="Activity Name *">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="ctAddCommentLoadingImage ctDefaultDisplayNone">
+											<img src="${baseURL}/assest/img/loading.gif">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary ctActivityBtn">Submit</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="ctMyModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sub Activity Name</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-8">
+								<form class="ctEnquiryNow" action="" method="POST">
+									<div class="form-group">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<input type="text"
+												class="form-control ctSubActivityName ctIsChkEmptyEnquiryVal"
+												name="name" value="" placeholder="Sub Activity Name *">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="ctAddCommentLoadingImage ctDefaultDisplayNone">
+											<img src="${baseURL}/assest/img/loading.gif">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary ctSubActivityBtn">Submit</button>
+						<button type="button" class="btn btn-default ctEnquiryModalClose"
+							data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>

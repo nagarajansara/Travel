@@ -46,6 +46,22 @@ public class BaseController
 		return userId;
 	}
 
+	public int getUserId_WHOUT_Exception(HttpServletRequest request)
+			throws ConstException
+	{
+		int userId = 0;
+		HttpSession session = request.getSession();
+		if (session != null)
+		{
+			Object obj = session.getAttribute(ATTR_USER_ID);
+			if (obj != null)
+			{
+				userId = ((Integer) obj).intValue();
+			}
+		}
+		return userId;
+	}
+
 	public String getSessionAttr(HttpServletRequest request, String attr)
 	{
 		String val = null;
@@ -58,7 +74,6 @@ public class BaseController
 				val = ((String) obj);
 			}
 		}
-
 		return val;
 	}
 

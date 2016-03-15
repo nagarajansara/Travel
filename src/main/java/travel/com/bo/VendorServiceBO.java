@@ -46,6 +46,14 @@ public class VendorServiceBO implements VendorService
 	@Qualifier("subActivityDAO")
 	SubActivityDAO subActivityDAO;
 
+	@Autowired
+	@Qualifier("reviewsDAO")
+	ReviewsDAO reviewsDAO;
+
+	@Autowired
+	@Qualifier("loginDAO")
+	LoginDAO loginDAO;
+
 	public List<Activity> getActivitys(Activity activity) throws Exception
 	{
 		return activityDAO.getActivitys(activity);
@@ -89,5 +97,36 @@ public class VendorServiceBO implements VendorService
 			throws Exception
 	{
 		return subActivityDAO.getSubActivity(sTATUS_ACTIVE);
+	}
+
+	@Override
+	public void addNewActivity(String activityName) throws Exception
+	{
+		activityDAO.addNewActivity(activityName);
+	}
+
+	@Override
+	public void addNewSubActivity(String activityName) throws Exception
+	{
+		subActivityDAO.addNewSubActivity(activityName);
+	}
+
+	@Override
+	public List<Reviews> getReviews(int vendorId, int startIndx, int endIndx)
+			throws Exception
+	{
+		return reviewsDAO.getReviews(vendorId, startIndx, endIndx);
+	}
+
+	@Override
+	public int getReviewsNumEntries(int vendorId) throws Exception
+	{
+		return reviewsDAO.getReviewsNumEntries(vendorId);
+	}
+
+	@Override
+	public List<Login> getVendorDetailsBasedId(int vendorId) throws Exception
+	{
+		return loginDAO.getVendorDetailsBasedId(vendorId);
 	}
 }

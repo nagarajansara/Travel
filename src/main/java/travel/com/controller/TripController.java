@@ -443,7 +443,7 @@ public class TripController extends BaseController
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String addEnquiry(HttpServletRequest request,
 			HttpServletResponse res,
-			@RequestParam(value = "tripId") int tripId, @RequestParam(
+			@RequestParam(value = "tripId") String tripId_Str, @RequestParam(
 					value = "username") String username, @RequestParam(
 					value = "phoneno") String phoneno, @RequestParam(
 					value = "email") String cutomerEmail, ModelMap model)
@@ -457,8 +457,13 @@ public class TripController extends BaseController
 				{
 
 					{
+						int tripId =
+								Integer.valueOf(utilities.getDecodedString(
+										tripId_Str, 1));
 						List<Trip> list =
 								tripService.getCredits_AND_Email(tripId); // TODO
+
+						int userId = getUserId_WHOUT_Exception(request);
 
 						String enquiryStatus = "";
 						int enquiryDeduction = 0;
@@ -504,9 +509,11 @@ public class TripController extends BaseController
 									totalCredist =
 											totalCredist
 													- Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
-									loginService.updateCredits(tripOwnerEmail,
-											totalCredist);
 
+									/*
+									 * loginService.updateCredits(tripOwnerEmail,
+									 * totalCredist);
+									 */
 									utilities.setJMS_Enqueued(toEmail, content,
 											appProp.getAdminName(),
 											appProp.getMailSubject(),
@@ -546,7 +553,8 @@ public class TripController extends BaseController
 							Enquiry enquiry =
 									new Enquiry(tripId, username,
 											enquiryStatus, phoneno,
-											enquiryDeduction, cutomerEmail);
+											enquiryDeduction, cutomerEmail,
+											userId);
 							enquiryService.addEnquiry(enquiry);
 						}
 

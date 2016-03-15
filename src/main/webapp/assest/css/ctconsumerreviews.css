@@ -1,0 +1,8 @@
+.ctConsumerComment {
+	font-family: verdana;
+	cursor: pointer;
+}
+
+.ctConsumerCommentsFrm,.ctConsumerLoading {
+	display: none;
+}

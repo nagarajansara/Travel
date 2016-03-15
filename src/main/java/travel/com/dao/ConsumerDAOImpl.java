@@ -172,4 +172,5 @@ public class ConsumerDAOImpl implements ConsumerDAO
 				GET_SAVED_TRIPS_NUMENTRIES, paramMap);
 
 	}
+
 }

@@ -121,7 +121,7 @@ public class TripDAOImpl implements TripDAO
 			"Select count(*) from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status";
 
 	final String GET_TRIP_DETAILS_BASED_ID =
-			"SELECT u.*, td.*, td.price, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
+			"SELECT u.id AS userid, u.*, td.*, IFNULL(r.startrating, 0) AS startrating, td.price, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
 					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat,  "
 					+ " IFNULL(v.views, 0) AS views, IFNULL(f.favourites, 0) AS favourites "
 					+ " FROM tripdetails td "
@@ -133,10 +133,13 @@ public class TripDAOImpl implements TripDAO
 					+ " LEFT OUTER JOIN (SELECT tripid, GROUP_CONCAT(NAME) AS tripimagename FROM tripimages WHERE STATUS =:status GROUP BY tripid) AS ti ON ti.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS views FROM viewers WHERE STATUS = 'viewed' GROUP BY tripid) v ON td.id = v.tripid "
 					+ " LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS favourites FROM viewers WHERE STATUS = 'liked' GROUP BY tripid) f ON td.id = f.tripid "
-					/*
-					 * +
-					 * "LEFT OUTER JOIN (SELECT tripid,COUNT(*) AS reviews, AVG(startrating) AS startrating FROM reviews GROUP BY tripid) r ON td.id = r.tripid "
-					 */
+					+ "LEFT OUTER JOIN (SELECT t.userid, COUNT(*) AS reviews, AVG(startrating) AS startrating FROM reviews rs "
+					+ "INNER JOIN "
+					+ "tripdetails t "
+					+ "ON  "
+					+ "t.id = rs.tripid "
+					+ "GROUP BY t.userid ) r "
+					+ "ON td.userid = r.userid "
 					+ "LEFT OUTER JOIN  (SELECT tripid, offer_percentage AS offer_percentage FROM deals) d ON td.id = d.tripid "
 					+ "WHERE td.id =:id";
 	final String GET_CREDITS_BASED_TRIPID =

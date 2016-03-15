@@ -35,6 +35,20 @@ public class Booking
 	@Setter
 	private int consumerid;
 
+	public int getUserid()
+	{
+		return userid;
+	}
+
+	public void setUserid(int userid)
+	{
+		this.userid = userid;
+	}
+
+	@Getter
+	@Setter
+	private int userid;
+
 	@Getter
 	@Setter
 	private String status;

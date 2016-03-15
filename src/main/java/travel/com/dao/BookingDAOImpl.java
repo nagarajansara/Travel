@@ -27,7 +27,7 @@ public class BookingDAOImpl implements BookingDAO
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	final String GET_BOOKING_DETAILS_USER =
-			"SELECT * from callbacks where consumerid =:consumerid";
+			"SELECT * from callbacks where userid =:userid";
 	final String GET_BOOKING_DETAILS_ADMIN =
 			"SELECT * from callbacks where vendorid =:vendorid AND status =:status";
 	final String GET_MY_LEADS =
@@ -35,12 +35,12 @@ public class BookingDAOImpl implements BookingDAO
 					+ "INNER JOIN tripdetails td  ON "
 					+ "b.tripid = td.id "
 					+ "INNER JOIN users u ON "
-					+ "u.id = b.consumerid "
+					+ "u.id = b.userid "
 					+ "WHERE td.userid =:vendorid AND b.status =:status ORDER BY b.createdat LIMIT :startIndx, :endIndx";
 
 	final String GET_NUMENTRIES_MYLEADS = "SELECT count(*) FROM booking b "
 			+ "INNER JOIN tripdetails td  ON " + "b.tripid = td.id "
-			+ "INNER JOIN users u ON " + "u.id = b.consumerid "
+			+ "INNER JOIN users u ON " + "u.id = b.userid "
 			+ "WHERE td.userid =:vendorid AND b.status =:status";
 
 	final String GET_VENDOR_STATISTIC_BOOKING =

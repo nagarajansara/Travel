@@ -38,4 +38,6 @@ public interface LoginDAO
 
 	int activatecustomer(String uUID) throws Exception;
 
+	List<Login> getVendorDetailsBasedId(int vendorId) throws Exception;
+
 }

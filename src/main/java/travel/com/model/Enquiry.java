@@ -61,9 +61,23 @@ public class Enquiry
 		this.totals = totals;
 	}
 
+	public int getUserid()
+	{
+		return userid;
+	}
+
+	public void setUserid(int userid)
+	{
+		this.userid = userid;
+	}
+
 	@Getter
 	@Setter
 	private int totals;
+
+	@Getter
+	@Setter
+	private int userid;
 
 	public int getId()
 	{
@@ -166,6 +180,18 @@ public class Enquiry
 		this.phoneno = phoneno;
 		this.credits = credits;
 		this.email = email;
+	}
+
+	public Enquiry(int tripId, String name, String status, String phoneno,
+			int credits, String email, int userId)
+	{
+		this.tripid = tripId;
+		this.name = name;
+		this.status = status;
+		this.phoneno = phoneno;
+		this.credits = credits;
+		this.email = email;
+		this.userid = userId;
 	}
 
 	public Enquiry(int credits, int id, String status)

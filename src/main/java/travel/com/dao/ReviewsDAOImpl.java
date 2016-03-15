@@ -40,6 +40,40 @@ public class ReviewsDAOImpl implements ReviewsDAO
 			"SELECT count(*) FROM reviews r INNER JOIN tripdetails t "
 					+ "ON t.id = r.tripid  where "
 					+ "r.tripid =:tripId AND t.userid =:userId";
+	final String GET_REVIEWS_BASED_VENDOR_ID =
+			"SELECT r.*, t.title AS title FROM reviews r  "
+					+ "INNER JOIN tripdetails t "
+					+ "ON r.tripid = t.id "
+					+ "WHERE t.userid =:vendorid ORDER BY r.createdate DESC LIMIT :startIndx, :endIndx";
+	final String GET_REVIEWS_BASED_VENDOR_ID_NUMENTRIES =
+			"SELECT count(*)  FROM reviews r  " + "INNER JOIN tripdetails t "
+					+ "ON r.tripid = t.id " + "WHERE t.userid =:vendorid";
+	// HERE CONSUMER AND VENDOR CAN GIVE THE REVIEWS
+	final String GET_REVIEWS_BASED_CONSUMER =
+			"SELECT IFNULL(r.comment, 'false') AS isreviewed, r.username, r.email, temp.userid, "
+					+ "temp.tripid, t.title FROM(SELECT b.userid, b.tripid, b.status FROM booking b "
+					+ "UNION "
+					+ "SELECT e.userid, e.tripid, e.status FROM enquiry e) "
+					+ "AS temp "
+					+ "INNER JOIN tripdetails t "
+					+ "ON "
+					+ "t.id = temp.tripid "
+					+ "LEFT OUTER JOIN "
+					+ "reviews r "
+					+ "ON "
+					+ "r.tripid = temp.tripid "
+					+ "WHERE temp.userid =:userId "
+					+ "AND "
+					+ "r.comment IS NULL "
+					+ "GROUP BY temp.tripid "
+					+ "LIMIT :startIndx, :endIndx";
+	final String GET_REVIEWS_NUMENTRIES_BASED_CONSUMER =
+			"SELECT count(*) FROM(SELECT b.userid, b.tripid, b.status FROM booking b "
+					+ "UNION "
+					+ "SELECT e.userid, e.tripid, e.status FROM enquiry e) "
+					+ "AS temp " + "LEFT OUTER JOIN " + "reviews r " + "ON "
+					+ "r.tripid = temp.tripid " + "WHERE temp.userid =:userId "
+					+ "AND " + "r.comment IS NULL ";
 
 	public List<Reviews> getReviewsBasedTripId(Reviews reviews)
 			throws Exception
@@ -140,5 +174,51 @@ public class ReviewsDAOImpl implements ReviewsDAO
 		map.put("userId", userId);
 		return namedParameterJdbcTemplate.queryForInt(
 				GET_VENDOR_REVIEWS_NUMENTRIES, map);
+	}
+
+	@Override
+	public List<Reviews> getReviews(int vendorId, int startIndx, int endIndx)
+			throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("vendorid", vendorId);
+		paramMap.put("startIndx", startIndx);
+		paramMap.put("endIndx", endIndx);
+
+		return namedParameterJdbcTemplate.query(GET_REVIEWS_BASED_VENDOR_ID,
+				paramMap, new BeanPropertyRowMapper(Reviews.class));
+
+	}
+
+	@Override
+	public int getReviewsNumEntries(int vendorId) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("vendorid", vendorId);
+
+		return namedParameterJdbcTemplate.queryForInt(
+				GET_REVIEWS_BASED_VENDOR_ID_NUMENTRIES, paramMap);
+	}
+
+	@Override
+	public List<Reviews> getConsumerReview(int userId, int startIndx,
+			int endIndx) throws Exception
+	{
+		Map paraMap = new HashMap();
+		paraMap.put("userId", userId);
+		paraMap.put("startIndx", startIndx);
+		paraMap.put("endIndx", endIndx);
+		return namedParameterJdbcTemplate.query(GET_REVIEWS_BASED_CONSUMER,
+				paraMap, new BeanPropertyRowMapper(Reviews.class));
+
+	}
+
+	@Override
+	public int getConsumerReviewNumEntries(int userId) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("userId", userId);
+		return namedParameterJdbcTemplate.queryForInt(
+				GET_REVIEWS_NUMENTRIES_BASED_CONSUMER, paramMap);
 	}
 }

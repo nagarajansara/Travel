@@ -24,10 +24,13 @@ public class SubActivityDAOImpl implements SubActivityDAO
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+	final String STATUS_ACTIVE = "active";
+
 	final String INSERT_DATA =
 			"INSERT INTO subactivity (name, status) values (:name, :status)";
 
-	final String GET_SUB_ACTIVITY = "Select * from subactivity where status =:status";
+	final String GET_SUB_ACTIVITY =
+			"Select * from subactivity where status =:status";
 
 	public void addSubActivity(SubActivity subActivity) throws Exception
 	{
@@ -46,6 +49,17 @@ public class SubActivityDAOImpl implements SubActivityDAO
 
 		return namedParameterJdbcTemplate.query(GET_SUB_ACTIVITY, paramMap,
 				new BeanPropertyRowMapper(SubActivity.class));
+
+	}
+
+	@Override
+	public void addNewSubActivity(String activityName) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("name", activityName);
+		paramMap.put("status", STATUS_ACTIVE);
+
+		namedParameterJdbcTemplate.update(INSERT_DATA, paramMap);
 
 	}
 }

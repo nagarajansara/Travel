@@ -19,7 +19,7 @@
 				<%@ include file="lib/v_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Profile Details</h3>
+						<h3 class="ctFont_FamilyStyle">My Profile</h3>
 					</div>
 					<c:if test="${not empty model.responseData.userDetails}">
 						<c:forEach items="${model.responseData.userDetails}" var="element"
@@ -59,6 +59,15 @@
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label">Address
 							</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<textarea disabled
+									class="ctIsChkEmptyVal form-control ctAddressArea" rows="3"
+									placeholder="" name="addressTxt">${address}</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-3 col-md-3 col-sm-3 control-label">How
+								many years working </label>
 							<div class="col-lg-4 col-md-4 col-sm-4">
 								<textarea disabled
 									class="ctIsChkEmptyVal form-control ctAddressArea" rows="3"
@@ -106,8 +115,7 @@
 							</label>
 							<div class="col-lg-4 col-md-4 col-sm-4 ctRouteDiv">
 								<input name="city" disabled type="text"
-									class="form-control ctIsChkEmptyVal" name=""
-									value="${city}">
+									class="form-control ctIsChkEmptyVal" name="" value="${city}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -143,9 +151,9 @@
 <script src="${baseURL}/assest/js/ctprofile.js"></script>
 <script src="${baseURL}/assest/plugin/selecttwo/select_min.js"></script>
 <script type="text/javascript">
-	$('.ctVendorListMenu li').removeClass('active');
-	$('.ctVendorListMenu .ctVendorProfileMenu').addClass('active');
-	
-	$('.ctPhoneNoTxt').numeric();
-	$('.ctPinCodeTxt').numeric();
+    $('.ctVendorListMenu li').removeClass('active');
+    $('.ctVendorListMenu .ctVendorProfileMenu').addClass('active');
+
+    $('.ctPhoneNoTxt').numeric();
+    $('.ctPinCodeTxt').numeric();
 </script>

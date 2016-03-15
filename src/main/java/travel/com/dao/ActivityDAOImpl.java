@@ -27,6 +27,7 @@ public class ActivityDAOImpl implements ActivityDAO
 			"SELECT  UNIX_TIMESTAMP(createdat)*1000, COUNT(*), DATE_FORMAT(createdat, '%m/%d/%Y') "
 					+ "FROM booking "
 					+ "WHERE createdat BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE() GROUP BY DATE_FORMAT(createdat, '%m/%d/%Y')";
+	final String INSERT_ACTIVITY = "INSERT INTO activity (name) values (:name)";
 
 	public List<Activity> getActivitys(Activity activity) throws Exception
 	{
@@ -40,7 +41,8 @@ public class ActivityDAOImpl implements ActivityDAO
 	}
 
 	@Override
-	public Map<String, Object> getVendorStatistic(String status, int vendorId) throws Exception
+	public Map<String, Object> getVendorStatistic(String status, int vendorId)
+			throws Exception
 	{
 		Map<String, Object> mapList = new HashMap<String, Object>();
 		Map params = new HashMap();
@@ -59,5 +61,15 @@ public class ActivityDAOImpl implements ActivityDAO
 	public Map<String, Object> getLeads(Booking booking) throws Exception
 	{
 		return null;
+	}
+
+	@Override
+	public void addNewActivity(String activityName) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("name", activityName);
+
+		namedParameterJdbcTemplate.update(INSERT_ACTIVITY, paramMap);
+
 	}
 }

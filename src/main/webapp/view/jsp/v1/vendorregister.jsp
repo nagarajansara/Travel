@@ -19,6 +19,8 @@
 
 
 
+
+
 <!--[if lt IE 9]>
 		<script type="text/javascript" src="js/respond.min.js"></script>
 		<![endif]-->
@@ -57,15 +59,37 @@ body {
 .ctRequired {
 	color: red;
 }
+
+.ctVendorReg #pass_form {
+	margin: 10px;
+}
+
+.ctVendorReg label {
+	font-family: verdana;
+	font-size: 12px;
+}
+
+.ctVendorReg input {
+	padding: 2px;
+	color: gray;
+}
+
+.ctVendorReg #passstrength {
+	color: red;
+	font-family: verdana;
+	font-size: 10px;
+	font-weight: bold;
+	color: #ffffff;
+}
 </style>
 
 </head>
 <body data-color="white" class="flat">
 	<div id="wrapper">
 		<div id="header" class="ctHeaderTag">
-			<h1>
+			<!-- <h1>
 				<a href="index.html">Unicorn Admin</a>
-			</h1>
+			</h1> -->
 			<!--<a href="#" id="menu-trigger"><i class="fa fa-bars"></i></a>-->
 		</div>
 		<div id="content" class="ctWrapper">
@@ -118,7 +142,7 @@ body {
 							<h5>Vendor Registration</h5>
 						</div>
 						<div class="widget-content nopadding">
-							<form class="form-horizontal" method="post"
+							<form class="form-horizontal ctVendorReg" method="post"
 								action="/travel/travelapi/login/vendorregister"
 								name="basic_validate" id="basic_validate"
 								novalidate="novalidate">
@@ -160,11 +184,24 @@ body {
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Password<span
 										class="ctRequired"> (*)</span></label>
+									<div class="col-sm-5 col-md-5 col-lg-5">
+										<input type="password"
+											class="form-control input-sm ctVendorPass" name="password"
+											id="password">
+									</div>
+									<div class="col-sm-3 col-md-3 col-lg-3" id="passstrength">
+
+									</div>
+								</div>
+								<!-- <div class="form-group">
+									<label class="col-sm-3 col-md-3 col-lg-3 control-label">Retype
+										Password<span class="ctRequired"> (*)</span>
+									</label>
 									<div class="col-sm-9 col-md-9 col-lg-5">
 										<input type="password" class="form-control input-sm"
 											name="password" id="password">
 									</div>
-								</div>
+								</div> -->
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 col-lg-3 control-label">State<span
 										class="ctRequired"> (*)</span></label>
@@ -291,9 +328,17 @@ body {
 	<script src="/travel/theme/dashboard/js/unicorn.js"></script>
 	<script src="/travel/theme/dashboard/js/unicorn.form_validation.js"></script>
 	<script src="/travel/assest/plugin/numeric/numeric.min.js"></script>
+
+	<script src="/travel/assest/util/ctutils.js"></script>
+
 </body>
 <script type="text/javascript">
     $('select').select2();
     $('#mobile').numeric();
     $('#contact').numeric();
+
+    $('.ctVendorPass').keyup(function(e) {
+	var tObj = this;
+	bmpUtil.passwordStrength(e, tObj, "#passstrength");
+    })
 </script>

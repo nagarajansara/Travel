@@ -97,6 +97,24 @@ public class LoginDAOImpl implements LoginDAO
 					+ "WHERE e.tripid =:tripId AND e.id =:enquiryId";
 	final String ACTIVATE_CUSTOMER =
 			"Update users set isapproved =:isapproved where verificationcode =:UUID";
+	final String GET_VENDOR_DETAILS_BASED_ON_ID =
+			"SELECT u.email, t.userid, IFNULL(rs.totalreviews, 0) AS totalreviews, u.firstname, u.lastname, count(*) AS totaltrip, IFNULL(rs.startrating, 0) AS starrating FROM users u "
+					+ "INNER JOIN "
+					+ "tripdetails t "
+					+ "ON "
+					+ "t.userid = u.id "
+					+ "LEFT OUTER JOIN "
+					+ "(SELECT td.userid, COUNT(*) AS totalreviews, AVG(startrating) AS startrating FROM reviews r "
+					+ "INNER JOIN "
+					+ "tripdetails td "
+					+ "ON "
+					+ "td.id = r.tripid "
+					+ "GROUP BY "
+					+ "r.tripid "
+					+ ") AS rs "
+					+ "ON "
+					+ "t.userid = rs.userid "
+					+ "WHERE u.id =:vendorId " + "GROUP BY " + "u.email ";
 
 	public void insertCustomerData(Login login) throws Exception
 	{
@@ -325,5 +343,17 @@ public class LoginDAOImpl implements LoginDAO
 		int updatedCount =
 				namedParameterJdbcTemplate.update(ACTIVATE_CUSTOMER, paramMap);
 		return updatedCount;
+	}
+
+	@Override
+	public List<Login> getVendorDetailsBasedId(int vendorId) throws Exception
+	{
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vendorId", vendorId);
+
+		return namedParameterJdbcTemplate.query(GET_VENDOR_DETAILS_BASED_ON_ID,
+				map, new BeanPropertyRowMapper(Login.class));
+
 	}
 }

@@ -37,6 +37,8 @@ function CtDAO() {
     this.UPDATE_TRIPIMAGE_TYPE = this.API_PREFIX
 	    + "/trip/updateTripImgType.json";
     this.ADD_SAVED_TRIPLIST = this.API_PREFIX + "/consumer/addSavedTrips.json";
+    this.ADD_ACTIVITY = this.API_PREFIX + "/vendor/addNewActivity.json";
+    this.ADD_SUB_ACTIVITY = this.API_PREFIX + "/vendor/addNewSubActivity.json";
 
     this.RESPONSE_CACHE = {};
 
@@ -116,7 +118,14 @@ CtDAO.prototype.updateTripImgType = function(param, cbk) {
 CtDAO.prototype.addSavedTrips = function(param, cbk) {
     var tObj = this;
     tObj.getData(tObj.ADD_SAVED_TRIPLIST, param, cbk);
-
+};
+CtDAO.prototype.addNewActivity = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.ADD_ACTIVITY, param, cbk);
+};
+CtDAO.prototype.addNewSubActivity = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.ADD_SUB_ACTIVITY, param, cbk);
 };
 CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	isParse) {

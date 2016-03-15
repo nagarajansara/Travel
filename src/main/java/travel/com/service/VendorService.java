@@ -28,4 +28,15 @@ public interface VendorService
 
 	List<SubActivity> getSubActivity(String sTATUS_ACTIVE) throws Exception;
 
+	void addNewActivity(String activityName) throws Exception;
+
+	void addNewSubActivity(String activityName) throws Exception;
+
+	List<Reviews> getReviews(int vendorId, int startIndx, int endIndx)
+			throws Exception;
+
+	int getReviewsNumEntries(int vendorId) throws Exception;
+
+	List<Login> getVendorDetailsBasedId(int vendorId) throws Exception;
+
 }

@@ -10,7 +10,7 @@
 				<%@ include file="lib/v_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Credits Details</h3>
+						<h3 class="ctFont_FamilyStyle">My Credit Status</h3>
 					</div>
 					<form action="#" method="post" role="form"
 						class="form-horizontal ctVendorListingForm">
@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-md-8 col-sm-8">
 							<div class="kd-section-title">
-								<h3 class="ctFont_FamilyStyle">Credits Reduction History</h3>
+								<h3 class="ctFont_FamilyStyle">Credits Usage</h3>
 							</div>
 						</div>
 						<div class="col-md-12 col-sm-12">

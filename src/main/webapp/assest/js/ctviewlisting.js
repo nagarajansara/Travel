@@ -7,7 +7,6 @@ function ctInitViewListing() {
     $("#star > img").click(function() {
 	var score = $(this).attr("alt");
 	START_RATING_DEFAULT_VALUE = score;
-	console.log(START_RATING_DEFAULT_VALUE);
     });
 
     $('.ctSUbmitEnquireForm')

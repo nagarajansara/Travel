@@ -12,7 +12,7 @@
 				<%@ include file="lib/v_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Deals Status</h3>
+						<h3 class="ctFont_FamilyStyle">Add a Deal</h3>
 					</div>
 					<form onsubmit="return ctAddDealsFrmSubmit();"
 						action="${baseURL}/travelapi/vendor/addDeals" method="post"
@@ -20,7 +20,7 @@
 						<div class="form-group">
 							<label
 								class="col-lg-3 col-md-3 col-sm-3 control-label ctFontWeight_B">
-							</label>
+								Enter Trip Name </label>
 							<div class="col-lg-4 col-md-4 col-sm-4">
 								<input style="width: 100%;" type="hidden" name="city"
 									id="ctSelectedTripId">
@@ -58,7 +58,7 @@
 					</form>
 					<div class="row">
 						<div class="kd-section-title">
-							<h3 class="ctFont_FamilyStyle">Offered Listing</h3>
+							<h3 class="ctFont_FamilyStyle">Deal History</h3>
 						</div>
 						<c:if test="${not empty model.responseData.dealsList}">
 							<table class="table table-striped">
@@ -70,29 +70,28 @@
 										<th>Grand Total</th>
 										<th>Manage</th>
 									</tr>
-								<thead>
-									<c:forEach items="${model.responseData.dealsList}"
-										var="element" varStatus="loop">
-										<tr>
-											<td>${(loop.index) + 1}</td>
-											<td>${element.title}</td>
-											<td><input type="text"
-												class="form-control ctDealsPercentage" disabled
-												value="${element.offer_percentage}"></td>
-											<td><fmt:formatNumber type="number"
-													maxFractionDigits="3"
-													value="${element.price - (element.price * (element.offer_percentage / 100))}" />
-											</td>
-											<td><a class="ctManageDealsAnchor"
-												href="javascript:void(0)"><i
-													class="fa fa-edit ctManageDealsEditIcon"
-													pk_dealsId="${element.id}"></a></i> &nbsp;<a
-												href="javascript:void(0)" class="ctManageUpdateDealsAnchor"
-												style="display: none"><i
-													class="fa fa-refresh ctManageDealsUpdateIcon"
-													pk_dealsId="${element.id}"></i> </a></td>
-										</tr>
-									</c:forEach>
+								</thead>
+								<c:forEach items="${model.responseData.dealsList}" var="element"
+									varStatus="loop">
+									<tr>
+										<td>${(loop.index) + 1}</td>
+										<td>${element.title}</td>
+										<td><input type="text"
+											class="form-control ctDealsPercentage" disabled
+											value="${element.offer_percentage}"></td>
+										<td><fmt:formatNumber type="number" maxFractionDigits="3"
+												value="${element.price - (element.price * (element.offer_percentage / 100))}" />
+										</td>
+										<td><a class="ctManageDealsAnchor"
+											href="javascript:void(0)"><i
+												class="fa fa-edit ctManageDealsEditIcon"
+												pk_dealsId="${element.id}"></a></i> &nbsp;<a
+											href="javascript:void(0)" class="ctManageUpdateDealsAnchor"
+											style="display: none"><i
+												class="fa fa-refresh ctManageDealsUpdateIcon"
+												pk_dealsId="${element.id}"></i> </a></td>
+									</tr>
+								</c:forEach>
 							</table>
 						</c:if>
 						<c:if test="${empty model.responseData.dealsList}">
@@ -123,7 +122,7 @@
     var remoteDataConfig = {
 	dropdownCssClass : 'bmSelect2Class',
 	cache : "true",
-	placeholder : "Enter trip title",
+	placeholder : "Enter Trip Name",
 	minimumInputLength : 2,
 	ajax : {
 	    url : '${baseURL}/travelapi/vendor/getDeals.json',

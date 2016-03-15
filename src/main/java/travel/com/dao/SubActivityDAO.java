@@ -9,4 +9,6 @@ public interface SubActivityDAO
 	void addSubActivity(SubActivity subActivity) throws Exception;
 
 	List<SubActivity> getSubActivity(String status) throws Exception;
+
+	void addNewSubActivity(String activityName) throws Exception;
 }

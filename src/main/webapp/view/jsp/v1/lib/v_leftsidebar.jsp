@@ -21,6 +21,6 @@
 		<li class="ctVendorContactMenu"><a href="#messagesone">Contact
 				Us</a></li>
 		<li class="ctVendorReviewsMenu"><a
-			href="${baseURL}/view/jsp/v1/vendorreview.jsp">Reviews</a></li>
+			href="${baseURL}/travelapi/vendor/getReviews">Reviews</a></li>
 	</ul>
 </div>

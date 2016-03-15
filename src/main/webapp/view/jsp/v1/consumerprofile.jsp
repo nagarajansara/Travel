@@ -19,7 +19,7 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Profile Details</h3>
+						<h3 class="ctFont_FamilyStyle">My Profile</h3>
 					</div>
 					<c:if test="${not empty model.responseData.userDetails}">
 						<c:forEach items="${model.responseData.userDetails}" var="element"
