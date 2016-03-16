@@ -503,7 +503,7 @@ public class TripController extends BaseController
 
 									String[] toAddr =
 									{ toEmail };
-									enquiryStatus = Enquiry.STATUS_SENT;
+									enquiryStatus = Enquiry.STATUS_PENDING;
 									enquiryDeduction =
 											Enquiry.DEFAULT_ENQUIRY_DEDUCTION;
 									totalCredist =

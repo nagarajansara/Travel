@@ -138,11 +138,11 @@
 													<span>Your Account</span>
 													<div class="kd-login-network">
 														<ul>
-															<li><a
+															<%-- <li><a
 																href="<%=fbConnection.getFBAuthUrl(domainName)%>"
 																data-original-title="Facebook"
 																style="font-size: 12px !important;"><i
-																	class="fa fa-facebook"></i> Login with Facebook</a></li>
+																	class="fa fa-facebook"></i> Login with Facebook</a></li> --%>
 															<!--<li><a href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i> Login with Twitter</a></li>-->
 														</ul>
 													</div>
@@ -241,10 +241,9 @@
 												<input type="text" id="srch-term" name="srch-term"
 													placeholder="Search" class="form-control">
 											</form></li>
-										<li><a href="${baseURL}/view/jsp/v1/home.jsp">Home</a>
-											<ul class="sub-dropdown">
+										<li><a href="${baseURL}/view/jsp/v1/home.jsp">Home</a> <!-- <ul class="sub-dropdown">
 												<li><a href="index-map.html">Map HomePage</a></li>
-											</ul></li>
+											</ul> --></li>
 										<li><a href="${baseURL}/travelapi/trip/getTripDetails">Listing
 												Page</a></li>
 										<!--<li><a href="about-us.html">About Us</a></li>

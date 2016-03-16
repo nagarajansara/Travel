@@ -37,4 +37,34 @@ public class EnquiryServiceBO implements EnquiryService
 	{
 		return enquiryDAO.getPendingEnquiryNumEntries(userId, status);
 	}
+
+	@Override
+	public List<Enquiry> getProcessingEnquiry(int userId, String statusSent,
+			int startIndx, int defaultMaxIndx) throws Exception
+	{
+		return enquiryDAO.getProcessingEnquiry(userId, statusSent, startIndx,
+				defaultMaxIndx);
+	}
+
+	@Override
+	public int getProcessingEnquiryNumEntries(int userId, String statusSent)
+			throws Exception
+	{
+		return enquiryDAO.getProcessingEnquiryNumEntries(userId, statusSent);
+	}
+
+	@Override
+	public List<Enquiry> getexpiredEnquiry(int userId, String statusSent,
+			int startIndx, int defaultMaxIndx) throws Exception
+	{
+		return enquiryDAO.getexpiredEnquiry(userId, statusSent, startIndx,
+				defaultMaxIndx);
+	}
+
+	@Override
+	public int getexpiredEnquiryNumEntries(int userId, String statusSent)
+			throws Exception
+	{
+		return enquiryDAO.getexpiredEnquiryNumEntries(userId, statusSent);
+	}
 }

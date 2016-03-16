@@ -31,14 +31,16 @@
 										<td><c:out value="${ loopElement.index + 1}"></c:out></td>
 										<td><a target="_balnk"
 											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.tripid}"><c:out
-													value="${ element.title}"></a>
-										</c:out></td>
+													value="${ element.title}"></a> </c:out></td>
 										<td><c:out value="${ element.offer_percentage}"></c:out></td>
 										<td><c:out value="${ element.price}"></c:out></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+					</c:if>
+					<c:if test="${empty model.responseData.deals}">
+						<span style="font-family: verdana; color: red; font-size: 12px;"> No record found</span>
 					</c:if>
 				</div>
 			</div>

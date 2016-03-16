@@ -15,4 +15,16 @@ public interface EnquiryService
 
 	int getPendingEnquiryNumEntries(int userId, String status) throws Exception;
 
+	List<Enquiry> getProcessingEnquiry(int userId, String statusSent,
+			int startIndx, int defaultMaxIndx) throws Exception;
+
+	int getProcessingEnquiryNumEntries(int userId, String statusSent)
+			throws Exception;
+
+	List<Enquiry> getexpiredEnquiry(int userId, String statusSent,
+			int startIndx, int defaultMaxIndx) throws Exception;
+
+	int getexpiredEnquiryNumEntries(int userId, String statusSent)
+			throws Exception;
+
 }

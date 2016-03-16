@@ -373,6 +373,7 @@ public class LoginController extends BaseController
 		return "403";
 	}
 
+	// Get the new enquiry
 	@RequestMapping(value = "/getpendingenquiry", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String getPendingEnquiry(HttpServletRequest request,
@@ -386,26 +387,44 @@ public class LoginController extends BaseController
 		{
 			Map<String, Object> map = new HashMap<String, Object>();
 			int userId = getUserId(request);
+
 			String status = Enquiry.STATUS_PENDING;
+			// Get New Enquiry (STATUS = PENDING)
 			List<Enquiry> list =
 					enquiryService.getPendingEnquiry(userId, status, startIndx,
 							utilities.getDefaultMaxIndx());
 			int numEntries =
 					enquiryService.getPendingEnquiryNumEntries(userId, status);
 
-			List<Enquiry> sentEnquiryDetails =
-					enquiryService.getPendingEnquiry(userId,
+			// Get Processing Enquiry ((STATUS = SENT) GET LAST ONE WEEK
+			// RECORD))
+			List<Enquiry> processingEnquiryDetails =
+					enquiryService.getProcessingEnquiry(userId,
 							Enquiry.STATUS_SENT, startIndx,
 							utilities.getDefaultMaxIndx());
-			int sentEnquiryDetailsNumEntries =
-					enquiryService.getPendingEnquiryNumEntries(userId,
+			int processingEnquiryDetailsNumEntries =
+					enquiryService.getProcessingEnquiryNumEntries(userId,
+							Enquiry.STATUS_SENT);
+
+			// Get New Enquiry ((STATUS = SENT) GET BEFORE TWO OR THREEE WEEK
+			// RECORDS))
+			List<Enquiry> expiredEnquirys =
+					enquiryService.getexpiredEnquiry(userId,
+							Enquiry.STATUS_SENT, startIndx,
+							utilities.getDefaultMaxIndx());
+			int expiredEnquirysNumEntries =
+					enquiryService.getexpiredEnquiryNumEntries(userId,
 							Enquiry.STATUS_SENT);
 
 			map.put("enquiry", list);
 			map.put("numEntries", numEntries);
-			map.put("sentEnquiryDetails", sentEnquiryDetails);
-			map.put("sentEnquiryDetailsNumEntries",
-					sentEnquiryDetailsNumEntries);
+
+			map.put("processingEnquiryDetails", processingEnquiryDetails);
+			map.put("processingEnquiryDetailsNumEntries",
+					processingEnquiryDetailsNumEntries);
+
+			map.put("expiredEnquirys", expiredEnquirys);
+			map.put("expiredEnquirysNumEntries", expiredEnquirysNumEntries);
 
 			utilities.setSuccessResponse(response, map);
 		} catch (Exception ex)
@@ -431,24 +450,42 @@ public class LoginController extends BaseController
 			Map<String, Object> map = new HashMap<String, Object>();
 			int userId = getUserId(request);
 			String status = Enquiry.STATUS_PENDING;
+
 			List<Enquiry> list =
 					enquiryService.getPendingEnquiry(userId, status, startIndx,
 							utilities.getDefaultMaxIndx());
 			int numEntries =
 					enquiryService.getPendingEnquiryNumEntries(userId, status);
-			List<Enquiry> sentEnquiryDetails =
-					enquiryService.getPendingEnquiry(userId,
-							Enquiry.STATUS_SENT, startIndx,
+
+			// Get Processing Enquiry ((STATUS = SENT) GET LAST ONE WEEK
+			// RECORD))
+			List<Enquiry> processingEnquiryDetails =
+					enquiryService.getProcessingEnquiry(userId,
+							Enquiry.STATUS_SENT, 0,
 							utilities.getDefaultMaxIndx());
-			int sentEnquiryDetailsNumEntries =
-					enquiryService.getPendingEnquiryNumEntries(userId,
+			int processingEnquiryDetailsNumEntries =
+					enquiryService.getProcessingEnquiryNumEntries(userId,
+							Enquiry.STATUS_SENT);
+
+			// Get New Enquiry ((STATUS = SENT) GET BEFORE TWO OR THREEE WEEK
+			// RECORDS))
+			List<Enquiry> expiredEnquirys =
+					enquiryService.getexpiredEnquiry(userId,
+							Enquiry.STATUS_SENT, 0,
+							utilities.getDefaultMaxIndx());
+			int expiredEnquirysNumEntries =
+					enquiryService.getexpiredEnquiryNumEntries(userId,
 							Enquiry.STATUS_SENT);
 
 			map.put("enquiry", list);
 			map.put("numEntries", numEntries);
-			map.put("sentEnquiryDetails", sentEnquiryDetails);
-			map.put("sentEnquiryDetailsNumEntries",
-					sentEnquiryDetailsNumEntries);
+
+			map.put("processingEnquiryDetails", processingEnquiryDetails);
+			map.put("processingEnquiryDetailsNumEntries",
+					processingEnquiryDetailsNumEntries);
+
+			map.put("expiredEnquirys", expiredEnquirys);
+			map.put("expiredEnquirysNumEntries", expiredEnquirysNumEntries);
 
 			utilities.setSuccessResponse(response, map);
 

@@ -15,7 +15,7 @@
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Enquire Status</h3>
 					</div>
-					<div class="kd-section-title ctUserCreditsValue"></div>
+					<!-- <div class="kd-section-title ctUserCreditsValue"></div> -->
 					<div class="ctLoadingImg" style="display: none;">
 						<img src="${baseURL}/assest/img/loading.gif">
 					</div>
@@ -67,34 +67,84 @@
 						<ul id="pagination-demo" class="pagination-sm pull-right"></ul>
 					</div>
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-3 col-md-3 col-lg-3 col-md-3 col-sm-3"></div>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
-					<h1>Sent Enquiry</h1>
-					<table class="table table-striped ctSentEnquiryStatus">
-						<thead>
-							<tr>
-								<th>S.No</th>
-								<th>Trip Name</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${model.responseData.sentEnquiryDetails}"
-								var="element" varStatus="loopElement">
+					<h1>Processing Enquiry</h1>
+					<c:if
+						test="${not empty model.responseData.processingEnquiryDetails}">
+						<table class="table table-striped ctSentEnquiryStatus">
+							<thead>
 								<tr>
-									<td><c:out value="${ loopElement.index + 1}"></c:out></td>
-									<td style="text-transform: uppercase;"><a
-										href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.tripid}"
-										target="_blank">${element.title }</a></td>
-									<td style="text-transform: uppercase;">${element.status }</td>
+									<th>S.No</th>
+									<th>Trip Name</th>
+									<th>Status</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<c:forEach
+									items="${model.responseData.processingEnquiryDetails}"
+									var="element" varStatus="loopElement">
+									<tr>
+										<td><c:out value="${ loopElement.index + 1}"></c:out></td>
+										<td style="text-transform: uppercase;"><a
+											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.tripid}"
+											target="_blank">${element.title }</a></td>
+										<td style="text-transform: uppercase;">${element.status }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+					<c:if test="${empty model.responseData.processingEnquiryDetails}">
+						<span class="ctDangerDefaultTxt">No data found</span>
+					</c:if>
 					<div class="form-group">
 						<label class="col-lg-12 col-md-12 col-sm-12 control-label">
 							<c:if
-								test="${model.responseData.sentEnquiryDetailsNumEntries gt 5}">
+								test="${model.responseData.processingEnquiryDetailsNumEntries gt 5}">
+								<a class="frame-btn thbg-color ctMoreSentEnquiryDetailsBtn"
+									href="javascript:void(0)">Request email to more details</a>
+								</br>&nbsp;
+										<img class="ctLoader" style="display: none;"
+									src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
+							</c:if>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-3 col-md-3 col-lg-3 col-md-3 col-sm-3"></div>
+				<div class="col-md-8 col-sm-8 ctAddListingDetails">
+					<h1>Expired Enquiry</h1>
+					<c:if test="${not empty model.responseData.expiredEnquirys}">
+						<table class="table table-striped ctSentEnquiryStatus">
+							<thead>
+								<tr>
+									<th>S.No</th>
+									<th>Trip Name</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${model.responseData.expiredEnquirys}"
+									var="element" varStatus="loopElement">
+									<tr>
+										<td><c:out value="${ loopElement.index + 1}"></c:out></td>
+										<td style="text-transform: uppercase;"><a
+											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.tripid}"
+											target="_blank">${element.title }</a></td>
+										<td style="text-transform: uppercase;">${element.status }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+					<c:if test="${empty model.responseData.expiredEnquirys}">
+						<span class="ctDangerDefaultTxt">No data found</span>
+					</c:if>
+					<div class="form-group">
+						<label class="col-lg-12 col-md-12 col-sm-12 control-label">
+							<c:if test="${model.responseData.expiredEnquirysNumEntries gt 5}">
 								<a class="frame-btn thbg-color ctMoreSentEnquiryDetailsBtn"
 									href="javascript:void(0)">Request email to more details</a>
 								</br>&nbsp;
