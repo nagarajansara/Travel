@@ -164,3 +164,17 @@ BmpUtil.prototype.convertDateENG = function(currDate) {
 
     return convertedJSON;
 };
+BmpUtil.prototype.getTwoDatesDiff = function(date1, date2) {
+    var diffDays = -1;
+    var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    var fromDate = date1.split("-");
+    var toDate = date2.split("-");
+    if (fromDate && fromDate.length > 0 && toDate && toDate.length > 0) {
+	var date1 = new Date(fromDate[0], fromDate[1], fromDate[2]);
+	var date2 = new Date(toDate[0], toDate[1], toDate[2]);
+
+	diffDays = Math.round(((date1.getTime() - date2.getTime()) / (oneDay)));
+    }
+    return diffDays;
+
+};

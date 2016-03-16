@@ -305,6 +305,12 @@
 											<img src="${baseURL}/assest/img/loading.gif">
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="ctActivityNotificationMsg" style="display: none;">
+											<span style="font-family: verdana; color: green;">Added
+												Successfully. Please refersh this page</span>
+										</div>
+									</div>
 								</form>
 							</div>
 						</div>
@@ -338,6 +344,13 @@
 									<div class="form-group">
 										<div class="ctAddCommentLoadingImage ctDefaultDisplayNone">
 											<img src="${baseURL}/assest/img/loading.gif">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="ctSubActivityNotificationMsg"
+											style="display: none; color: green;">
+											<span style="font-family: verdana;">Added
+												Successfully. Please refersh this page</span>
 										</div>
 									</div>
 								</form>

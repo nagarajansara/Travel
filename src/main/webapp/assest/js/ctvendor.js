@@ -185,7 +185,9 @@ function ctChkFileUploaded() {
     return isUploaded;
 };
 function ctInsertTripData() {
-    var isNotEmpty = true, noDaysTxt = $('.ctNoDurationTxt').val();
+    var isNotEmpty = true, noDaysTxt = $('.ctNoDurationTxt').val(), fromDate = $(
+	    "#fromDatePicker").val(), toDate = $('#toDatePicker').val();
+
     if (noDaysTxt && noDaysTxt.length > 0
 	    && parseInt(noDaysTxt) >= MIN_TRIP_DAYS) {
 
@@ -221,6 +223,12 @@ function ctInsertTripData() {
 		    isNotEmpty = false;
 		}
 	    });
+	    if (bmpUtil.getTwoDatesDiff(fromDate, toDate) > 0) {
+		sweetAlert("Oops...", "Please enter correct date !", "error");
+		isNotEmpty = false;
+
+	    }
+
 	} else {
 	    sweetAlert("Oops...", "Please enter all values!", "error");
 	    isNotEmpty = false;
@@ -317,15 +325,20 @@ function ctAddActivityEvent() {
 	var param = {}, activityName = $('.ctActivityName').val();
 	if (bmpUtil.isTextFieldEmpty('.ctActivityName')) {
 	    $('.ctAddCommentLoadingImage').show();
+	    $('.ctActivityNotificationMsg').hide();
 	    param = {
 		"activityName" : activityName
 	    }
 	    ctDAO.addNewActivity(param, function(data) {
 		if (data && bmpUtil.RESPONSE_STATUS == data.responseStatus) {
 		    $('.ctAddCommentLoadingImage').hide();
+		    $('.ctActivityNotificationMsg').show();
 		} else {
 		    $('.ctAddCommentLoadingImage').hide();
-		    alert(data.responseData);
+		    {
+			alert('Already exits');
+		    }
+
 		}
 
 	    });
@@ -340,12 +353,14 @@ function ctAddSubActivity() {
 	var param = {}, subActivityName = $('.ctSubActivityName').val();
 	if (bmpUtil.isTextFieldEmpty('.ctSubActivityName')) {
 	    $('.ctAddCommentLoadingImage').show();
+	    $('.ctSubActivityNotificationMsg').hide();
 	    param = {
 		"activityName" : subActivityName
 	    }
 	    ctDAO.addNewSubActivity(param, function(data) {
 		if (data && bmpUtil.RESPONSE_STATUS == data.responseStatus) {
 		    $('.ctAddCommentLoadingImage').hide();
+		    $('.ctSubActivityNotificationMsg').show();
 		} else {
 		    $('.ctAddCommentLoadingImage').hide();
 		    alert(data.responseData);
@@ -353,7 +368,10 @@ function ctAddSubActivity() {
 
 	    });
 	} else {
-	    alert("Please fill all the details");
+	    {
+		alert('Already exits');
+	    }
+
 	}
     });
 }
