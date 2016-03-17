@@ -36,6 +36,7 @@ public class AOPService
 		{
 			stopWatch.stop();
 			TaskInfo taskInfo = stopWatch.getLastTaskInfo();
+			
 			// Log the method's profiling result
 			String AOPServiceMessage =
 					taskInfo.getTaskName() + ": " + taskInfo.getTimeMillis()

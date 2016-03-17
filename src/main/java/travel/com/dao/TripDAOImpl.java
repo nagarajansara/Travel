@@ -121,7 +121,7 @@ public class TripDAOImpl implements TripDAO
 			"Select count(*) from tripdetails where fromdate >= DATE_FORMAT(NOW(), '%y-%m-%d') AND status =:status";
 
 	final String GET_TRIP_DETAILS_BASED_ID =
-			"SELECT u.id AS userid, u.*, td.*, IFNULL(r.startrating, 0) AS startrating, td.price, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
+			"SELECT u.id AS userid, u.*, td.*, td.id AS tripid, IFNULL(r.startrating, 0) AS startrating, td.price, (td.price - (td.price * (IFNULL(d.offer_percentage, 0)/100))) AS offer_percentage, c.city AS tocity, IFNULL(ti.tripimagename, :defaultImage) AS tripimagename, GROUP_CONCAT(it.daywisedescription) AS daysdesc, "
 					+ "DATE_FORMAT(td.fromdate, '%b %d, %Y') AS dateformat, DATE_FORMAT(td.todate, '%b %d, %Y') AS todateformat,  "
 					+ " IFNULL(v.views, 0) AS views, IFNULL(f.favourites, 0) AS favourites "
 					+ " FROM tripdetails td "

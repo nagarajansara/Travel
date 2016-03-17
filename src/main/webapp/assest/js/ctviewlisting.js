@@ -172,7 +172,8 @@ function ctSubmitBtn() {
 };
 function ctSetSavedTrips() {
     $('.ctSavedTripList').click(function() {
-	var tripId = bmpUtil.getLastStartingURL(), param = {};
+	// var tripId = bmpUtil.getLastStartingURL(), param = {};
+	var tripId = $('.ctSavedTripList').attr('PK_tripid');
 	param = {
 	    "tripId" : tripId
 	};

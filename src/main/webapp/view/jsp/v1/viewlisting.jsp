@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html"%>
+<%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <%@ include file="lib/header.jsp"%>
 <style type="text/css">
 .bs-example {
@@ -25,6 +26,7 @@
 								<ul class="slides">
 									<c:forEach items="${model.responseData.tripdetails}"
 										var="element" varStatus="loop">
+										<c:set var="TRIPID" value="${element.tripid }"></c:set>
 										<c:set var="ratedStart" value="${element.startrating }"></c:set>
 										<c:set var="tripimages"
 											value="${fn:split(element.tripimagename, ',')}" />
@@ -66,7 +68,7 @@
 							<c:set var="tourProvidedUserId" value="${element.userid }"
 								scope="request" />
 							<div class="kd-pkg-info ctNoborder">
-								<ul class="ctKdpkgInfoList">
+								<ul class="ctKdpkgInfoList ctKdpkgInfoListIconColor">
 									<li><i class="fa fa-map-marker"></i> <strong>Duration:</strong>
 										${element.dateformat} - ${element.todateformat}</li>
 									<li><i class="fa fa-paper-plane"></i> <strong>LOCATION:</strong>
@@ -86,7 +88,7 @@
 											</c:otherwise>
 										</c:choose></li>
 								</ul>
-								<div class="row" style="clear: both;">
+								<div class="row ctKdpkgInfoListIconColor" style="clear: both;">
 									<div class="col-md-4 col-sm-4">
 										<ul>
 											<li><i class="fa fa-eye"></i> <strong>Views:</strong> ${ element.views}</li>
@@ -137,7 +139,7 @@
 												<label
 													class="col-lg-2 col-md-2 col-sm-2 control-label ctViewListingFont_B">
 													Email :</label>
-												<div class="col-lg-6 col-md-6 col-sm-6">
+												<div class="col-lg-6 col-md-6 col-sm-6 ctTourVendorEmail">
 													<a
 														href="${baseURL}/travelapi/vendor/getVendorDetailsBasedId/${tourProvidedUserId}"
 														target="_balnk">${tourProvidedEmail}</a>
@@ -178,14 +180,17 @@
 										aria-controls=dates role="tab" data-toggle="tab">Dates</a></li>
 									<li class="pull-right ctSavedListTrip"><c:choose>
 											<c:when test="${(sessionScope.role != null)}">
-												<a class="ctSavedTripList" style="">Saved Trip List</a>
+												<a class="ctSavedTripList"
+													PK_tripid=${util:getBase64Encode(TRIPID) }>Saved Trip
+													List</a>
 											</c:when>
 											<c:otherwise>
-												<a class="ctSavedTripList" title="Please login and continue">Saved
-													Trip List</a>
+												<a class="ctSavedTripList" style="cursor: progress"
+													title="Please login and continue">Saved Trip List</a>
 											</c:otherwise>
 										</c:choose>
 								</ul>
+								<c:remove var="TRIPID" />
 								<c:forEach items="${model.responseData.tripdetails}"
 									var="element" varStatus="loop">
 									<div class="tab-content">

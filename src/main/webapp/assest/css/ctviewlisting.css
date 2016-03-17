@@ -64,3 +64,22 @@ body .ctThumbImgFlex .slides  li img {
 	padding: 10px !important;
 	margin-bottom: 0px !important;
 }
+
+.ctKdpkgInfoListIconColor i {
+	background-color: #087dc2;
+	border-color: #087dc2 !important;
+	color: #ffffff !important;
+}
+
+.ctKdpkgInfoListIconColor li {
+	color: #000000 !important;
+}
+
+.ctTourVendorEmail a {
+	text-decoration-line: underline !important;
+}
+
+.ctThumbImgFlex:hover,.ctThumbImgFlex {
+	cursor: pointer;
+	border: 
+}

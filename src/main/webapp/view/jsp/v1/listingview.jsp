@@ -186,14 +186,17 @@
 										<article class="col-md-12 ctBlogborderstyle">
 											<article class="col-md-5">
 												<figure>
-													<a href="#"><img width="315" height="235"
-														alt="${ element.title}" title="${ element.title}"
+													<a
+														href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }/${util:getSlugString(element.title)}"><img
+														width="315" height="235" alt="${ element.title}"
+														title="${ element.title}"
 														src="${hostName}:${port}/${uploadedImageFolderName}/${element.tripimagename}"></a>
 													<figcaption>
 														<span class="package-price thbg-color">RS ${ element.price}</span>
 														<div class="kd-bottomelement">
 															<h5>
-																<a href="#">${ element.title}</a>
+																<a
+																	href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }/${util:getSlugString(element.title)}">${ element.title}</a>
 															</h5>
 															<div class="days-counter ctDaysCounter">
 																<span>${ element.duration}</span> <br> days

@@ -149,7 +149,21 @@ public class Trip
 
 	@Getter
 	@Setter
+	private int tripid;
+
+	@Getter
+	@Setter
 	private double offer_percentage;
+
+	public int getTripid()
+	{
+		return tripid;
+	}
+
+	public void setTripid(int tripid)
+	{
+		this.tripid = tripid;
+	}
 
 	@Getter
 	@Setter
