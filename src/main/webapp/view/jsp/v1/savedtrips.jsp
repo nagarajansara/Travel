@@ -45,7 +45,7 @@
 										<section class="kd-bloginfo col-md-7">
 											<h2>
 												<a class="ctListingTitle" target="_blank"
-													href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.tripid) }">${ element.title}
+													href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.tripid) }/${util:getSlugString(element.title)}">${ element.title}
 												</a>
 											</h2>
 											<ul class="kd-postoption">

@@ -411,6 +411,55 @@ public class TripController extends BaseController
 		return "viewlisting";
 	}
 
+	// USED FOR SEO
+	@RequestMapping(value = "/getTripDetailsBasedId/{tripId}/{slug}", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String getTripDetailsBasedIdSlug(HttpServletRequest request,
+			@PathVariable("tripId") String tripId_INT,
+			@PathVariable("slug") String slug, HttpServletResponse res,
+			ModelMap model) throws Exception
+	{
+		try
+		{
+			String deCodedValue = utilities.getDecodedString(tripId_INT, 1);
+			int tripId = Integer.parseInt(new String(deCodedValue));
+			Map<String, Object> map = new HashMap<String, Object>();
+			String STATUS_ACTIVE = "active";
+			int credits = 0;
+			Viewers viewers =
+					new Viewers(tripId, credits, Viewers.STATUS_VIEWED);
+			viewersService.insertViewers(viewers);
+			Trip trip = new Trip(tripId, STATUS_ACTIVE);
+			String tripIds = String.valueOf(tripId);
+			if (true)
+			{
+				List<Trip> list = new ArrayList<Trip>();
+				list = tripService.getTripDetailsBasedId(trip);
+				map.put("tripdetails", list);
+
+			}
+
+			Reviews reviews =
+					new Reviews(tripId, utilities.getDefaultMinIndx(),
+							utilities.getDefaultMaxIndx());
+
+			List<Reviews> reviewList =
+					reviewsService.getReviewsBasedTripId(reviews);
+			int numEntries = reviewsService.getNumEntries(reviews);
+			map.put("reviewsdetails", reviewList);
+			map.put("reviewsNumEntries", numEntries);
+
+			map.put("reviewsCurrentPage", utilities.getDefaultMinIndx());
+			utilities.setSuccessResponse(response, map);
+		} catch (Exception ex)
+		{
+			logger.error("getTripDetailsBasedId :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "viewlisting";
+	}
+
 	@RequestMapping(value = "/addComments", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String addComments(HttpServletRequest request,

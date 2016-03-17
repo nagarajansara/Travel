@@ -51,7 +51,7 @@ public class TripDAOImpl implements TripDAO
 					+ "LEFT OUTER JOIN (SELECT tripid, COUNT(*) AS viwerscount FROM viewers GROUP BY tripid) AS v "
 					+ "ON v.tripid = td.id "
 					+ "LEFT OUTER JOIN (SELECT IFNULL(t.name, i.name) AS NAME, i.tripid, IFNULL(t.imagetype, i.imagetype) FROM tripimages i "
-					+ "LEFT OUTER JOIN(SELECT name, imagetype, tripid FROM tripimages WHERE imagetype = 'coverimage') AS t "
+					+ "LEFT OUTER JOIN(SELECT name, imagetype, tripid FROM tripimages WHERE imagetype = 'coverimage' AND STATUS ='active') AS t "
 					+ "ON i.tripid = t.tripid GROUP BY i.tripid) AS ti ON td.id = ti.tripid "
 					// +
 					// "LEFT OUTER JOIN(SELECT * FROM tripimages WHERE STATUS =:status ORDER BY imagetype) AS ti ON td.id = ti.tripid "

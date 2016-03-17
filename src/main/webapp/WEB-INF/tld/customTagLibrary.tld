@@ -13,4 +13,11 @@
 			java.lang.String getBase64Encode(java.lang.String)
 		</function-signature>
 	</function>
+	<function>
+		<name>getSlugString</name>
+		<function-class>travel.com.util.CustomELFunction</function-class>
+		<function-signature>
+			java.lang.String getSlugString(java.lang.String)
+		</function-signature>
+	</function>
 </taglib>
