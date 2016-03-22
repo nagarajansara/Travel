@@ -58,7 +58,7 @@ public class ConsumerDAOImpl implements ConsumerDAO
 					+ "ORDER BY td.createdat DESC LIMIT :startIndx, :maxIndx";
 
 	final String GET_CONSUMER_TRIPS_NUMENTRIES =
-			"Select count(*) from booking where consumerid =:consumerid AND status =:status";
+			"Select count(*) from booking where userid =:consumerid AND status =:status";
 	final String ADD_SAVED_TRIPS =
 			"INSERT IGNORE INTO savedtrips (userid, tripid) values(:userid, :tripid)";
 	final String GET_SAVED_TRIPS_NUMENTRIES =
