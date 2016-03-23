@@ -58,7 +58,7 @@
 <body>
 	<header id="mainheader">
 		<!--// Top Baar //-->
-		<div class="kd-topbar ctFont_FamilyStyle">
+		<div class="kd-topbar ct_MainHeaderFontStyle">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-5">
@@ -217,7 +217,7 @@
 			</div>
 		</div>
 		<!--// Header Baar //-->
-		<div class="kd-headbar ctFont_FamilyStyle">
+		<div class="kd-headbar ct_MainHeaderFontStyle ct_SubBasckGroundColor">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">

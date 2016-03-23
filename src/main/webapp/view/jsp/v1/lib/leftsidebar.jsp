@@ -1,30 +1,33 @@
 <nav id="side_fixed_nav">
 	<div class="slim_scroll">
 		<div class="side_nav_actions">
-			<a href="javascript:void(0)" id="side_fixed_nav_toggle"><span class="icon-align-justify"></span></a>
-			<div id="toogle_nav_visible" class="make-switch switch-mini" data-on="success" data-on-label="<i class='icon-lock'></i>" data-off-label="<i class='icon-unlock-alt'></i>">
+			<a href="javascript:void(0)" id="side_fixed_nav_toggle"><span
+				class="icon-align-justify"></span></a>
+			<div id="toogle_nav_visible" class="make-switch switch-mini"
+				data-on="success" data-on-label="<i class='icon-lock'></i>"
+				data-off-label="<i class='icon-unlock-alt'></i>">
 				<input id="nav_visible_input" type="checkbox">
 			</div>
 		</div>
-		<ul id="text_nav_side_fixed">
-			<li>
-				<a href="javascript:void(0)"><span class="icon-dashboard"></span>Dashboard</a>
+		<ul id="text_nav_side_fixed" class="ct_MainHeader">
+			<li><a href="javascript:void(0)"><span
+					class="icon-dashboard"></span>Dashboard</a>
 				<ul>
 					<li><a href="dashboard.html">Dashboard</a></li>
-					<li class="link_active"><a href="dashboard_drag_drop.html">Drag & Drop Dashboard</a></li>
-					<li>
-						<a href="javascript:void(0)">Navigations</a>
+					<li class="link_active"><a href="dashboard_drag_drop.html">Drag
+							& Drop Dashboard</a></li>
+					<li><a href="javascript:void(0)">Navigations</a>
 						<ul>
-							<li><a href="nav_side_accordion.html">Accordion Navigation</a></li>
+							<li><a href="nav_side_accordion.html">Accordion
+									Navigation</a></li>
 							<li><a href="nav_side_icons.html">Icon Navigation</a></li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href=""><span class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
+						</ul></li>
+				</ul></li>
+			<li><a href=""><span
+					class="glyphicon glyphicon-cloud-upload"></span>Upload</a>
 				<ul>
-					<li class="link_active"><a href="<c:url value="/view/jsp/v1/upload.jsp"/>">CSV upload</a></li>
+					<li class="link_active"><a
+						href="<c:url value="/view/jsp/v1/upload.jsp"/>">CSV upload</a></li>
 					<!--<li class="link_active"><a href="dashboard_drag_drop.html">Drag & Drop Dashboard</a></li>
 					<li>
 						<a href="javascript:void(0)">Navigations</a>
@@ -33,8 +36,7 @@
 							<li><a href="nav_side_icons.html">Icon Navigation</a></li>
 						</ul>
 					</li>-->
-				</ul>
-			</li>
+				</ul></li>
 			<!--<li>
 				<a href="javascript:void(0)"><span class="icon-th-list"></span>Forms</a>
 				<ul>
@@ -98,39 +100,42 @@
 					<li><a href="settings.html">Site Settings</a></li>
 					<li><a href="user_profile.html">User profile</a></li>
 				</ul>
-			</li>-->				
+			</li>-->
 		</ul>
 	</div>
 </nav>
 <!-- jQuery -->
-		<script src="/socialcrm/theme/js/jquery.min.js"></script>
-	<!-- bootstrap framework -->
-		<script src="/socialcrm/theme/bootstrap/js/bootstrap.min.js"></script>
-	<!-- jQuery resize event -->
-		<script src="/socialcrm/theme/js/jquery.ba-resize.min.js"></script>
-	<!-- jquery cookie -->
-		<script src="/socialcrm/theme/js/jquery_cookie.min.js"></script>
-	<!-- retina ready -->
-		<script src="/socialcrm/theme/js/retina.min.js"></script>
-	<!-- typeahead -->
-		<script src="/socialcrm/theme/js/lib/typeahead.js/typeahead.min.js"></script>
-		<script src="/socialcrm/theme/js/lib/typeahead.js/hogan-2.0.0.js"></script>
+<script src="/socialcrm/theme/js/jquery.min.js"></script>
+<!-- bootstrap framework -->
+<script src="/socialcrm/theme/bootstrap/js/bootstrap.min.js"></script>
+<!-- jQuery resize event -->
+<script src="/socialcrm/theme/js/jquery.ba-resize.min.js"></script>
+<!-- jquery cookie -->
+<script src="/socialcrm/theme/js/jquery_cookie.min.js"></script>
+<!-- retina ready -->
+<script src="/socialcrm/theme/js/retina.min.js"></script>
+<!-- typeahead -->
+<script src="/socialcrm/theme/js/lib/typeahead.js/typeahead.min.js"></script>
+<script src="/socialcrm/theme/js/lib/typeahead.js/hogan-2.0.0.js"></script>
 
-	<!-- tinyNav -->
-		<script src="/socialcrm/theme/js/tinynav.js"></script>
-	<!-- slimscroll -->
-		<script src="/socialcrm/theme/js/lib/jQuery-slimScroll/jquery.slimscroll.min.js"></script>
-	
-	<!-- bootstrap switch -->
-		<script src="/socialcrm/theme/js/lib/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-	
-	<!-- touchSwipe -->
-		<script src="/socialcrm/theme/js/lib/TouchSwipe/jquery.touchSwipe.min.js"></script>
-		
-	<!-- Navgoco -->
-		<script src="/socialcrm/theme/js/lib/navgoco/jquery.navgoco.min.js"></script>
-		<script src="/socialcrm/theme/js/lib/jasny_plugins/bootstrap-fileupload.js"></script>
-		
-	<!-- ebro common scripts/functions -->
-		<script src="/socialcrm/theme/js/ebro_common.js"></script>
-		
+<!-- tinyNav -->
+<script src="/socialcrm/theme/js/tinynav.js"></script>
+<!-- slimscroll -->
+<script
+	src="/socialcrm/theme/js/lib/jQuery-slimScroll/jquery.slimscroll.min.js"></script>
+
+<!-- bootstrap switch -->
+<script
+	src="/socialcrm/theme/js/lib/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
+<!-- touchSwipe -->
+<script
+	src="/socialcrm/theme/js/lib/TouchSwipe/jquery.touchSwipe.min.js"></script>
+
+<!-- Navgoco -->
+<script src="/socialcrm/theme/js/lib/navgoco/jquery.navgoco.min.js"></script>
+<script
+	src="/socialcrm/theme/js/lib/jasny_plugins/bootstrap-fileupload.js"></script>
+
+<!-- ebro common scripts/functions -->
+<script src="/socialcrm/theme/js/ebro_common.js"></script>

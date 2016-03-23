@@ -56,7 +56,7 @@ body .ctThumbImgFlex .slides  li img {
 
 .ctViewListingWigetBlogPost,.ctViewListingWigetBlogPost a,.ctViewListingWigetBlogPost h2
 	{
-	font-family: verdana;
+	font-family: Junction;
 }
 
 .ctNoborder {
@@ -66,8 +66,8 @@ body .ctThumbImgFlex .slides  li img {
 }
 
 .ctKdpkgInfoListIconColor i {
-	background-color: #087dc2;
-	border-color: #087dc2 !important;
+	background-color: #FFF056;
+	border-color: #FFF056 !important;
 	color: #ffffff !important;
 }
 
@@ -81,5 +81,5 @@ body .ctThumbImgFlex .slides  li img {
 
 .ctThumbImgFlex:hover,.ctThumbImgFlex {
 	cursor: pointer;
-	border: 
+	border:
 }

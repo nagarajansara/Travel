@@ -33,7 +33,7 @@
 }
 
 .ctListingTitle {
-	font-family: verdana !important;
+	/* font-family: verdana !important; */
 	font-size: 14px !important;
 	font-weight: bold !important;
 	text-transform: capitalize !important;

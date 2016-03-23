@@ -49,13 +49,14 @@
 }
 
 .ctVendorListMenu li:hover,.ctCustomerListMenu li:hover {
-	background-color: #0F7DC1 !important;
+	background-color: #99cd4e !important;
 	cursor: pointer !important;
 }
 
 .ctVendorListMenu li.active,.ctVendorListMenu .active a,.ctCustomerListMenu li.active,.ctCustomerListMenu .active a
 	{
-	background-color: #0F7DC1 !important;
+	/* background-color: #0F7DC1 !important; */
+	background-color: #99cd4e !important;
 	color: #fff;
 }
 
@@ -84,10 +85,9 @@
 }
 
 /************************ COMMON CSS CLASS ***********************************************/
-.ctFont_FamilyStyle {
+/*  {
 	font-family: verdana !important;
-}
-
+} */
 .ctFontWeight_B,.bmSelect2Class {
 	font-weight: bold;
 }
@@ -172,4 +172,29 @@
 
 .ctHomeRowArticle .custom-btn {
 	background-color: #fad160;
+}
+
+.ct_MainHeader {
+	background-color: #99CD4E !important;
+}
+
+.ct_MainHeaderFontStyle,.ctVendorListMenu {
+	font-family: Lato !important;
+	font-size: 14px !important;
+	font-weight: bold;
+}
+
+.kd-blogmedium,.kd-blogmedium a,.kd-bloginfo,.container {
+	font-family: Junction !important;
+	font-size: 14px !important;
+	font-weight: bold;
+}
+
+.ct_SubBasckGroundColor,.kd-content,.ctPagesection,.kd-pagesection {
+	background-color: #F2EFE4 !important;
+}
+
+.kd-userinfo .kd-social-network a {
+	background-color: #fff056;
+	border: 1px solid #fff056 !important;
 }
