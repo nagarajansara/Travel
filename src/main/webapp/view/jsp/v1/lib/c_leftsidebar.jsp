@@ -1,7 +1,7 @@
-<div class="col-md-3 col-md-3 col-lg-3 col-md-3 col-sm-3 ct_MainHeader">
+<div class="col-md-3 col-md-3 col-lg-3 col-md-3 col-sm-3">
 	<ul class="ctCustomerListMenu">
 		<li class="ctCustomerProfileMenu"><a
-			href="${baseURL}/travelapi/consumer/getprofile">Profile</a></li>
+			href="${baseURL}/travelapi/consumer/getprofile">My Profile</a></li>
 		<li class="ctCustomerTravelsMenu"><a
 			href="${baseURL}/travelapi/consumer/getConsumerTravels">My
 				Travels</a></li>
@@ -12,8 +12,8 @@
 			href="${baseURL}/travelapi/consumer/getConsumerReview">Reviews</a></li>
 		<li class="ctCustomerDealsMenu"><a
 			href="${baseURL}/travelapi/consumer/getAllDeals">Current Deals</a></li>
-		<li class="ctCustomerContactusMenu"><a href="#messagesone">Contact
-				Us</a></li>
+		<li class="ctCustomerContactusMenu"><a
+			href="${baseURL}/view/jsp/v1/contactus.jsp">Contact Us</a></li>
 		<li class="ctCustomerTutorialsMenu"><a href="#messagesone">Tutorials</a></li>
 	</ul>
 </div>

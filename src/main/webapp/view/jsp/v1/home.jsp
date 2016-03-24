@@ -115,10 +115,12 @@
 							<article class="col-md-4">
 								<article class="col-md-12 ctHomeRowArticle">
 									<h3>What is "Brand Name"</h3>
-									<p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
-										Ipsum Lorem Ipsum Lorem Ipsum</p>
+									<p></p>
 									<div class="kd-button">
-										<a class="custom-btn" href="#">How will "Brand" help me?</a>
+										<a class="custom-btn" href="#">In today's fast paced world
+											majority of us are stressed in work and life. To relax the
+											stress there is two option 1. Mother’s lap and the Nature's
+											lap. Horruit helps plan, choose and rest at the nature's lap</a>
 									</div>
 								</article>
 							</article>
@@ -126,7 +128,9 @@
 								<article class="col-md-12 ctHomeRowArticle ctHomeRowArticleR">
 									<h3>Save Time And Money</h3>
 									<div class="kd-button">
-										<a class="custom-btn" href="#">Choose your Adventure</a>
+										<a class="custom-btn" href="#">Take advantage of the best
+											deals, events and promotions. We offer the most comprehensive
+											adventure travel guide across the entire country</a>
 									</div>
 								</article>
 							</article>
@@ -134,13 +138,16 @@
 								<article class="col-md-12 ctHomeRowArticle">
 									<h3>Get a Quote</h3>
 									<div class="kd-button">
-										<a class="custom-btn" href="#">You Need?</a>
+										<a class="custom-btn" href="#">No time to browse through
+											everything? Let us know what you are looking for</a>
 									</div>
 								</article>
 								<article class="col-md-12 ctHomeRowArticle">
 									<h3>Share Your Experience</h3>
 									<div class="kd-button">
-										<a class="custom-btn" href="#">Share Now!</a>
+										<a class="custom-btn" href="#">Share you thrilling, funny,
+											scary, cool and heroic adventure experience with the
+											community. Be a brand ambassador for Adventure activities.</a>
 									</div>
 								</article>
 							</article>

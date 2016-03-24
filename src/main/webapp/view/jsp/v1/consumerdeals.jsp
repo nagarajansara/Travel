@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html"%>
 <%@ include file="lib/header.jsp"%>
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet"
 	href="${baseURL}/assest/css/ctconsumermytravels.css" media="screen" />
 <div class="kd-content">
@@ -40,7 +40,7 @@
 						</table>
 					</c:if>
 					<c:if test="${empty model.responseData.deals}">
-						<span style="font-family: verdana; color: red; font-size: 12px;"> No record found</span>
+						<span style="font-family: Junction; color: red; font-size: 12px;"> No record found</span>
 					</c:if>
 				</div>
 			</div>

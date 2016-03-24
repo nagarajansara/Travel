@@ -20,7 +20,7 @@
 						<img src="${baseURL}/assest/img/loading.gif">
 					</div>
 					<div class="ctNoCreditsWarning" style="display: none;">
-						<span style="font-family: verdana; color: red; font-size: 12px;">
+						<span style="font-family: Junction; color: red; font-size: 12px;">
 							Credits limit not eligible </span>
 					</div>
 					<h1>Pending Enquiry</h1>

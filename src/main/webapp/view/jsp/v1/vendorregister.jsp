@@ -36,7 +36,7 @@
 }
 
 .ctWrapper {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .ctHeaderTag {
-	background-color: rgb(8, 125, 194) !important;
+	background-color: #99CD4E !important;
 }
 
 .ctRequired {
@@ -65,7 +65,7 @@ body {
 }
 
 .ctVendorReg label {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 }
 
@@ -76,7 +76,7 @@ body {
 
 .ctVendorReg #passstrength {
 	color: red;
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 10px;
 	font-weight: bold;
 	color: #ffffff;
@@ -130,7 +130,7 @@ body {
 							</div>
 						</c:if>
 						<c:if test="${model.responseStatus eq 200}">
-							<span style="font-family: verdana; color: red">Registered
+							<span style="font-family: Junction; color: green">Registered
 								success. Please wait untill admin approve your request</span>
 							<%-- <c:redirect url="/view/jsp/v1/home.jsp" /> --%>
 						</c:if>

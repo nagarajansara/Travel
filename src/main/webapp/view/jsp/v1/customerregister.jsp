@@ -39,7 +39,7 @@
 }
 
 .ctWrapper {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 }
 
@@ -56,7 +56,7 @@ body {
 }
 
 .ctHeaderTag {
-	background-color: rgb(8, 125, 194) !important;
+	background-color: #99CD4E !important;
 }
 
 .ctRequired {
@@ -68,18 +68,18 @@ body {
 }
 
 .ctCustomerReg label {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 }
 
 .ctCustomerReg input {
 	padding: 2px;
-	color: gray;
+	/* color: gray; */
 }
 
 .ctCustomerReg #passstrength {
 	color: red;
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 10px;
 	font-weight: bold;
 	color: #ffffff;
@@ -134,7 +134,7 @@ body {
 						</c:if>
 						<c:if test="${model.responseStatus eq 200}">
 							<%-- <c:redirect url="/view/jsp/v1/home.jsp" /> --%>
-							<span style="font-family: verdana; color: red">Registered
+							<span style="font-family: Junction; color: green">Registered
 								success. Please check your email and activate your account</span>
 						</c:if>
 					</c:if>

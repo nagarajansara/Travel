@@ -59,7 +59,7 @@
 							</c:if>
 							<c:if test="${empty model.responseData.history}">
 								<span
-									style="font-family: verdana; color: red; font-weight: bold; font-size: 12px;">No
+									style="font-family: Junction; color: red; font-weight: bold; font-size: 12px;">No
 									credits history found</span>
 							</c:if>
 							<div class="form-group">

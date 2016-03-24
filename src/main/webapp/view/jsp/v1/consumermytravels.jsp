@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html"%>
 <%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <%@ include file="lib/header.jsp"%>
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet"
 	href="${baseURL}/assest/css/ctconsumermytravels.css" media="screen" />
 <div class="kd-content">
@@ -13,7 +13,8 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Travel History</h3>
+						<h3 class="ctFont_FamilyStyle">Your travel history with us!
+							Want to repeat a visit, check here!</h3>
 					</div>
 					<div class="kd-blog-list kd-blogmedium">
 						<c:if test="${not empty model.responseData.tripDetails}">

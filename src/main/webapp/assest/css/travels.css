@@ -1,6 +1,6 @@
 .tsDefaultSearchFontStyle select {
 	color: #000000 !important;
-	font-family: verdana;
+	font-family: Junction;
 }
 
 .ctTravelSearchTxt .input-group-btn>.btn {
@@ -19,7 +19,7 @@
 
 .tsDefaultSearchFontStyle input,.tsDefaultSearchFontStyle {
 	font-size: 12px;
-	font-family: verdana;
+	font-family: Junction;
 }
 
 .tsHomeSearchBtn {
@@ -65,7 +65,7 @@
 }
 
 .ctPagesection {
-	font-family: verdana;
+	font-family: Junction;
 }
 
 .ctConsumerContainer,.ctVendorContainer {
@@ -86,7 +86,7 @@
 
 /************************ COMMON CSS CLASS ***********************************************/
 /*  {
-	font-family: verdana !important;
+	font-family: Junction;
 } */
 .ctFontWeight_B,.bmSelect2Class {
 	font-weight: bold;
@@ -105,7 +105,7 @@
 }
 
 .ctDangerDefaultTxt {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 	color: red;
 }
@@ -137,18 +137,18 @@
 }
 
 .ctHomeRowArticle {
-	font-family: verdana;
+	font-family: Junction;
 	font-weight: bold;
 }
 
 .ctHomeRowArticle h3 {
 	font-size: 16px;
-	font-family: verdana;
+	font-family: Junction;
 	font-weight: bold;
 }
 
 .ctHomeRowArticle h3,.ctHomeRowArticle p,.ctHomeRowArticle a {
-	line-height: 3;
+	line-height: 1.5;
 }
 
 .ctDefaultDisplayNone {
@@ -166,7 +166,7 @@
 	border-top-left-radius: 11px;
 	border-top-right-radius: 11px;
 	box-shadow: 0px 0.5px 1px 1px;
-	font-family: verdana;
+	font-family: Junction;
 	text-align: center;
 }
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ include file="lib/header.jsp" %>
 <link rel="stylesheet" href="${baseURL}/assest/plugin/datepicker/tsdatepicker.css" media="screen" />
-<link rel="stylesheet" href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet" href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet" href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctvendor.css" media="screen" />
 <div class="kd-content">

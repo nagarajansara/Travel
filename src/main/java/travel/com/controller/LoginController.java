@@ -120,6 +120,8 @@ public class LoginController extends BaseController
 									+ utilities.getServerName()
 									+ "/travel/travelapi/login/activatecustomer/"
 									+ UUID);
+					map.put("VC_MACRO_NAME", firstName + " " + lastName);
+					map.put("VC_MACRO_EMAIL", email);
 					filePath = appProp.getHTMLDir() + "activation.html";
 					content = utilities.getFileContent(filePath);
 					content = utilities.replaceMacro(content, map);
@@ -127,7 +129,7 @@ public class LoginController extends BaseController
 
 				// ADD MAIL QUEUE JMS
 				utilities.setJMS_Enqueued(email, content,
-						appProp.getAdminName(), appProp.getMailSubject(),
+						appProp.getAdminName(), "Welcome Mail",
 						JMSProducer.EMAIL_QUEUE);
 
 				utilities.setSuccessResponse(response);

@@ -202,7 +202,7 @@
 }
 
 .kd-login-network ul li a {
-	background-color: #3b5999;
+	background-color: #99cd4e;
 	color: #ffffff;
 	font-size: 20px;
 	padding: 14px 40px;
@@ -216,7 +216,7 @@
 }
 
 .kd-login-network ul li a[data-original-title="Twitter"] {
-	background-color: #4fa8e4;
+	background-color: #99cd4e;
 }
 /* Or Sepratore */
 .kd-login-sepratore {

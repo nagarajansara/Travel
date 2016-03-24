@@ -177,11 +177,14 @@ function ctSetSavedTrips() {
 	param = {
 	    "tripId" : tripId
 	};
+	$('.ctLoadingSavedTrip').show();
 	ctDAO.addSavedTrips(param, function(data) {
 	    if (bmpUtil.RESPONSE_STATUS == data.responseStatus) {
 		alert("Successfully added");
+		$('.ctLoadingSavedTrip').hide();
 	    } else {
 		alert(data.responseData);
+		$('.ctLoadingSavedTrip').hide();
 	    }
 
 	});

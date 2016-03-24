@@ -5,13 +5,13 @@
 <head>
 <style type="text/css">
 .ctActivationSuccess {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 	color: green;
 }
 
 .ctActivationError {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 	color: red;
 }

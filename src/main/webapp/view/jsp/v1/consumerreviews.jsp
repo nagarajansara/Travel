@@ -41,19 +41,19 @@
 						<ul id="pagination-demo" class="pagination-sm pull-right"></ul>
 					</div>
 					<form class="form-horizontal ctConsumerCommentsFrm">
-						<h2 style="font-family: verdana; font-weight: bold;">Comments</h2>
+						<h2 style="font-family: Junction; font-weight: bold;">Comments</h2>
 						<div class="form-group">
-							<label style="font-family: verdana; font-weight: bold;"
+							<label style="font-family: Junction; font-weight: bold;"
 								class="col-lg-3 col-md-3 col-sm-3 control-label">Start
 								Ratting </label>
-							<div style="font-family: verdana; font-weight: bold;"
+							<div style="font-family: Junction; font-weight: bold;"
 								class="col-lg-9 col-md-9 col-sm-9">
 								<div id="star"></div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label"
-								style="font-family: verdana; font-weight: bold;">Email <span
+								style="font-family: Junction; font-weight: bold;">Email <span
 								class="ctRequired"> (*)</label>
 							<div class="col-lg-9 col-md-9 col-sm-9">
 								<input type="text" class="form-control  ctConsumerEmail"
@@ -62,7 +62,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label"
-								style="font-family: verdana; font-weight: bold;">Username
+								style="font-family: Junction; font-weight: bold;">Username
 								<span class="ctRequired"> (*) 
 							</label>
 							<div class="col-lg-9 col-md-9 col-sm-9">
@@ -72,7 +72,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label"
-								style="font-family: verdana; font-weight: bold;">Comment
+								style="font-family: Junction; font-weight: bold;">Comment
 								<span class="ctRequired"> (*) 
 							</label>
 							<div class="col-lg-9 col-md-9 col-sm-9">
@@ -82,7 +82,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label"
-								style="font-family: verdana; font-weight: bold;"></label>
+								style="font-family: Junction; font-weight: bold;"></label>
 							<div class="col-lg-9 col-md-9 col-sm-9">
 								<button type="button"
 									class="btn btn-primary ctAddConsumerReviewsBtn">Submit</button>

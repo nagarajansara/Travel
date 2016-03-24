@@ -5,8 +5,8 @@
 	media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctprofile.css"
 	media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctvendor.css"
@@ -19,7 +19,8 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">My Profile</h3>
+						<h3 class="ctFont_FamilyStyle">View/ Edit your personal
+							details</h3>
 					</div>
 					<c:if test="${not empty model.responseData.userDetails}">
 						<c:forEach items="${model.responseData.userDetails}" var="element"

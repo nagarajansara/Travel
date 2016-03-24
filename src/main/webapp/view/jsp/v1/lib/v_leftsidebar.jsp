@@ -18,8 +18,8 @@
 		<li class="ctVendorDealsMenu"><a
 			href="${baseURL}/travelapi/vendor/getDeals">Deals</a></li>
 		<li class="ctVendorTutorialsMenu"><a href="#messagesone">Tutorials</a></li>
-		<li class="ctVendorContactMenu"><a href="#messagesone">Contact
-				Us</a></li>
+		<li class="ctVendorContactMenu"><a
+			href="${baseURL}/view/jsp/v1/contactus.jsp">Contact Us</a></li>
 		<li class="ctVendorReviewsMenu"><a
 			href="${baseURL}/travelapi/vendor/getReviews">Reviews</a></li>
 	</ul>

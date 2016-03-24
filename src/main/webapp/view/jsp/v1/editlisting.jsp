@@ -3,8 +3,8 @@
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/datepicker/tsdatepicker.css"
 	media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctvendor.css"
@@ -119,7 +119,7 @@
 								<div class="col-lg-4 col-md-4  col-sm-4 ctEditRouteDiv">
 									<input value="${route}" name="route1" type="text" name="todate"
 										class="form-control ctIsChkEmptyVal"> <span
-										style="font-family: verdana; font-size: 10px; color: #c64837;">Using
+										style="font-family: Junction; font-size: 10px; color: #c64837;">Using
 										same route format like (X->Y)</span>
 								</div>
 							</div>
@@ -211,7 +211,7 @@
 						</table>
 					</c:if>
 					<c:if test="${empty model.responseData.tripImagesList}">
-						<span style="color: red; font-family: verdana; font-weight: bold">No
+						<span style="color: red; font-family: Junction; font-weight: bold">No
 							existing image found</span>
 					</c:if>
 					</br> </br> </br> </br> </br> </br>
@@ -289,7 +289,7 @@
 						</table>
 					</c:if>
 					<c:if test="${empty model.responseData.tripImagesList}">
-						<span style="color: red; font-family: verdana; font-weight: bold">No
+						<span style="color: red; font-family: Junction; font-weight: bold">No
 							existing image found</span>
 					</c:if>
 				</div>

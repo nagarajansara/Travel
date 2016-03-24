@@ -3,8 +3,8 @@
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/datepicker/tsdatepicker.css"
 	media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctvendor.css"
@@ -97,7 +97,7 @@
 								<article class="col-md-12">
 									<div align="center" style="color: red; cursor: pointer"
 										class="ctListingEmpty">
-										<span style="font-family: verdana; font-weight: bold">
+										<span style="font-family: Junction; font-weight: bold">
 											No listing found </span>
 									</div>
 								</article>
@@ -307,7 +307,7 @@
 									</div>
 									<div class="form-group">
 										<div class="ctActivityNotificationMsg" style="display: none;">
-											<span style="font-family: verdana; color: green;">Added
+											<span style="font-family: Junction; color: green;">Added
 												Successfully. Please refersh this page</span>
 										</div>
 									</div>
@@ -349,7 +349,7 @@
 									<div class="form-group">
 										<div class="ctSubActivityNotificationMsg"
 											style="display: none; color: green;">
-											<span style="font-family: verdana;">Added
+											<span style="font-family: Junction;">Added
 												Successfully. Please refersh this page</span>
 										</div>
 									</div>

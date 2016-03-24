@@ -66,11 +66,11 @@
 							<li>
 								<div id="lang_sel">
 									<ul>
-										<li><i class="fa fa-phone"></i> Phone: +44 123 456 789</li>
+										<li><i class="fa fa-phone"></i> Phone: 91-9962230256</li>
 									</ul>
 								</div>
 							</li>
-							<li><i class="fa fa-envelope-o"></i> Info@kodeforest.com</li>
+							<li><i class="fa fa-envelope-o"></i> dude@horruit.com</li>
 
 						</ul>
 					</div>
@@ -102,7 +102,7 @@
 															<ul>
 																<!--<li><a href="#" data-original-title="Facebook"><i class="fa fa-facebook"></i> Login with Facebook</a></li>
                                 <li><a href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i> Login with Twitter</a></li>-->
-																<li><a class="btn btn-primary dropdown-toggle"
+																<li><a class="dropdown-toggle"
 																	href="${baseURL}/view/jsp/v1/customerregister.jsp"><i
 																		class="fa fa-user icon-white"></i> Customer </a></li>
 																<%-- <li><a class="btn btn-primary dropdown-toggle"
@@ -156,7 +156,7 @@
 													name="basic_validate" id="basic_validate"
 													novalidate="novalidate">
 													<span class="ctErrorSpan"
-														style="display: none; color: red; font-family: verdana;">Invalid
+														style="display: none; color: red; font-family: Junction;">Invalid
 														login</span>
 													<p>
 														<i class="fa fa-envelope-o"></i> <input type="text"

@@ -3,8 +3,8 @@
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/datepicker/tsdatepicker.css"
 	media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet" href="${baseURL}/assest/css/ctmyleads.css"
 	media="screen" />
 <div class="kd-content">

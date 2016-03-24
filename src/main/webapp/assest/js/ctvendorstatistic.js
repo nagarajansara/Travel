@@ -11,7 +11,7 @@ function ctRenderCharts(jqSelector, data, title) {
 			    enabled : false
 			},
 			title : {
-			    text : '<spna style="font-family: verdana; font-weight: bold">'
+			    text : '<spna style="font-family: Junction; font-weight: bold">'
 				    +  title  +'</span>'
 			},
 			series : [ {

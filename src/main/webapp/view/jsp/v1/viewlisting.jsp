@@ -183,6 +183,8 @@
 												<a class="ctSavedTripList"
 													PK_tripid=${util:getBase64Encode(TRIPID) }>Saved Trip
 													List</a>
+												<img style="display: none;" class="ctLoadingSavedTrip"
+													src="${baseURL}/assest/img/loading.gif">
 											</c:when>
 											<c:otherwise>
 												<a class="ctSavedTripList" style="cursor: progress"
@@ -310,7 +312,7 @@
 									<input type="button" value="Submit comment "
 										class="thbg-color ctSubmitCommentBtn"> <span
 										class="ctSuccessComment"
-										style="display: none; font-family: verdana; color: green">&nbsp;&nbsp;Successfully
+										style="display: none; font-family: Junction; color: green">&nbsp;&nbsp;Successfully
 										commented</span>
 								</p>
 							</form>

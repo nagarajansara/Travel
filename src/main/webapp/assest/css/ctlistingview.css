@@ -20,14 +20,14 @@
 }
 
 .ctListingTitle {
-	/* font-family: verdana !important; */
+	/* font-family: Junction; */
 	font-size: 14px !important;
 	font-weight: bold !important;
 	text-transform: capitalize !important;
 }
 
 .ctNoDataFoundRow span {
-	font-family: verdana;
+	font-family: Junction;
 	color: red;
 	font-weight: bold;
 }
@@ -55,7 +55,7 @@
 }
 
 .ctBlogborderstyle h5,.ctDaysCounter {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 12px;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .ctDaysCounter span {
-	font-family: verdana;
+	font-family: Junction;
 	font-size: 20px;
 }
 

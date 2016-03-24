@@ -5,8 +5,8 @@
 	media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctprofile.css"
 	media="screen" />
-<link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
+<%-- <link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
 <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" />
 <link rel="stylesheet" href="${baseURL}/assest/css/ctvendor.css"
