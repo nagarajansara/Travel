@@ -532,9 +532,9 @@ public class TripController extends BaseController
 											new HashMap<String, String>();
 									String tripURL =
 											(utilities.isServer()) ? ("<a href=\"http://www.saratravel.tk/travel/travelapi/trip/getTripDetailsBasedId/"
-													+ tripId + "\">Trip Details</a>")
+													+ tripId_Str + "\">Trip Details</a>")
 													: "<a href=\"http://localhost:8082/travel/travelapi/trip/getTripDetailsBasedId/"
-															+ tripId
+															+ tripId_Str
 															+ "\">Trip Details</a>";
 
 									map.put("CT_TRIP_URL_MACRO", tripURL);

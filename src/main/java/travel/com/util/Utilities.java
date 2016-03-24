@@ -335,4 +335,22 @@ public class Utilities
 		return deCodedValue;
 
 	}
+
+	public String getEncodedString(String paramValue, int deCodedType)
+	{
+		// 1. base64 decode
+		String enCodedValue = "";
+		switch (deCodedType)
+		{
+		case 1:
+			byte[] bytesEncoded = Base64.encodeBase64(paramValue.getBytes());
+			enCodedValue = new String(bytesEncoded);
+			break;
+
+		default:
+			break;
+		}
+		return enCodedValue;
+
+	}
 }
