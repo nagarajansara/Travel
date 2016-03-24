@@ -13,6 +13,11 @@
 				<div class="col-md-8 col-sm-8">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">My points</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="Life is worthless without a reward! Write reviews, book trips and share interesting experience to win reward points! Redeem this for a refreshing reward!"
+							class="red-tooltip ctConsumerPointsIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<c:if test="${not empty model.responseData.points}">
 						<table class="table table-striped ctEnquiryTableStatus">
@@ -48,4 +53,6 @@
 <script type="text/javascript">
     $('.ctCustomerListMenu li').removeClass('active');
     $('.ctCustomerListMenu .ctCustomerPointsMenu').addClass('active');
+
+    $('.ctConsumerPointsIcon').tooltip();
 </script>

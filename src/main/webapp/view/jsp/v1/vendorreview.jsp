@@ -14,6 +14,11 @@
 				<div class="col-md-8 col-sm-8">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Review Section</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="We love feedbacks, so does our community! View/ Report reviews!"
+							class="red-tooltip ctVendorReviewIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<c:if test="${not empty model.responseData.reviewList}">
 						<table class="table table-striped">
@@ -57,6 +62,8 @@
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorReviewsMenu').addClass('active');
+
+    $(".ctVendorReviewIcon").tooltip();
 
     var numEntries = '${model.responseData.numEntries}', MAX_ENTRIES = 10, START_PAGE = 1;
     console.log("numEntries :" + numEntries);

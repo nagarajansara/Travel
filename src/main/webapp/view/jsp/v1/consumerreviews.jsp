@@ -11,7 +11,12 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Comments</h3>
+						<h3 class="ctFont_FamilyStyle">Reviews</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="We love feedbacks, so does our community! Add/ edit reviews!"
+							class="red-tooltip ctConsumerReviewsIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<c:if test="${not empty model.responseData.reviewsList}">
 						<table class="table table-striped">
@@ -53,8 +58,9 @@
 						</div>
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label"
-								style="font-family: Junction; font-weight: bold;">Email <span
-								class="ctRequired"> (*)</label>
+								style="font-family: Junction; font-weight: bold;">Email
+								<span class="ctRequired"> (*) 
+							</label>
 							<div class="col-lg-9 col-md-9 col-sm-9">
 								<input type="text" class="form-control  ctConsumerEmail"
 									name="phoneNo" value="" placeholder="Email *">
@@ -124,4 +130,5 @@
 		START_PAGE, URL);
 
     }
+    $('.ctConsumerReviewsIcon').tooltip();
 </script>

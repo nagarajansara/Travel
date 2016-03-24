@@ -12,7 +12,12 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Deals</h3>
+						<h3 class="ctFont_FamilyStyle">Current Deals</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="Get information on the latest and best deals for you!"
+							class="red-tooltip ctConsumerDealsIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<c:if test="${not empty model.responseData.deals}">
 						<table class="table table-striped ctEnquiryTableStatus">
@@ -40,7 +45,8 @@
 						</table>
 					</c:if>
 					<c:if test="${empty model.responseData.deals}">
-						<span style="font-family: Junction; color: red; font-size: 12px;"> No record found</span>
+						<span style="font-family: Junction; color: red; font-size: 12px;">
+							No record found</span>
 					</c:if>
 				</div>
 			</div>
@@ -94,4 +100,6 @@
 	    renderPagination.render();
 	}
     };
+
+    $('.ctConsumerDealsIcon').tooltip();
 </script>

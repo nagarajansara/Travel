@@ -11,10 +11,23 @@
 		class="pagesection ctPagesection">
 		<div class="container ctConsumerContainer">
 			<div class="row">
-				<%@ include file="lib/c_leftsidebar.jsp"%>
+				<c:choose>
+					<c:when
+						test="${(sessionScope.role != null) && (sessionScope.role eq 'ROLE_VENDOR')}">
+						<%@ include file="lib/v_leftsidebar.jsp"%>
+					</c:when>
+					<c:otherwise>
+						<%@ include file="lib/c_leftsidebar.jsp"%>
+					</c:otherwise>
+				</c:choose>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Contact Us</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="We are always available to help! You can reach us out at"
+							class="red-tooltip ctContactUsIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<div class="widget kd-userinfo-widget">
 						<ul>
@@ -35,6 +48,8 @@
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorContactMenu').addClass('active');
+
+    $(".ctContactUsIcon").tooltip();
 
     $('.ctCustomerListMenu li').removeClass('active');
     $('.ctCustomerListMenu .ctCustomerContactusMenu').addClass('active');

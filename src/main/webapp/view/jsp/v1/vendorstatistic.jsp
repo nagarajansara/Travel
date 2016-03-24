@@ -13,6 +13,11 @@
 				<div class="col-md-8 ctExistingTripDetails">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Statistics</h3>
+						&nbsp;<a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="Find out how many people viewed your profile"
+							class="red-tooltip ctVendorStatisticIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<div
 						class="col-md-12 col-sm-12 ctVedorStatisticBookingChartEmpty ctDefaultDisplayNone">
@@ -36,24 +41,22 @@
 <div class="clear"></div>
 <%@ include file="lib/footer.jsp"%>
 <script src="${baseURL}/assest/js/ctvendorstatistic.js"></script>
-<%-- <script src="${baseURL}/assest/plugin/chart/highcharts.js"></script> --%>
-<%-- <script src="${baseURL}/assest/plugin/chart/highchartexporting.js"></script> --%>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorStatisticsMenu').addClass('active');
     var bookingChart = '${model.responseData.bookingStatistic}', enquiryChart = '${model.responseData.enquiryStatistic}';
-   
     if (bookingChart == 'EMPTY') {
 	$('.ctVedorStatisticBookingChartEmpty').show();
     } else {
 	ctRenderCharts('.ctVendorStatistic', bookingChart, 'BOOKING');
     }
-    
+
     if (enquiryChart == 'EMPTY') {
 	$('.ctVedorStatisticEnquiryChartEmpty').show();
     } else {
 	ctRenderCharts('.ctVendorEnquiryStatistic', enquiryChart, 'ENQUIRY');
     }
+    $(".ctVendorStatisticIcon").tooltip();
 </script>

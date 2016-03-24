@@ -19,8 +19,11 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">View/ Edit your personal
-							details</h3>
+						<h3 class="ctFont_FamilyStyle">My Profile</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title="" data-original-title="View/ Edit your personal details"
+							class="red-tooltip ctConsumerIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<c:if test="${not empty model.responseData.userDetails}">
 						<c:forEach items="${model.responseData.userDetails}" var="element"
@@ -146,6 +149,9 @@
 <script type="text/javascript">
     $('.ctCustomerListMenu li').removeClass('active');
     $('.ctCustomerListMenu .ctCustomerProfileMenu').addClass('active');
+
+    $('.ctConsumerIcon').tooltip();
+    ;
 
     $('.ctPhoneNoTxt').numeric();
     $('.ctPinCodeTxt').numeric();

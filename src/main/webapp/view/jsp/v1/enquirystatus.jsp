@@ -14,6 +14,11 @@
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Enquire Status</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="View and action on the leads and booking that you have received"
+							class="red-tooltip ctVendorEnquireStatusIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<!-- <div class="kd-section-title ctUserCreditsValue"></div> -->
 					<div class="ctLoadingImg" style="display: none;">
@@ -207,5 +212,8 @@
 			}
 
 		    });
+
+    $(".ctVendorEnquireStatusIcon").tooltip();
+
     ctGetMoreSentEnquireDetails();
 </script>

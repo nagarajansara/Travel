@@ -11,6 +11,10 @@
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">My Credit Status</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title="" data-original-title="Check and Add your Balance!"
+							class="red-tooltip ctVendorCreditsIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<form action="#" method="post" role="form"
 						class="form-horizontal ctVendorListingForm">
@@ -87,5 +91,6 @@
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorCreditsMenu').addClass('active');
 
+    $(".ctVendorCreditsIcon").tooltip();
     ctCreditsOnInit();
 </script>

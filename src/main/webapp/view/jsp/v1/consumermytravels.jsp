@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html"%>
 <%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <%@ include file="lib/header.jsp"%>
-<%-- <link rel="stylesheet"
-	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
+<link rel="stylesheet"
+	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" />
 <link rel="stylesheet"
 	href="${baseURL}/assest/css/ctconsumermytravels.css" media="screen" />
 <div class="kd-content">
@@ -13,8 +13,12 @@
 				<%@ include file="lib/c_leftsidebar.jsp"%>
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
-						<h3 class="ctFont_FamilyStyle">Your travel history with us!
-							Want to repeat a visit, check here!</h3>
+						<h3 class="ctFont_FamilyStyle">My Travel</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="Your travel history with us! Want to repeat a visit, check here!"
+							class="red-tooltip ctConsumerMytravelsIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<div class="kd-blog-list kd-blogmedium">
 						<c:if test="${not empty model.responseData.tripDetails}">
@@ -94,6 +98,9 @@
 <script type="text/javascript">
     $('.ctCustomerListMenu li').removeClass('active');
     $('.ctCustomerListMenu .ctCustomerTravelsMenu').addClass('active');
+
+    $('.ctConsumerMytravelsIcon').tooltip();
+    $(".ctConsumerMytravelsIcon").popover();
 
     var numEntries = '${model.responseData.numEntries}';
     var MAX_ENTRIES = 5, START_PAGE = 1;

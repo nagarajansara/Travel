@@ -13,6 +13,11 @@
 				<div class="col-md-8 col-sm-8">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">Add a Deal</h3>
+						&nbsp;<a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="Add deals to improve your prospects"
+							class="red-tooltip ctVendorDealsIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<form onsubmit="return ctAddDealsFrmSubmit();"
 						action="${baseURL}/travelapi/vendor/addDeals" method="post"
@@ -52,7 +57,9 @@
 							<label
 								class="col-lg-3 col-md-3 col-sm-3 control-label ctFontWeight_B"></label>
 							<div class="col-lg-4 col-md-4 col-sm-4">
-								<button class="btn btn-primary" type="submit">ADD</button>
+								<button class="btn"
+									style="background-color: #99cd4e; color: #ffffff;"
+									type="submit">ADD</button>
 							</div>
 						</div>
 					</form>
@@ -114,6 +121,7 @@
 <script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
 <script type="text/javascript">
+    $(".ctVendorDealsIcon").tooltip();
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorDealsMenu').addClass('active');
     $('.ctOfferPercentage').numeric();

@@ -20,6 +20,11 @@
 				<div class="col-md-8 col-sm-8 ctAddListingDetails">
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">My Profile</h3>
+						&nbsp; <a href="#" data-toggle="tooltip" data-placement="right"
+							title=""
+							data-original-title="View/ Edit your personal and professional details"
+							class="red-tooltip ctVendorProfileIcon"><i
+							class="fa fa-info-circle"></i></a>
 					</div>
 					<c:if test="${not empty model.responseData.userDetails}">
 						<c:forEach items="${model.responseData.userDetails}" var="element"
@@ -153,7 +158,7 @@
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorProfileMenu').addClass('active');
-
     $('.ctPhoneNoTxt').numeric();
     $('.ctPinCodeTxt').numeric();
+    $(".ctVendorProfileIcon").tooltip();
 </script>

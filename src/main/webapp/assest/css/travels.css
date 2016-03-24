@@ -198,3 +198,15 @@
 	background-color: #fff056;
 	border: 1px solid #fff056 !important;
 }
+
+.red-tooltip+.tooltip>.tooltip-inner {
+	background-color: #999999;
+	color: #FFFFFF;
+	font-size: 14px !important;
+	font-weight: bold;
+	font-family: Junction !important;
+}
+
+.red-tooltip+.tooltip>.tooltip-arrow {
+	border-right-color: #999999;
+}
