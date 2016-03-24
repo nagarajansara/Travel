@@ -192,7 +192,6 @@
 											</c:otherwise>
 										</c:choose>
 								</ul>
-								<c:remove var="TRIPID" />
 								<c:forEach items="${model.responseData.tripdetails}"
 									var="element" varStatus="loop">
 									<div class="tab-content">
@@ -431,6 +430,7 @@
 							<button type="button" PK_tripid=${util:getBase64Encode(TRIPID) }
 								class="btn btn-primary ctSUbmitEnquireForm">Send</button>
 						</div>
+						<c:remove var="TRIPID" />
 					</div>
 				</div>
 			</div>
