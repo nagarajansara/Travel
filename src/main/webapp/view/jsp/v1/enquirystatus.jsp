@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html"%>
+<%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <%@ include file="lib/header.jsp"%>
 <link rel="stylesheet" href="${baseURL}/assest/css/ctenquirystatus.css"
 	media="screen" />
@@ -24,11 +25,11 @@
 					<div class="ctLoadingImg" style="display: none;">
 						<img src="${baseURL}/assest/img/loading.gif">
 					</div>
+					<h1>Pending Enquiry</h1>
 					<div class="ctNoCreditsWarning" style="display: none;">
 						<span style="font-family: Junction; color: red; font-size: 12px;">
 							Credits limit not eligible </span>
 					</div>
-					<h1>Pending Enquiry</h1>
 					<c:if test="${not empty model.responseData.enquiry}">
 						<table class="table table-striped ctEnquiryTableStatus">
 							<thead>
@@ -45,7 +46,7 @@
 									<tr>
 										<td><c:out value="${ loopElement.index + 1}"></c:out></td>
 										<td style="text-transform: uppercase;"><a
-											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.tripid}"
+											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }"
 											target="_blank">${element.title }</a></td>
 										<td style="text-transform: uppercase;">${element.status }</td>
 										<td class="ctEnquiryStatus" style="text-transform: uppercase;">
