@@ -15,11 +15,12 @@ function ctInitViewListing() {
 
 			var name = $('.ctName').val(), email = $(
 				'.ctEnquiryEmail').val(), phoneno = $(
-				'.ctPhoneNo').val(), param = {};
+				'.ctPhoneNo').val(), param = {}, tripId = $(
+				this).attr('PK_tripid');
 			$('.ctEnquiryStatus').hide();
 			if (bmpUtil.isTextFieldEmpty('.ctIsChkEmptyEnquiryVal')) {
 			    param = {
-				"tripId" : bmpUtil.getLastStartingURL(),
+				"tripId" : tripId,
 				"username" : name,
 				"phoneno" : phoneno,
 				"email" : email

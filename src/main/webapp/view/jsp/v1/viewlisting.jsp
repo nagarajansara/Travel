@@ -398,7 +398,6 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<!-- <label class="col-lg-3 col-md-3 col-sm-3 control-label"></label> -->
 											<div class="col-lg-12 col-md-12 col-sm-12">
 												<input type="text"
 													class="form-control ctEnquiryEmail ctIsChkEmptyEnquiryVal"
@@ -414,8 +413,6 @@
 										</div>
 										<div class="form-group ctNoCreditsDiv ctDefaultDisplayNone">
 											<div class="col-lg-12 col-md-12 col-sm-12">
-												<!-- <input type="text" class="form-control ctNoCreditsTxt"
-													name="name" value="" placeholder="Name *"> -->
 												<span class="ctNoCreditsTxt ctDangerDefaultTxt"></span>
 											</div>
 										</div>
@@ -431,8 +428,8 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default ctEnquiryModalClose"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary ctSUbmitEnquireForm">Send
-							</button>
+							<button type="button" PK_tripid=${util:getBase64Encode(TRIPID) }
+								class="btn btn-primary ctSUbmitEnquireForm">Send</button>
 						</div>
 					</div>
 				</div>
