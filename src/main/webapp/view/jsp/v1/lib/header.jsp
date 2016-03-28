@@ -20,7 +20,7 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="website" />
 <meta property="og:url"
-	content="http://www.saratravel.tk/travel/travelapi/trip/getTripDetails" />
+	content="http://www.ecosenseindia.com/travel/travelapi/trip/getTripDetails" />
 
 <title>Travel</title>
 

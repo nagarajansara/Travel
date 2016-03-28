@@ -86,7 +86,7 @@ public class FBConnection
 				FB_APP_ID = "379863222204467";
 				FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
 				REDIRECT_URI =
-						"http://saratravel.tk"
+						"http://ecosenseindia.com"
 								+ "/travel/travelapi/login/fbsignupcbk";
 			} else
 			{
@@ -180,7 +180,7 @@ public class FBConnection
 				FB_APP_ID = "379863222204467";
 				FB_APP_SECRET = "b19fdc076a88ff75ced567f27d34b4a9";
 				REDIRECT_URI =
-						"http://saratravel.tk"
+						"http://ecosenseindia.com"
 								+ "/travel/travelapi/login/fbsignupcbk";
 			} else
 			{

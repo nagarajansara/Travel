@@ -147,7 +147,10 @@ public class Utilities
 					|| IP.getHostAddress().toString().equals("128.199.237.142")
 					|| IP.getHostAddress().toString()
 							.equals("saracourierservice.tk")
-					|| IP.getHostAddress().toString().equals("saratravel.tk"))
+					|| IP.getHostAddress().toString()
+							.equals("ecosenseindia.com")
+					|| IP.getHostAddress().toString()
+							.equals("http://www.ecosenseindia.com"))
 			{
 				isServer = true;
 			}
