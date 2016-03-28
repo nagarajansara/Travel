@@ -136,7 +136,7 @@ public class Utilities
 		return simpleDateTime;
 	}
 
-	public boolean isServer() throws Exception
+	public static boolean isServer() throws Exception
 	{
 		boolean isServer = false;
 		InetAddress IP = InetAddress.getLocalHost();
@@ -266,8 +266,8 @@ public class Utilities
 		return content;
 	}
 
-	public  String replaceMacro(String content,
-			HashMap<String, String> map) throws Exception
+	public String replaceMacro(String content, HashMap<String, String> map)
+			throws Exception
 	{
 		for (Map.Entry<String, String> entry : map.entrySet())
 		{
