@@ -1,5 +1,6 @@
 <!--// Footer //-->
-<footer id="footer-widget" class="ctFont_FamilyStyle ctTravelFooterColor">
+<footer id="footer-widget"
+	class="ctFont_FamilyStyle ctTravelFooterColor">
 	<div class="container">
 		<div class="row">
 			<div class="widget col-md-2 kd-textwidget">
@@ -55,18 +56,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="widget col-md-2 kd-textwidget">
-				
-			</div>
-			<div class="widget col-md-2 kd-textwidget">
-				
-			</div>
+			<div class="widget col-md-2 kd-textwidget"></div>
+			<div class="widget col-md-2 kd-textwidget"></div>
 			<div class="widget col-md-3 kd-textwidget">
 				<p>© Copyright 2014 All Rights Reserved by KodeForest</p>
 			</div>
-			<div class="widget col-md-2 kd-textwidget">
-				
-			</div>
+			<div class="widget col-md-2 kd-textwidget"></div>
 		</div>
 	</div>
 </footer>
@@ -104,6 +99,8 @@
 <script src="${baseURL}/assest/plugin/numeric/numeric.min.js"></script>
 <%-- <script src="${baseURL}/theme/js/jquery.bxslider.min.js"></script> --%>
 <script src="${baseURL}/theme/js/waypoints-min.js"></script>
+<script src="${baseURL}/assest/plugin/excanvas.js"></script>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <%-- <script src="${baseURL}/theme/js/functions.js"></script> --%>
 
 <!-- END -->

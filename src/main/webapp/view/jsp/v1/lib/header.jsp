@@ -48,6 +48,13 @@
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
 
+ <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 <style>
 .ctLoginForm p span {
 	color: red;
@@ -62,7 +69,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-5">
-						<ul class="kd-topinfo">
+						<ul class="kd-topinfo ctHeaderInfo">
 							<li>
 								<div id="lang_sel">
 									<ul>
@@ -217,14 +224,14 @@
 			</div>
 		</div>
 		<!--// Header Baar //-->
-		<div class="kd-headbar ct_MainHeaderFontStyle ct_SubBasckGroundColor">
+		<div class="kd-headbar ct_MainHeaderFontStyle ct_SubBasckGroundColor ctHeaderCommon">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-3 col-xs-6">
 						<a href="index.html" class="logo ctTravelLogo_Padding"><img
 							src="${baseURL}/theme/images/logo.png" alt=""></a>
 					</div>
-					<div class="col-md-9">
+					<div class="col-md-9 col-xs-6">
 						<div class="kd-rightside ">
 							<nav class="navbar navbar-default navigation">
 								<div class="navbar-header">

@@ -76,10 +76,21 @@ body .ctThumbImgFlex .slides  li img {
 }
 
 .ctTourVendorEmail a {
-	text-decoration-line: underline !important;
+	text-decoration-color: -moz-use-text-color !important;
+	text-decoration: underline !important;
+	text-decoration-style: solid !important;
 }
 
 .ctThumbImgFlex:hover,.ctThumbImgFlex {
 	cursor: pointer;
 	border:
+}
+
+
+
+@media (max-width:480px){
+	.ctSavedListTrip{margin:25px 0 0;}
+}
+@media (max-width:360px){
+.ctViewListingMenu .nav > li > a{padding-right:10px;padding-left:10px;}
 }

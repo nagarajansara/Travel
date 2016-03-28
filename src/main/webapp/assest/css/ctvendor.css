@@ -1,35 +1,37 @@
-.bmSelect2Class
-{
+.bmSelect2Class {
 	font-family: Junction;
 	color: #000000;
 }
-.ctOperationVendorBtn
-{
+
+.ctOperationVendorBtn {
 	margin-top: 6px !important;
 }
+
 .custom-file-input {
 	display: inline-block;
 	position: relative;
 	color: #533e00;
 }
+
 .custom-file-input input {
 	visibility: hidden;
 	width: 100px
 }
+
 .custom-file-input:before {
 	content: 'Choose File';
 	display: block;
-	background: -webkit-linear-gradient( -180deg, #ffdc73, #febf01);
-	background: -o-linear-gradient( -180deg, #ffdc73, #febf01);
-	background: -moz-linear-gradient( -180deg, #ffdc73, #febf01);
-	background: linear-gradient( -180deg, #ffdc73, #febf01);
+	background: -webkit-linear-gradient(-180deg, #ffdc73, #febf01);
+	background: -o-linear-gradient(-180deg, #ffdc73, #febf01);
+	background: -moz-linear-gradient(-180deg, #ffdc73, #febf01);
+	background: linear-gradient(-180deg, #ffdc73, #febf01);
 	border: 3px solid #dca602;
 	border-radius: 10px;
 	padding: 5px 0px;
 	outline: none;
 	white-space: nowrap;
 	cursor: pointer;
-	text-shadow: 1px 1px rgba(255,255,255,0.7);
+	text-shadow: 1px 1px rgba(255, 255, 255, 0.7);
 	font-weight: bold;
 	text-align: center;
 	font-size: 10pt;
@@ -37,9 +39,15 @@
 	left: 0;
 	right: 0;
 }
+
 .custom-file-input:hover:before {
 	border-color: #febf01;
 }
+
 .custom-file-input:active:before {
 	background: #febf01;
+}
+
+.ctVendorSuccessMessage {
+	display: none;
 }

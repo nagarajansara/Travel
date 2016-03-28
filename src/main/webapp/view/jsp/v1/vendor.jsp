@@ -16,6 +16,14 @@
 			<div class="row">
 				<%@ include file="lib/v_leftsidebar.jsp"%>
 				<div class="col-md-8 ctExistingTripDetails">
+					<div role="alert"
+						class="alert success-message alert-dismissible fade in ctVendorSuccessMessage">
+						<button aria-label="Close" data-dismiss="alert" class="close"
+							type="button">
+							<span aria-hidden="true">×</span>
+						</button>
+						<p>Trip successfully added. Please wait until admin approve</p>
+					</div>
 					<div class="kd-section-title">
 						<h3 class="ctFont_FamilyStyle">List a Trip</h3>
 						<div
@@ -434,6 +442,11 @@
 
 	ctSetPagination(numEntries, ctDAO.TOTAL_RECORDS_PER_PAGE, 5,
 		START_PAGE, URL);
+    }
+
+    var response = bmpUtil.getQParamByName("success");
+    if (response && response == "true") {
+	$('.ctVendorSuccessMessage').show();
     }
 </script>
 

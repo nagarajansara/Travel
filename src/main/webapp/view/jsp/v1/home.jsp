@@ -77,40 +77,39 @@
 	</div>-->
 	<section class="kd-pagesection" style="padding: 50px 0px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="kd-modrentitle thememargin">
-						<h3>Book your perfect Adventure Trip...</h3>
-						<!-- <div class="kd-divider">
+			<div class="kd-modrentitle thememargin">
+				<h3>Book your perfect Adventure Trip...</h3>
+				<!-- <div class="kd-divider">
 							<div class="short-seprator">
 								<span><i class="fa fa-globe"></i></span>
 							</div>
 						</div> -->
-						<br /> <span> Enjoy the serene beauty right at tha laps of
-							Nature with a thing of adventure </span>
-					</div>
-				</div>
+				<br /> <span> Enjoy the serene beauty right at tha laps of
+					Nature with a thing of adventure </span>
+			</div>
+		</div>
+		<article class="col-md-12">
+			<figure>
+				<ul class="bxslider">
+					<li style="list-style: none"><img
+						src="${baseURL}/theme/extraimages/banner1.jpg" style="width: 100%"
+						alt="" />
+						<div class="kd-caption">
+							<h2>Looking For Best Trip</h2>
+							<h1>We Offer Best Services</h1>
+							<div class="linksection">
+								<a href="#">Get Deal Now</a>
+							</div>
+						</div></li>
+				</ul>
+			</figure>
+		</article>
+	</section>
+	<section class="kd-pagesection" style="padding: 50px 0px;">
+		<div class="container">
+			<div class="row">
 				<div class="col-md-12">
 					<div class="kd-package-list">
-						<div class="row">
-
-							<article class="col-md-12">
-								<figure>
-									<ul class="bxslider">
-										<li style="list-style: none"><img
-											src="${baseURL}/theme/extraimages/banner1.jpg" alt="" />
-											<div class="kd-caption">
-												<h2>Looking For Best Trip</h2>
-												<h1>We Offer Best Services</h1>
-												<div class="linksection">
-													<a href="#">Get Deal Now</a>
-												</div>
-											</div></li>
-									</ul>
-								</figure>
-							</article>
-
-						</div>
 						<div class="row">
 							<article class="col-md-4">
 								<article class="col-md-12 ctHomeRowArticle">

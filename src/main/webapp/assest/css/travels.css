@@ -132,8 +132,12 @@
 }
 
 .ctTravelFooterColor::before {
-	/* background-color: #aad5f4 !important; */
-	
+	background-color: #99cd4e !important;
+}
+
+.ctTravelFooterColor {
+	background-image: none !important;
+	background-color: #99cd4e !important;
 }
 
 .ctHomeRowArticle {
@@ -210,3 +214,23 @@
 .red-tooltip+.tooltip>.tooltip-arrow {
 	border-right-color: #999999;
 }
+
+.ctHomeRowArticle .kd-button{min-height:142px;}
+.ctNoborder {   min-height: 247px;}
+
+/******************************** Responsive Code *************************************************************************************/
+
+@media ( max-width :767px) {
+	.kd-topinfo.ctHeaderInfo{display:block;}
+	.ctHeaderCommon .navbar-header{margin-top:18px;}
+	.ctHeaderCommon .navbar-collapse{box-shadow: 0 8px 13px #ccc;}
+	.ctHeaderCommon .ctTravelNavBar-Nav li{padding-top:4px !important;padding-top: 18px !important;}
+	.ctHeaderCommon .navbar-nav { margin-bottom: 25px;}
+	}
+
+@media ( max-width :480px) {
+.ctHeaderCommon .col-md-3{width:50%;}
+.ctHeaderCommon .navbar-collapse {  left: auto;  right: 0;  width: 240px;}
+}
+
+/*********************************End**********************************************************************************************/
