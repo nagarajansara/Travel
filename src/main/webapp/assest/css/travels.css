@@ -175,7 +175,11 @@
 }
 
 .ctHomeRowArticle .custom-btn {
-	background-color: #fad160;
+	background-color: #F2EFE4;
+}
+
+.ctHomeRowArticle .custom-btn {
+	color: #000000 !important;
 }
 
 .ct_MainHeader {
@@ -215,22 +219,47 @@
 	border-right-color: #999999;
 }
 
-.ctHomeRowArticle .kd-button{min-height:142px;}
-.ctNoborder {   min-height: 247px;}
+.ctHomeRowArticle .kd-button {
+	min-height: 142px;
+}
+
+.ctNoborder {
+	min-height: 247px;
+}
+
+.ctHomeRowArticle a {
+	font-weight: normal !important;
+}
 
 /******************************** Responsive Code *************************************************************************************/
-
 @media ( max-width :767px) {
-	.kd-topinfo.ctHeaderInfo{display:block;}
-	.ctHeaderCommon .navbar-header{margin-top:18px;}
-	.ctHeaderCommon .navbar-collapse{box-shadow: 0 8px 13px #ccc;}
-	.ctHeaderCommon .ctTravelNavBar-Nav li{padding-top:4px !important;padding-top: 18px !important;}
-	.ctHeaderCommon .navbar-nav { margin-bottom: 25px;}
+	.kd-topinfo.ctHeaderInfo {
+		display: block;
 	}
+	.ctHeaderCommon .navbar-header {
+		margin-top: 18px;
+	}
+	.ctHeaderCommon .navbar-collapse {
+		box-shadow: 0 8px 13px #ccc;
+	}
+	.ctHeaderCommon .ctTravelNavBar-Nav li {
+		padding-top: 4px !important;
+		padding-top: 18px !important;
+	}
+	.ctHeaderCommon .navbar-nav {
+		margin-bottom: 25px;
+	}
+}
 
 @media ( max-width :480px) {
-.ctHeaderCommon .col-md-3{width:50%;}
-.ctHeaderCommon .navbar-collapse {  left: auto;  right: 0;  width: 240px;}
+	.ctHeaderCommon .col-md-3 {
+		width: 50%;
+	}
+	.ctHeaderCommon .navbar-collapse {
+		left: auto;
+		right: 0;
+		width: 240px;
+	}
 }
 
 /*********************************End**********************************************************************************************/

@@ -93,14 +93,13 @@
 				<ul class="bxslider">
 					<li style="list-style: none"><img
 						src="${baseURL}/theme/extraimages/banner1.jpg" style="width: 100%"
-						alt="" />
-						<div class="kd-caption">
+						alt="" /> <!-- <div class="kd-caption">
 							<h2>Looking For Best Trip</h2>
 							<h1>We Offer Best Services</h1>
 							<div class="linksection">
 								<a href="#">Get Deal Now</a>
 							</div>
-						</div></li>
+						</div> --></li>
 				</ul>
 			</figure>
 		</article>
@@ -118,7 +117,7 @@
 									<div class="kd-button">
 										<a class="custom-btn" href="#">In today's fast paced world
 											majority of us are stressed in work and life. To relax the
-											stress there is two option 1. Mother’s lap and the Nature's
+											stress there is two option 1. Mother's lap and the Nature's
 											lap. Horruit helps plan, choose and rest at the nature's lap</a>
 									</div>
 								</article>
