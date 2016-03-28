@@ -92,7 +92,7 @@
 			<figure>
 				<ul class="bxslider">
 					<li style="list-style: none"><img
-						src="${baseURL}/theme/extraimages/banner1.jpg" style="width: 100%"
+						src="${baseURL}/theme/extraimages/banner.jpeg" style="width: 100%"
 						alt="" /> <!-- <div class="kd-caption">
 							<h2>Looking For Best Trip</h2>
 							<h1>We Offer Best Services</h1>

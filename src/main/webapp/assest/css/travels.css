@@ -231,6 +231,11 @@
 	font-weight: normal !important;
 }
 
+.ctTravelLogo_Padding img {
+	height: 90px;
+	width: 180px;
+}
+
 /******************************** Responsive Code *************************************************************************************/
 @media ( max-width :767px) {
 	.kd-topinfo.ctHeaderInfo {
