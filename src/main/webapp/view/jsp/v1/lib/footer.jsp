@@ -153,12 +153,13 @@
 		    function(e) {
 			var data = $("#ctSelectHeaderCity").select2('data'), activityId = $(
 				'.ctActivityOptionTag option:selected').val();
-			bmpUtil.setLocalStorage("CT_CITY_NAME", data.text);
-			bmpUtil.setLocalStorage("CT_CITY_ID", data.id);
-			activityId = activityId ? (parseInt(activityId) != -1 ? parseInt(activityId) : "EMPTY") 
+			activityId = activityId ? (parseInt(activityId) != -1 ? parseInt(activityId)
+				: "EMPTY")
 				: "EMPTY";
-			
+
 			if (data) {
+			    bmpUtil.setLocalStorage("CT_CITY_NAME", data.text);
+			    bmpUtil.setLocalStorage("CT_CITY_ID", data.id);
 			    requestedFilterParamsJSON = {
 				"locationid" : "" + data.id + "",
 				"fromdate" : "",
