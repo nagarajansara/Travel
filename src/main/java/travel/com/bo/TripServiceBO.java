@@ -52,6 +52,10 @@ public class TripServiceBO implements TripService
 	@Qualifier("imageProcess")
 	ImageProcess imageProcess;
 
+	@Autowired
+	@Qualifier("activityDAO")
+	ActivityDAO activityDAO;
+
 	public static final int ONE_MB = 1024 * 1024; // 1 MB - Do not modify this.
 	public static final int MAX_BUFFER_SIZE = ONE_MB; // 1 MB
 	public static final int MAX_VIDEO_SIZE = 50 * ONE_MB; // 10 MB
@@ -283,6 +287,12 @@ public class TripServiceBO implements TripService
 			String iMAGE_TYPE_PROFILE) throws Exception
 	{
 		tripDAO.updateTripImgType_ViaTripId(tripId, imageId, iMAGE_TYPE_PROFILE);
+	}
+
+	@Override
+	public List<Activity> getActivitys(Activity activity) throws Exception
+	{
+		return activityDAO.getActivitys(activity);
 	}
 
 }

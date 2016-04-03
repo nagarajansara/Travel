@@ -20,4 +20,11 @@
 			java.lang.String getSlugString(java.lang.String)
 		</function-signature>
 	</function>
+	<function>
+		<name>getActivitys</name>
+		<function-class>travel.com.util.CustomELFunction</function-class>
+		<function-signature>
+			java.util.List getActivitys()
+		</function-signature>
+	</function>
 </taglib>

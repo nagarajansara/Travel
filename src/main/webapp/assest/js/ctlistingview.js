@@ -1,4 +1,4 @@
-var MAX_RANGE_VALUES = 100000, MIN_RANGE_VALUES = 100, DEFDAULE_EMPTY = "EMPTY";
+var MAX_RANGE_VALUES = 100000, MIN_RANGE_VALUES = 100000, DEFDAULE_EMPTY = "EMPTY";
 $(function() {
     $('#ctListingFromDate').Zebra_DatePicker({
 	format : 'Y-m'
@@ -23,7 +23,7 @@ function ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice,
 function ctSetFilterDatas(locationId, activityIds, fromPrice, toPrice,
 	subActivityIds) {
     fromPrice = (fromPrice && fromPrice.length > 0) ? fromPrice : 100;
-    toPrice = (toPrice && toPrice.length > 0) ? toPrice : 300;
+    toPrice = (toPrice && toPrice.length > 0) ? toPrice : MIN_RANGE_VALUES;
     if (activityIds && activityIds != DEFDAULE_EMPTY) {
 	activityIds = activityIds.split(",");
 	for (var i = 0; i < activityIds.length; i++) {
@@ -61,7 +61,7 @@ function ctSetFilterDatas(locationId, activityIds, fromPrice, toPrice,
     var remoteDataConfig = {
 	dropdownCssClass : 'bmSelect2Class',
 	cache : "true",
-	placeholder : "Enter your city",
+	placeholder : "Select your city",
 	minimumInputLength : 2,
 	ajax : {
 	    url : 'http://' + location.host + '/' + ctDAO.CONTEXT_NAME
@@ -147,7 +147,6 @@ function ctChkRequestedFilterParamsEmpty(requestedFilterParam) {
     var isEmpty = true;
     if (requestedFilterParam) {
 	for (var i = 0; i < requestedFilterParam.length; i++) {
-	    console.log("requestedFilterParam : " + requestedFilterParam);
 	    if (requestedFilterParam[i] && requestedFilterParam[i].length > 0
 		    && requestedFilterParam[i] != DEFDAULE_EMPTY) {
 		return false;

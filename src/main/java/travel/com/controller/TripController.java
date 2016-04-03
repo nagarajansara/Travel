@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -118,13 +119,13 @@ public class TripController extends BaseController
 	public String getTopActivitys(HttpServletRequest request,
 			HttpServletResponse res, ModelMap model) throws Exception
 	{
+
 		try
 		{
-
-			int visibleTopActivitys = 5;
+			int visibleTopActivitys = 3;
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<Trip> list = tripService.getTopActivitys(visibleTopActivitys);
-			utilities.setSuccessResponse(response);
+			utilities.setSuccessResponse(response, list);
 		} catch (Exception ex)
 		{
 			logger.error("getTopActivitys :" + ex.getMessage());
@@ -734,7 +735,8 @@ public class TripController extends BaseController
 			try
 			{
 				String[] requestParams_tripTable =
-				{ "startpoint", "fromdate" };
+				// { "startpoint", "fromdate" };
+						{ "locationid", "fromdate" };
 
 				String[] requestParam_activity =
 				{ "activitytype" };
@@ -907,7 +909,7 @@ public class TripController extends BaseController
 				if (request != null)
 				{
 					requestedParam.put("locationId",
-							request.getParameter("startpoint"));
+							request.getParameter("locationid"));
 					requestedParam.put("locationName",
 							request.getParameter("startLocation"));
 					requestedParam
@@ -934,7 +936,7 @@ public class TripController extends BaseController
 				} else
 				{
 					requestedParam.put("locationId",
-							jsonObject.get("startpoint"));
+							jsonObject.get("locationid"));
 					requestedParam.put("locationName",
 							jsonObject.get("startLocation"));
 

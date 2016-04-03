@@ -39,6 +39,7 @@ function CtDAO() {
     this.ADD_SAVED_TRIPLIST = this.API_PREFIX + "/consumer/addSavedTrips.json";
     this.ADD_ACTIVITY = this.API_PREFIX + "/vendor/addNewActivity.json";
     this.ADD_SUB_ACTIVITY = this.API_PREFIX + "/vendor/addNewSubActivity.json";
+    this.GET_REST_API_ACTIVITY = this.API_PREFIX + "/getRestActivitys.json";
 
     this.RESPONSE_CACHE = {};
 
@@ -127,17 +128,21 @@ CtDAO.prototype.addNewSubActivity = function(param, cbk) {
     var tObj = this;
     tObj.getData(tObj.ADD_SUB_ACTIVITY, param, cbk);
 };
+CtDAO.prototype.getRestApiActivity = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.GET_REST_API_ACTIVITY, param, cbk, true);
+};
 CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	isParse) {
     var tObj = this, cbk = function(data) {
 	if (data && data.model) {
-	    data = data.model;
 	    if (!isParse) {
 
 	    }
 	    if (isCacheMap && !tObj.CACHE_MAP[url]) {
 		tObj.CACHE_MAP[url] = data;
 	    }
+	    data = data.model;
 	}
 	callback(data);
     }, ajaxConfig = {
@@ -158,7 +163,12 @@ CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	}
 
     };
-    jQuery.ajax(ajaxConfig);
+    if (!tObj.CACHE_MAP[url]) {
+	jQuery.ajax(ajaxConfig);
+    } else {
+	cbk(tObj.CACHE_MAP[url]);
+    }
+
 };
 CtDAO.prototype.parseJSON = function(jsonData) {
     try {

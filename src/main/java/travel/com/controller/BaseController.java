@@ -25,6 +25,9 @@ public class BaseController
 	public final String ATTR_COUNTRY = "country";
 	public final String ATTR_MOBILE_NO = "mobileno";
 
+	public final String ATTR_CT_CITY_NAME = "ATTR_CT_CITY_NAME";
+	public final String ATTR_CT_CITY_ID = "ATTR_CT_CITY_ID";
+
 	public int getUserId(HttpServletRequest request) throws ConstException
 	{
 		int userId = 0;

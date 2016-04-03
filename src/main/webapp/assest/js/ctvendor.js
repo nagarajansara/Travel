@@ -258,6 +258,8 @@ function ctAddCityTravelDiv() {
 		    + (routeLen + 1), (routeLen + 1));
     $('.ctRouteFormDivLen' + formDIvLen).after(html);
 
+    $('.ctRouteTxt').alphanum(); // Allow only the letters inside the path
+
 };
 function ctMinusCityTravelDiv(tObj) {
     var formDIvLen = $('.ctRouteFormDiv').length;

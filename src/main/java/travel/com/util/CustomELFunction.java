@@ -2,10 +2,16 @@ package travel.com.util;
 
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.Base64;
+
+import travel.com.dao.ActivityDAO;
+import travel.com.dao.ActivityDAOImpl;
+import travel.com.model.Activity;
 
 public class CustomELFunction
 {
@@ -13,6 +19,20 @@ public class CustomELFunction
 	{
 		byte[] bytesEncoded = Base64.encodeBase64(paramName.getBytes());
 		return new String(bytesEncoded);
+	}
+
+	public static List<Activity> getActivitys()
+	{
+		List<Activity> list = new ArrayList<Activity>();
+		try
+		{
+			ActivityDAO activityDAO = new ActivityDAOImpl();
+			list = activityDAO.getActivitys(new Activity("active"));
+		} catch (Exception ex)
+		{
+			
+		}
+		return list;
 	}
 
 	// SEO Purpose

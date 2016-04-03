@@ -99,10 +99,110 @@
 <script src="${baseURL}/assest/plugin/numeric/numeric.min.js"></script>
 <%-- <script src="${baseURL}/theme/js/jquery.bxslider.min.js"></script> --%>
 <script src="${baseURL}/theme/js/waypoints-min.js"></script>
+<script src="${baseURL}/assest/plugin/selecttwo/select_min.js"></script>
 <!-- END -->
 
 <%-- <script src="${baseURL}/theme/js/bootstrap-datepicker.js"></script> --%>
 <script src="${baseURL}/assest/dao/ctdao.js"></script>
 <script src="${baseURL}/assest/util/ctutils.js"></script>
+
+<script>
+    var remoteDataConfig = {
+	dropdownCssClass : 'bmSelect2Class',
+	cache : "true",
+	placeholder : "Select your city",
+	minimumInputLength : 2,
+	ajax : {
+	    url : '${baseURL}/travelapi/city/getCityApi.json',
+	    dataType : 'json',
+	    data : function(term, page) {
+		searchTerm = term.toUpperCase();
+		return {
+		    locationname : term,
+		    page_limit : 10
+		};
+	    },
+	    results : function(data, page) {
+		return {
+		    results : getMockData(data.model)
+		};
+	    }
+	},
+	formatResult : function(option) {
+	    return "<div>" + option.text + "</div>";
+	},
+	formatSelection : function(option) {
+	    return option.text;
+	}
+    };
+    function getMockData(mockData) {
+	mockData = JSON.parse(mockData);
+	var foundOptions = [];
+	for ( var key in mockData) {
+	    if (mockData[key].text.toUpperCase().indexOf(searchTerm) >= 0) {
+		foundOptions.push(mockData[key]);
+	    }
+	}
+
+	return foundOptions;
+    };
+    $("#ctSelectHeaderCity").select2(remoteDataConfig);
+
+    $(".ctListSearchBtn")
+	    .click(
+		    function(e) {
+			var data = $("#ctSelectHeaderCity").select2('data'), activityId = $(
+				'.ctActivityOptionTag option:selected').val();
+			bmpUtil.setLocalStorage("CT_CITY_NAME", data.text);
+			bmpUtil.setLocalStorage("CT_CITY_ID", data.id);
+			activityId = activityId ? (parseInt(activityId) != -1 ? parseInt(activityId) : "EMPTY") 
+				: "EMPTY";
+			
+			if (data) {
+			    requestedFilterParamsJSON = {
+				"locationid" : "" + data.id + "",
+				"fromdate" : "",
+				"activitytype" : "" + activityId + "",
+				"toprice" : "100000",
+				"fromprice" : "10",
+				"startLocation" : "" + data.text + "",
+				"subactivitytype" : "EMPTY"
+			    };
+			    var params = JSON
+				    .stringify(requestedFilterParamsJSON);
+			    var URL = "http://"
+				    + location.host
+				    + "/travel/travelapi/trip/getFilterTripsDetailsPageNo/"
+				    + params;
+			    location.href = URL + "/1";
+			}
+		    });
+
+    if (bmpUtil.getLocalStorage("CT_CITY_ID")
+	    && bmpUtil.getLocalStorage("CT_CITY_NAME")) {
+	$("#ctSelectHeaderCity").select2("data", {
+	    id : bmpUtil.getLocalStorage("CT_CITY_ID"),
+	    text : bmpUtil.getLocalStorage("CT_CITY_NAME")
+	});
+    }
+    var param = {};
+    ctDAO
+	    .getRestApiActivity(
+		    param,
+		    function(data) {
+			if (data) {
+			    var html = '', responseData;
+
+			    for (var i = 0; i < data.length; i++) {
+				html += '<option pk="'+ data[i].id +'" value="'+ data[i].id  +'">'
+					+ data[i].name + '</option>';
+			    }
+			    $('.ctHeaderActivity')
+				    .html(
+					    '<select class="ctActivityOptionTag"><option value="-1">Select Activity</option>'
+						    + html + '</select>');
+			}
+		    });
+</script>
 
 </body>

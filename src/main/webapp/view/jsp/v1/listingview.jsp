@@ -37,7 +37,7 @@
 				</c:if>
 			</c:if>
 			<c:if test="${empty toPrice}">
-				<c:set var="toPrice" value="1000" />
+				<c:set var="toPrice" value="100000" />
 			</c:if>
 			<div class="row ctFont_FamilyStyle">
 				<div class="col-md-12">
@@ -68,7 +68,7 @@
 													</c:when>
 													<c:otherwise>
 														<input style="width: 100%;" type="hidden"
-															name="startpoint" id="ctSelectListingViewActivityType">
+															name="locationid" id="ctSelectListingViewActivityType">
 														<input type="hidden" value="EMPTY" name="startLocation"
 															class="ctStartLocation">
 													</c:otherwise>
@@ -269,17 +269,14 @@
 <script type="text/javascript">
     var numEntries = '${numEntries}', locationId = '${locationId}', locationName = '${locationName}', activityIds = '${activityIds}', fromdate = '${fromdate}', fromPrice = '${fromPrice}', toPrice = '${toPrice}', START_PAGE = 1, MAX_ENTRIES = 2, requestedFilterParams = [
 	    locationId, locationName, activityIds, fromdate, toPrice ], subActivityIds = '${subActivityIds}', requestedFilterParamsJSON = {
-	"startpoint" : locationId,
-	"fromdate" : fromdate,
-	"activitytype" : activityIds,
-	"toprice" : toPrice,
-	"fromprice" : fromPrice,
-	"startLocation" : locationName,
-	"subactivitytype" : subActivityIds
+			"locationid" : locationId,
+			"fromdate" : fromdate,
+			"activitytype" : activityIds,
+			"toprice" : toPrice,
+			"fromprice" : fromPrice,
+			"startLocation" : locationName,
+			"subactivitytype" : subActivityIds
     }, isTripDetails = '${model.responseData.istripDetails}';
-
-    console.log("subActivityIds :" + '${subActivityIds}');
-    console.log("numEntries :" + '${numEntries}');
 
     ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate,
 	    subActivityIds);
@@ -312,5 +309,12 @@
 		    START_PAGE, URL);
 	}
     }
+    $("#ctSelectListingViewActivityType").on('change', function(e) {
+	var data = $(this).select2('data');
+	if (data && data.id && data.text) {
+	    bmpUtil.setLocalStorage("CT_CITY_NAME", data.text);
+	    bmpUtil.setLocalStorage("CT_CITY_ID", data.id);
+	}
+    });
 </script>
 

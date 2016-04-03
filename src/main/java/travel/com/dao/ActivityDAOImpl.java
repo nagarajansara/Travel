@@ -33,7 +33,6 @@ public class ActivityDAOImpl implements ActivityDAO
 	{
 		Map map = new HashMap();
 		map.put("status", activity.getStatus());
-
 		List<Activity> list =
 				namedParameterJdbcTemplate.query(GET_ACTIVITYS_DETAILS, map,
 						new BeanPropertyRowMapper(Activity.class));

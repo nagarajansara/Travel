@@ -219,8 +219,8 @@
 	border-right-color: #999999;
 }
 
-.ctHomeRowArticle .kd-button {
-	min-height: 142px;
+.ctHomeRowArticleMax .kd-button {
+	min-height: 220px;
 }
 
 .ctNoborder {
@@ -229,6 +229,7 @@
 
 .ctHomeRowArticle a {
 	font-weight: normal !important;
+	text-transform: capitalize;
 }
 
 .ctTravelLogo_Padding img {

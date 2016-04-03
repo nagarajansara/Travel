@@ -178,3 +178,25 @@ BmpUtil.prototype.getTwoDatesDiff = function(date1, date2) {
     return diffDays;
 
 };
+BmpUtil.prototype.setLocalStorage = function(key, value) {
+    // Check browser support
+    if (typeof (Storage) !== "undefined") {
+	// Store
+	localStorage.setItem(key, value);
+
+    } else {
+	console.log('Browser not supported');
+    }
+};
+BmpUtil.prototype.getLocalStorage = function(key) {
+    // Check browser support
+    var value = "";
+    if (typeof (Storage) !== "undefined") {
+	// Store
+	value = localStorage.getItem(key);
+
+    } else {
+	console.log('Browser not supported');
+    }
+    return value;
+};

@@ -86,11 +86,23 @@ body .ctThumbImgFlex .slides  li img {
 	border:
 }
 
-
-
-@media (max-width:480px){
-	.ctSavedListTrip{margin:25px 0 0;}
+.ctOriginalImgFlex li:hover,.ctThumbImgFlex li:hover {
+	opacity: 0.5;
 }
-@media (max-width:360px){
-.ctViewListingMenu .nav > li > a{padding-right:10px;padding-left:10px;}
+
+.ctOriginalImgFlex div:first {
+	background-color: #eeeeee;
+}
+
+@media ( max-width :480px) {
+	.ctSavedListTrip {
+		margin: 25px 0 0;
+	}
+}
+
+@media ( max-width :360px) {
+	.ctViewListingMenu .nav>li>a {
+		padding-right: 10px;
+		padding-left: 10px;
+	}
 }

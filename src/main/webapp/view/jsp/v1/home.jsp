@@ -111,7 +111,7 @@
 					<div class="kd-package-list">
 						<div class="row">
 							<article class="col-md-4">
-								<article class="col-md-12 ctHomeRowArticle">
+								<article class="col-md-12 ctHomeRowArticle ctHomeRowArticleMax">
 									<h3>What is "Brand Name"</h3>
 									<p></p>
 									<div class="kd-button">
@@ -123,7 +123,8 @@
 								</article>
 							</article>
 							<article class="col-md-4">
-								<article class="col-md-12 ctHomeRowArticle ctHomeRowArticleR">
+								<article
+									class="col-md-12 ctHomeRowArticle  ctHomeRowArticleMax ctHomeRowArticleR">
 									<h3>Save Time And Money</h3>
 									<div class="kd-button">
 										<a class="custom-btn" href="#">Take advantage of the best
@@ -133,7 +134,8 @@
 								</article>
 							</article>
 							<article class="col-md-4">
-								<article class="col-md-12 ctHomeRowArticle">
+								<article class="col-md-12 ctHomeRowArticle"
+									style="margin-bottom: 8px !important;">
 									<h3>Get a Quote</h3>
 									<div class="kd-button">
 										<a class="custom-btn" href="#">No time to browse through
@@ -174,24 +176,34 @@
 				<div class="col-md-12">
 					<div class="kd-package-list">
 						<div class="row">
-							<article class="col-md-4">
-								<figure>
-									<a href="#"><img
-										src="${baseURL}/theme/extraimages/pakege2.jpg" alt=""></a>
-									<figcaption>
-										<span class="package-price thbg-color">$7,600</span>
-										<div class="kd-bottomelement">
-											<h5>
-												<a href="#">Paris and Bordeaux</a>
-											</h5>
-											<div class="days-counter">
-												<span>15</span> <br> days
-											</div>
-										</div>
-									</figcaption>
-								</figure>
-							</article>
-							<article class="col-md-4">
+							<c:if test="${not empty model.responseData}">
+								<c:forEach items="${model.responseData}" var="element"
+									varStatus="loop">
+									<article class="col-md-4">
+										<figure>
+											<a href="#"><img
+												src="/travel/theme/extraimages/pakege3.jpg" alt=""></a>
+											<figcaption>
+												<span class="package-price thbg-color">RS.
+													${element.price }</span>
+												<div class="kd-bottomelement">
+													<h5>
+														<a href="#">${element.title }</a>
+													</h5>
+													<div class="days-counter">
+														<span>${element.duration }</span> <br> days
+													</div>
+												</div>
+											</figcaption>
+										</figure>
+									</article>
+								</c:forEach>
+							</c:if>
+							<c:if test="${empty model.responseData}">
+								<span style="font-family: verdana; color: red;">No
+									Activity Found</span>
+							</c:if>
+							<%-- <article class="col-md-4">
 								<figure>
 									<a href="#"><img
 										src="${baseURL}/theme/extraimages/pakege3.jpg" alt=""></a>
@@ -224,7 +236,7 @@
 										</div>
 									</figcaption>
 								</figure>
-							</article>
+							</article> --%>
 						</div>
 						<div class="kd-loadsection">
 							<!-- <a href="#" class="kd-loadmorebtn">Load more</a> -->
@@ -245,8 +257,8 @@
 <script src="${baseURL}/theme/dashboard/js/jquery.validate.js"></script>
 
 <script src="${baseURL}/theme/dashboard/js/jquery.nicescroll.min.js"></script>
-<script src="${baseURL}/theme/dashboard/js/unicorn.js"></script>
-<script src="${baseURL}/theme/dashboard/js/unicorn.form_validation.js"></script>
+<%-- <script src="${baseURL}/theme/dashboard/js/unicorn.js"></script>
+<script src="${baseURL}/theme/dashboard/js/unicorn.form_validation.js"></script> --%>
 <script src="${baseURL}/assest/js/citytravels.js"></script>
 <script type="text/javascript">
     var loginStatus = '${model.responseStatus}';

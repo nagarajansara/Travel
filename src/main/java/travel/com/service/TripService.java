@@ -76,4 +76,5 @@ public interface TripService
 	void updateTripImgType_ViaTripId(int tripId, int imageId,
 			String iMAGE_TYPE_PROFILE) throws Exception;
 
+	List<Activity> getActivitys(Activity activity) throws Exception;
 }

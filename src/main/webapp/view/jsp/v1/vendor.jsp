@@ -384,6 +384,7 @@
 <script src="${baseURL}/assest/plugin/datepicker/tsdatepicker.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/twbsPagination.js"></script>
 <script src="${baseURL}/assest/plugin/pagination/renderpagination.js"></script>
+<script src="${baseURL}/assest/plugin/numeric/alphanum.js"></script>
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorListingMenu').addClass('active');
@@ -392,7 +393,7 @@
     var remoteDataConfig = {
 	dropdownCssClass : 'bmSelect2Class',
 	cache : "true",
-	placeholder : "Enter your pickup pincode",
+	placeholder : "Select your city",
 	minimumInputLength : 2,
 	ajax : {
 	    url : '${baseURL}/travelapi/city/getCityApi.json',
@@ -448,5 +449,8 @@
     if (response && response == "true") {
 	$('.ctVendorSuccessMessage').show();
     }
+
+    $('.ctRouteTxt').alphanum();
+    $('.ctNoDurationTxt').numeric();
 </script>
 

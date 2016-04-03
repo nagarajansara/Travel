@@ -329,7 +329,7 @@
 			    dropdownCssClass : 'bmSelect2Class',
 			    triggerChange : true,
 			    cache : true,
-			    placeholder : "Enter your pickup pincode",
+			    placeholder : "Select your city",
 			    minimumInputLength : 1,
 			    ajax : {
 				url : '${baseURL}/travelapi/city/getCityApi.json',

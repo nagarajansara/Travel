@@ -44,13 +44,15 @@
 <link href="${baseURL}/assest/css/ctconsumer.css" rel="stylesheet">
 <link href="${baseURL}/assest/plugin/alert/sweetalert.css"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="${baseURL}/assest/plugin/selecttwo/select_min.css" media="screen" />
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
 
- <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -224,7 +226,8 @@
 			</div>
 		</div>
 		<!--// Header Baar //-->
-		<div class="kd-headbar ct_MainHeaderFontStyle ct_SubBasckGroundColor ctHeaderCommon">
+		<div
+			class="kd-headbar ct_MainHeaderFontStyle ct_SubBasckGroundColor ctHeaderCommon">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 col-xs-6">
@@ -244,15 +247,24 @@
 
 								<div class="collapse navbar-collapse" id="navbar-collapse-1">
 									<ul class="nav navbar-nav ctTravelNavBar-Nav">
-										<li><form>
-												<input type="text" id="srch-term" name="srch-term"
-													placeholder="Search" class="form-control">
-											</form></li>
-										<li><a href="${baseURL}/view/jsp/v1/home.jsp">Home</a> <!-- <ul class="sub-dropdown">
+										<li>
+											<div style="max-width: 200px; min-width: 200px;">
+												<input style="width: 100%;" name="startpoint" type="hidden"
+													id="ctSelectHeaderCity">
+											</div>
+										</li>
+										<li class="ctHeaderActivity"></li>
+										<li><i class="fa fa-search ctListSearchBtn"
+											style="font-weight: bold; cursor: pointer; color: #666666;"></i></li>
+										<li><a href="${baseURL}/travelapi/trip/getTopActivitys">Home</a>
+										</li>
+
+										<!-- <ul class="sub-dropdown">
 												<li><a href="index-map.html">Map HomePage</a></li>
-											</ul> --></li>
-										<li><a href="${baseURL}/travelapi/trip/getTripDetails">Listing
-												Page</a></li>
+											</ul> -->
+										</li>
+										<%-- <li><a href="${baseURL}/travelapi/trip/getTripDetails">Listing
+												Page</a></li> --%>
 										<!--<li><a href="about-us.html">About Us</a></li>
                       <li><a href="#">Blog</a>
                         <ul class="sub-dropdown">
