@@ -26,7 +26,7 @@ public class AuthenticationFilter extends BaseController implements Filter
 
 {
 
-	public String SERVER_NAME = "localhost:8082";
+	public String SERVER_NAME = "startupguruji.com";
 
 	private String SESSION_FAILURE_URL = "http://" + SERVER_NAME
 			+ "/travel/view/jsp/v1/home.jsp";
