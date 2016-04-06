@@ -139,7 +139,8 @@
 	mockData = JSON.parse(mockData);
 	var foundOptions = [];
 	for ( var key in mockData) {
-	    if (mockData[key].text.toUpperCase().indexOf(searchTerm) >= 0) {
+	    if (mockData[key].text
+		    && mockData[key].text.toUpperCase().indexOf(searchTerm) >= 0) {
 		foundOptions.push(mockData[key]);
 	    }
 	}
