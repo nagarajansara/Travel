@@ -161,23 +161,23 @@
 			if (data) {
 			    bmpUtil.setLocalStorage("CT_CITY_NAME", data.text);
 			    bmpUtil.setLocalStorage("CT_CITY_ID", data.id);
-			    requestedFilterParamsJSON = {
-				"locationid" : "" + data.id + "",
-				"fromdate" : "",
-				"activitytype" : "" + activityId + "",
-				"toprice" : "100000",
-				"fromprice" : "10",
-				"startLocation" : "" + data.text + "",
-				"subactivitytype" : "EMPTY"
-			    };
-			    var params = JSON
-				    .stringify(requestedFilterParamsJSON);
-			    var URL = "http://"
-				    + location.host
-				    + "/travel/travelapi/trip/getFilterTripsDetailsPageNo/"
-				    + params;
-			    location.href = URL + "/1";
 			}
+			requestedFilterParamsJSON = {
+			    "locationid" : "" + ((data) ? data.id : "") + "",
+			    "fromdate" : "",
+			    "activitytype" : "" + activityId + "",
+			    "toprice" : "100000",
+			    "fromprice" : "10",
+			    "startLocation" : ""
+				    + ((data) ? data.text : "EMPTY") + "",
+			    "subactivitytype" : "EMPTY"
+			};
+			var params = JSON.stringify(requestedFilterParamsJSON);
+			var URL = "http://"
+				+ location.host
+				+ "/travel/travelapi/trip/getFilterTripsDetailsPageNo/"
+				+ params;
+			location.href = URL + "/1";
 		    });
 
     if (bmpUtil.getLocalStorage("CT_CITY_ID")

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html"%>
 <%@ include file="lib/header.jsp"%>
+<%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <!--// MainBanner //-->
 <div id="mainbanner">
 	<!--<ul class="bxslider">
@@ -114,38 +115,50 @@
 						<div class="row">
 							<article class="col-md-4">
 								<article class="col-md-12 ctHomeRowArticle ctHomeRowArticleMax">
-									<h3></h3>
 									<div class="kd-button ctHomeContentPadding">
 										<h3>What is "Horruit"</h3>
 										<a class="custom-btn" href="#">In today's fast paced world
 											majority of us are stressed in work and life. To relax the
 											stress there is two option 1. Mother's lap and the Nature's
 											lap. Horruit helps plan, choose and rest at the nature's lap</a>
+										<div class="linksection">
+											<a href="#"> Get started now <i
+												class="fa fa-chevron-circle-right"></i></a>
+										</div>
 									</div>
 								</article>
 							</article>
 							<article class="col-md-4">
 								<article
 									class="col-md-12 ctHomeRowArticle  ctHomeRowArticleMax ctHomeRowArticleR">
-									<h3></h3>
 									<div class="kd-button ctHomeContentPadding">
 										<h3>Save Time And Money</h3>
 										<a class="custom-btn" href="#">Take advantage of the best
 											deals, events and promotions. We offer the most comprehensive
 											adventure travel guide across the entire country</a>
+										<div class="linksection">
+											<a href="#"> Save Time And Money <i
+												class="fa fa-chevron-circle-right"></i></a>
+										</div>
 									</div>
 								</article>
 							</article>
 							<article class="col-md-4">
 								<article class="col-md-12 ctHomeRowArticle"
 									style="margin-bottom: 8px !important;">
-									<button style="background-color: inherit;" type="button"
-										data-toggle="modal" data-target="#myModal">
-										<h3>Get a Quote</h3>
+									<h3>Get a Quote</h3>
 									</button>
 									<div class="kd-button">
 										<a class="custom-btn" href="#">No time to browse through
 											everything? Let us know what you are looking for</a>
+										<div class="linksection">
+											<button style="background-color: inherit;" type="button"
+												data-toggle="modal" data-target="#myModal">
+												<a href="#"> Get a Quote <i
+													class="fa fa-chevron-circle-right"></i>
+												</a>
+											</button>
+										</div>
 									</div>
 								</article>
 								<article class="col-md-12 ctHomeRowArticle">
@@ -154,6 +167,10 @@
 										<a class="custom-btn" href="#">Share you thrilling, funny,
 											scary, cool and heroic adventure experience with the
 											community. Be a brand ambassador for Adventure activities.</a>
+										<div class="linksection">
+											<a href="#"> Share Your Experience <i
+												class="fa fa-chevron-circle-right"></i></a>
+										</div>
 									</div>
 								</article>
 							</article>
@@ -187,15 +204,18 @@
 									varStatus="loop">
 									<article class="col-md-4">
 										<figure>
-											<a href="#"><img
-												src="/${uploadedImageFolderName}/${element.defaultImage}"
+											<a
+												href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }/${util:getSlugString(element.title)}"><img
+												width="315" height="235"
+												src="${hostName}:${port}/${uploadedImageFolderName}/${element.defaultImage}"
 												alt="${element.title }"></a>
 											<figcaption>
 												<span class="package-price thbg-color">RS.
 													${element.price }</span>
 												<div class="kd-bottomelement">
 													<h5>
-														<a href="#">${element.title }</a>
+														<a target="_blank"
+															href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }/${util:getSlugString(element.title)}">${element.title }</a>
 													</h5>
 													<div class="days-counter">
 														<span>${element.duration }</span> <br> days

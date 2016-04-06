@@ -115,6 +115,7 @@ public class TripServiceBO implements TripService
 						finalImageURL =
 								utilities.getFiveDigitRandomNo()
 										+ (oldFileName.toLowerCase());
+						finalImageURL = finalImageURL.replaceAll("\\s+", "");
 						String newfile =
 								appProp.getUploadImagePath() + finalImageURL;
 						File newFile = new File(newfile);
