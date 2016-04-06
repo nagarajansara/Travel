@@ -32,7 +32,9 @@ function ctSetFilterDatas(locationId, activityIds, fromPrice, toPrice,
 		    'checked', true);
 	    html += '<li style="font-size: 12px; text-transform: capitalize;"><a class="thcolorhover" href="javascript:void(0)">'
 		    + $('.ctActivityTypeId[value = ' + activityIds[i] + ']')
-			    .attr('pk_name') + ' | </a></li>';
+			    .attr('pk_name')
+		    + ' '
+		    + ((i < activityIds.length - 1) ? '|' : '') + ' </a></li>';
 	}
 	$('.ctSelectedActivityKd').html(html);
     }

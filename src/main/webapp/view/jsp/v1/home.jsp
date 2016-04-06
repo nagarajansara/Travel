@@ -139,8 +139,8 @@
 							<article class="col-md-4">
 								<article class="col-md-12 ctHomeRowArticle"
 									style="margin-bottom: 8px !important;">
-									<button type="button" data-toggle="modal"
-										data-target="#myModal">
+									<button style="background-color: inherit;" type="button"
+										data-toggle="modal" data-target="#myModal">
 										<h3>Get a Quote</h3>
 									</button>
 									<div class="kd-button">
@@ -188,7 +188,7 @@
 									<article class="col-md-4">
 										<figure>
 											<a href="#"><img
-												src="${baseURL }/${uploadedImageFolderName}/${defaultImage}"
+												src="${baseURL }/${uploadedImageFolderName}/${element.defaultImage}"
 												alt="${element.title }"></a>
 											<figcaption>
 												<span class="package-price thbg-color">RS.
@@ -308,7 +308,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default ctCloseGetQuote" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default ctCloseGetQuote"
+							data-dismiss="modal">Close</button>
 						<button class="btn btn-primary ctSUbmitGetQuote" type="button">Send</button>
 					</div>
 				</div>
@@ -332,8 +333,6 @@
 <script type="text/javascript">
     var loginStatus = '${model.responseStatus}';
     ctLoginStatus(loginStatus);
-    
+
     $(".ctGetQuotePhoneNo").numeric();
-    
-    
 </script>
