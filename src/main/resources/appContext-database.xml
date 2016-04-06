@@ -56,6 +56,8 @@
 	</bean>
 	<bean id="pointsDAO" class="travel.com.dao.PointsDAOImpl">
 	</bean>
+	<bean id="customerQuoteDAO" class="travel.com.dao.CustomerQuoteDAOImpl">
+	</bean>
 
 
 </beans>

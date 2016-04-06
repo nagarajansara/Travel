@@ -175,7 +175,10 @@
 					</div>
 					<div class="col-md-9">
 						<div class="kd-section-title">
-							<h3>Listing View</h3>
+							<h3 style="margin-bottom: 0;">Listing View</h3>
+							<ul class="kd-postoption ctSelectedActivityKd">
+
+							</ul>
 						</div>
 						<div class="kd-package-list">
 							<c:if test="${not empty model.responseData.tripDetails}">
@@ -269,13 +272,13 @@
 <script type="text/javascript">
     var numEntries = '${numEntries}', locationId = '${locationId}', locationName = '${locationName}', activityIds = '${activityIds}', fromdate = '${fromdate}', fromPrice = '${fromPrice}', toPrice = '${toPrice}', START_PAGE = 1, MAX_ENTRIES = 2, requestedFilterParams = [
 	    locationId, locationName, activityIds, fromdate, toPrice ], subActivityIds = '${subActivityIds}', requestedFilterParamsJSON = {
-			"locationid" : locationId,
-			"fromdate" : fromdate,
-			"activitytype" : activityIds,
-			"toprice" : toPrice,
-			"fromprice" : fromPrice,
-			"startLocation" : locationName,
-			"subactivitytype" : subActivityIds
+	"locationid" : locationId,
+	"fromdate" : fromdate,
+	"activitytype" : activityIds,
+	"toprice" : toPrice,
+	"fromprice" : fromPrice,
+	"startLocation" : locationName,
+	"subactivitytype" : subActivityIds
     }, isTripDetails = '${model.responseData.istripDetails}';
 
     ctInitSetFilterData(locationId, activityIds, fromPrice, toPrice, fromdate,

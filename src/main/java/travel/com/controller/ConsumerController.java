@@ -490,4 +490,28 @@ public class ConsumerController extends BaseController
 		return "consumerreviews";
 	}
 
+	@RequestMapping(value = "/addQuoteDetails", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String addQuoteDetails(HttpServletRequest request, @RequestParam(
+			value = "name") String name,
+			@RequestParam(value = "email") String email, @RequestParam(
+					value = "phoneno") String phoneno, @RequestParam(
+					value = "requirement") String requirement, ModelMap model)
+	{
+		try
+		{
+			Map<String, Object> map = new HashMap<String, Object>();
+			CustomerQuote customerQuote =
+					new CustomerQuote(email, name, phoneno, requirement);
+			consumerService.addQuoteDetails(customerQuote);
+			utilities.setSuccessResponse(response);
+		} catch (Exception ex)
+		{
+			logger.error("addQuoteDetails :" + ex.getMessage());
+			utilities.setErrResponse(ex, response);
+		}
+		model.addAttribute("model", response);
+		return "consumerreviews";
+	}
+
 }

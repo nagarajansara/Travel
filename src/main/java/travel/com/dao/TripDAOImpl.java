@@ -151,7 +151,7 @@ public class TripDAOImpl implements TripDAO
 	final String GET_ALL_TRIPDETAILS =
 			"Select title, id from tripdetails where status =:status AND userid =:userid AND title like :startLetter";
 	final String GET_TOP_ACTIVITYS =
-			"SELECT SUBSTRING_INDEX(GROUP_CONCAT(IFNULL(tm.name, :defaultImage)), ',', 1) AS defaultImage, a.id, t.title, t.title, t.duration, t.price FROM "
+			"SELECT SUBSTRING_INDEX(GROUP_CONCAT(IFNULL(tm.name, :defaultImage)), ',', 1) AS defaultImage, a.id, t.title, t.duration, t.price FROM "
 					+ "(SELECT tripid AS id, 'a' AS titles FROM admin_topactivity where status = 'active' "
 					+ "UNION "
 					+ "SELECT id, 'b' AS titles FROM tripdetails where status = 'active') AS a "

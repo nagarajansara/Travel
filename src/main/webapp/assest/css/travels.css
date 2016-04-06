@@ -17,6 +17,11 @@
 	
 }
 
+.ctTravelNavBar-Nav li:first-child a {
+	height: 36px;
+	line-height: 35px;
+}
+
 .tsDefaultSearchFontStyle input,.tsDefaultSearchFontStyle {
 	font-size: 12px;
 	font-family: Junction;
@@ -220,7 +225,7 @@
 }
 
 .ctHomeRowArticleMax .kd-button {
-	min-height: 220px;
+	min-height: 243px;
 }
 
 .ctNoborder {
@@ -237,6 +242,13 @@
 	width: 180px;
 }
 
+.ctHomeContentPadding {
+	padding-top: 45px;
+}
+
+.ctSelectedActivityKd li {
+	list-style: none;
+}
 /******************************** Responsive Code *************************************************************************************/
 @media ( max-width :767px) {
 	.kd-topinfo.ctHeaderInfo {

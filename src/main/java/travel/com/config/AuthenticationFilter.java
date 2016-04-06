@@ -69,12 +69,14 @@ public class AuthenticationFilter extends BaseController implements Filter
 		AUTHENTICATED_URL.add("test.jsp");
 		AUTHENTICATED_URL.add("getRestActivitys.json");
 		AUTHENTICATED_URL.add("getTopActivitys");
+		AUTHENTICATED_URL.add("addQuoteDetails.json");
 
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsBasedId");
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsPageno");
 		AUTHENTICATED_URL_INDEXOF.add("getFilterTripsDetailsPageNo");
 		AUTHENTICATED_URL_INDEXOF.add("getAdminLoginValidate");
 		AUTHENTICATED_URL_INDEXOF.add("activatecustomer");
+		AUTHENTICATED_URL_INDEXOF.add("getVendorDetailsBasedId");
 
 		/************** Role based urls ***********************/
 

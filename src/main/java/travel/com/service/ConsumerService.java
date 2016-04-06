@@ -35,7 +35,10 @@ public interface ConsumerService
 	int getSavedTripNumEntries(int userId, String sTATTUS_SAVED)
 			throws Exception;
 
-	List<Reviews> getConsumerReview(int userId, int startIndx, int endIndx) throws Exception;
+	List<Reviews> getConsumerReview(int userId, int startIndx, int endIndx)
+			throws Exception;
 
 	int getConsumerReviewNumEntries(int userId) throws Exception;
+
+	void addQuoteDetails(CustomerQuote customerQuote) throws Exception;
 }

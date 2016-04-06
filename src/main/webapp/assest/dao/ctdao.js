@@ -40,6 +40,8 @@ function CtDAO() {
     this.ADD_ACTIVITY = this.API_PREFIX + "/vendor/addNewActivity.json";
     this.ADD_SUB_ACTIVITY = this.API_PREFIX + "/vendor/addNewSubActivity.json";
     this.GET_REST_API_ACTIVITY = this.API_PREFIX + "/getRestActivitys.json";
+    this.ADD_GET_QUOTE_DETAILS = this.API_PREFIX
+	    + "/consumer/addQuoteDetails.json";
 
     this.RESPONSE_CACHE = {};
 
@@ -132,15 +134,21 @@ CtDAO.prototype.getRestApiActivity = function(param, cbk) {
     var tObj = this;
     tObj.getData(tObj.GET_REST_API_ACTIVITY, param, cbk, true);
 };
+CtDAO.prototype.addGetQuoteDetails = function(param, cbk) {
+    var tObj = this;
+    tObj.getData(tObj.ADD_GET_QUOTE_DETAILS, param, cbk);
+};
 CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 	isParse) {
-    var tObj = this, cbk = function(data) {
+    var tObj = this, cbk = function(data, isCacheMap) {
 	if (data && data.model) {
 	    if (!isParse) {
 
 	    }
-	    if (isCacheMap && !tObj.CACHE_MAP[url]) {
+	    console.log("isCacheMap :" + isCacheMap);
+	    if (isCacheMap) {
 		tObj.CACHE_MAP[url] = data;
+		console.log(tObj.CACHE_MAP[url]);
 	    }
 	    data = data.model;
 	}
@@ -154,7 +162,7 @@ CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
 
 	},
 	success : function(data) {
-	    cbk(data);
+	    cbk(data, isCacheMap);
 	},
 	statusCode : {
 	    404 : function() {
@@ -166,7 +174,7 @@ CtDAO.prototype.getData = function(url, postParams, callback, isCacheMap,
     if (!tObj.CACHE_MAP[url]) {
 	jQuery.ajax(ajaxConfig);
     } else {
-	cbk(tObj.CACHE_MAP[url]);
+	cbk(tObj.CACHE_MAP[url], isCacheMap);
     }
 
 };

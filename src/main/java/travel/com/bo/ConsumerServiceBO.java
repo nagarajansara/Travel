@@ -134,4 +134,11 @@ public class ConsumerServiceBO implements ConsumerService
 	{
 		return reviewsDAO.getConsumerReviewNumEntries(userId);
 	}
+
+	@Override
+	public void addQuoteDetails(CustomerQuote customerQuote) throws Exception
+	{
+		consumerDAO.addQuoteDetails(customerQuote);
+
+	}
 }

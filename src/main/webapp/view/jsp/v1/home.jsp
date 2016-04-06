@@ -75,31 +75,33 @@
 			</form>
 		</div>
 	</div>-->
-	<section class="kd-pagesection" style="padding: 50px 0px;">
+	<section class="kd-pagesection" style="padding: 0px 0px;">
 		<div class="container">
-			<div class="kd-modrentitle thememargin">
+			<!-- <div class="kd-modrentitle thememargin">
 				<h3>Book your perfect Adventure Trip...</h3>
-				<!-- <div class="kd-divider">
+				<div class="kd-divider">
 							<div class="short-seprator">
 								<span><i class="fa fa-globe"></i></span>
 							</div>
-						</div> -->
+						</div>
 				<br /> <span> Enjoy the serene beauty right at tha laps of
 					Nature with a thing of adventure </span>
-			</div>
+			</div> -->
 		</div>
 		<article class="col-md-12">
 			<figure>
 				<ul class="bxslider">
 					<li style="list-style: none"><img
 						src="${baseURL}/theme/extraimages/banner.jpeg" style="width: 100%"
-						alt="" /> <!-- <div class="kd-caption">
-							<h2>Looking For Best Trip</h2>
-							<h1>We Offer Best Services</h1>
-							<div class="linksection">
+						alt="" />
+						<div class="kd-caption">
+							<h1>Book your perfect Adventure Trip...</h1>
+							<h2>Enjoy the serene beauty right at tha laps of Nature with
+								a thing of adventure</h2>
+							<!-- <div class="linksection">
 								<a href="#">Get Deal Now</a>
-							</div>
-						</div> --></li>
+							</div> -->
+						</div></li>
 				</ul>
 			</figure>
 		</article>
@@ -112,9 +114,9 @@
 						<div class="row">
 							<article class="col-md-4">
 								<article class="col-md-12 ctHomeRowArticle ctHomeRowArticleMax">
-									<h3>What is "Brand Name"</h3>
-									<p></p>
-									<div class="kd-button">
+									<h3></h3>
+									<div class="kd-button ctHomeContentPadding">
+										<h3>What is "Horruit"</h3>
 										<a class="custom-btn" href="#">In today's fast paced world
 											majority of us are stressed in work and life. To relax the
 											stress there is two option 1. Mother's lap and the Nature's
@@ -125,8 +127,9 @@
 							<article class="col-md-4">
 								<article
 									class="col-md-12 ctHomeRowArticle  ctHomeRowArticleMax ctHomeRowArticleR">
-									<h3>Save Time And Money</h3>
-									<div class="kd-button">
+									<h3></h3>
+									<div class="kd-button ctHomeContentPadding">
+										<h3>Save Time And Money</h3>
 										<a class="custom-btn" href="#">Take advantage of the best
 											deals, events and promotions. We offer the most comprehensive
 											adventure travel guide across the entire country</a>
@@ -136,7 +139,10 @@
 							<article class="col-md-4">
 								<article class="col-md-12 ctHomeRowArticle"
 									style="margin-bottom: 8px !important;">
-									<h3>Get a Quote</h3>
+									<button type="button" data-toggle="modal"
+										data-target="#myModal">
+										<h3>Get a Quote</h3>
+									</button>
 									<div class="kd-button">
 										<a class="custom-btn" href="#">No time to browse through
 											everything? Let us know what you are looking for</a>
@@ -182,7 +188,8 @@
 									<article class="col-md-4">
 										<figure>
 											<a href="#"><img
-												src="/travel/theme/extraimages/pakege3.jpg" alt=""></a>
+												src="${baseURL }/${uploadedImageFolderName}/${defaultImage}"
+												alt="${element.title }"></a>
 											<figcaption>
 												<span class="package-price thbg-color">RS.
 													${element.price }</span>
@@ -246,6 +253,68 @@
 
 			</div>
 		</div>
+		<!-- Modal -->
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Get a Quote</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-8">
+								<form method="POST" action="" class="ctGetQuote">
+									<div class="form-group">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<label
+												class="col-lg-12 col-md-12 col-sm-12 control-label ctGetQuoteStatus"
+												style="color: red; display: none"></label>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<input type="text" placeholder="Name *" value="" name="name"
+												class="form-control ctName ctGetQuoteName">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<input type="text" placeholder="Email *" value=""
+												name="email" class="form-control ctName ctGetQuoteEmail">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<input type="text" placeholder="PhoneNo *" value=""
+												name="email" class="form-control ctName ctGetQuotePhoneNo">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+											<textarea placeholder="what is your requirement *"
+												class="form-control ctQuoteRequirement ctIsChkEmptyVal"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="ctGetQuoteLoadingImage ctDefaultDisplayNone">
+											<img src="/travel/assest/img/loading.gif">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default ctCloseGetQuote" data-dismiss="modal">Close</button>
+						<button class="btn btn-primary ctSUbmitGetQuote" type="button">Send</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</section>
 	<!--// Page Section //-->
 
@@ -263,4 +332,8 @@
 <script type="text/javascript">
     var loginStatus = '${model.responseStatus}';
     ctLoginStatus(loginStatus);
+    
+    $(".ctGetQuotePhoneNo").numeric();
+    
+    
 </script>

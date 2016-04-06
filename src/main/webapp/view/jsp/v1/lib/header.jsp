@@ -235,7 +235,7 @@
 							src="${baseURL}/theme/images/logo.png" alt=""></a>
 					</div>
 					<div class="col-md-9 col-xs-6">
-						<div class="kd-rightside ">
+						<div class="kd-rightside " style="float: none;">
 							<nav class="navbar navbar-default navigation">
 								<div class="navbar-header">
 									<button type="button" class="navbar-toggle collapsed"
@@ -256,8 +256,8 @@
 										<li class="ctHeaderActivity"></li>
 										<li><i class="fa fa-search ctListSearchBtn"
 											style="font-weight: bold; cursor: pointer; color: #666666;"></i></li>
-										<li><a href="${baseURL}/travelapi/trip/getTopActivitys">Home</a>
-										</li>
+										<li><a style="line-height: 30px;"
+											href="${baseURL}/travelapi/trip/getTopActivitys">Home</a></li>
 
 										<!-- <ul class="sub-dropdown">
 												<li><a href="index-map.html">Map HomePage</a></li>

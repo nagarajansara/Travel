@@ -81,6 +81,9 @@ public class ConsumerDAOImpl implements ConsumerDAO
 					+ ") "
 					+ "AND td.status ='active' AND s.userid =:userId ORDER BY s.created_at DESC LIMIT :startIndx, :endIndx";
 
+	final String ADD_QUOTE =
+			"INSERT into customerquote (email, name, phoneno, requirement) values (:email, :name, :phoneno, :requirement)";
+
 	public List<Login> getProfile(int userId) throws Exception
 	{
 		Map map = new HashMap();
@@ -173,4 +176,16 @@ public class ConsumerDAOImpl implements ConsumerDAO
 
 	}
 
+	@Override
+	public void addQuoteDetails(CustomerQuote customerQuote) throws Exception
+	{
+		Map paramMap = new HashMap();
+		paramMap.put("email", customerQuote.getEmail());
+		paramMap.put("name", customerQuote.getName());
+		paramMap.put("phoneno", customerQuote.getPhoneno());
+		paramMap.put("requirement", customerQuote.getRequirement());
+
+		namedParameterJdbcTemplate.update(ADD_QUOTE, paramMap);
+
+	}
 }

@@ -24,12 +24,17 @@ function ctSetFilterDatas(locationId, activityIds, fromPrice, toPrice,
 	subActivityIds) {
     fromPrice = (fromPrice && fromPrice.length > 0) ? fromPrice : 100;
     toPrice = (toPrice && toPrice.length > 0) ? toPrice : MIN_RANGE_VALUES;
+    var html = '';
     if (activityIds && activityIds != DEFDAULE_EMPTY) {
 	activityIds = activityIds.split(",");
 	for (var i = 0; i < activityIds.length; i++) {
 	    $('.ctActivityTypeId[value = ' + activityIds[i] + ']').prop(
 		    'checked', true);
+	    html += '<li style="font-size: 12px; text-transform: capitalize;"><a class="thcolorhover" href="javascript:void(0)">'
+		    + $('.ctActivityTypeId[value = ' + activityIds[i] + ']')
+			    .attr('pk_name') + ' | </a></li>';
 	}
+	$('.ctSelectedActivityKd').html(html);
     }
     if (subActivityIds && subActivityIds != DEFDAULE_EMPTY) {
 	subActivityIds = subActivityIds.split(",");
