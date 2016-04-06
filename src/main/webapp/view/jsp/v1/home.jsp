@@ -188,7 +188,7 @@
 									<article class="col-md-4">
 										<figure>
 											<a href="#"><img
-												src="${baseURL }/${uploadedImageFolderName}/${element.defaultImage}"
+												src="/${uploadedImageFolderName}/${element.defaultImage}"
 												alt="${element.title }"></a>
 											<figcaption>
 												<span class="package-price thbg-color">RS.
