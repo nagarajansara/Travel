@@ -180,10 +180,10 @@ public class Utilities
 		return isNull;
 	}
 
-	public String getFiveDigitRandomNo()
+	public String getRandomNo()
 	{
 		Random r = new Random(System.currentTimeMillis());
-		int tempRandomVal = 10000 + r.nextInt(20000);
+		int tempRandomVal = 10000000 + r.nextInt(20000000);
 		return String.valueOf(tempRandomVal);
 	}
 

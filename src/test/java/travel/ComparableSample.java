@@ -1,10 +1,16 @@
 package travel;
 
+import java.util.Random;
+
 public class ComparableSample
 {
-	private static void main(String args[])
+	public static void main(String args[])
 	{
-
+		String str = "h.ello.one.mp4";
+		Random r = new Random(System.currentTimeMillis());
+		int tempRandomVal = 1000000 + r.nextInt(2000000);
+		String.valueOf(tempRandomVal);
+		System.out.println(String.valueOf(tempRandomVal));
 	}
 }
 
