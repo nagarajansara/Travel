@@ -6,29 +6,84 @@ public class ComparableSample
 {
 	public static void main(String args[])
 	{
-		String str = "h.ello.one.mp4";
-		Random r = new Random(System.currentTimeMillis());
-		int tempRandomVal = 1000000 + r.nextInt(2000000);
-		String.valueOf(tempRandomVal);
-		System.out.println(String.valueOf(tempRandomVal));
+		Table obj = new Table();// only one object
+		MyThread1 t1 = new MyThread1(new Table());
+		MyThread2 t2 = new MyThread2(new Table());
+		t1.start();
+		t2.start();
+
+	}
+	 void printTableR(int n)
+		{// method not synchronized
+			// synchronized (this.getClass())
+			{
+				for (int i = 1; i <= 5; i++)
+				{
+					System.out.println(n * i);
+					try
+					{
+						Thread.sleep(400);
+					} catch (Exception e)
+					{
+						System.out.println(e);
+					}
+				}
+			}
+		}
+}
+
+class Table
+{
+
+	synchronized static void printTable(int n)
+	{// method not synchronized
+		// synchronized (this.getClass())
+		{
+			for (int i = 1; i <= 5; i++)
+			{
+				System.out.println(n * i);
+				try
+				{
+					Thread.sleep(400);
+				} catch (Exception e)
+				{
+					System.out.println(e);
+				}
+			}
+		}
 	}
 }
 
-class Smaple implements Comparable
+class MyThread1 extends Thread
 {
-	int rollno;
-	String name;
-	int age;
+	Table t;
 
-	Smaple(int rollno, String name, int age)
+	MyThread1(Table t)
 	{
-		this.rollno = rollno;
-		this.name = name;
-		this.age = age;
+		this.t = t;
 	}
 
-	public int compareTo(Object obj)
+	public void run()
 	{
-		return 1;
+		//t.printTable(5);
+		 Table.printTable(5);
+		
+	}
+
+}
+
+class MyThread2 extends Thread
+{
+	Table t;
+
+	MyThread2(Table t)
+	{
+		this.t = t;
+	}
+
+	public void run()
+	{
+		//t.printTable(100);
+		 Table.printTable(100);
 	}
 }

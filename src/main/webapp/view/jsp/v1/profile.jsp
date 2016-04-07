@@ -70,7 +70,7 @@
 									placeholder="" name="addressTxt">${address}</textarea>
 							</div>
 						</div>
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label">How
 								many years working </label>
 							<div class="col-lg-4 col-md-4 col-sm-4">
@@ -78,7 +78,7 @@
 									class="ctIsChkEmptyVal form-control ctAddressArea" rows="3"
 									placeholder="" name="addressTxt">${address}</textarea>
 							</div>
-						</div>
+						</div> --%>
 						<div class="form-group">
 							<label class="col-lg-3 col-md-3 col-sm-3 control-label">Phone
 								No </label>

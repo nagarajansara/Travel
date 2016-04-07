@@ -70,6 +70,7 @@ public class AuthenticationFilter extends BaseController implements Filter
 		AUTHENTICATED_URL.add("getRestActivitys.json");
 		AUTHENTICATED_URL.add("getTopActivitys");
 		AUTHENTICATED_URL.add("addQuoteDetails.json");
+		AUTHENTICATED_URL.add("404error");
 
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsBasedId");
 		AUTHENTICATED_URL_INDEXOF.add("getTripDetailsPageno");
