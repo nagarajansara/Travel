@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html"%>
+<%@ taglib uri="/WEB-INF/tld/customTagLibrary" prefix="util"%>
 <%@ include file="lib/header.jsp"%>
 <%-- <link rel="stylesheet"
 	href="${baseURL}/assest/plugin/datepicker/tsstyle.css" media="screen" /> --%>
@@ -35,7 +36,7 @@
 									<tr>
 										<td><c:out value="${ loopElement.index + 1}"></c:out></td>
 										<td><a target="_balnk"
-											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${element.tripid}"><c:out
+											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.tripid) }/${util:getSlugString(element.title)}"><c:out
 													value="${ element.title}"></a> </c:out></td>
 										<td><c:out value="${ element.offer_percentage}"></c:out></td>
 										<td><c:out value="${ element.price}"></c:out></td>
