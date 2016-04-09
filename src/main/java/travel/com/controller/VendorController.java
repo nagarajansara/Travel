@@ -638,6 +638,7 @@ public class VendorController extends BaseController
 
 			String[][] responseBookingList = null;
 			String[][] responseEnquiryList = null;
+			String[][] responseViewersList = null;
 
 			int vendorId = getUserId(request);
 
@@ -646,6 +647,7 @@ public class VendorController extends BaseController
 			{
 				List<Booking> listBookings = (List<Booking>) map.get("booking");
 				List<Enquiry> enquiries = (List<Enquiry>) map.get("enquiry");
+				List<Viewers> viewers = (List<Viewers>) map.get("viewers");
 				if (listBookings != null && listBookings.size() > 0)
 				{
 					responseBookingList = new String[listBookings.size()][2];
@@ -674,6 +676,20 @@ public class VendorController extends BaseController
 								String.valueOf(enquiry.getTotals());
 					}
 				}
+				if (viewers != null && viewers.size() > 0)
+				{
+					responseViewersList = new String[viewers.size()][2];
+					for (int i = 0; i < viewers.size(); i++)
+					{
+						Viewers viewers2 = (Viewers) viewers.get(i);
+						int j = 0;
+						responseViewersList[i][j] =
+								(String) (viewers2.getCreatedat());
+						j = j + 1;
+						responseViewersList[i][j] =
+								String.valueOf(viewers2.getTotals());
+					}
+				}
 				responseMap.put(
 						"bookingStatistic",
 						(responseBookingList == null) ? utilities
@@ -684,6 +700,11 @@ public class VendorController extends BaseController
 						(responseEnquiryList == null) ? utilities
 								.getDefaultWord() : Arrays
 								.deepToString(responseEnquiryList));
+				responseMap.put(
+						"viewersStatistic",
+						(responseViewersList == null) ? utilities
+								.getDefaultWord() : Arrays
+								.deepToString(responseViewersList));
 
 				utilities.setSuccessResponse(response, responseMap);
 			} else

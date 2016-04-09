@@ -20,12 +20,21 @@
 							class="fa fa-info-circle"></i></a>
 					</div>
 					<div
+						class="col-md-12 col-sm-12 ctVedorStatisticViewersChartEmpty ctDefaultDisplayNone">
+						<span class="ctDangerDefaultTxt"> No data found in viewers
+						</span>
+					</div>
+					<div class="col-md-12 col-sm-12 ctVedorTripViewersStatistic"
+						style="height: 400px; min-width: 310px"></div>
+					<br> <br> <br>
+					<div
 						class="col-md-12 col-sm-12 ctVedorStatisticBookingChartEmpty ctDefaultDisplayNone">
 						<span class="ctDangerDefaultTxt"> No data found in booking
 						</span>
 					</div>
 					<div class="col-md-12 col-sm-12 ctVendorStatistic"
 						style="height: 400px; min-width: 310px"></div>
+					<br> <br> <br>
 					<div
 						class="col-md-12 col-sm-12 ctVedorStatisticEnquiryChartEmpty ctDefaultDisplayNone">
 						<span class="ctDangerDefaultTxt"> No data found in enquiry
@@ -46,7 +55,7 @@
 <script type="text/javascript">
     $('.ctVendorListMenu li').removeClass('active');
     $('.ctVendorListMenu .ctVendorStatisticsMenu').addClass('active');
-    var bookingChart = '${model.responseData.bookingStatistic}', enquiryChart = '${model.responseData.enquiryStatistic}';
+    var bookingChart = '${model.responseData.bookingStatistic}', enquiryChart = '${model.responseData.enquiryStatistic}', viewersChart = '${model.responseData.viewersStatistic}';
     if (bookingChart == 'EMPTY') {
 	$('.ctVedorStatisticBookingChartEmpty').show();
     } else {
@@ -57,6 +66,12 @@
 	$('.ctVedorStatisticEnquiryChartEmpty').show();
     } else {
 	ctRenderCharts('.ctVendorEnquiryStatistic', enquiryChart, 'ENQUIRY');
+    }
+
+    if (viewersChart == 'EMPTY') {
+	$('.ctVedorStatisticViewersChartEmpty').show();
+    } else {
+	ctRenderCharts('.ctVedorTripViewersStatistic', viewersChart, 'Viewers');
     }
     $(".ctVendorStatisticIcon").tooltip();
 </script>

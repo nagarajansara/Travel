@@ -58,6 +58,11 @@ public class BookingDAOImpl implements BookingDAO
 					+ "td.id = e.tripid "
 					+ "WHERE e.createdat BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() GROUP BY DATE_FORMAT(e.createdat, '%m/%d/%Y') AND "
 					+ "e.status =:status AND td.userid =:vendorid";
+	final String GET_VENDOR_TRIP_VIEWERS_STATISTIC =
+			"SELECT UNIX_TIMESTAMP(v.createdat)*1000 AS createdat, COUNT(*) AS totals "
+					+ "FROM viewers v " + "INNER JOIN  " + "tripdetails t "
+					+ "ON t.id = v.tripid " + "WHERE t.userid =:vendorid "
+					+ "GROUP BY DATE_FORMAT(v.createdat, '%m/%d/%Y') ";
 
 	public List<Booking> getBookingDetails(Booking booking) throws Exception
 	{
@@ -139,8 +144,18 @@ public class BookingDAOImpl implements BookingDAO
 		List<Enquiry> enquiryList =
 				namedParameterJdbcTemplate.query(GET_VENDOR_STATISTIC_ENQUIRY,
 						params, new BeanPropertyRowMapper(Enquiry.class));
+
+		params = new HashMap();
+		params.put("vendorid", vendorId);
+
+		List<Viewers> viewers =
+				namedParameterJdbcTemplate.query(
+						GET_VENDOR_TRIP_VIEWERS_STATISTIC, params,
+						new BeanPropertyRowMapper(Viewers.class));
+
 		mapList.put("booking", bookingList);
 		mapList.put("enquiry", enquiryList);
+		mapList.put("viewers", viewers);
 		return mapList;
 	}
 }

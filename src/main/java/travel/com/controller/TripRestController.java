@@ -46,6 +46,8 @@ import travel.com.bean.ReviewsBean;
 import travel.com.bean.TripDetailsBean;
 import travel.com.bean.service.ReviewsBeanService;
 import travel.com.bean.service.TripDetailsBeanService;
+import travel.com.cache.ActivityCache;
+import travel.com.cache.TripDetails;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
@@ -72,6 +74,10 @@ public class TripRestController
 	@Qualifier("response")
 	Response response;
 
+	@Autowired
+	@Qualifier("activityCache")
+	ActivityCache activityCache;
+
 	@RequestMapping(value = "/getRestActivitys", method =
 	{ RequestMethod.GET, RequestMethod.POST })
 	public List<Activity> getRestActivitys(HttpServletRequest request,
@@ -80,7 +86,8 @@ public class TripRestController
 		List<Activity> activityList = null;
 		try
 		{
-			activityList = tripService.getActivitys(new Activity("active"));
+			activityList = activityCache.getActivityDetails();
+			// activityList = tripService.getActivitys(new Activity("active"));
 			utilities.setSuccessResponse(response);
 		} catch (Exception ex)
 		{

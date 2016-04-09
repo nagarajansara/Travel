@@ -314,6 +314,8 @@ public class TripDAOImpl implements TripDAO
 		stringBuffer.append(" , ");
 		stringBuffer.append(" :endIndx ");
 
+		System.out.println("getFilterTripsDetails :" + stringBuffer.toString());
+
 		return namedParameterJdbcTemplate.query(stringBuffer.toString(), map,
 				new BeanPropertyRowMapper(Trip.class));
 
@@ -362,9 +364,7 @@ public class TripDAOImpl implements TripDAO
 
 	}
 
-	// TO-DO
-	// Activity
-	// Id's
+	// TO-DO Activity Id's
 	private String _setFilterActivityId(Map<String, Object> activityTable)
 	{
 		StringBuffer stringBuffer = new StringBuffer("");

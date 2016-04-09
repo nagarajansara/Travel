@@ -46,6 +46,7 @@ import travel.com.bean.ReviewsBean;
 import travel.com.bean.TripDetailsBean;
 import travel.com.bean.service.ReviewsBeanService;
 import travel.com.bean.service.TripDetailsBeanService;
+import travel.com.cache.TripDetails;
 import travel.com.dao.*;
 import travel.com.model.*;
 import travel.com.util.*;
@@ -112,6 +113,19 @@ public class TripController extends BaseController
 	@Autowired
 	@Qualifier("reviewsBeanService")
 	ReviewsBeanService reviewsBeanService;
+
+	@Autowired
+	@Qualifier("tripDetailsCache")
+	TripDetails tripDetailsCache;
+
+	@RequestMapping(value = "/testcache.html", method =
+	{ RequestMethod.GET })
+	public String homePage(@RequestParam(required = false) Integer id,
+			HashMap<String, String> map)
+	{
+		map.put("message", tripDetailsCache.getTripDetails(id));
+		return "403";
+	}
 
 	// Top relative activitys
 	@RequestMapping(value = "/getTopActivitys", method =

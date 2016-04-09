@@ -265,7 +265,7 @@
 										<!-- <ul class="sub-dropdown">
 												<li><a href="index-map.html">Map HomePage</a></li>
 											</ul> -->
-										</li>
+										<!-- </li> -->
 										<%-- <li><a href="${baseURL}/travelapi/trip/getTripDetails">Listing
 												Page</a></li> --%>
 										<!--<li><a href="about-us.html">About Us</a></li>

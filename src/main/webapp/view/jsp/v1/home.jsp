@@ -93,7 +93,7 @@
 			<figure>
 				<ul class="bxslider">
 					<li style="list-style: none"><img
-						src="${baseURL}/theme/extraimages/banner.jpeg" style="width: 100%"
+						src="${baseURL}/theme/extraimages/banner.jpg" style="width: 100%"
 						alt="" />
 						<div class="kd-caption">
 							<h1>Book your perfect Adventure Trip...</h1>
