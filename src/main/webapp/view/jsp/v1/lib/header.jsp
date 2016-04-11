@@ -234,8 +234,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 col-xs-6">
-						<a href="index.html" class="logo ctTravelLogo_Padding"><img
-							src="${baseURL}/theme/images/logo.png" alt=""></a>
+						<a href="${baseURL}/travelapi/trip/getTopActivitys"
+							class="logo ctTravelLogo_Padding"><img
+							src="${baseURL}/theme/images/logo.png" alt="hourrit"></a>
 					</div>
 					<div class="col-md-9 col-xs-6">
 						<div class="kd-rightside " style="float: none;">
