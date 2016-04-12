@@ -6,6 +6,7 @@ import java.util.*;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -30,6 +31,8 @@ public class AuthenticationFilter extends BaseController implements Filter
 
 	private String SESSION_FAILURE_URL = "http://" + SERVER_NAME
 			+ "/travel/view/jsp/v1/home.jsp";
+	private String SESSION_FAILURE_PATH = "/view/jsp/v1/home.jsp";
+
 	private List<String> AUTHENTICATED_URL = new ArrayList<String>();
 	private List<String> AUTHENTICATED_URL_INDEXOF = new ArrayList<String>();
 	private List<String> ROLE_CUSTOMER_URL = new ArrayList<String>();
@@ -127,7 +130,11 @@ public class AuthenticationFilter extends BaseController implements Filter
 				chain.doFilter(request, response);
 			} else
 			{
-				res.sendRedirect(SESSION_FAILURE_URL);
+				// res.sendRedirect(SESSION_FAILURE_URL);
+				RequestDispatcher requestDispatcher =
+						request.getRequestDispatcher(SESSION_FAILURE_PATH);
+				requestDispatcher.forward(request, response);
+
 			}
 
 		} else
@@ -141,7 +148,10 @@ public class AuthenticationFilter extends BaseController implements Filter
 					chain.doFilter(request, response);
 				} else
 				{
-					res.sendRedirect(SESSION_FAILURE_URL);
+					// res.sendRedirect(SESSION_FAILURE_URL);
+					RequestDispatcher requestDispatcher =
+							request.getRequestDispatcher(SESSION_FAILURE_PATH);
+					requestDispatcher.forward(request, response);
 				}
 			} else if (role != null
 					&& ROLE_VENDOR_URL.indexOf(lastURIWord) >= 0)
@@ -151,7 +161,10 @@ public class AuthenticationFilter extends BaseController implements Filter
 					chain.doFilter(request, response);
 				} else
 				{
-					res.sendRedirect(SESSION_FAILURE_URL);
+					// res.sendRedirect(SESSION_FAILURE_URL);
+					RequestDispatcher requestDispatcher =
+							request.getRequestDispatcher(SESSION_FAILURE_PATH);
+					requestDispatcher.forward(request, response);
 				}
 			} else
 			{

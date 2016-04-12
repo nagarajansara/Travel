@@ -44,6 +44,17 @@
 		<url-pattern>/travelapi/*</url-pattern>
 	</filter-mapping>
 
+	<!-- We are using the third party jar (planetj.jar) compressing purpose -->
+	<!-- <filter>
+		<filter-name>CompressingFilter</filter-name>
+		<filter-class>com.planetj.servlet.filter.compression.CompressingFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CompressingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+
 	<jsp-config>
 		<taglib>
 			<taglib-uri>/WEB-INF/tld/customTagLibrary</taglib-uri>
