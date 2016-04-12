@@ -45,7 +45,7 @@
 	</filter-mapping>
 
 	<!-- We are using the third party jar (planetj.jar) compressing purpose -->
-	<!-- <filter>
+	 <filter>
 		<filter-name>CompressingFilter</filter-name>
 		<filter-class>com.planetj.servlet.filter.compression.CompressingFilter
 		</filter-class>
@@ -53,7 +53,7 @@
 	<filter-mapping>
 		<filter-name>CompressingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	</filter-mapping>
 
 	<jsp-config>
 		<taglib>
