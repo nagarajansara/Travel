@@ -67,7 +67,7 @@ function ctInitViewListing() {
 				'#ctCommentsNumEntries').val()), params = {};
 			currentPage = currentPage + 1;
 			if (currentPage * ctDAO.TOTAL_RECORDS_PER_PAGE <= numEntries) {
-			    params["tripId"] = bmpUtil.getLastStartingURL();
+			    params["tripId"] = $(this).attr('PK_tripid');
 			    params["startIndx"] = currentPage;
 			    $('.ctLoadingImage').show();
 			    ctDAO
@@ -135,7 +135,7 @@ function ctSubmitBtn() {
 				&& comment.length > 0) {
 			    params["username"] = name;
 			    params["comment"] = comment;
-			    params["tripId"] = bmpUtil.getLastStartingURL();
+			    params["tripId"] = $(this).attr('PK_tripid');
 			    params["startrating"] = START_RATING_DEFAULT_VALUE;
 			    params["email"] = email;
 			    $('.ctSuccessComment').hide();
