@@ -269,8 +269,9 @@
 									<div align="center">
 										<c:if test="${not empty model.responseData.reviewsNumEntries}">
 											<c:if test="${model.responseData.reviewsNumEntries gt 10}">
-												<div id="load-more" class="ctViewLisitingLoadMore">Load
-													More</div>
+												<div id="load-more"
+													PK_tripid="${util:getBase64Encode(TRIPID) }"
+													class="ctViewLisitingLoadMore">Load More</div>
 												<div class="ctLoadingImage ctDefaultDisplayNone">
 													<img src="${baseURL}/assest/img/loading.gif">
 												</div>

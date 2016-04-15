@@ -46,7 +46,7 @@
 									<tr>
 										<td><c:out value="${ loopElement.index + 1}"></c:out></td>
 										<td style="text-transform: uppercase;"><a
-											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }"
+											href="${baseURL}/travelapi/trip/getTripDetailsBasedId/${util:getBase64Encode(element.id) }/${util:getSlugString(element.title)}"
 											target="_blank">${element.title }</a></td>
 										<td style="text-transform: uppercase;">${element.status }</td>
 										<td class="ctEnquiryStatus" style="text-transform: uppercase;">
